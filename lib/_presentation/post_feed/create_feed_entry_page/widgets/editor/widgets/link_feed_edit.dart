@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/post_feed/text_feed_edit.dart';
-import 'package:reddit_clone/application/create_feed/bloc/create_feed_bloc.dart';
+import '../../../../../core/app/colors.dart';
+import 'text_feed_edit.dart';
 
 class LinkFeedEdit extends StatelessWidget {
   final String title;
@@ -20,7 +17,7 @@ class LinkFeedEdit extends StatelessWidget {
     // final bloc = Provider.of<CreateFeedBloc>(context, listen: false);
     return Column(
       children: [
-        FeedEditTitleField(
+        FeedTitleField(
           initialValue: title,
           autofocus: autofocus,
         ),

@@ -1,14 +1,11 @@
-import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/post_feed/text_feed_edit.dart';
-import 'package:reddit_clone/application/create_feed/bloc/create_feed_bloc.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../../../../application/bloc/create_feed_bloc.dart';
+import '../../../../../../utility/app_logger.dart';
+import '../../../../../core/app/colors.dart';
+import 'text_feed_edit.dart';
 
 class PollFeedEdit extends StatelessWidget {
   final String title;
@@ -26,7 +23,7 @@ class PollFeedEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FeedEditTitleField(
+        FeedTitleField(
           initialValue: title,
         ),
         FeedEditBodyTextField(
@@ -36,16 +33,18 @@ class PollFeedEdit extends StatelessWidget {
         BlocBuilder<CreateFeedBloc, CreateFeedState>(
           builder: (context, state) {
             return state.maybeWhen(
-              pollFeedEntry:
-                  (title, bodyText, options, pollEndsDays, _, autofocus) =>
-                      Column(
+              pollFeedEntry: (title, bodyText, options, pollEndsDays, _,
+                      autofocus, error, touched) =>
+                  Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // mainAxisSize: MainAxisSize.min,
                 children: List.generate(
                   options.length,
+                  // 2,
                   (index) => PollOption(
                     hintText: 'Option ${index + 1}',
                     initialValue: options[index],
+                    // initialValue: "",
                   ),
                 ),
               ),
@@ -212,7 +211,7 @@ class PollEnds extends StatelessWidget {
                 return state.maybeWhen(
                   orElse: () => Text('Something gone wrong'),
                   pollFeedEntry: (title, bodyText, options, pollEndsDays,
-                          feedType, autofocus) =>
+                          feedType, autofocus, error, touched) =>
                       Row(
                     children: [
                       Text(

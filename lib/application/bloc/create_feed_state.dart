@@ -7,6 +7,8 @@ class CreateFeedState with _$CreateFeedState {
     required String bodyText,
     required FeedType feedType,
     required bool autofocus,
+    required Either<FeedEditFailure, Unit> error,
+    required bool touched,
   }) = _TextFeedEntry;
 
   const factory CreateFeedState.linkFeedEntry({
@@ -14,6 +16,8 @@ class CreateFeedState with _$CreateFeedState {
     required String url,
     required FeedType feedType,
     required bool autofocus,
+    required Either<FeedEditFailure, Unit> error,
+    required bool touched,
   }) = _LinkFeedEntry;
 
   const factory CreateFeedState.imageFeedEntry({
@@ -21,6 +25,8 @@ class CreateFeedState with _$CreateFeedState {
     File? image,
     required FeedType feedType,
     required bool autofocus,
+    required Either<FeedEditFailure, Unit> error,
+    required bool touched,
   }) = _ImageFeedEntry;
 
   const factory CreateFeedState.videoFeedEntry({
@@ -28,6 +34,8 @@ class CreateFeedState with _$CreateFeedState {
     File? video,
     required FeedType feedType,
     required bool autofocus,
+    required Either<FeedEditFailure, Unit> error,
+    required bool touched,
   }) = _VideoFeedEntry;
 
   const factory CreateFeedState.pollFeedEntry({
@@ -37,6 +45,8 @@ class CreateFeedState with _$CreateFeedState {
     required int pollEndsDays,
     required FeedType feedType,
     required bool autofocus,
+    required Either<FeedEditFailure, Unit> error,
+    required bool touched,
   }) = _PollFeedEntry;
 }
 

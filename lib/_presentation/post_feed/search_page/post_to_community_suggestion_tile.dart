@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/int_extension.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
 
-import '../../domain/community.dart';
-import '../../routes.dart';
+import '../../../domain/community.dart';
+import '../../../routes.dart';
+import '../../core/app/colors.dart';
+import '../../core/app/extensions/int_extension.dart';
+import '../../core/app/extensions/string_fill_extension.dart';
 
 class PostToCommunitySuggestionTile extends StatelessWidget {
   final Community community;

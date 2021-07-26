@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+
+import '../../utility/app_logger.dart';
 
 class SizeConfig {
   static late MediaQueryData _mediaQueryData;
@@ -19,6 +20,9 @@ class SizeConfig {
         ? screenHeight * 0.025
         : screenWidth * 0.025;
   }
+
+  static bool isKeyboardHidden(BuildContext context) =>
+      MediaQuery.of(context).viewInsets.bottom == 0;
 
   double screenHeightPercentage(BuildContext context,
           {double percentage = 1}) =>

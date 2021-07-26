@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/post_feed/poll_feed_edit.dart';
-import 'package:reddit_clone/application/create_feed/bloc/create_feed_bloc.dart';
+import '../../../../../../application/bloc/create_feed_bloc.dart';
+import '../../../../../core/app/colors.dart';
+import 'poll_feed_edit.dart';
 
 class TextFeedEdit extends StatelessWidget {
   final String title;
@@ -20,7 +20,7 @@ class TextFeedEdit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FeedEditTitleField(initialValue: title, autofocus: autofocus),
+        FeedTitleField(initialValue: title, autofocus: autofocus),
         FeedEditBodyTextField(inititialValue: bodyText, autofocus: autofocus)
         // TextField(
         //   decoration: InputDecoration(
@@ -39,26 +39,43 @@ class TextFeedEdit extends StatelessWidget {
   }
 }
 
-class FeedEditTitleField extends StatelessWidget {
+class FeedTitleField extends StatefulWidget {
   final String initialValue;
   final bool autofocus;
-  const FeedEditTitleField({
+  const FeedTitleField({
     Key? key,
     required this.initialValue,
     this.autofocus = false,
   }) : super(key: key);
 
   @override
+  _FeedTitleFieldState createState() => _FeedTitleFieldState();
+}
+
+class _FeedTitleFieldState extends State<FeedTitleField> {
+  String? errorText;
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: autofocus,
+      autofocus: widget.autofocus,
       maxLines: null,
       style: Theme.of(context).textTheme.headline6,
-      initialValue: initialValue,
-      onChanged: (value) => context
-          .read<CreateFeedBloc>()
-          .add(CreateFeedEvent.titleChanged(value)),
+      initialValue: widget.initialValue,
+      onChanged: (value) {
+        if (errorText != null && value.length <= 20) {
+          setState(() {
+            errorText = null;
+          });
+        }
+        if (value.length > 20) {
+          setState(() {
+            errorText = 'Must be maximum 300 character long';
+          });
+        }
+        context.read<CreateFeedBloc>().add(CreateFeedEvent.titleChanged(value));
+      },
       decoration: InputDecoration(
+        errorText: errorText,
         // isDense: false,
         hintText: 'Add a Title',
 

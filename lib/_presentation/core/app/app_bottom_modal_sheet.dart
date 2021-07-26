@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../utility/app_logger.dart';
 
 import 'colors.dart';
 

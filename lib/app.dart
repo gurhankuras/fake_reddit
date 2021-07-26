@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '_presentation/core/app/colors.dart';
+import '_presentation/core/size_config.dart';
 import 'drawer_wrapper.dart';
 import 'routes.dart';
 

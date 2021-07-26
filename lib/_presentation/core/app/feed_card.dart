@@ -3,8 +3,8 @@ import 'dart:ui';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
-import 'package:reddit_clone/domain/user.dart';
+import '../../../domain/feed_entry.dart';
+import '../../../domain/user.dart';
 
 import 'app_bottom_modal_sheet.dart';
 import 'colors.dart';

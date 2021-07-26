@@ -935,12 +935,16 @@ class _$CreateFeedStateTearOff {
       {required String title,
       required String bodyText,
       required FeedType feedType,
-      required bool autofocus}) {
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) {
     return _TextFeedEntry(
       title: title,
       bodyText: bodyText,
       feedType: feedType,
       autofocus: autofocus,
+      error: error,
+      touched: touched,
     );
   }
 
@@ -948,12 +952,16 @@ class _$CreateFeedStateTearOff {
       {required String title,
       required String url,
       required FeedType feedType,
-      required bool autofocus}) {
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) {
     return _LinkFeedEntry(
       title: title,
       url: url,
       feedType: feedType,
       autofocus: autofocus,
+      error: error,
+      touched: touched,
     );
   }
 
@@ -961,12 +969,16 @@ class _$CreateFeedStateTearOff {
       {required String title,
       File? image,
       required FeedType feedType,
-      required bool autofocus}) {
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) {
     return _ImageFeedEntry(
       title: title,
       image: image,
       feedType: feedType,
       autofocus: autofocus,
+      error: error,
+      touched: touched,
     );
   }
 
@@ -974,12 +986,16 @@ class _$CreateFeedStateTearOff {
       {required String title,
       File? video,
       required FeedType feedType,
-      required bool autofocus}) {
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) {
     return _VideoFeedEntry(
       title: title,
       video: video,
       feedType: feedType,
       autofocus: autofocus,
+      error: error,
+      touched: touched,
     );
   }
 
@@ -989,7 +1005,9 @@ class _$CreateFeedStateTearOff {
       required List<String> options,
       required int pollEndsDays,
       required FeedType feedType,
-      required bool autofocus}) {
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) {
     return _PollFeedEntry(
       title: title,
       bodyText: bodyText,
@@ -997,6 +1015,8 @@ class _$CreateFeedStateTearOff {
       pollEndsDays: pollEndsDays,
       feedType: feedType,
       autofocus: autofocus,
+      error: error,
+      touched: touched,
     );
   }
 }
@@ -1009,20 +1029,22 @@ mixin _$CreateFeedState {
   String get title => throw _privateConstructorUsedError;
   FeedType get feedType => throw _privateConstructorUsedError;
   bool get autofocus => throw _privateConstructorUsedError;
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  bool get touched => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1030,26 +1052,35 @@ mixin _$CreateFeedState {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) =>
@@ -1084,7 +1115,12 @@ abstract class $CreateFeedStateCopyWith<$Res> {
   factory $CreateFeedStateCopyWith(
           CreateFeedState value, $Res Function(CreateFeedState) then) =
       _$CreateFeedStateCopyWithImpl<$Res>;
-  $Res call({String title, FeedType feedType, bool autofocus});
+  $Res call(
+      {String title,
+      FeedType feedType,
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1101,6 +1137,8 @@ class _$CreateFeedStateCopyWithImpl<$Res>
     Object? title = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -1115,6 +1153,14 @@ class _$CreateFeedStateCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1126,7 +1172,13 @@ abstract class _$TextFeedEntryCopyWith<$Res>
           _TextFeedEntry value, $Res Function(_TextFeedEntry) then) =
       __$TextFeedEntryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String bodyText, FeedType feedType, bool autofocus});
+  $Res call(
+      {String title,
+      String bodyText,
+      FeedType feedType,
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1146,6 +1198,8 @@ class __$TextFeedEntryCopyWithImpl<$Res>
     Object? bodyText = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_TextFeedEntry(
       title: title == freezed
@@ -1164,6 +1218,14 @@ class __$TextFeedEntryCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1175,7 +1237,9 @@ class _$_TextFeedEntry implements _TextFeedEntry {
       {required this.title,
       required this.bodyText,
       required this.feedType,
-      required this.autofocus});
+      required this.autofocus,
+      required this.error,
+      required this.touched});
 
   @override
   final String title;
@@ -1185,10 +1249,14 @@ class _$_TextFeedEntry implements _TextFeedEntry {
   final FeedType feedType;
   @override
   final bool autofocus;
+  @override
+  final Either<FeedEditFailure, Unit> error;
+  @override
+  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.textFeedEntry(title: $title, bodyText: $bodyText, feedType: $feedType, autofocus: $autofocus)';
+    return 'CreateFeedState.textFeedEntry(title: $title, bodyText: $bodyText, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
   }
 
   @override
@@ -1205,7 +1273,11 @@ class _$_TextFeedEntry implements _TextFeedEntry {
                     .equals(other.feedType, feedType)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.touched, touched) ||
+                const DeepCollectionEquality().equals(other.touched, touched)));
   }
 
   @override
@@ -1214,7 +1286,9 @@ class _$_TextFeedEntry implements _TextFeedEntry {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(bodyText) ^
       const DeepCollectionEquality().hash(feedType) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(touched);
 
   @JsonKey(ignore: true)
   @override
@@ -1224,17 +1298,17 @@ class _$_TextFeedEntry implements _TextFeedEntry {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1242,34 +1316,44 @@ class _$_TextFeedEntry implements _TextFeedEntry {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) {
-    return textFeedEntry(title, bodyText, feedType, autofocus);
+    return textFeedEntry(title, bodyText, feedType, autofocus, error, touched);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (textFeedEntry != null) {
-      return textFeedEntry(title, bodyText, feedType, autofocus);
+      return textFeedEntry(
+          title, bodyText, feedType, autofocus, error, touched);
     }
     return orElse();
   }
@@ -1308,7 +1392,9 @@ abstract class _TextFeedEntry implements CreateFeedState {
       {required String title,
       required String bodyText,
       required FeedType feedType,
-      required bool autofocus}) = _$_TextFeedEntry;
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) = _$_TextFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1317,6 +1403,10 @@ abstract class _TextFeedEntry implements CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
+  @override
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  @override
+  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TextFeedEntryCopyWith<_TextFeedEntry> get copyWith =>
@@ -1330,7 +1420,13 @@ abstract class _$LinkFeedEntryCopyWith<$Res>
           _LinkFeedEntry value, $Res Function(_LinkFeedEntry) then) =
       __$LinkFeedEntryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, String url, FeedType feedType, bool autofocus});
+  $Res call(
+      {String title,
+      String url,
+      FeedType feedType,
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1350,6 +1446,8 @@ class __$LinkFeedEntryCopyWithImpl<$Res>
     Object? url = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_LinkFeedEntry(
       title: title == freezed
@@ -1368,6 +1466,14 @@ class __$LinkFeedEntryCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1379,7 +1485,9 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
       {required this.title,
       required this.url,
       required this.feedType,
-      required this.autofocus});
+      required this.autofocus,
+      required this.error,
+      required this.touched});
 
   @override
   final String title;
@@ -1389,10 +1497,14 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
   final FeedType feedType;
   @override
   final bool autofocus;
+  @override
+  final Either<FeedEditFailure, Unit> error;
+  @override
+  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.linkFeedEntry(title: $title, url: $url, feedType: $feedType, autofocus: $autofocus)';
+    return 'CreateFeedState.linkFeedEntry(title: $title, url: $url, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
   }
 
   @override
@@ -1408,7 +1520,11 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
                     .equals(other.feedType, feedType)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.touched, touched) ||
+                const DeepCollectionEquality().equals(other.touched, touched)));
   }
 
   @override
@@ -1417,7 +1533,9 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(feedType) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(touched);
 
   @JsonKey(ignore: true)
   @override
@@ -1427,17 +1545,17 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1445,34 +1563,43 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) {
-    return linkFeedEntry(title, url, feedType, autofocus);
+    return linkFeedEntry(title, url, feedType, autofocus, error, touched);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (linkFeedEntry != null) {
-      return linkFeedEntry(title, url, feedType, autofocus);
+      return linkFeedEntry(title, url, feedType, autofocus, error, touched);
     }
     return orElse();
   }
@@ -1511,7 +1638,9 @@ abstract class _LinkFeedEntry implements CreateFeedState {
       {required String title,
       required String url,
       required FeedType feedType,
-      required bool autofocus}) = _$_LinkFeedEntry;
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) = _$_LinkFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1520,6 +1649,10 @@ abstract class _LinkFeedEntry implements CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
+  @override
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  @override
+  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LinkFeedEntryCopyWith<_LinkFeedEntry> get copyWith =>
@@ -1533,7 +1666,13 @@ abstract class _$ImageFeedEntryCopyWith<$Res>
           _ImageFeedEntry value, $Res Function(_ImageFeedEntry) then) =
       __$ImageFeedEntryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, File? image, FeedType feedType, bool autofocus});
+  $Res call(
+      {String title,
+      File? image,
+      FeedType feedType,
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1553,6 +1692,8 @@ class __$ImageFeedEntryCopyWithImpl<$Res>
     Object? image = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_ImageFeedEntry(
       title: title == freezed
@@ -1571,6 +1712,14 @@ class __$ImageFeedEntryCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1582,7 +1731,9 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
       {required this.title,
       this.image,
       required this.feedType,
-      required this.autofocus});
+      required this.autofocus,
+      required this.error,
+      required this.touched});
 
   @override
   final String title;
@@ -1592,10 +1743,14 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
   final FeedType feedType;
   @override
   final bool autofocus;
+  @override
+  final Either<FeedEditFailure, Unit> error;
+  @override
+  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.imageFeedEntry(title: $title, image: $image, feedType: $feedType, autofocus: $autofocus)';
+    return 'CreateFeedState.imageFeedEntry(title: $title, image: $image, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
   }
 
   @override
@@ -1611,7 +1766,11 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
                     .equals(other.feedType, feedType)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.touched, touched) ||
+                const DeepCollectionEquality().equals(other.touched, touched)));
   }
 
   @override
@@ -1620,7 +1779,9 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(image) ^
       const DeepCollectionEquality().hash(feedType) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(touched);
 
   @JsonKey(ignore: true)
   @override
@@ -1630,17 +1791,17 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1648,34 +1809,43 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) {
-    return imageFeedEntry(title, image, feedType, autofocus);
+    return imageFeedEntry(title, image, feedType, autofocus, error, touched);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (imageFeedEntry != null) {
-      return imageFeedEntry(title, image, feedType, autofocus);
+      return imageFeedEntry(title, image, feedType, autofocus, error, touched);
     }
     return orElse();
   }
@@ -1714,7 +1884,9 @@ abstract class _ImageFeedEntry implements CreateFeedState {
       {required String title,
       File? image,
       required FeedType feedType,
-      required bool autofocus}) = _$_ImageFeedEntry;
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) = _$_ImageFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1723,6 +1895,10 @@ abstract class _ImageFeedEntry implements CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
+  @override
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  @override
+  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ImageFeedEntryCopyWith<_ImageFeedEntry> get copyWith =>
@@ -1736,7 +1912,13 @@ abstract class _$VideoFeedEntryCopyWith<$Res>
           _VideoFeedEntry value, $Res Function(_VideoFeedEntry) then) =
       __$VideoFeedEntryCopyWithImpl<$Res>;
   @override
-  $Res call({String title, File? video, FeedType feedType, bool autofocus});
+  $Res call(
+      {String title,
+      File? video,
+      FeedType feedType,
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1756,6 +1938,8 @@ class __$VideoFeedEntryCopyWithImpl<$Res>
     Object? video = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_VideoFeedEntry(
       title: title == freezed
@@ -1774,6 +1958,14 @@ class __$VideoFeedEntryCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1785,7 +1977,9 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
       {required this.title,
       this.video,
       required this.feedType,
-      required this.autofocus});
+      required this.autofocus,
+      required this.error,
+      required this.touched});
 
   @override
   final String title;
@@ -1795,10 +1989,14 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
   final FeedType feedType;
   @override
   final bool autofocus;
+  @override
+  final Either<FeedEditFailure, Unit> error;
+  @override
+  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.videoFeedEntry(title: $title, video: $video, feedType: $feedType, autofocus: $autofocus)';
+    return 'CreateFeedState.videoFeedEntry(title: $title, video: $video, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
   }
 
   @override
@@ -1814,7 +2012,11 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
                     .equals(other.feedType, feedType)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.touched, touched) ||
+                const DeepCollectionEquality().equals(other.touched, touched)));
   }
 
   @override
@@ -1823,7 +2025,9 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(video) ^
       const DeepCollectionEquality().hash(feedType) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(touched);
 
   @JsonKey(ignore: true)
   @override
@@ -1833,17 +2037,17 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1851,34 +2055,43 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) {
-    return videoFeedEntry(title, video, feedType, autofocus);
+    return videoFeedEntry(title, video, feedType, autofocus, error, touched);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (videoFeedEntry != null) {
-      return videoFeedEntry(title, video, feedType, autofocus);
+      return videoFeedEntry(title, video, feedType, autofocus, error, touched);
     }
     return orElse();
   }
@@ -1917,7 +2130,9 @@ abstract class _VideoFeedEntry implements CreateFeedState {
       {required String title,
       File? video,
       required FeedType feedType,
-      required bool autofocus}) = _$_VideoFeedEntry;
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) = _$_VideoFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1926,6 +2141,10 @@ abstract class _VideoFeedEntry implements CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
+  @override
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  @override
+  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VideoFeedEntryCopyWith<_VideoFeedEntry> get copyWith =>
@@ -1945,7 +2164,9 @@ abstract class _$PollFeedEntryCopyWith<$Res>
       List<String> options,
       int pollEndsDays,
       FeedType feedType,
-      bool autofocus});
+      bool autofocus,
+      Either<FeedEditFailure, Unit> error,
+      bool touched});
 }
 
 /// @nodoc
@@ -1967,6 +2188,8 @@ class __$PollFeedEntryCopyWithImpl<$Res>
     Object? pollEndsDays = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
+    Object? error = freezed,
+    Object? touched = freezed,
   }) {
     return _then(_PollFeedEntry(
       title: title == freezed
@@ -1993,6 +2216,14 @@ class __$PollFeedEntryCopyWithImpl<$Res>
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Either<FeedEditFailure, Unit>,
+      touched: touched == freezed
+          ? _value.touched
+          : touched // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -2006,7 +2237,9 @@ class _$_PollFeedEntry implements _PollFeedEntry {
       required this.options,
       required this.pollEndsDays,
       required this.feedType,
-      required this.autofocus});
+      required this.autofocus,
+      required this.error,
+      required this.touched});
 
   @override
   final String title;
@@ -2020,10 +2253,14 @@ class _$_PollFeedEntry implements _PollFeedEntry {
   final FeedType feedType;
   @override
   final bool autofocus;
+  @override
+  final Either<FeedEditFailure, Unit> error;
+  @override
+  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.pollFeedEntry(title: $title, bodyText: $bodyText, options: $options, pollEndsDays: $pollEndsDays, feedType: $feedType, autofocus: $autofocus)';
+    return 'CreateFeedState.pollFeedEntry(title: $title, bodyText: $bodyText, options: $options, pollEndsDays: $pollEndsDays, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
   }
 
   @override
@@ -2046,7 +2283,11 @@ class _$_PollFeedEntry implements _PollFeedEntry {
                     .equals(other.feedType, feedType)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)) &&
+            (identical(other.touched, touched) ||
+                const DeepCollectionEquality().equals(other.touched, touched)));
   }
 
   @override
@@ -2057,7 +2298,9 @@ class _$_PollFeedEntry implements _PollFeedEntry {
       const DeepCollectionEquality().hash(options) ^
       const DeepCollectionEquality().hash(pollEndsDays) ^
       const DeepCollectionEquality().hash(feedType) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(error) ^
+      const DeepCollectionEquality().hash(touched);
 
   @JsonKey(ignore: true)
   @override
@@ -2067,17 +2310,17 @@ class _$_PollFeedEntry implements _PollFeedEntry {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         textFeedEntry,
-    required TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)
+    required TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         linkFeedEntry,
-    required TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         imageFeedEntry,
-    required TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)
+    required TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -2085,36 +2328,45 @@ class _$_PollFeedEntry implements _PollFeedEntry {
             List<String> options,
             int pollEndsDays,
             FeedType feedType,
-            bool autofocus)
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)
         pollFeedEntry,
   }) {
-    return pollFeedEntry(
-        title, bodyText, options, pollEndsDays, feedType, autofocus);
+    return pollFeedEntry(title, bodyText, options, pollEndsDays, feedType,
+        autofocus, error, touched);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String title, String bodyText, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String bodyText, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         textFeedEntry,
-    TResult Function(
-            String title, String url, FeedType feedType, bool autofocus)?
+    TResult Function(String title, String url, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         linkFeedEntry,
-    TResult Function(
-            String title, File? image, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? image, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         imageFeedEntry,
-    TResult Function(
-            String title, File? video, FeedType feedType, bool autofocus)?
+    TResult Function(String title, File? video, FeedType feedType,
+            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
         videoFeedEntry,
-    TResult Function(String title, String bodyText, List<String> options,
-            int pollEndsDays, FeedType feedType, bool autofocus)?
+    TResult Function(
+            String title,
+            String bodyText,
+            List<String> options,
+            int pollEndsDays,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            bool touched)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (pollFeedEntry != null) {
-      return pollFeedEntry(
-          title, bodyText, options, pollEndsDays, feedType, autofocus);
+      return pollFeedEntry(title, bodyText, options, pollEndsDays, feedType,
+          autofocus, error, touched);
     }
     return orElse();
   }
@@ -2155,7 +2407,9 @@ abstract class _PollFeedEntry implements CreateFeedState {
       required List<String> options,
       required int pollEndsDays,
       required FeedType feedType,
-      required bool autofocus}) = _$_PollFeedEntry;
+      required bool autofocus,
+      required Either<FeedEditFailure, Unit> error,
+      required bool touched}) = _$_PollFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -2166,6 +2420,10 @@ abstract class _PollFeedEntry implements CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
+  @override
+  Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
+  @override
+  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PollFeedEntryCopyWith<_PollFeedEntry> get copyWith =>

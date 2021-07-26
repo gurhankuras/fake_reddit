@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
+import '../core/app/feed_card.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);

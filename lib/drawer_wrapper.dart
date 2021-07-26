@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/drawer/app_drawer.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '_presentation/core/app/colors.dart';
+import '_presentation/core/app/drawer/app_drawer.dart';
+import '_presentation/core/size_config.dart';
 
 import '_presentation/home/home_vm.dart';
 import 'main_page.dart';

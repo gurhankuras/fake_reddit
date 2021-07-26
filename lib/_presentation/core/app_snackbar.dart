@@ -1,7 +1,7 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
+import 'app/colors.dart';
 
 void showSnack({
   required String message,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/app/search_bar_field.dart';
+import '_presentation/core/app/extensions/string_fill_extension.dart';
+import '_presentation/core/app/search_bar_field.dart';
 
 import '_presentation/home/news.dart';
 import 'routes.dart';

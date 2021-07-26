@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '_presentation/home/search_page.dart';
 import '_presentation/post_feed/create_feed_entry_page/create_feed_entry_page.dart';
-import '_presentation/post_feed/post_feed_search_page.dart';
+import '_presentation/post_feed/search_page/post_feed_search_page.dart';
 import 'domain/community.dart';
 import 'main_page.dart';
 

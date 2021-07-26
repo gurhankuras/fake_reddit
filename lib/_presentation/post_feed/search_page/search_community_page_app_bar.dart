@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/search_bar_field.dart';
+
+import '../../core/app/colors.dart';
+import '../../core/app/search_bar_field.dart';
 
 class SearchCommunityPageAppBar extends StatefulWidget
     implements PreferredSizeWidget {
