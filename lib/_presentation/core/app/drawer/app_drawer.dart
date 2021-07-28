@@ -5,24 +5,25 @@ import 'widgets/options.dart';
 import 'widgets/user_info.dart';
 
 class AppDrawer extends StatelessWidget {
-  final VoidCallback closeDrawer;
-  final bool isDrawerOpen;
+  // final VoidCallback closeDrawer;
+  // final bool isDrawerOpen;
   const AppDrawer({
     Key? key,
-    required this.closeDrawer,
-    required this.isDrawerOpen,
+    // required this.closeDrawer,
+    // required this.isDrawerOpen,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     // safearea
-    return Column(
-      children: [
-        UserInfo(closeDrawer: closeDrawer),
-        const Expanded(
-          child: Options(),
-        ),
-        if (isDrawerOpen)
+    return Scaffold(
+      body: Column(
+        children: [
+          const UserInfo(),
+          const Expanded(
+            child: Options(),
+          ),
+          // if (isDrawerOpen)
           DecoratedBox(
             decoration: const BoxDecoration(
               color: AppColors.black,
@@ -37,7 +38,8 @@ class AppDrawer extends StatelessWidget {
               ),
             ),
           )
-      ],
+        ],
+      ),
     );
   }
 }

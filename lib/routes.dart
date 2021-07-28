@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/_presentation/change_community_avatar_page.dart';
+import 'package:reddit_clone/main_page.dart';
 
 import '_presentation/home/search_page.dart';
 import '_presentation/post_feed/create_feed_entry_page/create_feed_entry_page.dart';
 import '_presentation/post_feed/search_page/post_feed_search_page.dart';
 import 'domain/community.dart';
-import 'main_page.dart';
+import 'home_page.dart';
 
 abstract class Routes {
+  static const homePage = '/homePage';
   static const mainPage = '/';
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
   static const createFeedPage = '/createFeedPage';
+  static const changeCommunityAvatarPage = '/changeCommunityAvatarPage';
 }
 
 abstract class AppRouter {
@@ -19,6 +23,11 @@ abstract class AppRouter {
       case Routes.mainPage:
         return MaterialPageRoute(
           builder: (_) => const MainPage(),
+          settings: settings,
+        );
+      case Routes.homePage:
+        return MaterialPageRoute(
+          builder: (_) => const HomePage(),
           settings: settings,
         );
       case Routes.postFeedSearchPage:
@@ -39,6 +48,11 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (context) => CreateFeedEntryPage(community: args.community),
           fullscreenDialog: true,
+          settings: settings,
+        );
+      case Routes.changeCommunityAvatarPage:
+        return MaterialPageRoute(
+          builder: (_) => const ChangeCommunityAvatarPage(),
           settings: settings,
         );
       default:

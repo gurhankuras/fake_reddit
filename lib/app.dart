@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/size_config.dart';
-import 'drawer_wrapper.dart';
+import 'main_page.dart';
 import 'routes.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -17,11 +19,15 @@ class MyApp extends StatelessWidget {
     ));
 
     return MaterialApp(
+      initialRoute: Routes.changeCommunityAvatarPage,
       onGenerateRoute: AppRouter.onGenerateRoute,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme(context),
-      home: const DrawerWrapper(),
+      home: Provider(
+        child: const MainPage(),
+        create: (context) => MyDrawerController(),
+      ),
     );
   }
 

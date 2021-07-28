@@ -1,116 +1,142 @@
 import 'package:flutter/material.dart';
-import '_presentation/core/app/extensions/string_fill_extension.dart';
-import '_presentation/core/app/search_bar_field.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
+import '_presentation/core/app/colors.dart';
+import '_presentation/core/app/drawer/app_drawer.dart';
+import '_presentation/core/size_config.dart';
 
-import '_presentation/home/news.dart';
+import '_presentation/home/home_vm.dart';
+import 'home_page.dart';
 import 'routes.dart';
 
 class MainPage extends StatefulWidget {
-  // final Function? openDrawer;
   const MainPage({
     Key? key,
-    // required this.openDrawer,
   }) : super(key: key);
 
   @override
-  _MainPageState createState() => _MainPageState();
+  MainPageState createState() => MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> {
+  late PageController _pageController;
+  late MyDrawerController drawerController;
+
+  @override
+  void initState() {
+    _pageController = PageController();
+    drawerController = context.read<MyDrawerController>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  static List<Widget> widgetOptions = <Widget>[
+    const HomePage(),
+    Scaffold(
+      appBar: AppBar(),
+      body: const Center(
+        child: Text(
+          'HAHAHAHAHAHA',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    ),
+    const Center(
+      child: Text(
+        'Index 3: Settings',
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  ];
+  int index = 0;
+
+  double xPageOffset = 0;
+  bool isDragging = false;
+  bool isDrawerOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    final tabBarWidget = tabBar;
+    SizeConfig().init(context);
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: appBar(tabBarWidget, context),
-        // backgroundColor: Colors.indigo[800],
-
-        body: const TabBarView(
-          children: [
-            News(),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
-          ],
+    return ScaledDrawer(
+      curve: Curves.easeInOut,
+      controller: drawerController,
+      drawer: const AppDrawer(),
+      drawerColor: AppColors.black,
+      drawerWidth: MediaQuery.of(context).size.width * 0.7,
+      page: Scaffold(
+        backgroundColor: AppColors.lightBlack,
+        bottomNavigationBar: Consumer<HomeVM>(
+          builder: (context, value, child) => BottomNavigationBar(
+            items: navigationItems
+                .map((item) => BottomNavigationBarItem(
+                      icon: item.index == index
+                          ? item.selectedIcon
+                          : item.unselectedIcon,
+                      label: '',
+                    ))
+                .toList(),
+            currentIndex: value.currentPage,
+            onTap: (index) => navigateByIndex(index, value),
+          ),
         ),
+        body: buildPage(),
       ),
     );
   }
 
-  TabBar get tabBar {
-    return TabBar(
-      indicatorSize: TabBarIndicatorSize.label,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 10),
-      tabs: [
-        Tab(text: 'News'.fillN(3)),
-        Tab(text: 'Home'.fillN(3)),
-        Tab(text: 'Popular'.fillN(3)),
-      ],
-    );
+  void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
+    if (currentIndex == 2) {
+      Navigator.of(context).pushNamed(Routes.postFeedSearchPage);
+      return;
+    }
+    if (currentIndex != bottomNavigationViewModel.currentPage) {
+      _pageController.jumpToPage(currentIndex);
+    }
+    bottomNavigationViewModel.changePage(currentIndex);
   }
 
-  PreferredSize appBar(TabBar tabBar, BuildContext context) {
-    return PreferredSize(
-      preferredSize:
-          Size.fromHeight(kToolbarHeight + tabBar.preferredSize.height),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: AppBar(
-          bottom: tabBar,
-          leading: GestureDetector(
-            // onTap: () => widget.openDrawer?.call(),
-            child: Transform.scale(
-              scale: 0.6,
-              child: const CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://styles.redditmedia.com/t5_23ty4q/styles/profileIcon_vden2tg74d051.jpg?width=256&height=256&crop=256:256,smart&s=54e523221183c71419c0cadc616a13418f0c92ad',
-                ),
-              ),
-            ),
-          ),
-          title: SearchBarField(
-            hintText: 'Search',
-            absorbing: true,
-            onTap: () => Navigator.of(context).pushNamed(Routes.searchPage),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                child: const Icon(Icons.play_circle),
-                onTap: () {
-                  // TODO: navigate to another page
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                child: const Icon(Icons.monetization_on),
-                onTap: () {
-                  // TODO: navigate to another page
-                },
-              ),
-            )
-          ],
-        ),
+  List<NavigationItem> get navigationItems {
+    return const <NavigationItem>[
+      NavigationItem(
+        index: 0,
+        unselectedIcon: Icon(Icons.home_outlined),
+        selectedIcon: Icon(Icons.home_rounded),
       ),
+      NavigationItem(
+        index: 1,
+        selectedIcon: Icon(Icons.grid_view_rounded),
+        unselectedIcon: Icon(Icons.grid_view_outlined),
+      ),
+      NavigationItem(
+        index: 2,
+        selectedIcon: Icon(Icons.add, size: 36),
+        unselectedIcon: Icon(Icons.add_outlined, size: 36),
+      ),
+      NavigationItem(
+        index: 3,
+        selectedIcon: Icon(FontAwesomeIcons.solidCommentDots),
+        unselectedIcon: Icon(FontAwesomeIcons.commentDots),
+      ),
+      NavigationItem(
+        index: 4,
+        selectedIcon: Icon(FontAwesomeIcons.solidBell),
+        unselectedIcon: Icon(FontAwesomeIcons.bell),
+      ),
+    ];
+  }
+
+  Widget buildPage() {
+    return PageView(
+      controller: _pageController,
+      physics: const NeverScrollableScrollPhysics(),
+      children: widgetOptions,
     );
   }
-}
-
-class NavigationItem {
-  final Icon selectedIcon;
-  final Icon unselectedIcon;
-  final int index;
-
-  const NavigationItem({
-    required this.selectedIcon,
-    required this.unselectedIcon,
-    required this.index,
-  });
 }

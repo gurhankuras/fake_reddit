@@ -1,45 +1,64 @@
 import 'package:flutter/material.dart';
 
+const _kAnimationDuration = Duration(milliseconds: 200);
+const _kAnimationCurve = Curves.linear;
+const _kDefaultScale = ScaleRange(begin: 0.95, end: 1.0);
+
 class MyDrawerController {
   // TODO: ADD late
-  VoidCallback? openDrawer;
-  VoidCallback? closeDrawer;
-  VoidCallback? toggle;
+  late VoidCallback openDrawer;
+  late VoidCallback closeDrawer;
+  late VoidCallback toggle;
 
   MyDrawerController();
 
   void dispose() {}
 }
 
-class TransitionDrawer extends StatefulWidget {
+class ScaleRange {
+  final double begin;
+  final double end;
+
+  const ScaleRange({
+    required this.begin,
+    required this.end,
+  });
+}
+
+class ScaledDrawer extends StatefulWidget {
   // TODO add curve and scale parameters
   final Widget page;
   final Widget drawer;
   final Color drawerColor;
   final double drawerWidth;
+  final Curve curve;
 
+  final ScaleRange? scaleRange;
   final double? dragWidth;
   final MyDrawerController? controller;
   final Duration? duration;
 
-  TransitionDrawer({
+  const ScaledDrawer({
+    Key? key,
     required this.page,
     required this.drawer,
     required this.drawerColor,
     required this.drawerWidth,
+    this.scaleRange,
+    this.curve = _kAnimationCurve,
+    this.dragWidth = 35,
     this.controller,
     this.duration,
-    this.dragWidth = 35,
-  });
+  }) : super(key: key);
 
   @override
-  _TransitionDrawerState createState() => _TransitionDrawerState();
+  _ScaledDrawerState createState() => _ScaledDrawerState();
 }
 
 enum _DrawerState { Opened, Closed }
 enum _OnRelease { toLeft, toRight }
 
-class _TransitionDrawerState extends State<TransitionDrawer>
+class _ScaledDrawerState extends State<ScaledDrawer>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation<double> animation;
@@ -48,6 +67,35 @@ class _TransitionDrawerState extends State<TransitionDrawer>
   _OnRelease onRelease = _OnRelease.toLeft;
   _DrawerState _drawerState = _DrawerState.Closed;
   late double dragOffset;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      lowerBound: 0,
+      upperBound: 1,
+      duration: widget.duration ?? _kAnimationDuration,
+      vsync: this,
+    );
+    final curve = CurvedAnimation(curve: widget.curve, parent: controller);
+
+    animation = Tween<double>(begin: 0, end: 1).animate(curve)
+      ..addStatusListener(_listener);
+
+    final scale = widget.scaleRange ?? _kDefaultScale;
+    scaleAnimation =
+        Tween<double>(begin: scale.begin, end: scale.end).animate(controller);
+    _initControllerIfExist();
+  }
+
+  void _initControllerIfExist() {
+    final drawerController = widget.controller;
+    if (drawerController != null) {
+      drawerController.openDrawer = openDrawer;
+      drawerController.closeDrawer = closeDrawer;
+      drawerController.toggle = toggle;
+    }
+  }
 
   void _listener(AnimationStatus status) {
     print('STATUS CHANGED : $status');
@@ -70,32 +118,6 @@ class _TransitionDrawerState extends State<TransitionDrawer>
       setState(() {
         isAnimating = true;
       });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = AnimationController(
-      lowerBound: 0,
-      upperBound: 1,
-      duration: widget.duration ?? Duration(milliseconds: 200),
-      vsync: this,
-    );
-
-    animation = Tween<double>(begin: 0, end: 1).animate(controller)
-      ..addStatusListener(_listener);
-
-    scaleAnimation = Tween<double>(begin: 0.95, end: 1).animate(controller);
-    _initControllerIfExist();
-  }
-
-  void _initControllerIfExist() {
-    final drawerController = widget.controller;
-    if (drawerController != null) {
-      drawerController.openDrawer = openDrawer;
-      drawerController.closeDrawer = closeDrawer;
-      drawerController.toggle = toggle;
     }
   }
 
@@ -225,7 +247,7 @@ class _TransitionDrawerState extends State<TransitionDrawer>
             onHorizontalDragUpdate: _onHorizontalDragUpdate,
             onHorizontalDragEnd: _onHorizontalDragEnd,
             child: Container(
-              color: Colors.red,
+              color: Colors.transparent,
             ),
           ),
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
 
 import '../../app_button.dart';
 import '../../colors.dart';
@@ -10,36 +12,33 @@ import 'user_name.dart';
 class UserInfo extends StatelessWidget {
   const UserInfo({
     Key? key,
-    required this.closeDrawer,
+    // required this.closeDrawer,
   }) : super(key: key);
 
-  final VoidCallback closeDrawer;
+  // final VoidCallback closeDrawer;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: AppColors.darkGrey,
-          child: Column(
-            children: [
-              Container(
-                width: 100,
-                height: 150,
-                color: Colors.white,
-              ),
-              const UserName(name: 'Brilliant_Program232'),
-              const OnlineStatus(),
-              const SizedBox(height: 10),
-              const AppButton.icon(
-                text: 'Style Avatar',
-                icon: FontAwesomeIcons.tshirt,
-              ),
-              const AdditionalUserInfo()
-            ],
-          ),
+        Column(
+          children: [
+            Container(
+              width: 100,
+              height: 150,
+              color: Colors.white,
+            ),
+            const UserName(name: 'Brilliant_Program232'),
+            const OnlineStatus(),
+            const SizedBox(height: 10),
+            const AppButton.icon(
+              text: 'Style Avatar',
+              icon: FontAwesomeIcons.tshirt,
+            ),
+            const AdditionalUserInfo()
+          ],
         ),
-        CloseButton(closeDrawer: closeDrawer),
+        CloseButton(/*closeDrawer: closeDrawer*/),
       ],
     );
   }
@@ -48,18 +47,18 @@ class UserInfo extends StatelessWidget {
 class CloseButton extends StatelessWidget {
   const CloseButton({
     Key? key,
-    required this.closeDrawer,
+    // required this.closeDrawer,
   }) : super(key: key);
 
-  final VoidCallback closeDrawer;
+  // final VoidCallback closeDrawer;
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: 5,
-      left: 5,
+      top: 30,
+      left: 10,
       child: GestureDetector(
-        onTap: closeDrawer,
+        onTap: () => context.read<MyDrawerController>().closeDrawer(),
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Icon(
