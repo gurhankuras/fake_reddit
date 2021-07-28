@@ -1,5 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:reddit_clone/_presentation/core/app/app_bottom_modal_sheet.dart';
+import 'package:reddit_clone/infastructure/image_service.dart';
+import 'package:reddit_clone/routes.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class ChangeCommunityAvatarPage extends StatefulWidget {
@@ -13,6 +19,7 @@ class ChangeCommunityAvatarPage extends StatefulWidget {
 class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
   int iconCurrentIndex = 0;
   int colorCurrentIndex = 0;
+  Uint8List? file;
 
   void _onItemChanged(int index) {
     setState(() {
@@ -26,6 +33,27 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
     });
   }
 
+  Future<void> _loadCustomAvatar(
+      BuildContext dialogContext, ImageSource source) async {
+    Navigator.of(dialogContext).pop();
+    final service = ImageService();
+    final imageOption = await service.select(source: source);
+    final croppedImage = await imageOption.fold(
+      () async {
+        print('HATA OLDU');
+        return null;
+      },
+      (file) async => await Navigator.of(context).pushNamed<Uint8List>(
+          Routes.cropImagePage,
+          arguments: await file.readAsBytes()),
+    );
+    if (croppedImage != null) {
+      setState(() {
+        file = croppedImage;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,35 +61,7 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
         centerTitle: true,
         title: Text('Avatar'),
       ),
-      body:
-          // Column(
-          //   children: [
-          //     Container(
-          //       width: 200,
-          //       height: 200,
-          //       // child: Icon(avatars[iconCurrentIndex]),
-          //       color: colors[colorCurrentIndex],
-          //     ),
-          //     SizedBox(
-          //       height: 200,
-          //       child: SnapListView(
-          //         itemExtent: 200,
-          //         itemCount: colors.length,
-          //         itemBuilder: (context, index) {
-          //           return Container(
-          //             decoration: BoxDecoration(
-          //               border: Border.all(color: Colors.white),
-          //             ),
-          //             child: Text(colors[index].toString()),
-          //           );
-          //         },
-          //         // onItemChanged: _onItemChanged,
-          //         onItemFocused: _onItemFocused,
-          //       ),
-          //     ),
-          //   ],
-          // )
-          Column(
+      body: Column(
         children: [
           Spacer(flex: 1),
           SizedBox(
@@ -73,28 +73,63 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.4,
                   height: MediaQuery.of(context).size.width * 0.4,
-                  child: Icon(
-                    avatars[iconCurrentIndex],
-                    size: MediaQuery.of(context).size.width * 0.3,
-                  ),
+                  child: file == null
+                      ? Icon(
+                          avatars[iconCurrentIndex],
+                          size: MediaQuery.of(context).size.width * 0.3,
+                        )
+                      : null,
                   decoration: BoxDecoration(
-                    color: colors[colorCurrentIndex],
+                    image: file != null
+                        ? DecorationImage(image: MemoryImage(file!))
+                        : null,
+                    color: file == null ? colors[colorCurrentIndex] : null,
                     shape: BoxShape.circle,
                   ),
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.12,
-                    height: MediaQuery.of(context).size.width * 0.12,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 2),
-                    ),
-                    child: Icon(
-                      Icons.camera_alt_outlined,
-                      size: MediaQuery.of(context).size.width * 0.07,
+                  child: GestureDetector(
+                    onTap: () async {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        enableDrag: false,
+                        builder: (BuildContext dialogContext) {
+                          return AppModalBottomSheet(
+                            tiles: [
+                              ModelSheetTile(
+                                onAction: () => _loadCustomAvatar(
+                                  dialogContext,
+                                  ImageSource.camera,
+                                ),
+                                icon: Icons.camera_alt,
+                                text: 'Camera',
+                              ),
+                              ModelSheetTile(
+                                onAction: () => _loadCustomAvatar(
+                                  dialogContext,
+                                  ImageSource.gallery,
+                                ),
+                                icon: Icons.photo_library,
+                                text: 'Library',
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.12,
+                      height: MediaQuery.of(context).size.width * 0.12,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).scaffoldBackgroundColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 2),
+                      ),
+                      child: Icon(
+                        Icons.camera_alt_outlined,
+                        size: MediaQuery.of(context).size.width * 0.07,
+                      ),
                     ),
                   ),
                 )
@@ -126,23 +161,6 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
     );
   }
 
-  // Widget get snapList => ScrollSnapList(
-  //       curve: Curves.decelerate,
-  //       itemBuilder: (context, index) => Container(
-  //         width: MediaQuery.of(context).size.width / 5,
-  //         child: Icon(
-  //           avatars[index],
-  //           size: MediaQuery.of(context).size.width / 8,
-  //         ),
-  //       ),
-  //       selectedItemAnchor: SelectedItemAnchor.START,
-  //       itemCount: avatars.length,
-  //       itemSize: MediaQuery.of(context).size.width / 5,
-  //       onItemFocus: (index) => setState(() {
-  //         iconCurrentIndex = index;
-  //       }),
-  //     );
-
   Widget get snapList => SnapListView(
         curve: Curves.decelerate,
         itemBuilder: (context, index) => Container(
@@ -159,28 +177,6 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
           iconCurrentIndex = index;
         }),
       );
-
-  // Widget get colorSnapList => ScrollSnapList(
-  //       curve: Curves.decelerate,
-  //       itemBuilder: (context, index) => Container(
-  //         width: MediaQuery.of(context).size.width / 4,
-  //         height: MediaQuery.of(context).size.width / 4,
-  //         padding: EdgeInsets.all(10),
-  //         child: Container(
-  //           decoration: BoxDecoration(
-  //             color: colors[index],
-  //             shape: BoxShape.circle,
-  //           ),
-  //           width: MediaQuery.of(context).size.width / 7,
-  //           height: MediaQuery.of(context).size.width / 7,
-  //         ),
-  //       ),
-  //       itemCount: colors.length,
-  //       itemSize: MediaQuery.of(context).size.width / 4,
-  //       onItemFocus: (index) => setState(() {
-  //         colorCurrentIndex = index;
-  //       }),
-  //     );
 
   Widget get colorSnapList => SnapListView(
         curve: Curves.decelerate,
@@ -217,6 +213,7 @@ class _ChangeCommunityAvatarPageState extends State<ChangeCommunityAvatarPage> {
           height: (MediaQuery.of(context).size.width / 4),
         ),
       );
+
   List<IconData> get avatars => [
         Icons.g_mobiledata,
         Icons.gamepad,
@@ -376,13 +373,3 @@ class _SnapListViewState extends State<SnapListView> {
     );
   }
 }
-
-
- // Positioned(
-          //   left: constraints.maxWidth / 2,
-          //   height: constraints.maxHeight,
-          //   width: 2,
-          //   child: Container(
-          //     decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-          //   ),
-          // ),

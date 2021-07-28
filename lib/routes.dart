@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:reddit_clone/_presentation/change_community_avatar_page.dart';
+import 'package:reddit_clone/_presentation/crop_image_page.dart';
 import 'package:reddit_clone/main_page.dart';
 
 import '_presentation/home/search_page.dart';
@@ -15,6 +18,7 @@ abstract class Routes {
   static const searchPage = '/searchPage';
   static const createFeedPage = '/createFeedPage';
   static const changeCommunityAvatarPage = '/changeCommunityAvatarPage';
+  static const cropImagePage = '/cropImagePage';
 }
 
 abstract class AppRouter {
@@ -23,6 +27,13 @@ abstract class AppRouter {
       case Routes.mainPage:
         return MaterialPageRoute(
           builder: (_) => const MainPage(),
+          settings: settings,
+        );
+      case Routes.cropImagePage:
+        return MaterialPageRoute<Uint8List>(
+          builder: (_) => CropSample(
+            fileAsBytes: settings.arguments as Uint8List,
+          ),
           settings: settings,
         );
       case Routes.homePage:

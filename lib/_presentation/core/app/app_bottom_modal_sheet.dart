@@ -4,8 +4,12 @@ import '../../../utility/app_logger.dart';
 import 'colors.dart';
 
 class AppModalBottomSheet extends StatelessWidget {
+  final List<ModelSheetTile> tiles;
+  final VoidCallback? onClosed;
   const AppModalBottomSheet({
+    required this.tiles,
     Key? key,
+    this.onClosed,
   }) : super(key: key);
 
   @override
@@ -15,46 +19,7 @@ class AppModalBottomSheet extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.share,
-            text: 'Share',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.bookmark_outline,
-            text: 'Save',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.copy_all_outlined,
-            text: 'Copy',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.flag_outlined,
-            text: 'Report',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.block_outlined,
-            text: 'Block User',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.remove_red_eye_outlined,
-            text: 'Hide',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.call_missed_outgoing,
-            text: 'Crosspost to a community',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.chat_outlined,
-            text: 'Share to chat',
-          ),
+          ...tiles,
           Padding(
             padding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
             child: SizedBox(
@@ -68,7 +33,7 @@ class AppModalBottomSheet extends StatelessWidget {
                   'Close',
                   style: TextStyle(color: AppColors.mmoreLightGrey),
                 ),
-                onPressed: () => Navigator.pop(context),
+                onPressed: onClosed ?? () => Navigator.pop(context),
               ),
             ),
           )

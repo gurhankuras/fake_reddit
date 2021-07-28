@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:reddit_clone/utility/app_logger.dart';
 import '../../../domain/feed_entry.dart';
 import '../../../domain/user.dart';
 
@@ -158,7 +159,50 @@ class FeedTopInfoTile extends StatelessWidget {
                 context: context,
                 enableDrag: false,
                 builder: (BuildContext context) {
-                  return const AppModalBottomSheet();
+                  return AppModalBottomSheet(
+                    tiles: [
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.share,
+                        text: 'Share',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.bookmark_outline,
+                        text: 'Save',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.copy_all_outlined,
+                        text: 'Copy',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.flag_outlined,
+                        text: 'Report',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.block_outlined,
+                        text: 'Block User',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.remove_red_eye_outlined,
+                        text: 'Hide',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.call_missed_outgoing,
+                        text: 'Crosspost to a community',
+                      ),
+                      ModelSheetTile(
+                        onAction: () => log.i('onTap!'),
+                        icon: Icons.chat_outlined,
+                        text: 'Share to chat',
+                      ),
+                    ],
+                  );
                 },
               );
             },
