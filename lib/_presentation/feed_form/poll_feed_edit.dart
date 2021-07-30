@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/_presentation/feed_form/create_feed_entry_page.dart';
+import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
 
-import '../../../../../../application/bloc/create_feed_bloc.dart';
-import '../../../../../../utility/app_logger.dart';
-import '../../../../../core/app/colors.dart';
+import '../../application/create_feed_bloc.dart';
+import '../../utility/app_logger.dart';
+import '../core/app/colors.dart';
 import 'text_feed_edit.dart';
 
 class PollFeedEdit extends StatelessWidget {
@@ -21,6 +23,7 @@ class PollFeedEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('DISTAKI BUILD');
     return Column(
       children: [
         FeedTitleField(
@@ -32,9 +35,10 @@ class PollFeedEdit extends StatelessWidget {
         ),
         BlocBuilder<CreateFeedBloc, CreateFeedState>(
           builder: (context, state) {
+            print('GURHAN GURHAN');
             return state.maybeWhen(
               pollFeedEntry: (title, bodyText, options, pollEndsDays, _,
-                      autofocus, error, touched) =>
+                      autofocus, error) =>
                   Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // mainAxisSize: MainAxisSize.min,
@@ -44,6 +48,7 @@ class PollFeedEdit extends StatelessWidget {
                   (index) => PollOption(
                     hintText: 'Option ${index + 1}',
                     initialValue: options[index],
+                    index: index,
                     // initialValue: "",
                   ),
                 ),
@@ -52,15 +57,14 @@ class PollFeedEdit extends StatelessWidget {
             );
           },
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: GestureDetector(
-            onTap: () {
-              log.d('onTap');
-              context
-                  .read<CreateFeedBloc>()
-                  .add(const CreateFeedEvent.pollOptionAdded(''));
-            },
+        GestureDetector(
+          onTap: () {
+            context
+                .read<CreateFeedBloc>()
+                .add(const CreateFeedEvent.pollOptionAdded(''));
+          },
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Row(
               children: [
                 Icon(Icons.add, color: AppColors.iron),
@@ -134,84 +138,20 @@ class PollEnds extends StatelessWidget {
                 ),
           ),
           GestureDetector(
-            onTap: () {
-              // showSnack(message: 'Image deleted', context: context);
-
-              showModalBottomSheet(
-                context: context,
-                enableDrag: true,
-                // isScrollControlled: true,
-                backgroundColor: AppColors.lightBlack2,
-
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                ),
-                builder: (context) => Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Change Post Type',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5
-                            ?.copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Some of your post will be deleted if you continue.',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyText2
-                            ?.copyWith(color: AppColors.moreLightGrey),
-                      ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Expanded(
-                                flex: 5,
-                                child: GestureDetector(
-                                    child: Text(
-                                  'Cancel',
-                                  textAlign: TextAlign.center,
-                                ))),
-                            Spacer(
-                              flex: 1,
-                            ),
-                            Expanded(
-                              flex: 5,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text('Continue'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.red,
-                                    shape: StadiumBorder()),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              );
+            onTap: () async {
               context
                   .read<CreateFeedBloc>()
-                  .add(CreateFeedEvent.pollEndsChanged(4));
+                  .add(CreateFeedEvent.pollEndsPressed(
+                    showDays: showDays(context),
+                  ));
             },
             child: BlocBuilder<CreateFeedBloc, CreateFeedState>(
+              buildWhen: _buildPollEndsDaysWhen,
               builder: (context, state) {
                 return state.maybeWhen(
-                  orElse: () => Text('Something gone wrong'),
+                  orElse: () => const Text('Something gone wrong'),
                   pollFeedEntry: (title, bodyText, options, pollEndsDays,
-                          feedType, autofocus, error, touched) =>
+                          feedType, autofocus, error) =>
                       Row(
                     children: [
                       Text(
@@ -222,7 +162,7 @@ class PollEnds extends StatelessWidget {
                               // fontSize: 16,
                             ),
                       ),
-                      Icon(
+                      const Icon(
                         Icons.expand_more,
                         color: AppColors.lightGrey,
                       ),
@@ -236,15 +176,33 @@ class PollEnds extends StatelessWidget {
       ),
     );
   }
+
+  bool _buildPollEndsDaysWhen(
+          CreateFeedState previous, CreateFeedState current) =>
+      previous.maybeMap(
+        pollFeedEntry: (state) => state.pollEndsDays,
+        orElse: () => null,
+      ) !=
+      current.maybeMap(
+        pollFeedEntry: (state) => state.pollEndsDays,
+        orElse: () => null,
+      );
+
+  //     previous is PollFeedEntry &&
+  //     current is PollFeedEntry &&
+  //     previous.pollEndsDays != current.pollEndsDays,
+
 }
 
 class PollOption extends StatelessWidget {
   final String hintText;
   final String? initialValue;
+  final int index;
   const PollOption({
     Key? key,
     required this.hintText,
     this.initialValue,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -255,8 +213,12 @@ class PollOption extends StatelessWidget {
         Icon(Icons.more_vert, color: AppColors.iron),
         Expanded(
           child: TextFormField(
+            autofocus: index > 1,
+            onChanged: (value) => context
+                .read<CreateFeedBloc>()
+                .add(CreateFeedEvent.pollOptionEdited(index, value)),
             initialValue: initialValue,
-            inputFormatters: [LengthLimitingTextInputFormatter(40)],
+            inputFormatters: [LengthLimitingTextInputFormatter(60)],
             maxLines: 1,
             decoration: InputDecoration(
               hintText: hintText,
@@ -269,6 +231,13 @@ class PollOption extends StatelessWidget {
             ),
           ),
         ),
+        if (index > 1)
+          GestureDetector(
+            onTap: () => context
+                .read<CreateFeedBloc>()
+                .add(CreateFeedEvent.pollOptionDeleted(index)),
+            child: Icon(Icons.close),
+          )
       ],
     );
   }

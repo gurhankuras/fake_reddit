@@ -10,4 +10,6 @@ class ChangeCommunityAvatarEvent with _$ChangeCommunityAvatarEvent {
       _ImageCropped;
   const factory ChangeCommunityAvatarEvent.loadingCustomImageSelected(
       ImageSource source) = _LoadingCustomImageSelected;
+  const factory ChangeCommunityAvatarEvent.imageSelected(File image) =
+      _ImageSelected;
 }

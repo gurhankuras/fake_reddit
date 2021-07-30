@@ -16,10 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CreateFeedEventTearOff {
   const _$CreateFeedEventTearOff();
 
-  _FeedTypeChanged feedTypeChanged(int index, bool autofocus) {
+  _FeedTypeChanged feedTypeChanged(
+      {required int index,
+      required bool autofocus,
+      required Future<bool?> Function() showDialog}) {
     return _FeedTypeChanged(
-      index,
-      autofocus,
+      index: index,
+      autofocus: autofocus,
+      showDialog: showDialog,
     );
   }
 
@@ -41,9 +45,10 @@ class _$CreateFeedEventTearOff {
     );
   }
 
-  _PollEndsChanged pollEndsChanged(int day) {
-    return _PollEndsChanged(
-      day,
+  _PollEndsPressed pollEndsPressed(
+      {required Future<int?> Function(Days) showDays}) {
+    return _PollEndsPressed(
+      showDays: showDays,
     );
   }
 
@@ -51,6 +56,37 @@ class _$CreateFeedEventTearOff {
     return _PollOptionAdded(
       option,
     );
+  }
+
+  _PollOptionEdited pollOptionEdited(int index, String option) {
+    return _PollOptionEdited(
+      index,
+      option,
+    );
+  }
+
+  _PollOptionDeleted pollOptionDeleted(int index) {
+    return _PollOptionDeleted(
+      index,
+    );
+  }
+
+  _AddImageClicked addImageClicked() {
+    return const _AddImageClicked();
+  }
+
+  _ImageDeleted imageDeleted(String id) {
+    return _ImageDeleted(
+      id,
+    );
+  }
+
+  _RecoverLastDeletedImage recoverLastDeletedImage() {
+    return const _RecoverLastDeletedImage();
+  }
+
+  _FeedPosted feedPosted() {
+    return const _FeedPosted();
   }
 }
 
@@ -61,22 +97,39 @@ const $CreateFeedEvent = _$CreateFeedEventTearOff();
 mixin _$CreateFeedEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,8 +139,15 @@ mixin _$CreateFeedEvent {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -96,8 +156,14 @@ mixin _$CreateFeedEvent {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -125,7 +191,7 @@ abstract class _$FeedTypeChangedCopyWith<$Res> {
   factory _$FeedTypeChangedCopyWith(
           _FeedTypeChanged value, $Res Function(_FeedTypeChanged) then) =
       __$FeedTypeChangedCopyWithImpl<$Res>;
-  $Res call({int index, bool autofocus});
+  $Res call({int index, bool autofocus, Future<bool?> Function() showDialog});
 }
 
 /// @nodoc
@@ -143,16 +209,21 @@ class __$FeedTypeChangedCopyWithImpl<$Res>
   $Res call({
     Object? index = freezed,
     Object? autofocus = freezed,
+    Object? showDialog = freezed,
   }) {
     return _then(_FeedTypeChanged(
-      index == freezed
+      index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
               as int,
-      autofocus == freezed
+      autofocus: autofocus == freezed
           ? _value.autofocus
           : autofocus // ignore: cast_nullable_to_non_nullable
               as bool,
+      showDialog: showDialog == freezed
+          ? _value.showDialog
+          : showDialog // ignore: cast_nullable_to_non_nullable
+              as Future<bool?> Function(),
     ));
   }
 }
@@ -160,16 +231,19 @@ class __$FeedTypeChangedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_FeedTypeChanged implements _FeedTypeChanged {
-  const _$_FeedTypeChanged(this.index, this.autofocus);
+  const _$_FeedTypeChanged(
+      {required this.index, required this.autofocus, required this.showDialog});
 
   @override
   final int index;
   @override
   final bool autofocus;
+  @override
+  final Future<bool?> Function() showDialog;
 
   @override
   String toString() {
-    return 'CreateFeedEvent.feedTypeChanged(index: $index, autofocus: $autofocus)';
+    return 'CreateFeedEvent.feedTypeChanged(index: $index, autofocus: $autofocus, showDialog: $showDialog)';
   }
 
   @override
@@ -180,14 +254,18 @@ class _$_FeedTypeChanged implements _FeedTypeChanged {
                 const DeepCollectionEquality().equals(other.index, index)) &&
             (identical(other.autofocus, autofocus) ||
                 const DeepCollectionEquality()
-                    .equals(other.autofocus, autofocus)));
+                    .equals(other.autofocus, autofocus)) &&
+            (identical(other.showDialog, showDialog) ||
+                const DeepCollectionEquality()
+                    .equals(other.showDialog, showDialog)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(index) ^
-      const DeepCollectionEquality().hash(autofocus);
+      const DeepCollectionEquality().hash(autofocus) ^
+      const DeepCollectionEquality().hash(showDialog);
 
   @JsonKey(ignore: true)
   @override
@@ -197,29 +275,46 @@ class _$_FeedTypeChanged implements _FeedTypeChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
-    return feedTypeChanged(index, autofocus);
+    return feedTypeChanged(index, autofocus, showDialog);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
     if (feedTypeChanged != null) {
-      return feedTypeChanged(index, autofocus);
+      return feedTypeChanged(index, autofocus, showDialog);
     }
     return orElse();
   }
@@ -231,8 +326,15 @@ class _$_FeedTypeChanged implements _FeedTypeChanged {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
     return feedTypeChanged(this);
   }
@@ -244,8 +346,14 @@ class _$_FeedTypeChanged implements _FeedTypeChanged {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (feedTypeChanged != null) {
@@ -256,11 +364,14 @@ class _$_FeedTypeChanged implements _FeedTypeChanged {
 }
 
 abstract class _FeedTypeChanged implements CreateFeedEvent {
-  const factory _FeedTypeChanged(int index, bool autofocus) =
-      _$_FeedTypeChanged;
+  const factory _FeedTypeChanged(
+      {required int index,
+      required bool autofocus,
+      required Future<bool?> Function() showDialog}) = _$_FeedTypeChanged;
 
   int get index => throw _privateConstructorUsedError;
   bool get autofocus => throw _privateConstructorUsedError;
+  Future<bool?> Function() get showDialog => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$FeedTypeChangedCopyWith<_FeedTypeChanged> get copyWith =>
       throw _privateConstructorUsedError;
@@ -331,12 +442,21 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
     return titleChanged(title);
   }
@@ -344,12 +464,20 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
     if (titleChanged != null) {
@@ -365,8 +493,15 @@ class _$_TitleChanged implements _TitleChanged {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
     return titleChanged(this);
   }
@@ -378,8 +513,14 @@ class _$_TitleChanged implements _TitleChanged {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (titleChanged != null) {
@@ -464,12 +605,21 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
     return bodyTextChanged(bodyText);
   }
@@ -477,12 +627,20 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
     if (bodyTextChanged != null) {
@@ -498,8 +656,15 @@ class _$_BodyTextChanged implements _BodyTextChanged {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
     return bodyTextChanged(this);
   }
@@ -511,8 +676,14 @@ class _$_BodyTextChanged implements _BodyTextChanged {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (bodyTextChanged != null) {
@@ -596,12 +767,21 @@ class _$_UrlChanged implements _UrlChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
     return urlChanged(url);
   }
@@ -609,12 +789,20 @@ class _$_UrlChanged implements _UrlChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
     if (urlChanged != null) {
@@ -630,8 +818,15 @@ class _$_UrlChanged implements _UrlChanged {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
     return urlChanged(this);
   }
@@ -643,8 +838,14 @@ class _$_UrlChanged implements _UrlChanged {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (urlChanged != null) {
@@ -664,93 +865,111 @@ abstract class _UrlChanged implements CreateFeedEvent {
 }
 
 /// @nodoc
-abstract class _$PollEndsChangedCopyWith<$Res> {
-  factory _$PollEndsChangedCopyWith(
-          _PollEndsChanged value, $Res Function(_PollEndsChanged) then) =
-      __$PollEndsChangedCopyWithImpl<$Res>;
-  $Res call({int day});
+abstract class _$PollEndsPressedCopyWith<$Res> {
+  factory _$PollEndsPressedCopyWith(
+          _PollEndsPressed value, $Res Function(_PollEndsPressed) then) =
+      __$PollEndsPressedCopyWithImpl<$Res>;
+  $Res call({Future<int?> Function(Days) showDays});
 }
 
 /// @nodoc
-class __$PollEndsChangedCopyWithImpl<$Res>
+class __$PollEndsPressedCopyWithImpl<$Res>
     extends _$CreateFeedEventCopyWithImpl<$Res>
-    implements _$PollEndsChangedCopyWith<$Res> {
-  __$PollEndsChangedCopyWithImpl(
-      _PollEndsChanged _value, $Res Function(_PollEndsChanged) _then)
-      : super(_value, (v) => _then(v as _PollEndsChanged));
+    implements _$PollEndsPressedCopyWith<$Res> {
+  __$PollEndsPressedCopyWithImpl(
+      _PollEndsPressed _value, $Res Function(_PollEndsPressed) _then)
+      : super(_value, (v) => _then(v as _PollEndsPressed));
 
   @override
-  _PollEndsChanged get _value => super._value as _PollEndsChanged;
+  _PollEndsPressed get _value => super._value as _PollEndsPressed;
 
   @override
   $Res call({
-    Object? day = freezed,
+    Object? showDays = freezed,
   }) {
-    return _then(_PollEndsChanged(
-      day == freezed
-          ? _value.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_PollEndsPressed(
+      showDays: showDays == freezed
+          ? _value.showDays
+          : showDays // ignore: cast_nullable_to_non_nullable
+              as Future<int?> Function(Days),
     ));
   }
 }
 
 /// @nodoc
 
-class _$_PollEndsChanged implements _PollEndsChanged {
-  const _$_PollEndsChanged(this.day);
+class _$_PollEndsPressed implements _PollEndsPressed {
+  const _$_PollEndsPressed({required this.showDays});
 
   @override
-  final int day;
+  final Future<int?> Function(Days) showDays;
 
   @override
   String toString() {
-    return 'CreateFeedEvent.pollEndsChanged(day: $day)';
+    return 'CreateFeedEvent.pollEndsPressed(showDays: $showDays)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PollEndsChanged &&
-            (identical(other.day, day) ||
-                const DeepCollectionEquality().equals(other.day, day)));
+        (other is _PollEndsPressed &&
+            (identical(other.showDays, showDays) ||
+                const DeepCollectionEquality()
+                    .equals(other.showDays, showDays)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(day);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(showDays);
 
   @JsonKey(ignore: true)
   @override
-  _$PollEndsChangedCopyWith<_PollEndsChanged> get copyWith =>
-      __$PollEndsChangedCopyWithImpl<_PollEndsChanged>(this, _$identity);
+  _$PollEndsPressedCopyWith<_PollEndsPressed> get copyWith =>
+      __$PollEndsPressedCopyWithImpl<_PollEndsPressed>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
-    return pollEndsChanged(day);
+    return pollEndsPressed(showDays);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
-    if (pollEndsChanged != null) {
-      return pollEndsChanged(day);
+    if (pollEndsPressed != null) {
+      return pollEndsPressed(showDays);
     }
     return orElse();
   }
@@ -762,10 +981,17 @@ class _$_PollEndsChanged implements _PollEndsChanged {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
-    return pollEndsChanged(this);
+    return pollEndsPressed(this);
   }
 
   @override
@@ -775,23 +1001,31 @@ class _$_PollEndsChanged implements _PollEndsChanged {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
-    if (pollEndsChanged != null) {
-      return pollEndsChanged(this);
+    if (pollEndsPressed != null) {
+      return pollEndsPressed(this);
     }
     return orElse();
   }
 }
 
-abstract class _PollEndsChanged implements CreateFeedEvent {
-  const factory _PollEndsChanged(int day) = _$_PollEndsChanged;
+abstract class _PollEndsPressed implements CreateFeedEvent {
+  const factory _PollEndsPressed(
+      {required Future<int?> Function(Days) showDays}) = _$_PollEndsPressed;
 
-  int get day => throw _privateConstructorUsedError;
+  Future<int?> Function(Days) get showDays =>
+      throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PollEndsChangedCopyWith<_PollEndsChanged> get copyWith =>
+  _$PollEndsPressedCopyWith<_PollEndsPressed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -860,12 +1094,21 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int index, bool autofocus) feedTypeChanged,
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
     required TResult Function(String title) titleChanged,
     required TResult Function(String bodyText) bodyTextChanged,
     required TResult Function(String url) urlChanged,
-    required TResult Function(int day) pollEndsChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
     required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
   }) {
     return pollOptionAdded(option);
   }
@@ -873,12 +1116,20 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int index, bool autofocus)? feedTypeChanged,
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
     TResult Function(String title)? titleChanged,
     TResult Function(String bodyText)? bodyTextChanged,
     TResult Function(String url)? urlChanged,
-    TResult Function(int day)? pollEndsChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
     TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
     required TResult orElse(),
   }) {
     if (pollOptionAdded != null) {
@@ -894,8 +1145,15 @@ class _$_PollOptionAdded implements _PollOptionAdded {
     required TResult Function(_TitleChanged value) titleChanged,
     required TResult Function(_BodyTextChanged value) bodyTextChanged,
     required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsChanged value) pollEndsChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
     required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
   }) {
     return pollOptionAdded(this);
   }
@@ -907,8 +1165,14 @@ class _$_PollOptionAdded implements _PollOptionAdded {
     TResult Function(_TitleChanged value)? titleChanged,
     TResult Function(_BodyTextChanged value)? bodyTextChanged,
     TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsChanged value)? pollEndsChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
     TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (pollOptionAdded != null) {
@@ -928,6 +1192,902 @@ abstract class _PollOptionAdded implements CreateFeedEvent {
 }
 
 /// @nodoc
+abstract class _$PollOptionEditedCopyWith<$Res> {
+  factory _$PollOptionEditedCopyWith(
+          _PollOptionEdited value, $Res Function(_PollOptionEdited) then) =
+      __$PollOptionEditedCopyWithImpl<$Res>;
+  $Res call({int index, String option});
+}
+
+/// @nodoc
+class __$PollOptionEditedCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$PollOptionEditedCopyWith<$Res> {
+  __$PollOptionEditedCopyWithImpl(
+      _PollOptionEdited _value, $Res Function(_PollOptionEdited) _then)
+      : super(_value, (v) => _then(v as _PollOptionEdited));
+
+  @override
+  _PollOptionEdited get _value => super._value as _PollOptionEdited;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+    Object? option = freezed,
+  }) {
+    return _then(_PollOptionEdited(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      option == freezed
+          ? _value.option
+          : option // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PollOptionEdited implements _PollOptionEdited {
+  const _$_PollOptionEdited(this.index, this.option);
+
+  @override
+  final int index;
+  @override
+  final String option;
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.pollOptionEdited(index: $index, option: $option)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PollOptionEdited &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)) &&
+            (identical(other.option, option) ||
+                const DeepCollectionEquality().equals(other.option, option)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(index) ^
+      const DeepCollectionEquality().hash(option);
+
+  @JsonKey(ignore: true)
+  @override
+  _$PollOptionEditedCopyWith<_PollOptionEdited> get copyWith =>
+      __$PollOptionEditedCopyWithImpl<_PollOptionEdited>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return pollOptionEdited(index, option);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (pollOptionEdited != null) {
+      return pollOptionEdited(index, option);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return pollOptionEdited(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (pollOptionEdited != null) {
+      return pollOptionEdited(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PollOptionEdited implements CreateFeedEvent {
+  const factory _PollOptionEdited(int index, String option) =
+      _$_PollOptionEdited;
+
+  int get index => throw _privateConstructorUsedError;
+  String get option => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$PollOptionEditedCopyWith<_PollOptionEdited> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$PollOptionDeletedCopyWith<$Res> {
+  factory _$PollOptionDeletedCopyWith(
+          _PollOptionDeleted value, $Res Function(_PollOptionDeleted) then) =
+      __$PollOptionDeletedCopyWithImpl<$Res>;
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$PollOptionDeletedCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$PollOptionDeletedCopyWith<$Res> {
+  __$PollOptionDeletedCopyWithImpl(
+      _PollOptionDeleted _value, $Res Function(_PollOptionDeleted) _then)
+      : super(_value, (v) => _then(v as _PollOptionDeleted));
+
+  @override
+  _PollOptionDeleted get _value => super._value as _PollOptionDeleted;
+
+  @override
+  $Res call({
+    Object? index = freezed,
+  }) {
+    return _then(_PollOptionDeleted(
+      index == freezed
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_PollOptionDeleted implements _PollOptionDeleted {
+  const _$_PollOptionDeleted(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.pollOptionDeleted(index: $index)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _PollOptionDeleted &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @JsonKey(ignore: true)
+  @override
+  _$PollOptionDeletedCopyWith<_PollOptionDeleted> get copyWith =>
+      __$PollOptionDeletedCopyWithImpl<_PollOptionDeleted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return pollOptionDeleted(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (pollOptionDeleted != null) {
+      return pollOptionDeleted(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return pollOptionDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (pollOptionDeleted != null) {
+      return pollOptionDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PollOptionDeleted implements CreateFeedEvent {
+  const factory _PollOptionDeleted(int index) = _$_PollOptionDeleted;
+
+  int get index => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$PollOptionDeletedCopyWith<_PollOptionDeleted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$AddImageClickedCopyWith<$Res> {
+  factory _$AddImageClickedCopyWith(
+          _AddImageClicked value, $Res Function(_AddImageClicked) then) =
+      __$AddImageClickedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$AddImageClickedCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$AddImageClickedCopyWith<$Res> {
+  __$AddImageClickedCopyWithImpl(
+      _AddImageClicked _value, $Res Function(_AddImageClicked) _then)
+      : super(_value, (v) => _then(v as _AddImageClicked));
+
+  @override
+  _AddImageClicked get _value => super._value as _AddImageClicked;
+}
+
+/// @nodoc
+
+class _$_AddImageClicked implements _AddImageClicked {
+  const _$_AddImageClicked();
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.addImageClicked()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _AddImageClicked);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return addImageClicked();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (addImageClicked != null) {
+      return addImageClicked();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return addImageClicked(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (addImageClicked != null) {
+      return addImageClicked(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddImageClicked implements CreateFeedEvent {
+  const factory _AddImageClicked() = _$_AddImageClicked;
+}
+
+/// @nodoc
+abstract class _$ImageDeletedCopyWith<$Res> {
+  factory _$ImageDeletedCopyWith(
+          _ImageDeleted value, $Res Function(_ImageDeleted) then) =
+      __$ImageDeletedCopyWithImpl<$Res>;
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$ImageDeletedCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$ImageDeletedCopyWith<$Res> {
+  __$ImageDeletedCopyWithImpl(
+      _ImageDeleted _value, $Res Function(_ImageDeleted) _then)
+      : super(_value, (v) => _then(v as _ImageDeleted));
+
+  @override
+  _ImageDeleted get _value => super._value as _ImageDeleted;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_ImageDeleted(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ImageDeleted implements _ImageDeleted {
+  const _$_ImageDeleted(this.id);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.imageDeleted(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ImageDeleted &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ImageDeletedCopyWith<_ImageDeleted> get copyWith =>
+      __$ImageDeletedCopyWithImpl<_ImageDeleted>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return imageDeleted(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (imageDeleted != null) {
+      return imageDeleted(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return imageDeleted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (imageDeleted != null) {
+      return imageDeleted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ImageDeleted implements CreateFeedEvent {
+  const factory _ImageDeleted(String id) = _$_ImageDeleted;
+
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ImageDeletedCopyWith<_ImageDeleted> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$RecoverLastDeletedImageCopyWith<$Res> {
+  factory _$RecoverLastDeletedImageCopyWith(_RecoverLastDeletedImage value,
+          $Res Function(_RecoverLastDeletedImage) then) =
+      __$RecoverLastDeletedImageCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$RecoverLastDeletedImageCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$RecoverLastDeletedImageCopyWith<$Res> {
+  __$RecoverLastDeletedImageCopyWithImpl(_RecoverLastDeletedImage _value,
+      $Res Function(_RecoverLastDeletedImage) _then)
+      : super(_value, (v) => _then(v as _RecoverLastDeletedImage));
+
+  @override
+  _RecoverLastDeletedImage get _value =>
+      super._value as _RecoverLastDeletedImage;
+}
+
+/// @nodoc
+
+class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
+  const _$_RecoverLastDeletedImage();
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.recoverLastDeletedImage()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RecoverLastDeletedImage);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return recoverLastDeletedImage();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (recoverLastDeletedImage != null) {
+      return recoverLastDeletedImage();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return recoverLastDeletedImage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (recoverLastDeletedImage != null) {
+      return recoverLastDeletedImage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RecoverLastDeletedImage implements CreateFeedEvent {
+  const factory _RecoverLastDeletedImage() = _$_RecoverLastDeletedImage;
+}
+
+/// @nodoc
+abstract class _$FeedPostedCopyWith<$Res> {
+  factory _$FeedPostedCopyWith(
+          _FeedPosted value, $Res Function(_FeedPosted) then) =
+      __$FeedPostedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$FeedPostedCopyWithImpl<$Res>
+    extends _$CreateFeedEventCopyWithImpl<$Res>
+    implements _$FeedPostedCopyWith<$Res> {
+  __$FeedPostedCopyWithImpl(
+      _FeedPosted _value, $Res Function(_FeedPosted) _then)
+      : super(_value, (v) => _then(v as _FeedPosted));
+
+  @override
+  _FeedPosted get _value => super._value as _FeedPosted;
+}
+
+/// @nodoc
+
+class _$_FeedPosted implements _FeedPosted {
+  const _$_FeedPosted();
+
+  @override
+  String toString() {
+    return 'CreateFeedEvent.feedPosted()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _FeedPosted);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)
+        feedTypeChanged,
+    required TResult Function(String title) titleChanged,
+    required TResult Function(String bodyText) bodyTextChanged,
+    required TResult Function(String url) urlChanged,
+    required TResult Function(Future<int?> Function(Days) showDays)
+        pollEndsPressed,
+    required TResult Function(String option) pollOptionAdded,
+    required TResult Function(int index, String option) pollOptionEdited,
+    required TResult Function(int index) pollOptionDeleted,
+    required TResult Function() addImageClicked,
+    required TResult Function(String id) imageDeleted,
+    required TResult Function() recoverLastDeletedImage,
+    required TResult Function() feedPosted,
+  }) {
+    return feedPosted();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            int index, bool autofocus, Future<bool?> Function() showDialog)?
+        feedTypeChanged,
+    TResult Function(String title)? titleChanged,
+    TResult Function(String bodyText)? bodyTextChanged,
+    TResult Function(String url)? urlChanged,
+    TResult Function(Future<int?> Function(Days) showDays)? pollEndsPressed,
+    TResult Function(String option)? pollOptionAdded,
+    TResult Function(int index, String option)? pollOptionEdited,
+    TResult Function(int index)? pollOptionDeleted,
+    TResult Function()? addImageClicked,
+    TResult Function(String id)? imageDeleted,
+    TResult Function()? recoverLastDeletedImage,
+    TResult Function()? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (feedPosted != null) {
+      return feedPosted();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FeedTypeChanged value) feedTypeChanged,
+    required TResult Function(_TitleChanged value) titleChanged,
+    required TResult Function(_BodyTextChanged value) bodyTextChanged,
+    required TResult Function(_UrlChanged value) urlChanged,
+    required TResult Function(_PollEndsPressed value) pollEndsPressed,
+    required TResult Function(_PollOptionAdded value) pollOptionAdded,
+    required TResult Function(_PollOptionEdited value) pollOptionEdited,
+    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(_AddImageClicked value) addImageClicked,
+    required TResult Function(_ImageDeleted value) imageDeleted,
+    required TResult Function(_RecoverLastDeletedImage value)
+        recoverLastDeletedImage,
+    required TResult Function(_FeedPosted value) feedPosted,
+  }) {
+    return feedPosted(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FeedTypeChanged value)? feedTypeChanged,
+    TResult Function(_TitleChanged value)? titleChanged,
+    TResult Function(_BodyTextChanged value)? bodyTextChanged,
+    TResult Function(_UrlChanged value)? urlChanged,
+    TResult Function(_PollEndsPressed value)? pollEndsPressed,
+    TResult Function(_PollOptionAdded value)? pollOptionAdded,
+    TResult Function(_PollOptionEdited value)? pollOptionEdited,
+    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(_AddImageClicked value)? addImageClicked,
+    TResult Function(_ImageDeleted value)? imageDeleted,
+    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(_FeedPosted value)? feedPosted,
+    required TResult orElse(),
+  }) {
+    if (feedPosted != null) {
+      return feedPosted(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FeedPosted implements CreateFeedEvent {
+  const factory _FeedPosted() = _$_FeedPosted;
+}
+
+/// @nodoc
 class _$CreateFeedStateTearOff {
   const _$CreateFeedStateTearOff();
 
@@ -936,15 +2096,13 @@ class _$CreateFeedStateTearOff {
       required String bodyText,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) {
+      required Either<FeedEditFailure, Unit> error}) {
     return _TextFeedEntry(
       title: title,
       bodyText: bodyText,
       feedType: feedType,
       autofocus: autofocus,
       error: error,
-      touched: touched,
     );
   }
 
@@ -953,32 +2111,34 @@ class _$CreateFeedStateTearOff {
       required String url,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) {
+      required Either<FeedEditFailure, Unit> error}) {
     return _LinkFeedEntry(
       title: title,
       url: url,
       feedType: feedType,
       autofocus: autofocus,
       error: error,
-      touched: touched,
     );
   }
 
   _ImageFeedEntry imageFeedEntry(
       {required String title,
-      File? image,
+      required List<ImageData> images,
       required FeedType feedType,
       required bool autofocus,
       required Either<FeedEditFailure, Unit> error,
-      required bool touched}) {
+      required Option<bool> dirty,
+      required Option<DeletedImageData> lastDeletedImage,
+      required int nextIndex}) {
     return _ImageFeedEntry(
       title: title,
-      image: image,
+      images: images,
       feedType: feedType,
       autofocus: autofocus,
       error: error,
-      touched: touched,
+      dirty: dirty,
+      lastDeletedImage: lastDeletedImage,
+      nextIndex: nextIndex,
     );
   }
 
@@ -987,15 +2147,13 @@ class _$CreateFeedStateTearOff {
       File? video,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) {
+      required Either<FeedEditFailure, Unit> error}) {
     return _VideoFeedEntry(
       title: title,
       video: video,
       feedType: feedType,
       autofocus: autofocus,
       error: error,
-      touched: touched,
     );
   }
 
@@ -1006,8 +2164,7 @@ class _$CreateFeedStateTearOff {
       required int pollEndsDays,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) {
+      required Either<FeedEditFailure, Unit> error}) {
     return _PollFeedEntry(
       title: title,
       bodyText: bodyText,
@@ -1016,7 +2173,6 @@ class _$CreateFeedStateTearOff {
       feedType: feedType,
       autofocus: autofocus,
       error: error,
-      touched: touched,
     );
   }
 }
@@ -1030,21 +2186,27 @@ mixin _$CreateFeedState {
   FeedType get feedType => throw _privateConstructorUsedError;
   bool get autofocus => throw _privateConstructorUsedError;
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  bool get touched => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1053,24 +2215,30 @@ mixin _$CreateFeedState {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -1079,8 +2247,7 @@ mixin _$CreateFeedState {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) =>
@@ -1119,8 +2286,7 @@ abstract class $CreateFeedStateCopyWith<$Res> {
       {String title,
       FeedType feedType,
       bool autofocus,
-      Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Either<FeedEditFailure, Unit> error});
 }
 
 /// @nodoc
@@ -1138,7 +2304,6 @@ class _$CreateFeedStateCopyWithImpl<$Res>
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
   }) {
     return _then(_value.copyWith(
       title: title == freezed
@@ -1157,10 +2322,6 @@ class _$CreateFeedStateCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1177,8 +2338,7 @@ abstract class _$TextFeedEntryCopyWith<$Res>
       String bodyText,
       FeedType feedType,
       bool autofocus,
-      Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Either<FeedEditFailure, Unit> error});
 }
 
 /// @nodoc
@@ -1199,7 +2359,6 @@ class __$TextFeedEntryCopyWithImpl<$Res>
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
   }) {
     return _then(_TextFeedEntry(
       title: title == freezed
@@ -1222,10 +2381,6 @@ class __$TextFeedEntryCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1238,8 +2393,7 @@ class _$_TextFeedEntry implements _TextFeedEntry {
       required this.bodyText,
       required this.feedType,
       required this.autofocus,
-      required this.error,
-      required this.touched});
+      required this.error});
 
   @override
   final String title;
@@ -1251,12 +2405,10 @@ class _$_TextFeedEntry implements _TextFeedEntry {
   final bool autofocus;
   @override
   final Either<FeedEditFailure, Unit> error;
-  @override
-  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.textFeedEntry(title: $title, bodyText: $bodyText, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
+    return 'CreateFeedState.textFeedEntry(title: $title, bodyText: $bodyText, feedType: $feedType, autofocus: $autofocus, error: $error)';
   }
 
   @override
@@ -1275,9 +2427,7 @@ class _$_TextFeedEntry implements _TextFeedEntry {
                 const DeepCollectionEquality()
                     .equals(other.autofocus, autofocus)) &&
             (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.touched, touched) ||
-                const DeepCollectionEquality().equals(other.touched, touched)));
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
@@ -1287,8 +2437,7 @@ class _$_TextFeedEntry implements _TextFeedEntry {
       const DeepCollectionEquality().hash(bodyText) ^
       const DeepCollectionEquality().hash(feedType) ^
       const DeepCollectionEquality().hash(autofocus) ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(touched);
+      const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -1299,16 +2448,23 @@ class _$_TextFeedEntry implements _TextFeedEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1317,27 +2473,33 @@ class _$_TextFeedEntry implements _TextFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) {
-    return textFeedEntry(title, bodyText, feedType, autofocus, error, touched);
+    return textFeedEntry(title, bodyText, feedType, autofocus, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -1346,14 +2508,12 @@ class _$_TextFeedEntry implements _TextFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (textFeedEntry != null) {
-      return textFeedEntry(
-          title, bodyText, feedType, autofocus, error, touched);
+      return textFeedEntry(title, bodyText, feedType, autofocus, error);
     }
     return orElse();
   }
@@ -1393,8 +2553,7 @@ abstract class _TextFeedEntry implements CreateFeedState {
       required String bodyText,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) = _$_TextFeedEntry;
+      required Either<FeedEditFailure, Unit> error}) = _$_TextFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1405,8 +2564,6 @@ abstract class _TextFeedEntry implements CreateFeedState {
   bool get autofocus => throw _privateConstructorUsedError;
   @override
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  @override
-  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TextFeedEntryCopyWith<_TextFeedEntry> get copyWith =>
@@ -1425,8 +2582,7 @@ abstract class _$LinkFeedEntryCopyWith<$Res>
       String url,
       FeedType feedType,
       bool autofocus,
-      Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Either<FeedEditFailure, Unit> error});
 }
 
 /// @nodoc
@@ -1447,7 +2603,6 @@ class __$LinkFeedEntryCopyWithImpl<$Res>
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
   }) {
     return _then(_LinkFeedEntry(
       title: title == freezed
@@ -1470,10 +2625,6 @@ class __$LinkFeedEntryCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1486,8 +2637,7 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
       required this.url,
       required this.feedType,
       required this.autofocus,
-      required this.error,
-      required this.touched});
+      required this.error});
 
   @override
   final String title;
@@ -1499,12 +2649,10 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
   final bool autofocus;
   @override
   final Either<FeedEditFailure, Unit> error;
-  @override
-  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.linkFeedEntry(title: $title, url: $url, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
+    return 'CreateFeedState.linkFeedEntry(title: $title, url: $url, feedType: $feedType, autofocus: $autofocus, error: $error)';
   }
 
   @override
@@ -1522,9 +2670,7 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
                 const DeepCollectionEquality()
                     .equals(other.autofocus, autofocus)) &&
             (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.touched, touched) ||
-                const DeepCollectionEquality().equals(other.touched, touched)));
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
@@ -1534,8 +2680,7 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
       const DeepCollectionEquality().hash(url) ^
       const DeepCollectionEquality().hash(feedType) ^
       const DeepCollectionEquality().hash(autofocus) ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(touched);
+      const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -1546,16 +2691,23 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1564,27 +2716,33 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) {
-    return linkFeedEntry(title, url, feedType, autofocus, error, touched);
+    return linkFeedEntry(title, url, feedType, autofocus, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -1593,13 +2751,12 @@ class _$_LinkFeedEntry implements _LinkFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (linkFeedEntry != null) {
-      return linkFeedEntry(title, url, feedType, autofocus, error, touched);
+      return linkFeedEntry(title, url, feedType, autofocus, error);
     }
     return orElse();
   }
@@ -1639,8 +2796,7 @@ abstract class _LinkFeedEntry implements CreateFeedState {
       required String url,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) = _$_LinkFeedEntry;
+      required Either<FeedEditFailure, Unit> error}) = _$_LinkFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -1651,8 +2807,6 @@ abstract class _LinkFeedEntry implements CreateFeedState {
   bool get autofocus => throw _privateConstructorUsedError;
   @override
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  @override
-  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$LinkFeedEntryCopyWith<_LinkFeedEntry> get copyWith =>
@@ -1668,11 +2822,13 @@ abstract class _$ImageFeedEntryCopyWith<$Res>
   @override
   $Res call(
       {String title,
-      File? image,
+      List<ImageData> images,
       FeedType feedType,
       bool autofocus,
       Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Option<bool> dirty,
+      Option<DeletedImageData> lastDeletedImage,
+      int nextIndex});
 }
 
 /// @nodoc
@@ -1689,21 +2845,23 @@ class __$ImageFeedEntryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = freezed,
-    Object? image = freezed,
+    Object? images = freezed,
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
+    Object? dirty = freezed,
+    Object? lastDeletedImage = freezed,
+    Object? nextIndex = freezed,
   }) {
     return _then(_ImageFeedEntry(
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      image: image == freezed
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as File?,
+      images: images == freezed
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ImageData>,
       feedType: feedType == freezed
           ? _value.feedType
           : feedType // ignore: cast_nullable_to_non_nullable
@@ -1716,10 +2874,18 @@ class __$ImageFeedEntryCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
+      dirty: dirty == freezed
+          ? _value.dirty
+          : dirty // ignore: cast_nullable_to_non_nullable
+              as Option<bool>,
+      lastDeletedImage: lastDeletedImage == freezed
+          ? _value.lastDeletedImage
+          : lastDeletedImage // ignore: cast_nullable_to_non_nullable
+              as Option<DeletedImageData>,
+      nextIndex: nextIndex == freezed
+          ? _value.nextIndex
+          : nextIndex // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -1729,16 +2895,18 @@ class __$ImageFeedEntryCopyWithImpl<$Res>
 class _$_ImageFeedEntry implements _ImageFeedEntry {
   const _$_ImageFeedEntry(
       {required this.title,
-      this.image,
+      required this.images,
       required this.feedType,
       required this.autofocus,
       required this.error,
-      required this.touched});
+      required this.dirty,
+      required this.lastDeletedImage,
+      required this.nextIndex});
 
   @override
   final String title;
   @override
-  final File? image;
+  final List<ImageData> images;
   @override
   final FeedType feedType;
   @override
@@ -1746,11 +2914,15 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
   @override
   final Either<FeedEditFailure, Unit> error;
   @override
-  final bool touched;
+  final Option<bool> dirty;
+  @override
+  final Option<DeletedImageData> lastDeletedImage;
+  @override
+  final int nextIndex;
 
   @override
   String toString() {
-    return 'CreateFeedState.imageFeedEntry(title: $title, image: $image, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
+    return 'CreateFeedState.imageFeedEntry(title: $title, images: $images, feedType: $feedType, autofocus: $autofocus, error: $error, dirty: $dirty, lastDeletedImage: $lastDeletedImage, nextIndex: $nextIndex)';
   }
 
   @override
@@ -1759,8 +2931,8 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
         (other is _ImageFeedEntry &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.image, image) ||
-                const DeepCollectionEquality().equals(other.image, image)) &&
+            (identical(other.images, images) ||
+                const DeepCollectionEquality().equals(other.images, images)) &&
             (identical(other.feedType, feedType) ||
                 const DeepCollectionEquality()
                     .equals(other.feedType, feedType)) &&
@@ -1769,19 +2941,27 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
                     .equals(other.autofocus, autofocus)) &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.touched, touched) ||
-                const DeepCollectionEquality().equals(other.touched, touched)));
+            (identical(other.dirty, dirty) ||
+                const DeepCollectionEquality().equals(other.dirty, dirty)) &&
+            (identical(other.lastDeletedImage, lastDeletedImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastDeletedImage, lastDeletedImage)) &&
+            (identical(other.nextIndex, nextIndex) ||
+                const DeepCollectionEquality()
+                    .equals(other.nextIndex, nextIndex)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(image) ^
+      const DeepCollectionEquality().hash(images) ^
       const DeepCollectionEquality().hash(feedType) ^
       const DeepCollectionEquality().hash(autofocus) ^
       const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(touched);
+      const DeepCollectionEquality().hash(dirty) ^
+      const DeepCollectionEquality().hash(lastDeletedImage) ^
+      const DeepCollectionEquality().hash(nextIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -1792,16 +2972,23 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -1810,27 +2997,34 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) {
-    return imageFeedEntry(title, image, feedType, autofocus, error, touched);
+    return imageFeedEntry(title, images, feedType, autofocus, error, dirty,
+        lastDeletedImage, nextIndex);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -1839,13 +3033,13 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (imageFeedEntry != null) {
-      return imageFeedEntry(title, image, feedType, autofocus, error, touched);
+      return imageFeedEntry(title, images, feedType, autofocus, error, dirty,
+          lastDeletedImage, nextIndex);
     }
     return orElse();
   }
@@ -1882,23 +3076,27 @@ class _$_ImageFeedEntry implements _ImageFeedEntry {
 abstract class _ImageFeedEntry implements CreateFeedState {
   const factory _ImageFeedEntry(
       {required String title,
-      File? image,
+      required List<ImageData> images,
       required FeedType feedType,
       required bool autofocus,
       required Either<FeedEditFailure, Unit> error,
-      required bool touched}) = _$_ImageFeedEntry;
+      required Option<bool> dirty,
+      required Option<DeletedImageData> lastDeletedImage,
+      required int nextIndex}) = _$_ImageFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
-  File? get image => throw _privateConstructorUsedError;
+  List<ImageData> get images => throw _privateConstructorUsedError;
   @override
   FeedType get feedType => throw _privateConstructorUsedError;
   @override
   bool get autofocus => throw _privateConstructorUsedError;
   @override
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  @override
-  bool get touched => throw _privateConstructorUsedError;
+  Option<bool> get dirty => throw _privateConstructorUsedError;
+  Option<DeletedImageData> get lastDeletedImage =>
+      throw _privateConstructorUsedError;
+  int get nextIndex => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ImageFeedEntryCopyWith<_ImageFeedEntry> get copyWith =>
@@ -1917,8 +3115,7 @@ abstract class _$VideoFeedEntryCopyWith<$Res>
       File? video,
       FeedType feedType,
       bool autofocus,
-      Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Either<FeedEditFailure, Unit> error});
 }
 
 /// @nodoc
@@ -1939,7 +3136,6 @@ class __$VideoFeedEntryCopyWithImpl<$Res>
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
   }) {
     return _then(_VideoFeedEntry(
       title: title == freezed
@@ -1962,10 +3158,6 @@ class __$VideoFeedEntryCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -1978,8 +3170,7 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
       this.video,
       required this.feedType,
       required this.autofocus,
-      required this.error,
-      required this.touched});
+      required this.error});
 
   @override
   final String title;
@@ -1991,12 +3182,10 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
   final bool autofocus;
   @override
   final Either<FeedEditFailure, Unit> error;
-  @override
-  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.videoFeedEntry(title: $title, video: $video, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
+    return 'CreateFeedState.videoFeedEntry(title: $title, video: $video, feedType: $feedType, autofocus: $autofocus, error: $error)';
   }
 
   @override
@@ -2014,9 +3203,7 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
                 const DeepCollectionEquality()
                     .equals(other.autofocus, autofocus)) &&
             (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.touched, touched) ||
-                const DeepCollectionEquality().equals(other.touched, touched)));
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
@@ -2026,8 +3213,7 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
       const DeepCollectionEquality().hash(video) ^
       const DeepCollectionEquality().hash(feedType) ^
       const DeepCollectionEquality().hash(autofocus) ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(touched);
+      const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -2038,16 +3224,23 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -2056,27 +3249,33 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) {
-    return videoFeedEntry(title, video, feedType, autofocus, error, touched);
+    return videoFeedEntry(title, video, feedType, autofocus, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -2085,13 +3284,12 @@ class _$_VideoFeedEntry implements _VideoFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (videoFeedEntry != null) {
-      return videoFeedEntry(title, video, feedType, autofocus, error, touched);
+      return videoFeedEntry(title, video, feedType, autofocus, error);
     }
     return orElse();
   }
@@ -2131,8 +3329,7 @@ abstract class _VideoFeedEntry implements CreateFeedState {
       File? video,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) = _$_VideoFeedEntry;
+      required Either<FeedEditFailure, Unit> error}) = _$_VideoFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -2143,8 +3340,6 @@ abstract class _VideoFeedEntry implements CreateFeedState {
   bool get autofocus => throw _privateConstructorUsedError;
   @override
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  @override
-  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VideoFeedEntryCopyWith<_VideoFeedEntry> get copyWith =>
@@ -2165,8 +3360,7 @@ abstract class _$PollFeedEntryCopyWith<$Res>
       int pollEndsDays,
       FeedType feedType,
       bool autofocus,
-      Either<FeedEditFailure, Unit> error,
-      bool touched});
+      Either<FeedEditFailure, Unit> error});
 }
 
 /// @nodoc
@@ -2189,7 +3383,6 @@ class __$PollFeedEntryCopyWithImpl<$Res>
     Object? feedType = freezed,
     Object? autofocus = freezed,
     Object? error = freezed,
-    Object? touched = freezed,
   }) {
     return _then(_PollFeedEntry(
       title: title == freezed
@@ -2220,10 +3413,6 @@ class __$PollFeedEntryCopyWithImpl<$Res>
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
               as Either<FeedEditFailure, Unit>,
-      touched: touched == freezed
-          ? _value.touched
-          : touched // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -2238,8 +3427,7 @@ class _$_PollFeedEntry implements _PollFeedEntry {
       required this.pollEndsDays,
       required this.feedType,
       required this.autofocus,
-      required this.error,
-      required this.touched});
+      required this.error});
 
   @override
   final String title;
@@ -2255,12 +3443,10 @@ class _$_PollFeedEntry implements _PollFeedEntry {
   final bool autofocus;
   @override
   final Either<FeedEditFailure, Unit> error;
-  @override
-  final bool touched;
 
   @override
   String toString() {
-    return 'CreateFeedState.pollFeedEntry(title: $title, bodyText: $bodyText, options: $options, pollEndsDays: $pollEndsDays, feedType: $feedType, autofocus: $autofocus, error: $error, touched: $touched)';
+    return 'CreateFeedState.pollFeedEntry(title: $title, bodyText: $bodyText, options: $options, pollEndsDays: $pollEndsDays, feedType: $feedType, autofocus: $autofocus, error: $error)';
   }
 
   @override
@@ -2285,9 +3471,7 @@ class _$_PollFeedEntry implements _PollFeedEntry {
                 const DeepCollectionEquality()
                     .equals(other.autofocus, autofocus)) &&
             (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)) &&
-            (identical(other.touched, touched) ||
-                const DeepCollectionEquality().equals(other.touched, touched)));
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
@@ -2299,8 +3483,7 @@ class _$_PollFeedEntry implements _PollFeedEntry {
       const DeepCollectionEquality().hash(pollEndsDays) ^
       const DeepCollectionEquality().hash(feedType) ^
       const DeepCollectionEquality().hash(autofocus) ^
-      const DeepCollectionEquality().hash(error) ^
-      const DeepCollectionEquality().hash(touched);
+      const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
   @override
@@ -2311,16 +3494,23 @@ class _$_PollFeedEntry implements _PollFeedEntry {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         textFeedEntry,
     required TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         linkFeedEntry,
-    required TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+    required TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)
         imageFeedEntry,
     required TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)
+            bool autofocus, Either<FeedEditFailure, Unit> error)
         videoFeedEntry,
     required TResult Function(
             String title,
@@ -2329,28 +3519,34 @@ class _$_PollFeedEntry implements _PollFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)
+            Either<FeedEditFailure, Unit> error)
         pollFeedEntry,
   }) {
-    return pollFeedEntry(title, bodyText, options, pollEndsDays, feedType,
-        autofocus, error, touched);
+    return pollFeedEntry(
+        title, bodyText, options, pollEndsDays, feedType, autofocus, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title, String bodyText, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         textFeedEntry,
     TResult Function(String title, String url, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         linkFeedEntry,
-    TResult Function(String title, File? image, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+    TResult Function(
+            String title,
+            List<ImageData> images,
+            FeedType feedType,
+            bool autofocus,
+            Either<FeedEditFailure, Unit> error,
+            Option<bool> dirty,
+            Option<DeletedImageData> lastDeletedImage,
+            int nextIndex)?
         imageFeedEntry,
     TResult Function(String title, File? video, FeedType feedType,
-            bool autofocus, Either<FeedEditFailure, Unit> error, bool touched)?
+            bool autofocus, Either<FeedEditFailure, Unit> error)?
         videoFeedEntry,
     TResult Function(
             String title,
@@ -2359,14 +3555,13 @@ class _$_PollFeedEntry implements _PollFeedEntry {
             int pollEndsDays,
             FeedType feedType,
             bool autofocus,
-            Either<FeedEditFailure, Unit> error,
-            bool touched)?
+            Either<FeedEditFailure, Unit> error)?
         pollFeedEntry,
     required TResult orElse(),
   }) {
     if (pollFeedEntry != null) {
-      return pollFeedEntry(title, bodyText, options, pollEndsDays, feedType,
-          autofocus, error, touched);
+      return pollFeedEntry(
+          title, bodyText, options, pollEndsDays, feedType, autofocus, error);
     }
     return orElse();
   }
@@ -2408,8 +3603,7 @@ abstract class _PollFeedEntry implements CreateFeedState {
       required int pollEndsDays,
       required FeedType feedType,
       required bool autofocus,
-      required Either<FeedEditFailure, Unit> error,
-      required bool touched}) = _$_PollFeedEntry;
+      required Either<FeedEditFailure, Unit> error}) = _$_PollFeedEntry;
 
   @override
   String get title => throw _privateConstructorUsedError;
@@ -2422,8 +3616,6 @@ abstract class _PollFeedEntry implements CreateFeedState {
   bool get autofocus => throw _privateConstructorUsedError;
   @override
   Either<FeedEditFailure, Unit> get error => throw _privateConstructorUsedError;
-  @override
-  bool get touched => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PollFeedEntryCopyWith<_PollFeedEntry> get copyWith =>

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/app/colors.dart';
-import '../../../core/reusable/filled_circle_icon.dart';
-import '../create_feed_entry_page.dart';
+import '../core/app/colors.dart';
+import '../core/reusable/filled_circle_icon.dart';
+import 'create_feed_entry_page.dart';
 
 class FeedTypeButton extends StatelessWidget {
-  final FeedType feedType;
+  final FeedTypeData feedType;
   final int index;
   final bool selected;
   final Function(int index) onTap;

@@ -8,7 +8,6 @@ class CreateFeedState with _$CreateFeedState {
     required FeedType feedType,
     required bool autofocus,
     required Either<FeedEditFailure, Unit> error,
-    required bool touched,
   }) = _TextFeedEntry;
 
   const factory CreateFeedState.linkFeedEntry({
@@ -17,16 +16,17 @@ class CreateFeedState with _$CreateFeedState {
     required FeedType feedType,
     required bool autofocus,
     required Either<FeedEditFailure, Unit> error,
-    required bool touched,
   }) = _LinkFeedEntry;
 
   const factory CreateFeedState.imageFeedEntry({
     required String title,
-    File? image,
+    required List<ImageData> images,
     required FeedType feedType,
     required bool autofocus,
     required Either<FeedEditFailure, Unit> error,
-    required bool touched,
+    required Option<bool> dirty,
+    required Option<DeletedImageData> lastDeletedImage,
+    required int nextIndex,
   }) = _ImageFeedEntry;
 
   const factory CreateFeedState.videoFeedEntry({
@@ -35,7 +35,6 @@ class CreateFeedState with _$CreateFeedState {
     required FeedType feedType,
     required bool autofocus,
     required Either<FeedEditFailure, Unit> error,
-    required bool touched,
   }) = _VideoFeedEntry;
 
   const factory CreateFeedState.pollFeedEntry({
@@ -46,8 +45,25 @@ class CreateFeedState with _$CreateFeedState {
     required FeedType feedType,
     required bool autofocus,
     required Either<FeedEditFailure, Unit> error,
-    required bool touched,
   }) = _PollFeedEntry;
+}
+
+///
+class DeletedImageData {
+  final ImageData imageData;
+  final int index;
+
+  DeletedImageData(this.imageData, this.index);
+
+  DeletedImageData copyWith({
+    ImageData? imageData,
+    int? index,
+  }) {
+    return DeletedImageData(
+      imageData ?? this.imageData,
+      index ?? this.index,
+    );
+  }
 }
 
 enum FeedType { text, link, image, video, poll }

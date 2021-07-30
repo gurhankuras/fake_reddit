@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
+import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+
 import '_presentation/core/app/extensions/string_fill_extension.dart';
 import '_presentation/core/app/search_bar_field.dart';
-
+import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/home/news.dart';
 import 'routes.dart';
 
@@ -21,6 +22,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    print(context.read<MainPageBloc>());
+
     final tabBarWidget = tabBar;
 
     return DefaultTabController(
@@ -86,6 +89,8 @@ class _HomePageState extends State<HomePage> {
                 child: const Icon(Icons.play_circle),
                 onTap: () {
                   // TODO: navigate to another page
+                  Navigator.of(context)
+                      .pushNamed(Routes.changeCommunityAvatarPage);
                 },
               ),
             ),

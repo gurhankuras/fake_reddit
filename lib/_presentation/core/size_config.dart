@@ -24,9 +24,8 @@ class SizeConfig {
   static bool isKeyboardHidden(BuildContext context) =>
       MediaQuery.of(context).viewInsets.bottom == 0;
 
-  double screenHeightPercentage(BuildContext context,
-          {double percentage = 1}) =>
-      screenHeight * percentage;
-  double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
-      screenWidth * percentage;
+  static double screenHeightPercentage([double percentage = 1]) =>
+      screenHeight * percentage / 100;
+  static double screenWidthPercentage([double percentage = 1]) =>
+      screenWidth * percentage / 100;
 }

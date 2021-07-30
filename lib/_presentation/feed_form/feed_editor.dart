@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
 
-import '../../../../../application/bloc/create_feed_bloc.dart';
-import 'widgets/link_feed_edit.dart';
-import 'widgets/poll_feed_edit.dart';
-import 'widgets/text_feed_edit.dart';
+import '../../application/create_feed_bloc.dart';
+import 'base_feed_edit.dart';
+import 'link_feed_edit.dart';
+import 'poll_feed_edit.dart';
+import 'text_feed_edit.dart';
 
 class FeedEditor extends StatelessWidget {
   const FeedEditor({
@@ -37,6 +39,9 @@ class FeedEditor extends StatelessWidget {
                   title: state.title,
                   bodyText: state.bodyText,
                   autofocus: state.autofocus,
+                ),
+                imageFeedEntry: (state) => ImageFeedEdit(
+                  title: state.title,
                 ),
                 orElse: () => const Text('HAHAHAHA'),
               ),

@@ -1,13 +1,20 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/change_community_avatar_page.dart';
-import 'package:reddit_clone/_presentation/crop_image_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'package:reddit_clone/_presentation/change_community_avatar/change_community_avatar_page.dart';
+import 'package:reddit_clone/_presentation/change_community_avatar/crop_image_page.dart';
+import 'package:reddit_clone/_presentation/post_feed/create_feed_entry_overview_page.dart';
+import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import 'package:reddit_clone/application/change_community_avatar/change_community_avatar_bloc.dart';
+import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import 'package:reddit_clone/infastructure/image_service.dart';
 import 'package:reddit_clone/main_page.dart';
 
 import '_presentation/home/search_page.dart';
-import '_presentation/post_feed/create_feed_entry_page/create_feed_entry_page.dart';
-import '_presentation/post_feed/search_page/post_feed_search_page.dart';
+import '_presentation/feed_form/create_feed_entry_page.dart';
+import '_presentation/search_community/post_feed_search_page.dart';
 import 'domain/community.dart';
 import 'home_page.dart';
 
@@ -17,6 +24,7 @@ abstract class Routes {
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
   static const createFeedPage = '/createFeedPage';
+  static const createFeedOverviewPage = '/createFeedOverviewPage';
   static const changeCommunityAvatarPage = '/changeCommunityAvatarPage';
   static const cropImagePage = '/cropImagePage';
 }
@@ -31,8 +39,11 @@ abstract class AppRouter {
         );
       case Routes.cropImagePage:
         return MaterialPageRoute<Uint8List>(
-          builder: (_) => CropSample(
-            fileAsBytes: settings.arguments as Uint8List,
+          builder: (context) => BlocProvider.value(
+            value: context.read<ChangeCommunityAvatarBloc>(),
+            child: CropSample(
+              fileAsBytes: settings.arguments as Uint8List,
+            ),
           ),
           settings: settings,
         );
@@ -43,7 +54,10 @@ abstract class AppRouter {
         );
       case Routes.postFeedSearchPage:
         return MaterialPageRoute(
-          builder: (_) => const PostFeedSearchPage(),
+          builder: (_) => BlocProvider.value(
+            value: settings.arguments as MainPageBloc,
+            child: const PostFeedSearchPage(),
+          ),
           settings: settings,
         );
       case Routes.searchPage:
@@ -57,13 +71,29 @@ abstract class AppRouter {
       case Routes.createFeedPage:
         final args = settings.arguments as CreateFeedPageArguments;
         return MaterialPageRoute(
-          builder: (context) => CreateFeedEntryPage(community: args.community),
+          builder: (context) => BlocProvider(
+            create: (context) => CreateFeedBloc(
+              imageService: ImageService(),
+              mainPageBloc: args.bloc,
+            ),
+            child: CreateFeedEntryPage(community: args.community),
+          ),
           fullscreenDialog: true,
+          settings: settings,
+        );
+      case Routes.createFeedOverviewPage:
+        return MaterialPageRoute(
+          builder: (context) => CreateFeedEntryOverviewPage(
+              community: settings.arguments as Community),
           settings: settings,
         );
       case Routes.changeCommunityAvatarPage:
         return MaterialPageRoute(
-          builder: (_) => const ChangeCommunityAvatarPage(),
+          builder: (_) => BlocProvider(
+            create: (context) =>
+                ChangeCommunityAvatarBloc(imageService: ImageService()),
+            child: const ChangeCommunityAvatarPage(),
+          ),
           settings: settings,
         );
       default:
@@ -79,8 +109,12 @@ abstract class AppRouter {
 
 class CreateFeedPageArguments {
   final Community community;
+  final MainPageBloc bloc;
 
-  CreateFeedPageArguments(this.community);
+  CreateFeedPageArguments(
+    this.community,
+    this.bloc,
+  );
 }
 
 Widget searchPageTransitionBuilder(

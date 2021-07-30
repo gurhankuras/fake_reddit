@@ -2,7 +2,8 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reddit_clone/domain/i_image_service.dart';
+
+import '../domain/i_image_service.dart';
 
 class ImageService implements IImageService {
   @override
@@ -15,6 +16,7 @@ class ImageService implements IImageService {
     return await select(source: ImageSource.camera);
   }
 
+  @override
   Future<Option<File>> select({required ImageSource source}) async {
     final picker = ImagePicker();
     final image = await picker.pickImage(source: source);
@@ -28,5 +30,15 @@ class ImageService implements IImageService {
   Future<Option<File>> selectAndCrop() {
     // TODO: implement selectAndCrop
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Option<List<File>>> pickImageMultiple() async {
+    final picker = ImagePicker();
+    final images = await picker.pickMultiImage();
+    if (images == null) {
+      return none();
+    }
+    return some(images.map((xfile) => File(xfile.path)).toList());
   }
 }

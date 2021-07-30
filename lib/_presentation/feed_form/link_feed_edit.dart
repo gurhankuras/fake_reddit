@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../core/app/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import 'package:string_validator/string_validator.dart';
+import '../core/app/colors.dart';
 import 'text_feed_edit.dart';
 
 class LinkFeedEdit extends StatelessWidget {
@@ -23,6 +25,10 @@ class LinkFeedEdit extends StatelessWidget {
         ),
         TextFormField(
           initialValue: '',
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          validator: (value) {
+            return !isURL(value!) ? "invalid url" : null;
+          },
           decoration: InputDecoration(
             // isDense: false,
             hintText: 'Add URL',
@@ -33,6 +39,9 @@ class LinkFeedEdit extends StatelessWidget {
                 ),
             border: InputBorder.none,
           ),
+          onChanged: (value) => context.read<CreateFeedBloc>().add(
+                CreateFeedEvent.urlChanged(value),
+              ),
         ),
       ],
     );

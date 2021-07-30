@@ -39,6 +39,12 @@ class _$ChangeCommunityAvatarEventTearOff {
       source,
     );
   }
+
+  _ImageSelected imageSelected(File image) {
+    return _ImageSelected(
+      image,
+    );
+  }
 }
 
 /// @nodoc
@@ -52,6 +58,7 @@ mixin _$ChangeCommunityAvatarEvent {
     required TResult Function(int index) avatarIconChanged,
     required TResult Function(Uint8List bytes) imageCropped,
     required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +67,7 @@ mixin _$ChangeCommunityAvatarEvent {
     TResult Function(int index)? avatarIconChanged,
     TResult Function(Uint8List bytes)? imageCropped,
     TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -70,6 +78,7 @@ mixin _$ChangeCommunityAvatarEvent {
     required TResult Function(_ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +88,7 @@ mixin _$ChangeCommunityAvatarEvent {
     TResult Function(_ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -170,6 +180,7 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
     required TResult Function(int index) avatarIconChanged,
     required TResult Function(Uint8List bytes) imageCropped,
     required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
   }) {
     return avatarColorChanged(index);
   }
@@ -181,6 +192,7 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
     TResult Function(int index)? avatarIconChanged,
     TResult Function(Uint8List bytes)? imageCropped,
     TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
     required TResult orElse(),
   }) {
     if (avatarColorChanged != null) {
@@ -197,6 +209,7 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
     required TResult Function(_ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
   }) {
     return avatarColorChanged(this);
   }
@@ -209,6 +222,7 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
     TResult Function(_ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
     required TResult orElse(),
   }) {
     if (avatarColorChanged != null) {
@@ -296,6 +310,7 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
     required TResult Function(int index) avatarIconChanged,
     required TResult Function(Uint8List bytes) imageCropped,
     required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
   }) {
     return avatarIconChanged(index);
   }
@@ -307,6 +322,7 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
     TResult Function(int index)? avatarIconChanged,
     TResult Function(Uint8List bytes)? imageCropped,
     TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
     required TResult orElse(),
   }) {
     if (avatarIconChanged != null) {
@@ -323,6 +339,7 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
     required TResult Function(_ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
   }) {
     return avatarIconChanged(this);
   }
@@ -335,6 +352,7 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
     TResult Function(_ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
     required TResult orElse(),
   }) {
     if (avatarIconChanged != null) {
@@ -422,6 +440,7 @@ class _$_ImageCropped implements _ImageCropped {
     required TResult Function(int index) avatarIconChanged,
     required TResult Function(Uint8List bytes) imageCropped,
     required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
   }) {
     return imageCropped(bytes);
   }
@@ -433,6 +452,7 @@ class _$_ImageCropped implements _ImageCropped {
     TResult Function(int index)? avatarIconChanged,
     TResult Function(Uint8List bytes)? imageCropped,
     TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
     required TResult orElse(),
   }) {
     if (imageCropped != null) {
@@ -449,6 +469,7 @@ class _$_ImageCropped implements _ImageCropped {
     required TResult Function(_ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
   }) {
     return imageCropped(this);
   }
@@ -461,6 +482,7 @@ class _$_ImageCropped implements _ImageCropped {
     TResult Function(_ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
     required TResult orElse(),
   }) {
     if (imageCropped != null) {
@@ -551,6 +573,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     required TResult Function(int index) avatarIconChanged,
     required TResult Function(Uint8List bytes) imageCropped,
     required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
   }) {
     return loadingCustomImageSelected(source);
   }
@@ -562,6 +585,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     TResult Function(int index)? avatarIconChanged,
     TResult Function(Uint8List bytes)? imageCropped,
     TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
     required TResult orElse(),
   }) {
     if (loadingCustomImageSelected != null) {
@@ -578,6 +602,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     required TResult Function(_ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
   }) {
     return loadingCustomImageSelected(this);
   }
@@ -590,6 +615,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     TResult Function(_ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
     required TResult orElse(),
   }) {
     if (loadingCustomImageSelected != null) {
@@ -611,6 +637,136 @@ abstract class _LoadingCustomImageSelected
 }
 
 /// @nodoc
+abstract class _$ImageSelectedCopyWith<$Res> {
+  factory _$ImageSelectedCopyWith(
+          _ImageSelected value, $Res Function(_ImageSelected) then) =
+      __$ImageSelectedCopyWithImpl<$Res>;
+  $Res call({File image});
+}
+
+/// @nodoc
+class __$ImageSelectedCopyWithImpl<$Res>
+    extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
+    implements _$ImageSelectedCopyWith<$Res> {
+  __$ImageSelectedCopyWithImpl(
+      _ImageSelected _value, $Res Function(_ImageSelected) _then)
+      : super(_value, (v) => _then(v as _ImageSelected));
+
+  @override
+  _ImageSelected get _value => super._value as _ImageSelected;
+
+  @override
+  $Res call({
+    Object? image = freezed,
+  }) {
+    return _then(_ImageSelected(
+      image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as File,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ImageSelected implements _ImageSelected {
+  const _$_ImageSelected(this.image);
+
+  @override
+  final File image;
+
+  @override
+  String toString() {
+    return 'ChangeCommunityAvatarEvent.imageSelected(image: $image)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _ImageSelected &&
+            (identical(other.image, image) ||
+                const DeepCollectionEquality().equals(other.image, image)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(image);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ImageSelectedCopyWith<_ImageSelected> get copyWith =>
+      __$ImageSelectedCopyWithImpl<_ImageSelected>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int index) avatarColorChanged,
+    required TResult Function(int index) avatarIconChanged,
+    required TResult Function(Uint8List bytes) imageCropped,
+    required TResult Function(ImageSource source) loadingCustomImageSelected,
+    required TResult Function(File image) imageSelected,
+  }) {
+    return imageSelected(image);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int index)? avatarColorChanged,
+    TResult Function(int index)? avatarIconChanged,
+    TResult Function(Uint8List bytes)? imageCropped,
+    TResult Function(ImageSource source)? loadingCustomImageSelected,
+    TResult Function(File image)? imageSelected,
+    required TResult orElse(),
+  }) {
+    if (imageSelected != null) {
+      return imageSelected(image);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(_LoadingCustomImageSelected value)
+        loadingCustomImageSelected,
+    required TResult Function(_ImageSelected value) imageSelected,
+  }) {
+    return imageSelected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(_LoadingCustomImageSelected value)?
+        loadingCustomImageSelected,
+    TResult Function(_ImageSelected value)? imageSelected,
+    required TResult orElse(),
+  }) {
+    if (imageSelected != null) {
+      return imageSelected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ImageSelected implements ChangeCommunityAvatarEvent {
+  const factory _ImageSelected(File image) = _$_ImageSelected;
+
+  File get image => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$ImageSelectedCopyWith<_ImageSelected> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 class _$ChangeCommunityAvatarStateTearOff {
   const _$ChangeCommunityAvatarStateTearOff();
 
@@ -618,12 +774,14 @@ class _$ChangeCommunityAvatarStateTearOff {
       {required bool hasAnyChanged,
       required int iconIndex,
       required int colorIndex,
-      required Option<Uint8List> croppedImage}) {
+      required Option<Uint8List> croppedImage,
+      required Option<Uint8List> selectedImage}) {
     return _ChangeCommunityAvatarState(
       hasAnyChanged: hasAnyChanged,
       iconIndex: iconIndex,
       colorIndex: colorIndex,
       croppedImage: croppedImage,
+      selectedImage: selectedImage,
     );
   }
 }
@@ -637,6 +795,7 @@ mixin _$ChangeCommunityAvatarState {
   int get iconIndex => throw _privateConstructorUsedError;
   int get colorIndex => throw _privateConstructorUsedError;
   Option<Uint8List> get croppedImage => throw _privateConstructorUsedError;
+  Option<Uint8List> get selectedImage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChangeCommunityAvatarStateCopyWith<ChangeCommunityAvatarState>
@@ -652,7 +811,8 @@ abstract class $ChangeCommunityAvatarStateCopyWith<$Res> {
       {bool hasAnyChanged,
       int iconIndex,
       int colorIndex,
-      Option<Uint8List> croppedImage});
+      Option<Uint8List> croppedImage,
+      Option<Uint8List> selectedImage});
 }
 
 /// @nodoc
@@ -670,6 +830,7 @@ class _$ChangeCommunityAvatarStateCopyWithImpl<$Res>
     Object? iconIndex = freezed,
     Object? colorIndex = freezed,
     Object? croppedImage = freezed,
+    Object? selectedImage = freezed,
   }) {
     return _then(_value.copyWith(
       hasAnyChanged: hasAnyChanged == freezed
@@ -688,6 +849,10 @@ class _$ChangeCommunityAvatarStateCopyWithImpl<$Res>
           ? _value.croppedImage
           : croppedImage // ignore: cast_nullable_to_non_nullable
               as Option<Uint8List>,
+      selectedImage: selectedImage == freezed
+          ? _value.selectedImage
+          : selectedImage // ignore: cast_nullable_to_non_nullable
+              as Option<Uint8List>,
     ));
   }
 }
@@ -704,7 +869,8 @@ abstract class _$ChangeCommunityAvatarStateCopyWith<$Res>
       {bool hasAnyChanged,
       int iconIndex,
       int colorIndex,
-      Option<Uint8List> croppedImage});
+      Option<Uint8List> croppedImage,
+      Option<Uint8List> selectedImage});
 }
 
 /// @nodoc
@@ -725,6 +891,7 @@ class __$ChangeCommunityAvatarStateCopyWithImpl<$Res>
     Object? iconIndex = freezed,
     Object? colorIndex = freezed,
     Object? croppedImage = freezed,
+    Object? selectedImage = freezed,
   }) {
     return _then(_ChangeCommunityAvatarState(
       hasAnyChanged: hasAnyChanged == freezed
@@ -743,6 +910,10 @@ class __$ChangeCommunityAvatarStateCopyWithImpl<$Res>
           ? _value.croppedImage
           : croppedImage // ignore: cast_nullable_to_non_nullable
               as Option<Uint8List>,
+      selectedImage: selectedImage == freezed
+          ? _value.selectedImage
+          : selectedImage // ignore: cast_nullable_to_non_nullable
+              as Option<Uint8List>,
     ));
   }
 }
@@ -754,7 +925,8 @@ class _$_ChangeCommunityAvatarState implements _ChangeCommunityAvatarState {
       {required this.hasAnyChanged,
       required this.iconIndex,
       required this.colorIndex,
-      required this.croppedImage});
+      required this.croppedImage,
+      required this.selectedImage});
 
   @override
   final bool hasAnyChanged;
@@ -764,10 +936,12 @@ class _$_ChangeCommunityAvatarState implements _ChangeCommunityAvatarState {
   final int colorIndex;
   @override
   final Option<Uint8List> croppedImage;
+  @override
+  final Option<Uint8List> selectedImage;
 
   @override
   String toString() {
-    return 'ChangeCommunityAvatarState(hasAnyChanged: $hasAnyChanged, iconIndex: $iconIndex, colorIndex: $colorIndex, croppedImage: $croppedImage)';
+    return 'ChangeCommunityAvatarState(hasAnyChanged: $hasAnyChanged, iconIndex: $iconIndex, colorIndex: $colorIndex, croppedImage: $croppedImage, selectedImage: $selectedImage)';
   }
 
   @override
@@ -785,7 +959,10 @@ class _$_ChangeCommunityAvatarState implements _ChangeCommunityAvatarState {
                     .equals(other.colorIndex, colorIndex)) &&
             (identical(other.croppedImage, croppedImage) ||
                 const DeepCollectionEquality()
-                    .equals(other.croppedImage, croppedImage)));
+                    .equals(other.croppedImage, croppedImage)) &&
+            (identical(other.selectedImage, selectedImage) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedImage, selectedImage)));
   }
 
   @override
@@ -794,7 +971,8 @@ class _$_ChangeCommunityAvatarState implements _ChangeCommunityAvatarState {
       const DeepCollectionEquality().hash(hasAnyChanged) ^
       const DeepCollectionEquality().hash(iconIndex) ^
       const DeepCollectionEquality().hash(colorIndex) ^
-      const DeepCollectionEquality().hash(croppedImage);
+      const DeepCollectionEquality().hash(croppedImage) ^
+      const DeepCollectionEquality().hash(selectedImage);
 
   @JsonKey(ignore: true)
   @override
@@ -806,10 +984,12 @@ class _$_ChangeCommunityAvatarState implements _ChangeCommunityAvatarState {
 abstract class _ChangeCommunityAvatarState
     implements ChangeCommunityAvatarState {
   const factory _ChangeCommunityAvatarState(
-      {required bool hasAnyChanged,
-      required int iconIndex,
-      required int colorIndex,
-      required Option<Uint8List> croppedImage}) = _$_ChangeCommunityAvatarState;
+          {required bool hasAnyChanged,
+          required int iconIndex,
+          required int colorIndex,
+          required Option<Uint8List> croppedImage,
+          required Option<Uint8List> selectedImage}) =
+      _$_ChangeCommunityAvatarState;
 
   @override
   bool get hasAnyChanged => throw _privateConstructorUsedError;
@@ -819,6 +999,8 @@ abstract class _ChangeCommunityAvatarState
   int get colorIndex => throw _privateConstructorUsedError;
   @override
   Option<Uint8List> get croppedImage => throw _privateConstructorUsedError;
+  @override
+  Option<Uint8List> get selectedImage => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ChangeCommunityAvatarStateCopyWith<_ChangeCommunityAvatarState>

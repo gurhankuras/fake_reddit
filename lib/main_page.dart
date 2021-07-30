@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
+import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
+import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/size_config.dart';
-
 import '_presentation/home/home_vm.dart';
 import 'home_page.dart';
 import 'routes.dart';
@@ -22,11 +24,13 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   late PageController _pageController;
   late MyDrawerController drawerController;
+  // late ScrollController scrollController;
 
   @override
   void initState() {
     _pageController = PageController();
     drawerController = context.read<MyDrawerController>();
+    // scrollController = ScrollController();
     super.initState();
   }
 
@@ -93,13 +97,18 @@ class MainPageState extends State<MainPage> {
 
   void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
     if (currentIndex == 2) {
-      Navigator.of(context).pushNamed(Routes.postFeedSearchPage);
+      Navigator.of(context).pushNamed(Routes.postFeedSearchPage,
+          arguments: context.read<MainPageBloc>());
       return;
     }
     if (currentIndex != bottomNavigationViewModel.currentPage) {
       _pageController.jumpToPage(currentIndex);
+      bottomNavigationViewModel.changePage(currentIndex);
     }
-    bottomNavigationViewModel.changePage(currentIndex);
+    // else {
+    //   scrollController.animateTo(0,
+    //       duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
+    // }
   }
 
   List<NavigationItem> get navigationItems {
@@ -133,6 +142,7 @@ class MainPageState extends State<MainPage> {
   }
 
   Widget buildPage() {
+    print(context.read<MainPageBloc>());
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),

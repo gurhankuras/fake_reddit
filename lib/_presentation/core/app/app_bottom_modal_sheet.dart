@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../utility/app_logger.dart';
 
 import 'colors.dart';
 
 class AppModalBottomSheet extends StatelessWidget {
-  final List<ModelSheetTile> tiles;
+  final List<Widget> tiles;
   final VoidCallback? onClosed;
   const AppModalBottomSheet({
     required this.tiles,

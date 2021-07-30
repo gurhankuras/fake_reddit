@@ -3,7 +3,9 @@ import 'dart:typed_data';
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:reddit_clone/application/change_community_avatar/change_community_avatar_bloc.dart';
 
 class CropSample extends StatefulWidget {
   final Uint8List fileAsBytes;
@@ -31,11 +33,6 @@ class _CropSampleState extends State<CropSample> {
   // Future<void> _loadAllImages() async {
 
   // }
-
-  Future<Uint8List> _load(String assetName) async {
-    final assetData = await rootBundle.load(assetName);
-    return assetData.buffer.asUint8List();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +74,10 @@ class _CropSampleState extends State<CropSample> {
                               _croppedData = croppedData;
                               _isCropping = false;
                             });
+                            context.read<ChangeCommunityAvatarBloc>().add(
+                                  ChangeCommunityAvatarEvent.imageCropped(
+                                      croppedData),
+                                );
                           },
                           withCircleUi: true,
                           initialSize: 0.5,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart'
-    hide FeedType;
+import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import 'package:reddit_clone/application/create_feed_bloc.dart' hide FeedType;
 
-import '../../../core/app/colors.dart';
-import '../../../core/reusable/filled_circle_icon.dart';
-import '../create_feed_entry_page.dart';
+import '../core/app/colors.dart';
+import '../core/reusable/filled_circle_icon.dart';
+import 'create_feed_entry_page.dart';
 
 class MinimizedFeedTypesBar extends StatelessWidget {
-  final List<FeedType> feedTypes;
+  final List<FeedTypeData> feedTypes;
 
   const MinimizedFeedTypesBar({
     Key? key,
@@ -53,7 +53,7 @@ class MinimizedOptions extends StatelessWidget {
     required this.feedTypes,
   }) : super(key: key);
 
-  final List<FeedType> feedTypes;
+  final List<FeedTypeData> feedTypes;
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +66,13 @@ class MinimizedOptions extends StatelessWidget {
             (index) => Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6.0),
               child: GestureDetector(
-                onTap: () => context
-                    .read<CreateFeedBloc>()
-                    .add(CreateFeedEvent.feedTypeChanged(index, true)),
+                onTap: () => context.read<CreateFeedBloc>().add(
+                      CreateFeedEvent.feedTypeChanged(
+                        index: index,
+                        autofocus: true,
+                        showDialog: showF(context),
+                      ),
+                    ),
                 child: FilledCircleIcon(
                   selected: index == state.feedType.index,
                   padding: EdgeInsets.all(5),

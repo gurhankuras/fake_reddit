@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
 
-import '../../../domain/community.dart';
-import '../../../routes.dart';
-import '../../core/app/colors.dart';
-import '../../core/app/extensions/int_extension.dart';
-import '../../core/app/extensions/string_fill_extension.dart';
+import '../../domain/community.dart';
+import '../../routes.dart';
+import '../core/app/colors.dart';
+import '../core/app/extensions/int_extension.dart';
+import '../core/app/extensions/string_fill_extension.dart';
 
 class PostToCommunitySuggestionTile extends StatelessWidget {
   final Community community;
@@ -20,7 +22,8 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
     return ListTile(
       onTap: () => Navigator.of(context).pushNamed(
         Routes.createFeedPage,
-        arguments: CreateFeedPageArguments(community),
+        arguments:
+            CreateFeedPageArguments(community, context.read<MainPageBloc>()),
       ),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(community.image),
