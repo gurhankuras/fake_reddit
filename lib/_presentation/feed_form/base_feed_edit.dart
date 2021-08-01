@@ -1,14 +1,12 @@
-import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
-import 'package:reddit_clone/domain/image_data.dart';
-import 'package:reddit_clone/routes.dart';
 
+import '../../application/bloc/create_feed_bloc.dart';
+import '../../domain/image_data.dart';
+import '../../routes.dart';
 import '../core/app/colors.dart';
+import '../core/app_snackbar.dart';
 import 'text_feed_edit.dart';
 
 class ImageFeedEdit extends StatelessWidget {

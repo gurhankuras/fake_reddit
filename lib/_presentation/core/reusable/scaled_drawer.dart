@@ -5,7 +5,6 @@ const _kAnimationCurve = Curves.linear;
 const _kDefaultScale = ScaleRange(begin: 0.95, end: 1.0);
 
 class MyDrawerController {
-  // TODO: ADD late
   late VoidCallback openDrawer;
   late VoidCallback closeDrawer;
   late VoidCallback toggle;
@@ -26,7 +25,6 @@ class ScaleRange {
 }
 
 class ScaledDrawer extends StatefulWidget {
-  // TODO add curve and scale parameters
   final Widget page;
   final Widget drawer;
   final Color drawerColor;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/home/home_tab_page.dart';
 import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
 
+import 'application/auth/auth_bloc.dart';
 import '_presentation/core/app/extensions/string_fill_extension.dart';
 import '_presentation/core/app/search_bar_field.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
         body: const TabBarView(
           children: [
             News(),
-            Icon(Icons.directions_transit),
+            HomeTabPage(),
             Icon(Icons.directions_bike),
           ],
         ),
@@ -97,11 +99,9 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: GestureDetector(
-                child: const Icon(Icons.monetization_on),
-                onTap: () {
-                  // TODO: navigate to another page
-                },
-              ),
+                  child: const Icon(Icons.monetization_on),
+                  onTap: () =>
+                      context.read<AuthBloc>().add(AuthEvent.signedOut())),
             )
           ],
         ),

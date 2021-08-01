@@ -4,17 +4,17 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide id;
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/feed_form/create_feed_entry_page.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
-import 'package:reddit_clone/domain/feed_edit_failure.dart';
-import 'package:reddit_clone/domain/i_image_service.dart';
-import 'package:reddit_clone/domain/image_data.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
 
+import '../../_presentation/feed_form/create_feed_entry_page.dart';
+import '../../domain/feed_edit_failure.dart';
+import '../../domain/i_image_service.dart';
+import '../../domain/image_data.dart';
+import '../../utility/app_logger.dart';
+import '../main_page_bloc/main_page_bloc.dart';
+
+part 'create_feed_bloc.freezed.dart';
 part 'create_feed_event.dart';
 part 'create_feed_state.dart';
-part 'create_feed_bloc.freezed.dart';
 
 class CreateFeedBloc extends Bloc<CreateFeedEvent, CreateFeedState> {
   final IImageService imageService;

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/core/app/app_bottom_modal_sheet.dart';
-import 'package:reddit_clone/_presentation/post_feed/create_feed_entry_overview_page.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
-
+import '../../application/bloc/create_feed_bloc.dart';
 import '../../domain/community.dart';
-import '../../infastructure/image_service.dart';
 import '../../routes.dart';
-import '../../utility/app_logger.dart';
+import '../core/app/app_bottom_modal_sheet.dart';
 import '../core/app/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/size_config.dart';
+import '../post_feed/create_feed_entry_overview_page.dart';
 import 'feed_editor.dart';
 import 'feed_types_sections.dart';
 import 'minimized_feed_types_bar.dart';

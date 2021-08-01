@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/feed_form/create_feed_entry_page.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
 
-import '../../application/create_feed_bloc.dart';
-import '../../utility/app_logger.dart';
+import '../../application/bloc/create_feed_bloc.dart';
 import '../core/app/colors.dart';
+import 'create_feed_entry_page.dart';
 import 'text_feed_edit.dart';
 
 class PollFeedEdit extends StatelessWidget {

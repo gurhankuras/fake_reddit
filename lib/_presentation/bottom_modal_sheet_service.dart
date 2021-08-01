@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:reddit_clone/_presentation/core/app/app_bottom_modal_sheet.dart';
 
-import 'package:reddit_clone/domain/i_bottom_modal_sheet_service.dart';
+import '../domain/i_bottom_modal_sheet_service.dart';
+import 'core/app/app_bottom_modal_sheet.dart';
 
 class BottomModalSheetService implements IBottomModalSheetService {
   Map<String, BottomSheetRegisterer> registry;

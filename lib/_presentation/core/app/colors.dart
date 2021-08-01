@@ -16,4 +16,5 @@ abstract class AppColors {
   static const Color red = Color(0xFFec0924);
   static const Color orange = Color(0xFFfe851a);
   static final Color pink = Colors.pinkAccent[400]!;
+  static const Color splashBackground = Color(0xFF373c3f);
 }

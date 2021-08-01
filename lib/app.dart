@@ -3,7 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import 'package:reddit_clone/_presentation/splash/splash_page.dart';
+import 'package:reddit_clone/infastructure/auth/auth_service.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
+import 'application/auth/auth_bloc.dart';
 
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
@@ -20,7 +23,7 @@ class MyApp extends StatelessWidget {
     ));
 
     return MaterialApp(
-      initialRoute: Routes.changeCommunityAvatarPage,
+      // initialRoute: Routes.splashPage,
       onGenerateRoute: AppRouter.onGenerateRoute,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
@@ -28,9 +31,9 @@ class MyApp extends StatelessWidget {
       home: MultiProvider(
         providers: [
           Provider(create: (context) => MyDrawerController()),
-          BlocProvider(create: (context) => MainPageBloc(context: context))
+          BlocProvider(create: (context) => MainPageBloc(context: context)),
         ],
-        child: const MainPage(),
+        child: const SplashPage(),
       ),
     );
   }

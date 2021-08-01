@@ -1,19 +1,16 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../feed_form/create_feed_entry_page.dart';
+import 'content_preview.dart';
+import '../../application/bloc/create_feed_bloc.dart';
+import '../../domain/community.dart';
+import '../../routes.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/reusable/base_app_action_chip.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/feed_form/create_feed_entry_page.dart'
-    hide FeedType;
-import 'package:reddit_clone/_presentation/post_feed/content_preview.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
-import 'package:reddit_clone/domain/community.dart';
-import 'package:reddit_clone/routes.dart';
+import '../core/app/colors.dart';
+import '../core/reusable/base_app_action_chip.dart';
+import '../core/size_config.dart';
 
 class CreateFeedEntryOverviewPage extends StatelessWidget {
   final Community community;

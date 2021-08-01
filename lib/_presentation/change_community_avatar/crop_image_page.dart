@@ -2,10 +2,9 @@ import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:reddit_clone/application/change_community_avatar/change_community_avatar_bloc.dart';
+
+import '../../application/change_community_avatar/change_community_avatar_bloc.dart';
 
 class CropSample extends StatefulWidget {
   final Uint8List fileAsBytes;
@@ -38,7 +37,7 @@ class _CropSampleState extends State<CropSample> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: Center(

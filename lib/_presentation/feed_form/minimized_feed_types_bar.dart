@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
-import 'package:reddit_clone/application/create_feed_bloc.dart' hide FeedType;
+import '../../application/bloc/create_feed_bloc.dart';
 
 import '../core/app/colors.dart';
 import '../core/reusable/filled_circle_icon.dart';

@@ -2,16 +2,21 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/_presentation/auth/auth_page.dart';
+import 'package:reddit_clone/_presentation/splash/splash_page.dart';
+import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
+import 'package:reddit_clone/infastructure/auth/auth_service.dart';
+import 'package:reddit_clone/main.dart';
 
-import 'package:reddit_clone/_presentation/change_community_avatar/change_community_avatar_page.dart';
-import 'package:reddit_clone/_presentation/change_community_avatar/crop_image_page.dart';
-import 'package:reddit_clone/_presentation/post_feed/create_feed_entry_overview_page.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
-import 'package:reddit_clone/application/change_community_avatar/change_community_avatar_bloc.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
-import 'package:reddit_clone/infastructure/image_service.dart';
+import '_presentation/change_community_avatar/change_community_avatar_page.dart';
+import '_presentation/change_community_avatar/crop_image_page.dart';
+import '_presentation/post_feed/create_feed_entry_overview_page.dart';
+import 'application/bloc/create_feed_bloc.dart';
+import 'application/change_community_avatar/change_community_avatar_bloc.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
+import 'infastructure/image_service.dart';
 import 'package:reddit_clone/main_page.dart';
-
+import './application/auth/auth_bloc.dart';
 import '_presentation/home/search_page.dart';
 import '_presentation/feed_form/create_feed_entry_page.dart';
 import '_presentation/search_community/post_feed_search_page.dart';
@@ -20,7 +25,9 @@ import 'home_page.dart';
 
 abstract class Routes {
   static const homePage = '/homePage';
-  static const mainPage = '/';
+  static const mainPage = '/mainPage';
+  static const splashPage = '/splash';
+  static const signInUpPage = '/signInUpPage';
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
   static const createFeedPage = '/createFeedPage';
@@ -34,7 +41,28 @@ abstract class AppRouter {
     switch (settings.name) {
       case Routes.mainPage:
         return MaterialPageRoute(
-          builder: (_) => const MainPage(),
+          builder: (_) => BlocProvider(
+            create: (context) => MainPageBloc(context: context),
+            child: const MainPage(),
+          ),
+          settings: settings,
+        );
+      case Routes.signInUpPage:
+        return MaterialPageRoute(
+          builder: (_) => const AuthPage(),
+          settings: settings,
+          fullscreenDialog: true,
+        );
+      case Routes.splashPage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => AuthBloc(
+              authService: ALWAYS_FAILING_AUTH
+                  ? AlwaysFailingAuthService()
+                  : AuthService(),
+            )..add(const AuthEvent.gotUserSignedIn()),
+            child: const SplashPage(),
+          ),
           settings: settings,
         );
       case Routes.cropImagePage:

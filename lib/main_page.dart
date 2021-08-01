@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import 'package:reddit_clone/_presentation/auth/auth_page.dart';
+import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
+import 'package:reddit_clone/_presentation/core/authentication_button.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
+import 'application/auth/auth_bloc.dart';
 
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
@@ -68,37 +72,56 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return ScaledDrawer(
-      curve: Curves.easeInOut,
-      controller: drawerController,
-      drawer: const AppDrawer(),
-      drawerColor: AppColors.black,
-      drawerWidth: MediaQuery.of(context).size.width * 0.7,
-      page: Scaffold(
-        backgroundColor: AppColors.lightBlack,
-        bottomNavigationBar: Consumer<HomeVM>(
-          builder: (context, value, child) => BottomNavigationBar(
-            items: navigationItems
-                .map((item) => BottomNavigationBarItem(
-                      icon: item.index == index
-                          ? item.selectedIcon
-                          : item.unselectedIcon,
-                      label: '',
-                    ))
-                .toList(),
-            currentIndex: value.currentPage,
-            onTap: (index) => navigateByIndex(index, value),
+    return BlocListener<AuthBloc, AuthState>(
+      listener: (context, state) {
+        state.maybeMap(
+          orElse: () => null,
+          unauthenticated: (value) =>
+              Navigator.of(context).pushNamedAndRemoveUntil(
+            Routes.signInUpPage,
+            (route) => false,
           ),
+        );
+        // TODO: implement listener
+      },
+      child: ScaledDrawer(
+        curve: Curves.easeInOut,
+        controller: drawerController,
+        drawer: const AppDrawer(),
+        drawerColor: AppColors.black,
+        drawerWidth: MediaQuery.of(context).size.width * 0.7,
+        page: Scaffold(
+          backgroundColor: AppColors.lightBlack,
+          bottomNavigationBar: Consumer<HomeVM>(
+            builder: (context, value, child) => BottomNavigationBar(
+              items: navigationItems
+                  .map((item) => BottomNavigationBarItem(
+                        icon: item.index == index
+                            ? item.selectedIcon
+                            : item.unselectedIcon,
+                        label: '',
+                      ))
+                  .toList(),
+              currentIndex: value.currentPage,
+              onTap: (index) => navigateByIndex(index, value),
+            ),
+          ),
+          body: buildPage(),
         ),
-        body: buildPage(),
       ),
     );
   }
 
   void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
     if (currentIndex == 2) {
-      Navigator.of(context).pushNamed(Routes.postFeedSearchPage,
-          arguments: context.read<MainPageBloc>());
+      context.read<AuthBloc>().state.maybeMap(
+            // initial: initial,
+            // unauthenticated: unauthenticated,
+            authenticated: (_) => Navigator.of(context).pushNamed(
+                Routes.postFeedSearchPage,
+                arguments: context.read<MainPageBloc>()),
+            orElse: () => showSignUpSheet(context),
+          );
       return;
     }
     if (currentIndex != bottomNavigationViewModel.currentPage) {

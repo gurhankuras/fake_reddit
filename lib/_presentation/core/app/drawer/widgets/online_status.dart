@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
 import '../../colors.dart';
 
-// TODO: use sharedpreferences for persistence
 class OnlineStatus extends StatefulWidget {
   const OnlineStatus({
     Key? key,

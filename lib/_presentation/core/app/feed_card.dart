@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../utility/app_logger.dart';
 import '../../../domain/feed_entry.dart';
 import '../../../domain/user.dart';
 

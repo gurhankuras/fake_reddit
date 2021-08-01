@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import '../../application/bloc/create_feed_bloc.dart';
 
-import '../../application/create_feed_bloc.dart';
 import 'base_feed_edit.dart';
 import 'link_feed_edit.dart';
 import 'poll_feed_edit.dart';

@@ -7,7 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reddit_clone/domain/i_image_service.dart';
+import '../../domain/i_image_service.dart';
 
 part 'change_community_avatar_event.dart';
 part 'change_community_avatar_state.dart';

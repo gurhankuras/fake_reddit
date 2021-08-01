@@ -6,6 +6,7 @@ class SizeConfig {
   static late MediaQueryData _mediaQueryData;
   static late double screenWidth;
   static late double screenHeight;
+  static late double devicePixelRatio;
   static late double defaultSize;
   static late Orientation orientation;
 
@@ -14,6 +15,7 @@ class SizeConfig {
     _mediaQueryData = MediaQuery.of(context);
     screenWidth = _mediaQueryData.size.width;
     screenHeight = _mediaQueryData.size.height;
+    devicePixelRatio = _mediaQueryData.devicePixelRatio;
     orientation = _mediaQueryData.orientation;
 
     defaultSize = orientation == Orientation.landscape

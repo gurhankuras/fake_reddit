@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
 
+import '../../../reusable/scaled_drawer.dart';
 import '../../app_button.dart';
-import '../../colors.dart';
 import 'additional_user_info.dart';
 import 'online_status.dart';
 import 'user_name.dart';

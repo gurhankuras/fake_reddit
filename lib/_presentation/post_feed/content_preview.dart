@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import '../core/app/colors.dart';
+import '../../application/bloc/create_feed_bloc.dart';
 
 class ContentPreview extends StatelessWidget {
   final String title;

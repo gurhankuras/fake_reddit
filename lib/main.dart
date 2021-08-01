@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
+import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
+import 'package:reddit_clone/infastructure/auth/auth_service.dart';
 
 import '_presentation/home/home_vm.dart';
 import 'app.dart';
 import 'application/core/simple_bloc_observer.dart';
+import 'application/auth/auth_bloc.dart';
 
+const ALWAYS_FAILING_AUTH = true;
 void main() {
   Bloc.observer = SimpleBlocObserver();
   // Logger.level = Level.wtf;
@@ -14,5 +20,19 @@ void main() {
   //   'imageSelect': (context, dialogContext) => Container(),
   // });
 
-  runApp(ChangeNotifierProvider(create: (context) => HomeVM(), child: MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        Provider(create: (context) => MyDrawerController()),
+        BlocProvider(
+            create: (context) => AuthBloc(
+                  authService: ALWAYS_FAILING_AUTH
+                      ? AlwaysFailingAuthService()
+                      : AuthService(),
+                )..add(const AuthEvent.gotUserSignedIn())),
+        ChangeNotifierProvider(create: (context) => HomeVM()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }

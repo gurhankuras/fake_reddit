@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/application/bloc/create_feed_bloc.dart';
+import '../../application/bloc/create_feed_bloc.dart';
 import 'package:string_validator/string_validator.dart';
 import '../core/app/colors.dart';
 import 'text_feed_edit.dart';
