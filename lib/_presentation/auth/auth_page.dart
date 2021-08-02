@@ -50,7 +50,8 @@ class AuthPage extends StatelessWidget {
           ),
           bottomSheet: BlocBuilder<SignUpFormBloc, SignUpFormState>(
             buildWhen: (previous, current) =>
-                previous.failure != current.failure,
+                previous.failure != current.failure ||
+                previous.isSubmitting != current.isSubmitting,
             builder: (context, state) {
               return PersistentContinueButton(
                 animation: animation,

@@ -56,6 +56,7 @@ abstract class AppRouter {
             create: (context) => SignUpFormBloc(
               authBloc: context.read<AuthBloc>(),
               verificator: SignUpVerificator(),
+              formatValidator: SignUpFormatValidator(),
             ),
             child: AuthPage(animation: animation),
           ),

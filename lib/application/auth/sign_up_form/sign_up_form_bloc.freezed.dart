@@ -573,6 +573,8 @@ class _$SignUpFormStateTearOff {
       {required String email,
       required String password,
       required String username,
+      required bool checkingEmail,
+      required bool checkingUsername,
       required bool showErrorMessages,
       required bool isSubmitting,
       required Option<ValueFailure<String>> emailFailure,
@@ -583,6 +585,8 @@ class _$SignUpFormStateTearOff {
       email: email,
       password: password,
       username: username,
+      checkingEmail: checkingEmail,
+      checkingUsername: checkingUsername,
       showErrorMessages: showErrorMessages,
       isSubmitting: isSubmitting,
       emailFailure: emailFailure,
@@ -601,6 +605,8 @@ mixin _$SignUpFormState {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
+  bool get checkingEmail => throw _privateConstructorUsedError;
+  bool get checkingUsername => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<ValueFailure<String>> get emailFailure =>
@@ -626,6 +632,8 @@ abstract class $SignUpFormStateCopyWith<$Res> {
       {String email,
       String password,
       String username,
+      bool checkingEmail,
+      bool checkingUsername,
       bool showErrorMessages,
       bool isSubmitting,
       Option<ValueFailure<String>> emailFailure,
@@ -648,6 +656,8 @@ class _$SignUpFormStateCopyWithImpl<$Res>
     Object? email = freezed,
     Object? password = freezed,
     Object? username = freezed,
+    Object? checkingEmail = freezed,
+    Object? checkingUsername = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? emailFailure = freezed,
@@ -668,6 +678,14 @@ class _$SignUpFormStateCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      checkingEmail: checkingEmail == freezed
+          ? _value.checkingEmail
+          : checkingEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      checkingUsername: checkingUsername == freezed
+          ? _value.checkingUsername
+          : checkingUsername // ignore: cast_nullable_to_non_nullable
+              as bool,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -707,6 +725,8 @@ abstract class _$SignUpFormStateCopyWith<$Res>
       {String email,
       String password,
       String username,
+      bool checkingEmail,
+      bool checkingUsername,
       bool showErrorMessages,
       bool isSubmitting,
       Option<ValueFailure<String>> emailFailure,
@@ -731,6 +751,8 @@ class __$SignUpFormStateCopyWithImpl<$Res>
     Object? email = freezed,
     Object? password = freezed,
     Object? username = freezed,
+    Object? checkingEmail = freezed,
+    Object? checkingUsername = freezed,
     Object? showErrorMessages = freezed,
     Object? isSubmitting = freezed,
     Object? emailFailure = freezed,
@@ -751,6 +773,14 @@ class __$SignUpFormStateCopyWithImpl<$Res>
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      checkingEmail: checkingEmail == freezed
+          ? _value.checkingEmail
+          : checkingEmail // ignore: cast_nullable_to_non_nullable
+              as bool,
+      checkingUsername: checkingUsername == freezed
+          ? _value.checkingUsername
+          : checkingUsername // ignore: cast_nullable_to_non_nullable
+              as bool,
       showErrorMessages: showErrorMessages == freezed
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -786,6 +816,8 @@ class _$_SignUpFormState implements _SignUpFormState {
       {required this.email,
       required this.password,
       required this.username,
+      required this.checkingEmail,
+      required this.checkingUsername,
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.emailFailure,
@@ -799,6 +831,10 @@ class _$_SignUpFormState implements _SignUpFormState {
   final String password;
   @override
   final String username;
+  @override
+  final bool checkingEmail;
+  @override
+  final bool checkingUsername;
   @override
   final bool showErrorMessages;
   @override
@@ -814,7 +850,7 @@ class _$_SignUpFormState implements _SignUpFormState {
 
   @override
   String toString() {
-    return 'SignUpFormState(email: $email, password: $password, username: $username, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, emailFailure: $emailFailure, passwordFailure: $passwordFailure, usernameFailure: $usernameFailure, failure: $failure)';
+    return 'SignUpFormState(email: $email, password: $password, username: $username, checkingEmail: $checkingEmail, checkingUsername: $checkingUsername, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, emailFailure: $emailFailure, passwordFailure: $passwordFailure, usernameFailure: $usernameFailure, failure: $failure)';
   }
 
   @override
@@ -829,6 +865,12 @@ class _$_SignUpFormState implements _SignUpFormState {
             (identical(other.username, username) ||
                 const DeepCollectionEquality()
                     .equals(other.username, username)) &&
+            (identical(other.checkingEmail, checkingEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.checkingEmail, checkingEmail)) &&
+            (identical(other.checkingUsername, checkingUsername) ||
+                const DeepCollectionEquality()
+                    .equals(other.checkingUsername, checkingUsername)) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.showErrorMessages, showErrorMessages)) &&
@@ -854,6 +896,8 @@ class _$_SignUpFormState implements _SignUpFormState {
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(password) ^
       const DeepCollectionEquality().hash(username) ^
+      const DeepCollectionEquality().hash(checkingEmail) ^
+      const DeepCollectionEquality().hash(checkingUsername) ^
       const DeepCollectionEquality().hash(showErrorMessages) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(emailFailure) ^
@@ -872,6 +916,8 @@ abstract class _SignUpFormState implements SignUpFormState {
       {required String email,
       required String password,
       required String username,
+      required bool checkingEmail,
+      required bool checkingUsername,
       required bool showErrorMessages,
       required bool isSubmitting,
       required Option<ValueFailure<String>> emailFailure,
@@ -885,6 +931,10 @@ abstract class _SignUpFormState implements SignUpFormState {
   String get password => throw _privateConstructorUsedError;
   @override
   String get username => throw _privateConstructorUsedError;
+  @override
+  bool get checkingEmail => throw _privateConstructorUsedError;
+  @override
+  bool get checkingUsername => throw _privateConstructorUsedError;
   @override
   bool get showErrorMessages => throw _privateConstructorUsedError;
   @override
