@@ -30,9 +30,19 @@ class UserInfo extends StatelessWidget {
             const UserName(name: 'Brilliant_Program232'),
             const OnlineStatus(),
             const SizedBox(height: 10),
-            const AppButton.icon(
+            AppButton.icon(
+              // text: Text(
+              //   'Style Avatar',
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .bodyText1
+              //       ?.copyWith(fontWeight: FontWeight.w800),
+              // ),
               text: 'Style Avatar',
               icon: FontAwesomeIcons.tshirt,
+              onTap: () {
+                // TODO
+              },
             ),
             const AdditionalUserInfo()
           ],

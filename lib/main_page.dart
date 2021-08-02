@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/auth/auth_page.dart';
 import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
 import 'package:reddit_clone/_presentation/core/authentication_button.dart';
+import 'package:reddit_clone/_presentation/inbox/inbox_page.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/auth/auth_bloc.dart';
 
@@ -61,6 +62,7 @@ class MainPageState extends State<MainPage> {
         style: TextStyle(color: Colors.white),
       ),
     ),
+    InboxPage()
   ];
   int index = 0;
 

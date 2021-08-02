@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/auth/auth_page.dart';
 import 'package:reddit_clone/_presentation/splash/splash_page.dart';
+import 'package:reddit_clone/domain/auth/sign_up_verificator.dart';
 import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
 import 'package:reddit_clone/infastructure/auth/auth_service.dart';
 import 'package:reddit_clone/main.dart';
@@ -17,6 +18,8 @@ import 'application/main_page_bloc/main_page_bloc.dart';
 import 'infastructure/image_service.dart';
 import 'package:reddit_clone/main_page.dart';
 import './application/auth/auth_bloc.dart';
+import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
+
 import '_presentation/home/search_page.dart';
 import '_presentation/feed_form/create_feed_entry_page.dart';
 import '_presentation/search_community/post_feed_search_page.dart';
@@ -48,11 +51,23 @@ abstract class AppRouter {
           settings: settings,
         );
       case Routes.signInUpPage:
-        return MaterialPageRoute(
-          builder: (_) => const AuthPage(),
-          settings: settings,
-          fullscreenDialog: true,
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+            create: (context) => SignUpFormBloc(
+              authBloc: context.read<AuthBloc>(),
+              verificator: SignUpVerificator(),
+            ),
+            child: AuthPage(animation: animation),
+          ),
+          transitionsBuilder: searchPageTransitionBuilder,
+          transitionDuration: const Duration(milliseconds: 300),
+          reverseTransitionDuration: const Duration(milliseconds: 300),
         );
+      // return MaterialPageRoute(
+      //   builder: (_) => const AuthPage(),
+      //   settings: settings,
+      //   fullscreenDialog: true,
+      // );
       case Routes.splashPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -158,5 +173,28 @@ Widget searchPageTransitionBuilder(
   return FadeTransition(
     opacity: opacityAnimation,
     child: child,
+  );
+}
+
+Widget loginSignUpTransitionBuider(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child) {
+  var begin = Offset(0.0, 1);
+  var end = Offset(0, 0);
+  var tween = Tween(begin: begin, end: end);
+  // final curvedAnimation =
+  // CurvedAnimation(parent: animation, curve: Curves.easeInOut).drive(tween);
+  var transitionAnimation =
+      animation.drive(tween.chain(CurveTween(curve: Curves.easeInOut)));
+
+  return SlideTransition(
+    position: transitionAnimation,
+    child: FadeTransition(
+        opacity: animation.drive(
+          Tween(begin: 0.0, end: 1),
+        ),
+        child: child),
   );
 }
