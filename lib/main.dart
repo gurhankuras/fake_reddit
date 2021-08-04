@@ -5,9 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
 import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import 'package:reddit_clone/domain/auth/token_cache_service.dart';
 import 'package:reddit_clone/domain/env.dart';
 import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
 import 'package:reddit_clone/infastructure/auth/auth_service.dart';
+import 'package:reddit_clone/infastructure/core/cache_service.dart';
 import 'package:reddit_clone/injection.dart';
 
 import '_presentation/home/home_vm.dart';
@@ -20,6 +22,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies(Env.dev);
   // print(ValidatorObject("gurhan", none()).min(3).max(7).get());
+  print(await getIt<CacheService>().getString(TokenKeys.ACCESS_TOKEN_KEY));
+  print(await getIt<CacheService>().getString(TokenKeys.REFRESH_TOKEN_KEY));
+
   Bloc.observer = SimpleBlocObserver();
   // Logger.level = Level.wtf;
   // IBottomModalSheetService bottomModalSheetService =
@@ -32,9 +37,8 @@ void main() async {
       providers: [
         Provider(create: (context) => MyDrawerController()),
         BlocProvider(
-            create: (context) => AuthBloc(
-                  authService: AlwaysFailingAuthService(),
-                )..add(const AuthEvent.gotUserSignedIn())),
+            create: (context) =>
+                getIt<AuthBloc>()..add(const AuthEvent.gotUserSignedIn())),
         ChangeNotifierProvider(create: (context) => HomeVM()),
       ],
       child: MyApp(),

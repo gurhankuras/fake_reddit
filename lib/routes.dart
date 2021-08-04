@@ -3,10 +3,15 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/auth/auth_page.dart';
+import 'package:reddit_clone/_presentation/auth/login_page.dart';
+import 'package:reddit_clone/_presentation/auth/sign_up_page.dart';
 import 'package:reddit_clone/_presentation/splash/splash_page.dart';
+import 'package:reddit_clone/application/auth/login_form/login_form_bloc.dart';
+import 'package:reddit_clone/domain/auth/i_auth_service.dart';
 import 'package:reddit_clone/domain/auth/sign_up_verificator.dart';
 import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
 import 'package:reddit_clone/infastructure/auth/auth_service.dart';
+import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/main.dart';
 
 import '_presentation/change_community_avatar/change_community_avatar_page.dart';
@@ -30,7 +35,9 @@ abstract class Routes {
   static const homePage = '/homePage';
   static const mainPage = '/mainPage';
   static const splashPage = '/splash';
-  static const signInUpPage = '/signInUpPage';
+  static const signupPage = '/signupPage';
+  static const loginPage = '/loginPage';
+
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
   static const createFeedPage = '/createFeedPage';
@@ -50,17 +57,33 @@ abstract class AppRouter {
           ),
           settings: settings,
         );
-      case Routes.signInUpPage:
+
+      case Routes.signupPage:
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
             create: (context) => SignUpFormBloc(
               authBloc: context.read<AuthBloc>(),
               verificator: SignUpVerificator(),
               formatValidator: SignUpFormatValidator(),
-              authService: AlwaysFailingAuthService(),
+              authService: getIt<IAuthService>(),
             ),
-            child: AuthPage(animation: animation),
+            child: SignUpPage(animation: animation),
           ),
+          fullscreenDialog: true,
+          transitionsBuilder: searchPageTransitionBuilder,
+          transitionDuration: const Duration(milliseconds: 300),
+          reverseTransitionDuration: const Duration(milliseconds: 300),
+        );
+      case Routes.loginPage:
+        return PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+            create: (context) => LoginFormBloc(
+              authBloc: context.read<AuthBloc>(),
+              authService: getIt<IAuthService>(),
+            ),
+            child: LoginPage(animation: animation),
+          ),
+          fullscreenDialog: true,
           transitionsBuilder: searchPageTransitionBuilder,
           transitionDuration: const Duration(milliseconds: 300),
           reverseTransitionDuration: const Duration(milliseconds: 300),
@@ -72,12 +95,7 @@ abstract class AppRouter {
       // );
       case Routes.splashPage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => AuthBloc(
-              authService: AlwaysFailingAuthService(),
-            )..add(const AuthEvent.authCheckRequested()),
-            child: const SplashPage(),
-          ),
+          builder: (context) => const SplashPage(),
           settings: settings,
         );
       case Routes.cropImagePage:

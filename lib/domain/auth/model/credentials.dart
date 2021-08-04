@@ -7,5 +7,6 @@ class Credentials with _$Credentials {
   factory Credentials({
     required String email,
     required String password,
+    required String username,
   }) = _Credentials;
 }

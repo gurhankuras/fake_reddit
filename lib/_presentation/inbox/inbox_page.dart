@@ -224,7 +224,7 @@ class _ActivityTabPageState extends State<ActivityTabPage>
                           children: [
                             OutlinedButton(
                               onPressed: () => Navigator.of(context)
-                                  .pushNamed(Routes.signInUpPage),
+                                  .pushNamed(Routes.loginPage),
                               child: Text(
                                 'LOG IN',
                                 style: Theme.of(context)
@@ -247,7 +247,7 @@ class _ActivityTabPageState extends State<ActivityTabPage>
                             SizedBox(width: SizeConfig.defaultSize),
                             ElevatedButton(
                               onPressed: () => Navigator.of(context)
-                                  .pushNamed(Routes.signInUpPage),
+                                  .pushNamed(Routes.signupPage),
                               child: Text(
                                 'SIGN UP',
                                 style: Theme.of(context)

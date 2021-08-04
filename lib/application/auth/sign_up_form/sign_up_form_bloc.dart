@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 import 'package:reddit_clone/domain/auth/i_auth_service.dart';
 import 'package:reddit_clone/domain/auth/model/credentials.dart';
@@ -18,6 +19,7 @@ part 'sign_up_form_bloc.freezed.dart';
 part 'sign_up_form_event.dart';
 part 'sign_up_form_state.dart';
 
+@Injectable()
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final AuthBloc authBloc;
   final IAuthService authService;
@@ -72,16 +74,6 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
             );
           },
         );
-
-        // yield state.copyWith(
-        //   username: e.username,
-        //   usernameFailure: formatValidator.username(e.username),
-        //   failure: formatValidator.form(
-        //     emailValue: state.email,
-        //     passwordValue: state.password,
-        //     usernameValue: e.username,
-        //   ),
-        // );
       },
       emailChanged: (e) async* {
         final noneOrFailure = formatValidator.email(e.email);
@@ -134,6 +126,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           credentials: Credentials(
             email: state.email,
             password: state.password,
+            username: state.username,
           ),
         );
         yield* failureOrSuccess.fold(
@@ -150,6 +143,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   }
 }
 
+@LazySingleton()
 class SignUpFormatValidator {
   Option<ValueFailure<String>> password(String password) {
     const minLength = 6;

@@ -1,7 +1,9 @@
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
 import 'package:reddit_clone/domain/core/value_failure.dart';
 import 'package:reddit_clone/infastructure/auth/i_sign_up_verificator.dart';
 
+@LazySingleton()
 class SignUpVerificator implements ISignUpVerificator {
   @override
   Future<Option<ValueFailure<String>>> email(String email) async {

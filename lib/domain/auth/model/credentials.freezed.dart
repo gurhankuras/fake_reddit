@@ -16,10 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CredentialsTearOff {
   const _$CredentialsTearOff();
 
-  _Credentials call({required String email, required String password}) {
+  _Credentials call(
+      {required String email,
+      required String password,
+      required String username}) {
     return _Credentials(
       email: email,
       password: password,
+      username: username,
     );
   }
 }
@@ -31,6 +35,7 @@ const $Credentials = _$CredentialsTearOff();
 mixin _$Credentials {
   String get email => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $CredentialsCopyWith<Credentials> get copyWith =>
@@ -42,7 +47,7 @@ abstract class $CredentialsCopyWith<$Res> {
   factory $CredentialsCopyWith(
           Credentials value, $Res Function(Credentials) then) =
       _$CredentialsCopyWithImpl<$Res>;
-  $Res call({String email, String password});
+  $Res call({String email, String password, String username});
 }
 
 /// @nodoc
@@ -57,6 +62,7 @@ class _$CredentialsCopyWithImpl<$Res> implements $CredentialsCopyWith<$Res> {
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? username = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -66,6 +72,10 @@ class _$CredentialsCopyWithImpl<$Res> implements $CredentialsCopyWith<$Res> {
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -78,7 +88,7 @@ abstract class _$CredentialsCopyWith<$Res>
           _Credentials value, $Res Function(_Credentials) then) =
       __$CredentialsCopyWithImpl<$Res>;
   @override
-  $Res call({String email, String password});
+  $Res call({String email, String password, String username});
 }
 
 /// @nodoc
@@ -95,6 +105,7 @@ class __$CredentialsCopyWithImpl<$Res> extends _$CredentialsCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? username = freezed,
   }) {
     return _then(_Credentials(
       email: email == freezed
@@ -105,6 +116,10 @@ class __$CredentialsCopyWithImpl<$Res> extends _$CredentialsCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -112,16 +127,19 @@ class __$CredentialsCopyWithImpl<$Res> extends _$CredentialsCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Credentials implements _Credentials {
-  _$_Credentials({required this.email, required this.password});
+  _$_Credentials(
+      {required this.email, required this.password, required this.username});
 
   @override
   final String email;
   @override
   final String password;
+  @override
+  final String username;
 
   @override
   String toString() {
-    return 'Credentials(email: $email, password: $password)';
+    return 'Credentials(email: $email, password: $password, username: $username)';
   }
 
   @override
@@ -132,14 +150,18 @@ class _$_Credentials implements _Credentials {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                    .equals(other.password, password)) &&
+            (identical(other.username, username) ||
+                const DeepCollectionEquality()
+                    .equals(other.username, username)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(password);
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(username);
 
   @JsonKey(ignore: true)
   @override
@@ -148,13 +170,17 @@ class _$_Credentials implements _Credentials {
 }
 
 abstract class _Credentials implements Credentials {
-  factory _Credentials({required String email, required String password}) =
-      _$_Credentials;
+  factory _Credentials(
+      {required String email,
+      required String password,
+      required String username}) = _$_Credentials;
 
   @override
   String get email => throw _privateConstructorUsedError;
   @override
   String get password => throw _privateConstructorUsedError;
+  @override
+  String get username => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CredentialsCopyWith<_Credentials> get copyWith =>

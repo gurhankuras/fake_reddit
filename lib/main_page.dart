@@ -80,7 +80,7 @@ class MainPageState extends State<MainPage> {
           orElse: () => null,
           unauthenticated: (value) =>
               Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.signInUpPage,
+            Routes.mainPage,
             (route) => false,
           ),
         );

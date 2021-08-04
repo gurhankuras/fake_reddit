@@ -10,8 +10,10 @@ import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:reddit_clone/domain/auth/model/credentials.dart';
+import 'package:reddit_clone/domain/auth/model/login_credentials.dart';
 import 'package:reddit_clone/domain/i_token_cache_service.dart';
 import 'package:reddit_clone/infastructure/auth/dto/credentials_dto.dart';
+import 'package:reddit_clone/infastructure/auth/dto/login_credentials_dto.dart';
 import 'package:reddit_clone/infastructure/auth/dto/user_tokens_dto.dart';
 import 'package:reddit_clone/infastructure/core/connectivity_dio_checker.dart';
 import 'package:reddit_clone/infastructure/core/token_dio_interceptor.dart';
@@ -51,17 +53,17 @@ class AuthService implements IAuthService {
   // - refresh token expired
   // - user logged out explicitly
   @override
-  Future<Either<AuthFailure, Unit>> signIn({
-    required Credentials credentials,
+  Future<Either<AuthFailure, Unit>> loginWithEmail({
+    required LoginCredentials credentials,
   }) async {
     try {
       final response = await dio.post(
         '/sessions',
-        data: CredentialsDTO.fromDomain(credentials).toJson(),
+        data: LoginCredentialsDTO.fromDomain(credentials).toJson(),
       );
 
       if (response.statusCode != HttpStatus.ok) {
-        return left(AuthFailure.serverError());
+        return left(const AuthFailure.serverError());
       }
       if (response.data is Map) {
         final tokens = UserTokensDTO.fromJson(response.data).toDomain();
@@ -71,7 +73,7 @@ class AuthService implements IAuthService {
         tokenService.setRefreshToken(tokens.refreshToken);
         return right(unit);
       }
-      return left(AuthFailure.serverError());
+      return left(const AuthFailure.serverError());
     } catch (e) {
       return left(mapTryErrorToFailure(e));
     }
@@ -80,15 +82,35 @@ class AuthService implements IAuthService {
   @override
   Future<Either<AuthFailure, Unit>> signUp({
     required Credentials credentials,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    try {
+      final response = await dio.post(
+        '/users',
+        data: CredentialsDTO.fromDomain(credentials).toJson(),
+      );
+
+      if (response.statusCode != HttpStatus.ok) {
+        return left(const AuthFailure.serverError());
+      }
+      if (response.data is Map) {
+        final tokens = UserTokensDTO.fromJson(response.data).toDomain();
+        // ignore: unawaited_futures
+        tokenService.setAccessToken(tokens.accessToken);
+        // ignore: unawaited_futures
+        tokenService.setRefreshToken(tokens.refreshToken);
+        return right(unit);
+      }
+      return left(const AuthFailure.serverError());
+    } catch (e) {
+      return left(mapTryErrorToFailure(e));
+    }
   }
 
   @override
   Future<Either<AuthFailure, Unit>> checkIfUserHasTokens() async {
     try {
       final response = await dio.get('/protected');
-
+      print(response);
       if (response.statusCode == HttpStatus.forbidden) {
         return left(AuthFailure.tokenNotFound());
       } else if (response.statusCode != HttpStatus.ok) {

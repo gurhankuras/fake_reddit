@@ -20,10 +20,11 @@ CredentialsDTO _$CredentialsDTOFromJson(Map<String, dynamic> json) {
 class _$CredentialsDTOTearOff {
   const _$CredentialsDTOTearOff();
 
-  _CredentialsDTO call({String? email, String? password}) {
+  _CredentialsDTO call({String? email, String? password, String? username}) {
     return _CredentialsDTO(
       email: email,
       password: password,
+      username: username,
     );
   }
 
@@ -39,6 +40,7 @@ const $CredentialsDTO = _$CredentialsDTOTearOff();
 mixin _$CredentialsDTO {
   String? get email => throw _privateConstructorUsedError;
   String? get password => throw _privateConstructorUsedError;
+  String? get username => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,7 @@ abstract class $CredentialsDTOCopyWith<$Res> {
   factory $CredentialsDTOCopyWith(
           CredentialsDTO value, $Res Function(CredentialsDTO) then) =
       _$CredentialsDTOCopyWithImpl<$Res>;
-  $Res call({String? email, String? password});
+  $Res call({String? email, String? password, String? username});
 }
 
 /// @nodoc
@@ -67,6 +69,7 @@ class _$CredentialsDTOCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? username = freezed,
   }) {
     return _then(_value.copyWith(
       email: email == freezed
@@ -76,6 +79,10 @@ class _$CredentialsDTOCopyWithImpl<$Res>
       password: password == freezed
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String?,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -88,7 +95,7 @@ abstract class _$CredentialsDTOCopyWith<$Res>
           _CredentialsDTO value, $Res Function(_CredentialsDTO) then) =
       __$CredentialsDTOCopyWithImpl<$Res>;
   @override
-  $Res call({String? email, String? password});
+  $Res call({String? email, String? password, String? username});
 }
 
 /// @nodoc
@@ -106,6 +113,7 @@ class __$CredentialsDTOCopyWithImpl<$Res>
   $Res call({
     Object? email = freezed,
     Object? password = freezed,
+    Object? username = freezed,
   }) {
     return _then(_CredentialsDTO(
       email: email == freezed
@@ -116,6 +124,10 @@ class __$CredentialsDTOCopyWithImpl<$Res>
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
               as String?,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -123,7 +135,7 @@ class __$CredentialsDTOCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_CredentialsDTO extends _CredentialsDTO {
-  _$_CredentialsDTO({this.email, this.password}) : super._();
+  _$_CredentialsDTO({this.email, this.password, this.username}) : super._();
 
   factory _$_CredentialsDTO.fromJson(Map<String, dynamic> json) =>
       _$$_CredentialsDTOFromJson(json);
@@ -132,10 +144,12 @@ class _$_CredentialsDTO extends _CredentialsDTO {
   final String? email;
   @override
   final String? password;
+  @override
+  final String? username;
 
   @override
   String toString() {
-    return 'CredentialsDTO(email: $email, password: $password)';
+    return 'CredentialsDTO(email: $email, password: $password, username: $username)';
   }
 
   @override
@@ -146,14 +160,18 @@ class _$_CredentialsDTO extends _CredentialsDTO {
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
-                    .equals(other.password, password)));
+                    .equals(other.password, password)) &&
+            (identical(other.username, username) ||
+                const DeepCollectionEquality()
+                    .equals(other.username, username)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(password);
+      const DeepCollectionEquality().hash(password) ^
+      const DeepCollectionEquality().hash(username);
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +185,7 @@ class _$_CredentialsDTO extends _CredentialsDTO {
 }
 
 abstract class _CredentialsDTO extends CredentialsDTO {
-  factory _CredentialsDTO({String? email, String? password}) =
+  factory _CredentialsDTO({String? email, String? password, String? username}) =
       _$_CredentialsDTO;
   _CredentialsDTO._() : super._();
 
@@ -178,6 +196,8 @@ abstract class _CredentialsDTO extends CredentialsDTO {
   String? get email => throw _privateConstructorUsedError;
   @override
   String? get password => throw _privateConstructorUsedError;
+  @override
+  String? get username => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$CredentialsDTOCopyWith<_CredentialsDTO> get copyWith =>

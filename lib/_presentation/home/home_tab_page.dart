@@ -57,7 +57,7 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () =>
-                      Navigator.of(context).pushNamed(Routes.signInUpPage),
+                      Navigator.of(context).pushNamed(Routes.signupPage),
                   child: Text('SIGN UP'),
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
@@ -66,7 +66,7 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () =>
-                    Navigator.of(context).pushNamed(Routes.signInUpPage),
+                    Navigator.of(context).pushNamed(Routes.loginPage),
                 child: Text('LOG IN'),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
