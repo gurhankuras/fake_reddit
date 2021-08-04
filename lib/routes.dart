@@ -15,7 +15,7 @@ import '_presentation/post_feed/create_feed_entry_overview_page.dart';
 import 'application/bloc/create_feed_bloc.dart';
 import 'application/change_community_avatar/change_community_avatar_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
-import 'infastructure/image_service.dart';
+import 'infastructure/core/image_service.dart';
 import 'package:reddit_clone/main_page.dart';
 import './application/auth/auth_bloc.dart';
 import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
@@ -57,6 +57,7 @@ abstract class AppRouter {
               authBloc: context.read<AuthBloc>(),
               verificator: SignUpVerificator(),
               formatValidator: SignUpFormatValidator(),
+              authService: AlwaysFailingAuthService(),
             ),
             child: AuthPage(animation: animation),
           ),
@@ -73,10 +74,8 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => AuthBloc(
-              authService: ALWAYS_FAILING_AUTH
-                  ? AlwaysFailingAuthService()
-                  : AuthService(),
-            )..add(const AuthEvent.gotUserSignedIn()),
+              authService: AlwaysFailingAuthService(),
+            )..add(const AuthEvent.authCheckRequested()),
             child: const SplashPage(),
           ),
           settings: settings,

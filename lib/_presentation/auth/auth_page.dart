@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:reddit_clone/_presentation/auth/password_text_input.dart';
 import 'package:reddit_clone/_presentation/auth/sign_up_email_text_input.dart';
+import 'package:reddit_clone/_presentation/auth/sign_up_text_field.dart';
 import 'package:reddit_clone/_presentation/auth/sign_up_username_text_input.dart';
-
 import 'package:reddit_clone/_presentation/core/app/app_button.dart';
 import 'package:reddit_clone/_presentation/core/app/colors.dart';
 import 'package:reddit_clone/_presentation/core/assets.dart';
 import 'package:reddit_clone/_presentation/core/authentication_button.dart';
+import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
 import 'package:reddit_clone/_presentation/core/reusable/app_text_input.dart';
 import 'package:reddit_clone/_presentation/core/reusable/text_divider_line.dart';
 import 'package:reddit_clone/_presentation/core/size_config.dart';
@@ -78,13 +80,7 @@ class AuthPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Create an account',
-                          style: Theme.of(context).textTheme.headline6?.apply(
-                                fontSizeFactor: 1.15,
-                                fontWeightDelta: 3,
-                              ),
-                        ),
+                        const AppHeader('Create an account'),
                         const PoliciesText(),
                         const AgreementCheck(),
                         const AuthButton(
@@ -104,7 +100,38 @@ class AuthPage extends StatelessWidget {
                               ),
                         ),
                         const EmailTextInput(),
-                        const SignUpUsernameTextInput(),
+                        SignUpTextField(
+                          name: 'Username',
+                          onChanged: (value) => context
+                              .read<SignUpFormBloc>()
+                              .add(SignUpFormEvent.usernameChanged(value)),
+                          suffixBuilder: (context, state, controller, touched) {
+                            if (touched) {
+                              if (state.checkingUsername) {
+                                return const Icon(Icons.circle,
+                                    color: Colors.blue);
+                              }
+                              return state.usernameFailure.fold(
+                                () => const Icon(Icons.check,
+                                    color: Colors.green),
+                                (a) => GestureDetector(
+                                  onTap: () {
+                                    controller.clear();
+                                    context.read<SignUpFormBloc>().add(
+                                          const SignUpFormEvent.usernameChanged(
+                                              ''),
+                                        );
+                                  },
+                                  child: const Icon(Icons.dangerous,
+                                      color: Colors.red),
+                                ),
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        ),
+                        // const SignUpUsernameTextInput(),
                         const PasswordTextInput(),
                         const SizedBox(
                           width: double.infinity,

@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../domain/i_image_service.dart';
+import '../../domain/i_image_service.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: IImageService)
 class ImageService implements IImageService {
   @override
   Future<Option<File>> selectFromGallery() async {

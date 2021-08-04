@@ -5,7 +5,10 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:reddit_clone/domain/value_failure.dart';
+import 'package:reddit_clone/domain/auth/i_auth_service.dart';
+import 'package:reddit_clone/domain/auth/model/credentials.dart';
+import 'package:reddit_clone/domain/core/value_failure.dart';
+import 'package:reddit_clone/infastructure/auth/auth_service.dart';
 import 'package:reddit_clone/infastructure/auth/i_sign_up_verificator.dart';
 import 'package:reddit_clone/utility/app_logger.dart';
 
@@ -17,11 +20,13 @@ part 'sign_up_form_state.dart';
 
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final AuthBloc authBloc;
+  final IAuthService authService;
   final ISignUpVerificator verificator;
   final SignUpFormatValidator formatValidator;
 
   SignUpFormBloc({
     required this.authBloc,
+    required this.authService,
     required this.verificator,
     required this.formatValidator,
   }) : super(SignUpFormState.initial(formatValidator)) {
@@ -125,8 +130,21 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
       },
       signInPressed: (e) async* {
         yield state.copyWith(isSubmitting: true);
-        await Future.delayed(const Duration(seconds: 3));
-        yield state.copyWith(isSubmitting: false);
+        final failureOrSuccess = await authService.signUp(
+          credentials: Credentials(
+            email: state.email,
+            password: state.password,
+          ),
+        );
+        yield* failureOrSuccess.fold(
+          (l) async* {
+            yield state.copyWith(isSubmitting: false);
+          },
+          (r) async* {
+            authBloc.add(const AuthEvent.gotUserSignedIn());
+            yield state.copyWith(isSubmitting: false);
+          },
+        );
       },
     );
   }
@@ -176,3 +194,60 @@ class SignUpFormatValidator {
         .orElse(() => username(usernameValue));
   }
 }
+
+// abstract class IPredicate {
+//   Option<ValueFailure<String>> test(String value);
+// }
+
+// class MinimumCharacters implements IPredicate {
+//   final int minLength;
+//   const MinimumCharacters(this.minLength);
+//   @override
+//   Option<ValueFailure<String>> test(String value) {
+//     return option(
+//       value.length < minLength,
+//       ValueFailure.shortLength(failedValue: value, min: minLength),
+//     );
+//   }
+// }
+
+// class FormatValidator {
+//   Option<ValueFailure<String>> validate(String value, IPredicate pred) {
+//     return pred.test(value);
+//   }
+// }
+
+// class ValidatorObject {
+//   final Option<ValueFailure<String>> valueOrFailure;
+//   final String value;
+
+//   const ValidatorObject(this.value, this.valueOrFailure);
+
+//   ValidatorObject min(int n) {
+//     if (valueOrFailure.isSome()) {
+//       this;
+//     }
+//     return ValidatorObject(
+//         value,
+//         valueOrFailure.orElse(() => option(
+//               value.length < n,
+//               ValueFailure.shortLength(failedValue: value, min: n),
+//             )));
+//   }
+
+//   ValidatorObject max(int n) {
+//     if (valueOrFailure.isSome()) {
+//       this;
+//     }
+//     return ValidatorObject(
+//         value,
+//         valueOrFailure.orElse(() => option(
+//               value.length > n,
+//               ValueFailure.exceedingLength(failedValue: value, max: n),
+//             )));
+//   }
+
+//   Option<ValueFailure<String>> get() {
+//     return valueOrFailure;
+//   }
+// }

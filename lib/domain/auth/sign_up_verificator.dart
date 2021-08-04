@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/value_failure.dart';
+import 'package:reddit_clone/domain/core/value_failure.dart';
 import 'package:reddit_clone/infastructure/auth/i_sign_up_verificator.dart';
 
 class SignUpVerificator implements ISignUpVerificator {
