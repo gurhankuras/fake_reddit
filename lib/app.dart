@@ -3,14 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/splash/splash_page.dart';
-import 'package:reddit_clone/infastructure/auth/auth_service.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
-import 'application/auth/auth_bloc.dart';
 
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
-import 'main_page.dart';
+import '_presentation/splash/splash_page.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
 import 'routes.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -68,14 +65,12 @@ class MyApp extends StatelessWidget {
           ),
       fontFamily: GoogleFonts.scada().fontFamily,
       scrollbarTheme: const ScrollbarThemeData(
-        showTrackOnHover: true,
-        // thumbColor:
-        //     MaterialStateProperty.resolveWith((states) => Colors.white),
-        // trackColor:
-        //     MaterialStateProperty.resolveWith((states) => Colors.white),
-        // trackBorderColor:
-        //     MaterialStateProperty.resolveWith((states) => Colors.white),
-      ),
+          // showTrackOnHover: true,
+          // thumbColor: MaterialStateProperty.resolveWith((states) => Colors.white),
+          // trackColor: MaterialStateProperty.resolveWith((states) => Colors.white),
+          // trackBorderColor:
+          //     MaterialStateProperty.resolveWith((states) => Colors.white),
+          ),
       primaryIconTheme: const IconThemeData(color: Colors.white),
       iconTheme: const IconThemeData(
         color: Colors.white,

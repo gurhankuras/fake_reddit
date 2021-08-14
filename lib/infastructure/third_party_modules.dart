@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,4 +34,10 @@ abstract class SharedPrefsModule {
   @Singleton()
   @preResolve
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+}
+
+@module
+abstract class GoogleSignInModule {
+  @Singleton()
+  GoogleSignIn get googleSignIn => GoogleSignIn();
 }

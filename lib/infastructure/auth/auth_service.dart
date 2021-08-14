@@ -1,7 +1,3 @@
-import 'package:reddit_clone/domain/auth/auth_failure.dart';
-import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -9,28 +5,31 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:reddit_clone/domain/auth/model/credentials.dart';
-import 'package:reddit_clone/domain/auth/model/login_credentials.dart';
-import 'package:reddit_clone/domain/i_token_cache_service.dart';
-import 'package:reddit_clone/infastructure/auth/dto/credentials_dto.dart';
-import 'package:reddit_clone/infastructure/auth/dto/login_credentials_dto.dart';
-import 'package:reddit_clone/infastructure/auth/dto/user_tokens_dto.dart';
-import 'package:reddit_clone/infastructure/core/connectivity_dio_checker.dart';
-import 'package:reddit_clone/infastructure/core/token_dio_interceptor.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
 
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_service.dart';
+import '../../domain/auth/i_google_auth_service.dart';
+import '../../domain/auth/model/credentials.dart';
+import '../../domain/auth/model/login_credentials.dart';
+import '../../domain/i_token_cache_service.dart';
 import '../../injection.dart';
+import '../../utility/app_logger.dart';
+import '../core/connectivity_dio_checker.dart';
+import '../core/token_dio_interceptor.dart';
+import 'dto/credentials_dto.dart';
+import 'dto/login_credentials_dto.dart';
+import 'dto/user_tokens_dto.dart';
 
 @Singleton(as: IAuthService)
 class AuthService implements IAuthService {
   final Dio dio;
   final ITokenCacheService tokenService;
+  final IGoogleAuthService googleAuthService;
 
   AuthService({
     required this.dio,
     required this.tokenService,
+    required this.googleAuthService,
   }) {
     kDebugMode
         ? dio.interceptors.add(PrettyDioLogger(
@@ -93,11 +92,6 @@ class AuthService implements IAuthService {
         return left(const AuthFailure.serverError());
       }
       if (response.data is Map) {
-        final tokens = UserTokensDTO.fromJson(response.data).toDomain();
-        // ignore: unawaited_futures
-        tokenService.setAccessToken(tokens.accessToken);
-        // ignore: unawaited_futures
-        tokenService.setRefreshToken(tokens.refreshToken);
         return right(unit);
       }
       return left(const AuthFailure.serverError());
@@ -132,6 +126,7 @@ class AuthService implements IAuthService {
 
       if (response.statusCode == HttpStatus.ok) {
         await tokenService.clear();
+        await googleAuthService.logOut();
       }
     } on DioError catch (_) {
       //   if (e.error is NotConnected) {
@@ -141,6 +136,76 @@ class AuthService implements IAuthService {
       //   return left(AuthFailure.serverError());
       // } catch (e) {
       //   return left(AuthFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> loginWithGoogle() async {
+    final userOrFailure = await googleAuthService.login();
+    try {
+      final user = userOrFailure.fold(
+        (failure) => null,
+        (user) => user,
+      );
+      if (user == null) {
+        return userOrFailure.map((r) => unit);
+      }
+
+      final response = await dio.post(
+        '/sessions?google=true',
+        data: {
+          'email': user.email,
+          'password': 'sssssssss',
+          'username': 'sssssssssss'
+        },
+      );
+
+      if (response.statusCode != HttpStatus.ok) {
+        return left(const AuthFailure.serverError());
+      }
+      if (response.data is Map) {
+        final tokens = UserTokensDTO.fromJson(response.data).toDomain();
+        // ignore: unawaited_futures
+        tokenService.setAccessToken(tokens.accessToken);
+        // ignore: unawaited_futures
+        tokenService.setRefreshToken(tokens.refreshToken);
+        return right(unit);
+      }
+      return left(const AuthFailure.serverError());
+    } catch (e) {
+      return left(mapTryErrorToFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> signUpWithGoogle() async {
+    final userOrFailure = await googleAuthService.login();
+    final user = userOrFailure.fold(
+      (failure) => null,
+      (user) => user,
+    );
+    if (user == null) {
+      return userOrFailure.map((r) => unit);
+    }
+    try {
+      final response = await dio.post(
+        '/users?google=true',
+        data: {
+          'email': user.email,
+          'username': 'fffffffffffff',
+          'password': 'ddddddddddddddd',
+        },
+      );
+
+      if (response.statusCode != HttpStatus.ok) {
+        return left(const AuthFailure.serverError());
+      }
+      if (response.data is Map) {
+        return right(unit);
+      }
+      return left(const AuthFailure.serverError());
+    } catch (e) {
+      return left(mapTryErrorToFailure(e));
     }
   }
 }

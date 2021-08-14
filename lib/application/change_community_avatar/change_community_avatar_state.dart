@@ -8,6 +8,8 @@ class ChangeCommunityAvatarState with _$ChangeCommunityAvatarState {
     required int colorIndex,
     required Option<Uint8List> croppedImage,
     required Option<Uint8List> selectedImage,
+    required bool saving,
+    required Option<bool> success,
   }) = _ChangeCommunityAvatarState;
 
   factory ChangeCommunityAvatarState.initial() => ChangeCommunityAvatarState(
@@ -16,5 +18,7 @@ class ChangeCommunityAvatarState with _$ChangeCommunityAvatarState {
         croppedImage: none(),
         selectedImage: none(),
         hasAnyChanged: false,
+        saving: false,
+        success: none(),
       );
 }

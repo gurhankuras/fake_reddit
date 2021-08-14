@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_text_field.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
+import 'sign_up_text_field.dart';
+import '../../application/auth/sign_up_form/sign_up_form_bloc.dart';
 
 class SignUpUsernameTextField extends StatelessWidget {
   const SignUpUsernameTextField({Key? key}) : super(key: key);

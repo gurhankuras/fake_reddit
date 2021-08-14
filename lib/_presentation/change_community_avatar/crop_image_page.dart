@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:crop_your_image/crop_your_image.dart';
@@ -75,7 +76,8 @@ class _CropSampleState extends State<CropSample> {
                             });
                             context.read<ChangeCommunityAvatarBloc>().add(
                                   ChangeCommunityAvatarEvent.imageCropped(
-                                      croppedData),
+                                    _croppedData!,
+                                  ),
                                 );
                           },
                           withCircleUi: true,

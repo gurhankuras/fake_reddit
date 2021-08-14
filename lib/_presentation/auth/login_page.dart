@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/auth/auth_page.dart';
-import 'package:reddit_clone/_presentation/auth/password_text_input.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_text_input.dart';
-import 'package:reddit_clone/application/auth/login_form/login_form_bloc.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:reddit_clone/routes.dart';
 import '../../application/auth/auth_bloc.dart';
+import '../../application/auth/login_form/login_form_bloc.dart';
+import '../../routes.dart';
+import '../core/reusable/app_text_input.dart';
+import 'auth_page.dart';
+import 'password_text_input.dart';
 
 class LoginPage extends StatelessWidget {
   final Animation<double> animation;
@@ -29,6 +28,10 @@ class LoginPage extends StatelessWidget {
       },
       child: AuthPage(
         auth: AuthPageEnum.login,
+        onAppleAuthPressed: () {},
+        onGoogleAuthPressed: () => context
+            .read<LoginFormBloc>()
+            .add(const LoginFormEvent.googleLoginPressed()),
         bottomSheet: continueButton(),
         actionText: 'SIGN UP',
         onActionTap: () =>

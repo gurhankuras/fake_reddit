@@ -2,17 +2,15 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-import 'package:reddit_clone/domain/auth/model/credentials.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/infastructure/auth/auth_service.dart';
-import 'package:reddit_clone/infastructure/auth/i_sign_up_verificator.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
-
+import '../../../domain/auth/i_auth_service.dart';
+import '../../../domain/auth/model/credentials.dart';
+import '../../../domain/auth/model/login_credentials.dart';
+import '../../../domain/core/value_failure.dart';
+import '../../../infastructure/auth/i_sign_up_verificator.dart';
+import '../../../utility/app_logger.dart';
 import '../auth_bloc.dart';
 
 part 'sign_up_form_bloc.freezed.dart';
@@ -121,21 +119,61 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
         );
       },
       signInPressed: (e) async* {
-        yield state.copyWith(isSubmitting: true);
-        final failureOrSuccess = await authService.signUp(
-          credentials: Credentials(
-            email: state.email,
-            password: state.password,
-            username: state.username,
-          ),
+        // yield state.copyWith(isSubmitting: true);
+
+        final signUpCreds = Credentials(
+          email: state.email,
+          password: state.password,
+          username: state.username,
         );
+        final failureOrSuccess = await authService.signUp(
+          credentials: signUpCreds,
+        );
+
         yield* failureOrSuccess.fold(
           (l) async* {
-            yield state.copyWith(isSubmitting: false);
+            // yield state.copyWith(isSubmitting: false);
+            yield state;
           },
           (r) async* {
-            authBloc.add(const AuthEvent.gotUserSignedIn());
-            yield state.copyWith(isSubmitting: false);
+            final signInOrFailure = await authService.loginWithEmail(
+              credentials: LoginCredentials(
+                username: signUpCreds.username,
+                password: signUpCreds.password,
+              ),
+            );
+            yield* signInOrFailure.fold(
+              (l) async* {
+                yield state;
+              },
+              (r) async* {
+                authBloc.add(const AuthEvent.gotUserSignedIn());
+                yield state;
+              },
+            );
+          },
+        );
+      },
+      googleSignUpPressed: (e) async* {
+        // yield state.copyWith(isSubmitting: true);
+
+        final failureOrSuccess = await authService.signUpWithGoogle();
+
+        yield* failureOrSuccess.fold(
+          (l) async* {
+            yield state;
+          },
+          (r) async* {
+            final signInOrFailure = await authService.loginWithGoogle();
+            yield* signInOrFailure.fold(
+              (l) async* {
+                yield state;
+              },
+              (r) async* {
+                authBloc.add(const AuthEvent.gotUserSignedIn());
+                yield state;
+              },
+            );
           },
         );
       },

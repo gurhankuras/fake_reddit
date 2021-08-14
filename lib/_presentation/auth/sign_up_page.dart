@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/auth/auth_page.dart';
-import 'package:reddit_clone/_presentation/auth/password_text_input.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_email_text_input.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_text_field.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_username_text_input.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:reddit_clone/routes.dart';
 import '../../application/auth/auth_bloc.dart';
+import '../../application/auth/sign_up_form/sign_up_form_bloc.dart';
+import '../../routes.dart';
+import 'auth_page.dart';
+import 'password_text_input.dart';
+import 'sign_up_email_text_input.dart';
+import 'sign_up_username_text_input.dart';
 
 class SignUpPage extends StatelessWidget {
   final Animation<double> animation;
@@ -30,6 +29,10 @@ class SignUpPage extends StatelessWidget {
       },
       child: AuthPage(
         auth: AuthPageEnum.signup,
+        onAppleAuthPressed: () {},
+        onGoogleAuthPressed: () => context
+            .read<SignUpFormBloc>()
+            .add(const SignUpFormEvent.googleSignUpPressed()),
         bottomSheet: continueButton(),
         actionText: 'LOG IN',
         onActionTap: () =>

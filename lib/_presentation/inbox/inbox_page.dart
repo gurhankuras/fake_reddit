@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/assets.dart';
-import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/routes.dart';
+import '../core/app/colors.dart';
+import '../core/app/extensions/string_fill_extension.dart';
+import '../core/assets.dart';
+import '../core/reusable/scaled_drawer.dart';
+import '../core/size_config.dart';
+import '../../routes.dart';
 
 class InboxPage extends StatelessWidget {
   const InboxPage({Key? key}) : super(key: key);

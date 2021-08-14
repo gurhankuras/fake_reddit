@@ -1,18 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-import 'package:reddit_clone/domain/auth/model/credentials.dart';
-import 'package:reddit_clone/domain/auth/model/login_credentials.dart';
-import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
 
+import '../../domain/auth/i_auth_service.dart';
+import '../../utility/app_logger.dart';
+
+part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
-part 'auth_bloc.freezed.dart';
 
 @Injectable()
 class AuthBloc extends Bloc<AuthEvent, AuthState> {

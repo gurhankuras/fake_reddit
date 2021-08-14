@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
+import '../app/colors.dart';
 
 class TextDividerLine extends StatelessWidget {
   final String text;

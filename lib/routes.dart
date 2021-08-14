@@ -2,34 +2,32 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/auth/auth_page.dart';
-import 'package:reddit_clone/_presentation/auth/login_page.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_page.dart';
-import 'package:reddit_clone/_presentation/splash/splash_page.dart';
-import 'package:reddit_clone/application/auth/login_form/login_form_bloc.dart';
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-import 'package:reddit_clone/domain/auth/sign_up_verificator.dart';
-import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
-import 'package:reddit_clone/infastructure/auth/auth_service.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/main.dart';
+import 'package:reddit_clone/domain/community/i_community_service.dart';
+import 'package:reddit_clone/domain/i_image_service.dart';
 
+import '_presentation/auth/login_page.dart';
+import '_presentation/auth/sign_up_page.dart';
 import '_presentation/change_community_avatar/change_community_avatar_page.dart';
 import '_presentation/change_community_avatar/crop_image_page.dart';
+import '_presentation/feed_form/create_feed_entry_page.dart';
+import '_presentation/home/search_page.dart';
 import '_presentation/post_feed/create_feed_entry_overview_page.dart';
+import '_presentation/search_community/post_feed_search_page.dart';
+import '_presentation/single_feed/single_feed_page.dart';
+import '_presentation/splash/splash_page.dart';
+import 'application/auth/auth_bloc.dart';
+import 'application/auth/login_form/login_form_bloc.dart';
+import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'application/bloc/create_feed_bloc.dart';
 import 'application/change_community_avatar/change_community_avatar_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
-import 'infastructure/core/image_service.dart';
-import 'package:reddit_clone/main_page.dart';
-import './application/auth/auth_bloc.dart';
-import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
-
-import '_presentation/home/search_page.dart';
-import '_presentation/feed_form/create_feed_entry_page.dart';
-import '_presentation/search_community/post_feed_search_page.dart';
+import 'domain/auth/i_auth_service.dart';
+import 'domain/auth/sign_up_verificator.dart';
 import 'domain/community.dart';
 import 'home_page.dart';
+import 'infastructure/core/image_service.dart';
+import 'injection.dart';
+import 'main_page.dart';
 
 abstract class Routes {
   static const homePage = '/homePage';
@@ -37,6 +35,7 @@ abstract class Routes {
   static const splashPage = '/splash';
   static const signupPage = '/signupPage';
   static const loginPage = '/loginPage';
+  static const singleFeedPage = '/singleFeedPage';
 
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
@@ -98,6 +97,11 @@ abstract class AppRouter {
           builder: (context) => const SplashPage(),
           settings: settings,
         );
+      case Routes.singleFeedPage:
+        return MaterialPageRoute(
+          builder: (context) => const SingleFeedPage(),
+          settings: settings,
+        );
       case Routes.cropImagePage:
         return MaterialPageRoute<Uint8List>(
           builder: (context) => BlocProvider.value(
@@ -151,8 +155,10 @@ abstract class AppRouter {
       case Routes.changeCommunityAvatarPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) =>
-                ChangeCommunityAvatarBloc(imageService: ImageService()),
+            create: (context) => ChangeCommunityAvatarBloc(
+              communityService: getIt<ICommunityService>(),
+              imageService: getIt<IImageService>(),
+            ),
             child: const ChangeCommunityAvatarPage(),
           ),
           settings: settings,

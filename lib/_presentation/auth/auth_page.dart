@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/auth/password_text_input.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_email_text_input.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_text_field.dart';
-import 'package:reddit_clone/_presentation/auth/sign_up_username_text_input.dart';
-import 'package:reddit_clone/_presentation/core/app/app_button.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/assets.dart';
-import 'package:reddit_clone/_presentation/core/authentication_button.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_text_input.dart';
-import 'package:reddit_clone/_presentation/core/reusable/text_divider_line.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:reddit_clone/routes.dart';
+import '../core/app/app_button.dart';
+import '../core/app/colors.dart';
+import '../core/assets.dart';
+import '../core/authentication_button.dart';
+import '../core/reusable/app_header.dart';
+import '../core/reusable/text_divider_line.dart';
+import '../core/size_config.dart';
 
 enum AuthPageEnum { signup, login }
 
@@ -22,6 +14,9 @@ class AuthPage extends StatelessWidget {
   final String actionText;
   final VoidCallback onActionTap;
   final String headerText;
+  final VoidCallback onGoogleAuthPressed;
+  final VoidCallback onAppleAuthPressed;
+
   final List<Widget> textFields;
   final Widget bottomSheet;
   final AuthPageEnum auth;
@@ -32,6 +27,8 @@ class AuthPage extends StatelessWidget {
     required this.actionText,
     required this.onActionTap,
     required this.headerText,
+    required this.onGoogleAuthPressed,
+    required this.onAppleAuthPressed,
     required this.textFields,
     required this.bottomSheet,
     required this.auth,
@@ -80,6 +77,8 @@ class AuthPage extends StatelessWidget {
                 child: AuthPageBody(
                   headerText: headerText,
                   textFields: textFields,
+                  onAppleAuthPressed: onAppleAuthPressed,
+                  onGoogleAuthPressed: onGoogleAuthPressed,
                   auth: auth,
                 ),
               ),
@@ -95,12 +94,16 @@ class AuthPageBody extends StatelessWidget {
   final String headerText;
   final List<Widget> textFields;
   final AuthPageEnum auth;
+  final VoidCallback onGoogleAuthPressed;
+  final VoidCallback onAppleAuthPressed;
 
   const AuthPageBody({
     Key? key,
     required this.headerText,
     required this.textFields,
     required this.auth,
+    required this.onGoogleAuthPressed,
+    required this.onAppleAuthPressed,
   }) : super(key: key);
 
   @override
@@ -113,13 +116,15 @@ class AuthPageBody extends StatelessWidget {
         if (auth != AuthPageEnum.signup)
           SizedBox(height: SizeConfig.defaultSize),
         if (auth == AuthPageEnum.signup) const AgreementCheck(),
-        const AuthButton(
+        AuthButton(
           auth: AuthMethods.google,
           width: double.infinity,
+          onPressed: onGoogleAuthPressed,
         ),
-        const AuthButton(
+        AuthButton(
           auth: AuthMethods.apple,
           width: double.infinity,
+          onPressed: onAppleAuthPressed,
         ),
         SizedBox(height: SizeConfig.defaultSize),
         TextDividerLine(

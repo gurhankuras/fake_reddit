@@ -1,14 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:reddit_clone/_presentation/core/app/app_bottom_modal_sheet.dart';
-import 'package:reddit_clone/_presentation/core/assets.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-
 import 'app/colors.dart';
+import 'assets.dart';
+import 'size_config.dart';
 
 enum AuthMethods {
   google,
@@ -39,10 +36,12 @@ Map<AuthMethods, _AuthMethodData> _methods = {
 class AuthButton extends StatelessWidget {
   final AuthMethods auth;
   final double? width;
+  final VoidCallback onPressed;
   const AuthButton({
     Key? key,
     required this.auth,
     this.width,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -65,7 +64,7 @@ class AuthButton extends StatelessWidget {
                 fontSizeDelta: 1.1,
               ),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           // primary: Colors.white,
           // padding: EdgeInsets.zero,
@@ -99,9 +98,9 @@ void showSignUpSheet(BuildContext context) {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: SizeConfig.defaultSize),
-          const AuthButton(auth: AuthMethods.google),
-          const AuthButton(auth: AuthMethods.apple),
-          const AuthButton(auth: AuthMethods.email),
+          AuthButton(auth: AuthMethods.google, onPressed: () {}),
+          AuthButton(auth: AuthMethods.apple, onPressed: () {}),
+          AuthButton(auth: AuthMethods.email, onPressed: () {}),
           const AgreementCheck(),
           const AlreadyRedditor(),
           SizedBox(height: SizeConfig.defaultSize * 1.5),

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../settings/settings_panel.dart';
+import '../../reusable/scaled_drawer.dart';
 import '../colors.dart';
 import 'widgets/options.dart';
 import 'widgets/user_info.dart';
 
 class AppDrawer extends StatelessWidget {
   // final VoidCallback closeDrawer;
+  final Widget page;
   // final bool isDrawerOpen;
   const AppDrawer({
     Key? key,
-    // required this.closeDrawer,
-    // required this.isDrawerOpen,
+    required this.page,
   }) : super(key: key);
 
   @override
@@ -31,6 +34,17 @@ class AppDrawer extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: DrawerOption(
+                onTap: () {
+                  context.read<MyDrawerController>().closeDrawer();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SettingsPanelPage(
+                        page: page,
+                      ),
+                      fullscreenDialog: true,
+                    ),
+                  );
+                },
                 item: DrawerItem(
                   title: 'Settings',
                   icon: Icons.settings,
@@ -43,17 +57,3 @@ class AppDrawer extends StatelessWidget {
     );
   }
 }
-/*
-
-DecoratedBox(
-            decoration: BoxDecoration(
-              color: AppColors.black,
-            ),
-            child: DrawerOption(
-              item: DrawerItem(
-                title: 'Settings',
-                icon: Icons.settings,
-              ),
-            ),
-          )
-*/

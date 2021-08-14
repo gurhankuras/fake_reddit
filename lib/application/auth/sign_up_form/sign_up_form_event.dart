@@ -8,4 +8,6 @@ class SignUpFormEvent with _$SignUpFormEvent {
       _UsernameChanged;
   const factory SignUpFormEvent.emailChanged(String email) = _EmailChanged;
   const factory SignUpFormEvent.signInPressed() = _SignUpPressed;
+
+  const factory SignUpFormEvent.googleSignUpPressed() = _GoogleSignUpPressed;
 }

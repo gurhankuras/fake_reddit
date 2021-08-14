@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/routes.dart';
+import '../core/app/colors.dart';
+import '../core/size_config.dart';
+import '../../routes.dart';
 import '../../application/auth/auth_bloc.dart';
 
 class SplashPage extends StatelessWidget {

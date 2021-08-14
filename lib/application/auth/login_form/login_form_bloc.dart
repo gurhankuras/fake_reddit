@@ -5,10 +5,10 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-import 'package:reddit_clone/domain/auth/model/login_credentials.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../domain/auth/i_auth_service.dart';
+import '../../../domain/auth/model/login_credentials.dart';
+import '../../../domain/core/value_failure.dart';
+import '../../../utility/app_logger.dart';
 
 import '../auth_bloc.dart';
 
@@ -70,6 +70,20 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           (r) async* {
             authBloc.add(const AuthEvent.authCheckRequested());
             yield state.copyWith(isSubmitting: false);
+          },
+        );
+      },
+      googleLoginPressed: (e) async* {
+        // yield state.copyWith(isSubmitting: true);
+
+        final userOrFailure = await authService.loginWithGoogle();
+        yield* userOrFailure.fold(
+          (failure) async* {
+            yield state /*.copyWith(isSubmitting: false)*/;
+          },
+          (user) async* {
+            authBloc.add(const AuthEvent.authCheckRequested());
+            yield state /*.copyWith(isSubmitting: false)*/;
           },
         );
       },

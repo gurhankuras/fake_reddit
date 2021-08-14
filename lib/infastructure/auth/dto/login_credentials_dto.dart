@@ -1,7 +1,6 @@
-import 'package:reddit_clone/domain/auth/model/credentials.dart';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reddit_clone/domain/auth/model/login_credentials.dart';
+
+import '../../../domain/auth/model/login_credentials.dart';
 
 part 'login_credentials_dto.freezed.dart';
 part 'login_credentials_dto.g.dart';

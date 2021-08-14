@@ -21,8 +21,6 @@ environment:
   sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
-  flutter:
-    sdk: flutter
   another_flushbar: ^1.10.24
   bloc: ^7.0.0
   connectivity: ^3.0.6
@@ -34,6 +32,9 @@ dependencies:
   dotted_border: ^2.0.0
   drop_cap_text: ^1.1.3
   equatable: ^2.0.3
+  faker: ^2.0.0
+  flutter:
+    sdk: flutter
   flutter_bloc: ^7.1.0
   flutter_lints: ^1.0.4
   flutter_lorem: ^2.0.0
@@ -42,14 +43,21 @@ dependencies:
   freezed: ^0.14.3
   get_it: ^7.2.0
   google_fonts: ^2.1.0
+  google_sign_in: ^5.0.7
   image_picker: ^0.8.2
   injectable: ^1.4.1
   keyboard_dismisser: ^2.0.0
   logger: ^1.0.0
+  mime_type: ^1.0.0
+  path: ^1.8.0
+  path_provider: ^2.0.2
   pretty_dio_logger: ^1.1.1
   provider: ^5.0.0
   scroll_snap_list: ^0.8.2
+  scrollable_positioned_list: 0.2.0-nullsafety.0
   shared_preferences: ^2.0.6
+  shimmer: ^2.0.0
+  sliding_up_panel: ^2.0.0+1
   string_validator: ^0.3.0
   url_launcher: ^6.0.9
   uuid: ^3.0.4
@@ -58,7 +66,7 @@ dev_dependencies:
   build_runner: ^2.0.6
   freezed_annotation: ^0.14.3
   injectable_generator: null
-  json_serializable:
+  json_serializable: null
 
 dependency_overrides:
   analyzer: '^2.0.0'

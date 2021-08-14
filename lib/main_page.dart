@@ -2,18 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/auth/auth_page.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/core/authentication_button.dart';
-import 'package:reddit_clone/_presentation/inbox/inbox_page.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
-import 'application/auth/auth_bloc.dart';
 
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
+import '_presentation/core/authentication_button.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/size_config.dart';
 import '_presentation/home/home_vm.dart';
+import '_presentation/inbox/inbox_page.dart';
+import 'application/auth/auth_bloc.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
 import 'home_page.dart';
 import 'routes.dart';
 
@@ -89,7 +87,7 @@ class MainPageState extends State<MainPage> {
       child: ScaledDrawer(
         curve: Curves.easeInOut,
         controller: drawerController,
-        drawer: const AppDrawer(),
+        drawer: AppDrawer(page: widget),
         drawerColor: AppColors.black,
         drawerWidth: MediaQuery.of(context).size.width * 0.7,
         page: Scaffold(

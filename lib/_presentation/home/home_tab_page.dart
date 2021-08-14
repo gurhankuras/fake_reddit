@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/routes.dart';
+import '../core/size_config.dart';
+import '../../routes.dart';
 
 import '../../application/auth/auth_bloc.dart';
 
@@ -34,7 +34,6 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
         child: SizedBox(
           width: SizeConfig.screenWidthPercentage(60),
           child: Column(
-            // ignore: prefer_const_literals_to_create_immutables
             children: [
               const IntroEntry(
                 image: 'assets/png1.png',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/home/home_tab_page.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
+import '_presentation/home/home_tab_page.dart';
+import 'application/main_page_bloc/main_page_bloc.dart';
 
 import 'application/auth/auth_bloc.dart';
 import '_presentation/core/app/extensions/string_fill_extension.dart';

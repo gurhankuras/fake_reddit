@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/core/general_failures.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/domain/i_token_cache_service.dart';
+import '../core/general_failures.dart';
+import '../../infastructure/core/cache_service.dart';
+import '../i_token_cache_service.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class TokenKeys {

@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:reddit_clone/domain/community/i_community_service.dart';
 import '../../domain/i_image_service.dart';
 
 part 'change_community_avatar_event.dart';
@@ -16,7 +17,9 @@ part 'change_community_avatar_bloc.freezed.dart';
 class ChangeCommunityAvatarBloc
     extends Bloc<ChangeCommunityAvatarEvent, ChangeCommunityAvatarState> {
   final IImageService imageService;
+  final ICommunityService communityService;
   ChangeCommunityAvatarBloc({
+    required this.communityService,
     required this.imageService,
   }) : super(ChangeCommunityAvatarState.initial());
 
@@ -24,40 +27,64 @@ class ChangeCommunityAvatarBloc
   Stream<ChangeCommunityAvatarState> mapEventToState(
     ChangeCommunityAvatarEvent event,
   ) async* {
-    yield* event.map(avatarColorChanged: (e) async* {
-      yield state.copyWith(
-        colorIndex: e.index,
-        hasAnyChanged: true,
-      );
-    }, avatarIconChanged: (e) async* {
-      yield state.copyWith(
-        iconIndex: e.index,
-        hasAnyChanged: true,
-      );
-    }, imageCropped: (e) async* {
-      yield state.copyWith(
-        croppedImage: some(e.bytes),
-        hasAnyChanged: true,
-        selectedImage: none(),
-      );
-    }, loadingCustomImageSelected: (e) async* {
-      final fileOrNot = await imageService.select(source: e.source);
-      yield* fileOrNot.fold(
-        () async* {
-          yield state;
-        },
-        (image) async* {
-          add(ChangeCommunityAvatarEvent.imageSelected(image));
-          yield state;
-        },
-      );
-    }, imageSelected: (e) async* {
-      final bytes = e.image.readAsBytesSync();
-      yield state.copyWith(
-        selectedImage: some(bytes),
-        hasAnyChanged: true,
-      );
-    });
+    yield* event.map(
+      avatarColorChanged: (e) async* {
+        yield state.copyWith(
+          colorIndex: e.index,
+          hasAnyChanged: true,
+        );
+      },
+      avatarIconChanged: (e) async* {
+        yield state.copyWith(
+          iconIndex: e.index,
+          hasAnyChanged: true,
+        );
+      },
+      imageCropped: (e) async* {
+        yield state.copyWith(
+          croppedImage: some(e.bytes),
+          hasAnyChanged: true,
+          selectedImage: none(),
+        );
+      },
+      loadingCustomImageSelected: (e) async* {
+        final fileOrNot = await imageService.select(source: e.source);
+        yield* fileOrNot.fold(
+          () async* {
+            yield state;
+          },
+          (image) async* {
+            add(ChangeCommunityAvatarEvent.imageSelected(image));
+            yield state;
+          },
+        );
+      },
+      imageSelected: (e) async* {
+        final bytes = e.image.readAsBytesSync();
+        yield state.copyWith(
+          selectedImage: some(bytes),
+          hasAnyChanged: true,
+        );
+      },
+      saved: (e) async* {
+        yield state.copyWith(saving: true);
+        if (state.croppedImage.isSome()) {
+          final failureOrSuccess = await communityService.changeAvatar(
+              '123232', state.croppedImage.getOrElse(() => Uint8List(0)));
+          // await Future.delayed(Duration(seconds: 1));
+          yield* failureOrSuccess.fold(
+            (l) async* {
+              yield state.copyWith(saving: false, success: some(false));
+              yield state.copyWith(success: none());
+            },
+            (r) async* {
+              yield state.copyWith(saving: false, success: some(true));
+            },
+          );
+        }
+        yield state.copyWith(saving: false);
+      },
+    );
   }
 
   List<IconData> get avatars => [

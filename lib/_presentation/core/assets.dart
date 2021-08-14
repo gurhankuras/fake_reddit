@@ -6,4 +6,5 @@ abstract class Assets {
   static const dog = 'assets/dog.svg';
   static const shibaInu = 'assets/shiba-inu.svg';
   static const spinner = 'assets/spinner.gif';
+  static const redditFailure = 'assets/reddit-failure.png';
 }

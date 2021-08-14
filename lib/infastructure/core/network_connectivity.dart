@@ -1,5 +1,5 @@
 import 'package:connectivity/connectivity.dart';
-import 'package:reddit_clone/domain/i_network_connectivity.dart';
+import '../../domain/i_network_connectivity.dart';
 import 'package:injectable/injectable.dart';
 
 @Singleton(as: INetworkConnectivity)

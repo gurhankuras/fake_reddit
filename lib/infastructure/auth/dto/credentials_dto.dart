@@ -1,4 +1,4 @@
-import 'package:reddit_clone/domain/auth/model/credentials.dart';
+import '../../../domain/auth/model/credentials.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 

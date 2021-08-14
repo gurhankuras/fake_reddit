@@ -12,4 +12,5 @@ class ChangeCommunityAvatarEvent with _$ChangeCommunityAvatarEvent {
       ImageSource source) = _LoadingCustomImageSelected;
   const factory ChangeCommunityAvatarEvent.imageSelected(File image) =
       _ImageSelected;
+  const factory ChangeCommunityAvatarEvent.saved() = _Saved;
 }

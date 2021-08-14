@@ -1,21 +1,16 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/reusable/scaled_drawer.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:reddit_clone/application/main_page_bloc/main_page_bloc.dart';
-import 'package:reddit_clone/domain/auth/token_cache_service.dart';
-import 'package:reddit_clone/domain/env.dart';
-import 'package:reddit_clone/infastructure/auth/always_failing_auth_service.dart';
-import 'package:reddit_clone/infastructure/auth/auth_service.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/injection.dart';
 
+import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/home/home_vm.dart';
 import 'app.dart';
-import 'application/core/simple_bloc_observer.dart';
 import 'application/auth/auth_bloc.dart';
+import 'application/core/simple_bloc_observer.dart';
+import 'domain/auth/token_cache_service.dart';
+import 'domain/env.dart';
+import 'infastructure/core/cache_service.dart';
+import 'injection.dart';
 
 const ALWAYS_FAILING_AUTH = true;
 void main() async {

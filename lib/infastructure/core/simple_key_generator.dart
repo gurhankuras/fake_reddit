@@ -1,4 +1,4 @@
-import 'package:reddit_clone/domain/i_key_generator.dart';
+import '../../domain/i_key_generator.dart';
 
 import 'package:injectable/injectable.dart';
 

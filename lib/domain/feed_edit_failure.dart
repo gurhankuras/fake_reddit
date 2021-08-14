@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 part 'feed_edit_failure.freezed.dart';
 
 @freezed

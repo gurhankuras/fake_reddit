@@ -1,12 +1,11 @@
 import 'package:dartz/dartz.dart' hide State;
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/auth/sign_up_email_text_input.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_text_input.dart';
-import 'package:reddit_clone/application/auth/sign_up_form/sign_up_form_bloc.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
+import '../../application/auth/sign_up_form/sign_up_form_bloc.dart';
+import '../../domain/core/value_failure.dart';
+import '../core/reusable/app_text_input.dart';
+import 'sign_up_email_text_input.dart';
 
 class SignUpTextField extends StatefulWidget {
   final String name;

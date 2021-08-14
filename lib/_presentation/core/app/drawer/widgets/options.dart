@@ -13,7 +13,10 @@ class Options extends StatelessWidget {
       child: ListView.builder(
         shrinkWrap: true,
         itemCount: drawerItems.length,
-        itemBuilder: (context, index) => DrawerOption(item: drawerItems[index]),
+        itemBuilder: (context, index) => DrawerOption(
+          item: drawerItems[index],
+          onTap: () {},
+        ),
       ),
     );
   }
@@ -58,17 +61,17 @@ class Options extends StatelessWidget {
 
 class DrawerOption extends StatelessWidget {
   final DrawerItem item;
+  final VoidCallback onTap;
   const DrawerOption({
     Key? key,
     required this.item,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {
-        // TODO:
-      },
+      onTap: onTap,
       horizontalTitleGap: 0,
       title: Text(
         item.title,

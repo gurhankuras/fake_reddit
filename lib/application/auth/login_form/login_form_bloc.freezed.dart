@@ -31,6 +31,10 @@ class _$LoginFormEventTearOff {
   _LoginPressed loginPressed() {
     return const _LoginPressed();
   }
+
+  _GoogleLoginPressed googleLoginPressed() {
+    return const _GoogleLoginPressed();
+  }
 }
 
 /// @nodoc
@@ -43,6 +47,7 @@ mixin _$LoginFormEvent {
     required TResult Function(String password) passwordChanged,
     required TResult Function(String username) usernameChanged,
     required TResult Function() loginPressed,
+    required TResult Function() googleLoginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,7 @@ mixin _$LoginFormEvent {
     TResult Function(String password)? passwordChanged,
     TResult Function(String username)? usernameChanged,
     TResult Function()? loginPressed,
+    TResult Function()? googleLoginPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,6 +64,7 @@ mixin _$LoginFormEvent {
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_LoginPressed value) loginPressed,
+    required TResult Function(_GoogleLoginPressed value) googleLoginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -65,6 +72,7 @@ mixin _$LoginFormEvent {
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_LoginPressed value)? loginPressed,
+    TResult Function(_GoogleLoginPressed value)? googleLoginPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -156,6 +164,7 @@ class _$_PasswordChanged implements _PasswordChanged {
     required TResult Function(String password) passwordChanged,
     required TResult Function(String username) usernameChanged,
     required TResult Function() loginPressed,
+    required TResult Function() googleLoginPressed,
   }) {
     return passwordChanged(password);
   }
@@ -166,6 +175,7 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult Function(String password)? passwordChanged,
     TResult Function(String username)? usernameChanged,
     TResult Function()? loginPressed,
+    TResult Function()? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -180,6 +190,7 @@ class _$_PasswordChanged implements _PasswordChanged {
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_LoginPressed value) loginPressed,
+    required TResult Function(_GoogleLoginPressed value) googleLoginPressed,
   }) {
     return passwordChanged(this);
   }
@@ -190,6 +201,7 @@ class _$_PasswordChanged implements _PasswordChanged {
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_LoginPressed value)? loginPressed,
+    TResult Function(_GoogleLoginPressed value)? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (passwordChanged != null) {
@@ -277,6 +289,7 @@ class _$_UsernameChanged implements _UsernameChanged {
     required TResult Function(String password) passwordChanged,
     required TResult Function(String username) usernameChanged,
     required TResult Function() loginPressed,
+    required TResult Function() googleLoginPressed,
   }) {
     return usernameChanged(username);
   }
@@ -287,6 +300,7 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult Function(String password)? passwordChanged,
     TResult Function(String username)? usernameChanged,
     TResult Function()? loginPressed,
+    TResult Function()? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -301,6 +315,7 @@ class _$_UsernameChanged implements _UsernameChanged {
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_LoginPressed value) loginPressed,
+    required TResult Function(_GoogleLoginPressed value) googleLoginPressed,
   }) {
     return usernameChanged(this);
   }
@@ -311,6 +326,7 @@ class _$_UsernameChanged implements _UsernameChanged {
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_LoginPressed value)? loginPressed,
+    TResult Function(_GoogleLoginPressed value)? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (usernameChanged != null) {
@@ -372,6 +388,7 @@ class _$_LoginPressed implements _LoginPressed {
     required TResult Function(String password) passwordChanged,
     required TResult Function(String username) usernameChanged,
     required TResult Function() loginPressed,
+    required TResult Function() googleLoginPressed,
   }) {
     return loginPressed();
   }
@@ -382,6 +399,7 @@ class _$_LoginPressed implements _LoginPressed {
     TResult Function(String password)? passwordChanged,
     TResult Function(String username)? usernameChanged,
     TResult Function()? loginPressed,
+    TResult Function()? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (loginPressed != null) {
@@ -396,6 +414,7 @@ class _$_LoginPressed implements _LoginPressed {
     required TResult Function(_PasswordChanged value) passwordChanged,
     required TResult Function(_UsernameChanged value) usernameChanged,
     required TResult Function(_LoginPressed value) loginPressed,
+    required TResult Function(_GoogleLoginPressed value) googleLoginPressed,
   }) {
     return loginPressed(this);
   }
@@ -406,6 +425,7 @@ class _$_LoginPressed implements _LoginPressed {
     TResult Function(_PasswordChanged value)? passwordChanged,
     TResult Function(_UsernameChanged value)? usernameChanged,
     TResult Function(_LoginPressed value)? loginPressed,
+    TResult Function(_GoogleLoginPressed value)? googleLoginPressed,
     required TResult orElse(),
   }) {
     if (loginPressed != null) {
@@ -417,6 +437,100 @@ class _$_LoginPressed implements _LoginPressed {
 
 abstract class _LoginPressed implements LoginFormEvent {
   const factory _LoginPressed() = _$_LoginPressed;
+}
+
+/// @nodoc
+abstract class _$GoogleLoginPressedCopyWith<$Res> {
+  factory _$GoogleLoginPressedCopyWith(
+          _GoogleLoginPressed value, $Res Function(_GoogleLoginPressed) then) =
+      __$GoogleLoginPressedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$GoogleLoginPressedCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res>
+    implements _$GoogleLoginPressedCopyWith<$Res> {
+  __$GoogleLoginPressedCopyWithImpl(
+      _GoogleLoginPressed _value, $Res Function(_GoogleLoginPressed) _then)
+      : super(_value, (v) => _then(v as _GoogleLoginPressed));
+
+  @override
+  _GoogleLoginPressed get _value => super._value as _GoogleLoginPressed;
+}
+
+/// @nodoc
+
+class _$_GoogleLoginPressed implements _GoogleLoginPressed {
+  const _$_GoogleLoginPressed();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.googleLoginPressed()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _GoogleLoginPressed);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String password) passwordChanged,
+    required TResult Function(String username) usernameChanged,
+    required TResult Function() loginPressed,
+    required TResult Function() googleLoginPressed,
+  }) {
+    return googleLoginPressed();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String password)? passwordChanged,
+    TResult Function(String username)? usernameChanged,
+    TResult Function()? loginPressed,
+    TResult Function()? googleLoginPressed,
+    required TResult orElse(),
+  }) {
+    if (googleLoginPressed != null) {
+      return googleLoginPressed();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PasswordChanged value) passwordChanged,
+    required TResult Function(_UsernameChanged value) usernameChanged,
+    required TResult Function(_LoginPressed value) loginPressed,
+    required TResult Function(_GoogleLoginPressed value) googleLoginPressed,
+  }) {
+    return googleLoginPressed(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PasswordChanged value)? passwordChanged,
+    TResult Function(_UsernameChanged value)? usernameChanged,
+    TResult Function(_LoginPressed value)? loginPressed,
+    TResult Function(_GoogleLoginPressed value)? googleLoginPressed,
+    required TResult orElse(),
+  }) {
+    if (googleLoginPressed != null) {
+      return googleLoginPressed(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GoogleLoginPressed implements LoginFormEvent {
+  const factory _GoogleLoginPressed() = _$_GoogleLoginPressed;
 }
 
 /// @nodoc

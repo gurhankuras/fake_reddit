@@ -7,4 +7,5 @@ class LoginFormEvent with _$LoginFormEvent {
   const factory LoginFormEvent.usernameChanged(String username) =
       _UsernameChanged;
   const factory LoginFormEvent.loginPressed() = _LoginPressed;
+  const factory LoginFormEvent.googleLoginPressed() = _GoogleLoginPressed;
 }

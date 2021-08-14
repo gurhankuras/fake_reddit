@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/core/general_failures.dart';
-import 'package:reddit_clone/domain/i_key_generator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../domain/core/general_failures.dart';
+import '../../domain/i_key_generator.dart';
 
 @Singleton()
 class CacheService {
@@ -94,6 +95,24 @@ class CacheService {
     // always returns true
     await prefs.setString(key, value);
     return Future.value(right(unit));
+  }
+
+  Future<Either<GeneralFailure<String>, Unit>> setBool(
+    String key,
+    bool value,
+  ) async {
+    // always returns true
+    await prefs.setBool(key, value);
+    return Future.value(right(unit));
+  }
+
+  Future<Either<GeneralFailure<String>, bool>> getBool(String key) async {
+    final value = prefs.getBool(key);
+
+    if (value == null) {
+      return Future.value(left(GeneralFailure.notFound(notFoundValue: key)));
+    }
+    return Future.value(right(value));
   }
 
   void clear() {

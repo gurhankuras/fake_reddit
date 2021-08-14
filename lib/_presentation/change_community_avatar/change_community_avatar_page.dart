@@ -5,6 +5,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
+import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
 import '../../application/change_community_avatar/change_community_avatar_bloc.dart';
 
 import '../core/app/app_bottom_modal_sheet.dart';
@@ -89,44 +91,95 @@ class ChangeCommunityAvatarPage extends StatelessWidget {
           context.read<ChangeCommunityAvatarBloc>().state.hasAnyChanged
               ? _showLeaveWithoutSavingDialog(context)
               : Future.value(true),
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Avatar'),
-        ),
-        body: Column(
-          children: [
-            const Spacer(flex: 1),
-            AvatarPhotoDisplay(
-              bloc: bloc,
-              avatars: avatars,
-              colors: colors,
-            ),
-            // Spacer(),
-            SizedBox(
-              height: 150,
-              child: Stack(
-                children: [
-                  const ListCircleIndicator(),
-                  snapList(context, avatars),
-                ],
+      child:
+          BlocListener<ChangeCommunityAvatarBloc, ChangeCommunityAvatarState>(
+        listener: (context, state) {
+          state.success.fold(
+            () => null,
+            (success) {
+              if (success) {
+                Navigator.of(context).pop();
+              } else {
+                showSnack(
+                  message:
+                      'Sorry, there was an error updating the avatar for r/SSSSadas',
+                  context: context,
+                );
+              }
+            },
+          );
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text('Avatar'),
+            actions: actions,
+          ),
+          body: Column(
+            children: [
+              const Spacer(flex: 1),
+              AvatarPhotoDisplay(
+                bloc: bloc,
+                avatars: avatars,
+                colors: colors,
               ),
-            ),
-            SizedBox(
-              height: 100,
-              child: Stack(
-                children: [
-                  colorSnapList(context, colors),
-                  const ListCircleIndicator(),
-                ],
+              // Spacer(),
+              SizedBox(
+                height: 150,
+                child: Stack(
+                  children: [
+                    const ListCircleIndicator(),
+                    snapList(context, avatars),
+                  ],
+                ),
               ),
-            ),
-            const Spacer(flex: 2)
-          ],
+              SizedBox(
+                height: 100,
+                child: Stack(
+                  children: [
+                    colorSnapList(context, colors),
+                    const ListCircleIndicator(),
+                  ],
+                ),
+              ),
+              const Spacer(flex: 2)
+            ],
+          ),
         ),
       ),
     );
   }
+
+  get actions => [
+        BlocBuilder<ChangeCommunityAvatarBloc, ChangeCommunityAvatarState>(
+          buildWhen: (previous, current) =>
+              previous.hasAnyChanged != current.hasAnyChanged ||
+              previous.saving != current.saving,
+          builder: (context, state) {
+            return state.saving
+                ? Center(
+                    child: Transform.scale(
+                      scale: 0.4,
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : TextButton(
+                    onPressed: state.hasAnyChanged
+                        ? () => context
+                            .read<ChangeCommunityAvatarBloc>()
+                            .add(const ChangeCommunityAvatarEvent.saved())
+                        : null,
+                    child: AppHeader(
+                      'SAVE',
+                      fontSizeFactor: 0.7,
+                      color: state.hasAnyChanged
+                          ? Colors.blue
+                          : AppColors.lightGrey,
+                    ),
+                  );
+          },
+        )
+      ];
 
   Widget snapList(BuildContext context, List<IconData> avatars) => SnapListView(
       curve: Curves.decelerate,

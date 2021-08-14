@@ -1,4 +1,4 @@
-import 'package:reddit_clone/domain/i_network_connectivity.dart';
+import '../../domain/i_network_connectivity.dart';
 
 import '../../../domain/auth/auth_failure.dart';
 import 'package:dio/dio.dart';

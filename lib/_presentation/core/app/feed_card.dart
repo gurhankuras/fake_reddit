@@ -3,10 +3,13 @@ import 'dart:ui';
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../utility/app_logger.dart';
+import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
+import 'package:reddit_clone/_presentation/core/size_config.dart';
+
 import '../../../domain/feed_entry.dart';
 import '../../../domain/user.dart';
-
+import '../../../routes.dart';
+import '../../../utility/app_logger.dart';
 import 'app_bottom_modal_sheet.dart';
 import 'colors.dart';
 
@@ -15,17 +18,22 @@ class FeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Container(
-        decoration: const BoxDecoration(color: AppColors.lightBlack),
-        width: double.infinity,
-        child: Column(
-          children: [
-            FeedTopInfoTile(entry: mockFeedEntry),
-            FeedContent(entry: mockFeedEntry),
-            FeedActionBar(entry: mockFeedEntry)
-          ],
+    return GestureDetector(
+      onTap: () => Navigator.of(context).pushNamed(Routes.singleFeedPage),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Container(
+          decoration: const BoxDecoration(color: AppColors.lightBlack),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FeedTopInfoTile(entry: mockFeedEntry),
+              // FeedContent(entry: mockFeedEntry),
+              ImageFeed(entry: mockFeedEntry),
+              FeedActionBar(entry: mockFeedEntry)
+            ],
+          ),
         ),
       ),
     );
@@ -58,6 +66,31 @@ class FeedContent extends StatelessWidget {
           child: Image.network(entry.image),
         ),
       ),
+    );
+  }
+}
+
+class ImageFeed extends StatelessWidget {
+  final FeedEntry entry;
+  const ImageFeed({
+    Key? key,
+    required this.entry,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        AppHeader(
+          entry.contentText,
+          fontWeightDelta: 0,
+          fontSizeFactor: 0.9,
+        ),
+        SizedBox(height: SizeConfig.screenWidthPercentage(2)),
+        Image.network(
+            'https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'),
+      ],
     );
   }
 }

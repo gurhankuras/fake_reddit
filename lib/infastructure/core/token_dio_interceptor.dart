@@ -1,4 +1,4 @@
-import 'package:reddit_clone/domain/i_token_cache_service.dart';
+import '../../domain/i_token_cache_service.dart';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
