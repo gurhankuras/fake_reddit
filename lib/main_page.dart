@@ -7,6 +7,7 @@ import '_presentation/core/app/colors.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
 import '_presentation/core/authentication_button.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
+import '_presentation/core/scroll_controllers.dart';
 import '_presentation/core/size_config.dart';
 import '_presentation/home/home_vm.dart';
 import '_presentation/inbox/inbox_page.dart';
@@ -43,25 +44,7 @@ class MainPageState extends State<MainPage> {
     super.dispose();
   }
 
-  static List<Widget> widgetOptions = <Widget>[
-    const HomePage(),
-    Scaffold(
-      appBar: AppBar(),
-      body: const Center(
-        child: Text(
-          'HAHAHAHAHAHA',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    ),
-    const Center(
-      child: Text(
-        'Index 3: Settings',
-        style: TextStyle(color: Colors.white),
-      ),
-    ),
-    InboxPage()
-  ];
+  // static List<Widget> widgetOptions =
   int index = 0;
 
   double xPageOffset = 0;
@@ -71,6 +54,7 @@ class MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    print(context.read<ScrollControllers>());
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
@@ -127,6 +111,11 @@ class MainPageState extends State<MainPage> {
     if (currentIndex != bottomNavigationViewModel.currentPage) {
       _pageController.jumpToPage(currentIndex);
       bottomNavigationViewModel.changePage(currentIndex);
+    } else {
+      final scrollControllers = context.read<ScrollControllers>();
+      // scrollControllers.initNews();
+      scrollControllers.newsScrollController?.animateTo(0,
+          duration: Duration(milliseconds: 200), curve: Curves.easeIn);
     }
     // else {
     //   scrollController.animateTo(0,
@@ -165,11 +154,34 @@ class MainPageState extends State<MainPage> {
   }
 
   Widget buildPage() {
-    print(context.read<MainPageBloc>());
+    final scrollControllers = context.read<ScrollControllers>();
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
-      children: widgetOptions,
+      children: <Widget>[
+        // Provider.value(value:
+        Provider.value(
+          value: scrollControllers,
+          child: const HomePage(),
+        ),
+        // ),
+        Scaffold(
+          appBar: AppBar(),
+          body: const Center(
+            child: Text(
+              'HAHAHAHAHAHA',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+        const Center(
+          child: Text(
+            'Index 3: Settings',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        InboxPage()
+      ],
     );
   }
 }

@@ -2,8 +2,12 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/domain/community/i_community_service.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/scroll_controllers.dart';
+import 'package:reddit_clone/_presentation/subreddit/subreddit_page.dart';
+import 'package:reddit_clone/application/subreddit/subreddit_bloc.dart';
 import 'package:reddit_clone/domain/i_image_service.dart';
+import 'package:reddit_clone/infastructure/subreddit/subreddit_service.dart';
 
 import '_presentation/auth/login_page.dart';
 import '_presentation/auth/sign_up_page.dart';
@@ -24,6 +28,7 @@ import 'application/main_page_bloc/main_page_bloc.dart';
 import 'domain/auth/i_auth_service.dart';
 import 'domain/auth/sign_up_verificator.dart';
 import 'domain/community.dart';
+import 'domain/subreddit/i_subreddit_service.dart';
 import 'home_page.dart';
 import 'infastructure/core/image_service.dart';
 import 'injection.dart';
@@ -35,7 +40,9 @@ abstract class Routes {
   static const splashPage = '/splash';
   static const signupPage = '/signupPage';
   static const loginPage = '/loginPage';
-  static const singleFeedPage = '/singleFeedPage';
+  static const singlePostPage = '/singlePostPage';
+
+  static const subredditPage = '/r';
 
   static const postFeedSearchPage = '/postFeedSearchPage';
   static const searchPage = '/searchPage';
@@ -50,8 +57,15 @@ abstract class AppRouter {
     switch (settings.name) {
       case Routes.mainPage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => MainPageBloc(context: context),
+          builder: (_) => MultiProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => MainPageBloc(context: context),
+              ),
+              Provider(
+                create: (context) => ScrollControllers(),
+              ),
+            ],
             child: const MainPage(),
           ),
           settings: settings,
@@ -97,7 +111,18 @@ abstract class AppRouter {
           builder: (context) => const SplashPage(),
           settings: settings,
         );
-      case Routes.singleFeedPage:
+      case Routes.subredditPage:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (context) =>
+                SubredditBloc(subredditService: getIt<ISubredditService>())
+                  // ..add(SubredditEvent.subredditInfoFetchingStarted())
+                  ..add(SubredditEvent.feedFetchingStarted()),
+            child: SubredditPage(),
+          ),
+          settings: settings,
+        );
+      case Routes.singlePostPage:
         return MaterialPageRoute(
           builder: (context) => const SingleFeedPage(),
           settings: settings,
@@ -149,14 +174,14 @@ abstract class AppRouter {
       case Routes.createFeedOverviewPage:
         return MaterialPageRoute(
           builder: (context) => CreateFeedEntryOverviewPage(
-              community: settings.arguments as Community),
+              community: settings.arguments as SubredditInfo),
           settings: settings,
         );
       case Routes.changeCommunityAvatarPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChangeCommunityAvatarBloc(
-              communityService: getIt<ICommunityService>(),
+              communityService: getIt<ISubredditService>(),
               imageService: getIt<IImageService>(),
             ),
             child: const ChangeCommunityAvatarPage(),
@@ -175,7 +200,7 @@ abstract class AppRouter {
 }
 
 class CreateFeedPageArguments {
-  final Community community;
+  final SubredditInfo community;
   final MainPageBloc bloc;
 
   CreateFeedPageArguments(

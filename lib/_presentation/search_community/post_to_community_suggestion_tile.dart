@@ -9,7 +9,7 @@ import '../core/app/extensions/int_extension.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 
 class PostToCommunitySuggestionTile extends StatelessWidget {
-  final Community community;
+  final SubredditInfo community;
   const PostToCommunitySuggestionTile({Key? key, required this.community})
       : super(key: key);
 
@@ -26,7 +26,7 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
             CreateFeedPageArguments(community, context.read<MainPageBloc>()),
       ),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(community.image),
+        backgroundImage: NetworkImage(community.avatar),
       ),
       title: Text(
         community.name.toSubreddit,
@@ -35,25 +35,8 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
       subtitle: Row(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (community.isNSFW)
-            Row(
-              // textBaseline: TextBaseline.ideographic,
-              // crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Icon(
-                  Icons.report_problem,
-                  size: 13,
-                  color: Colors.pinkAccent[400]!,
-                ),
-                const SizedBox(width: 4),
-                Text('NSFW',
-                    style: subtitleTextStyle?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: Colors.pinkAccent[400]!,
-                    )),
-                Text(' • ', style: subtitleTextStyle),
-              ],
-            ),
+          if (community.isNSFW) NSFWWarning(),
+          if (community.isNSFW) Text(' • ', style: subtitleTextStyle),
           Text('${community.onlineCount.to()} online',
               style: subtitleTextStyle),
           Text(' • ', style: subtitleTextStyle),
@@ -64,8 +47,38 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
   }
 }
 
-final mockSuggestion = Community(
-    isNSFW: true,
-    onlineCount: 2654245000,
-    name: 'Terraria',
-    image: 'https://i.redd.it/aqg4kea97uf51.png');
+class NSFWWarning extends StatelessWidget {
+  const NSFWWarning({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme.caption?.copyWith(
+          fontSize: 13,
+          fontWeight: FontWeight.w700,
+          color: Colors.pinkAccent[400]!,
+        );
+    return Row(
+      children: [
+        Icon(
+          Icons.report_problem,
+          size: 13,
+          color: Colors.pinkAccent[400]!,
+        ),
+        const SizedBox(width: 4),
+        Text('NSFW', style: textStyle),
+      ],
+    );
+  }
+}
+
+final mockSuggestion = SubredditInfo(
+  isNSFW: true,
+  onlineCount: 2654245000,
+  name: 'Terraria',
+  avatar: 'https://i.redd.it/aqg4kea97uf51.png',
+  backgroundImage: '',
+  description: '',
+  memberCount: 222,
+);

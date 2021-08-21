@@ -14,7 +14,7 @@ import 'feed_types_sections.dart';
 import 'minimized_feed_types_bar.dart';
 
 class CreateFeedEntryPage extends StatelessWidget {
-  final Community community;
+  final SubredditInfo community;
 
   const CreateFeedEntryPage({Key? key, required this.community})
       : super(key: key);
@@ -123,7 +123,7 @@ class ChangeCommunityBar extends StatelessWidget {
     required this.community,
   }) : super(key: key);
 
-  final Community community;
+  final SubredditInfo community;
 
   @override
   Widget build(BuildContext context) {
@@ -136,7 +136,7 @@ class ChangeCommunityBar extends StatelessWidget {
             onTap: () => print('tap tap'),
             child: Row(
               children: [
-                CircleAvatar(backgroundImage: NetworkImage(community.image)),
+                CircleAvatar(backgroundImage: NetworkImage(community.avatar)),
                 const SizedBox(width: 10),
                 Text(community.name.toSubreddit),
                 const Icon(Icons.expand_more)

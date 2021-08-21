@@ -13,7 +13,7 @@ import '../core/reusable/base_app_action_chip.dart';
 import '../core/size_config.dart';
 
 class CreateFeedEntryOverviewPage extends StatelessWidget {
-  final Community community;
+  final SubredditInfo community;
   const CreateFeedEntryOverviewPage({
     Key? key,
     required this.community,

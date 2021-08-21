@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:reddit_clone/_presentation/inbox/messages_tab_page.dart';
 import '../core/app/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/assets.dart';
@@ -24,7 +25,7 @@ class InboxPage extends StatelessWidget {
         body: const TabBarView(
           children: [
             ActivityTabPage(),
-            Icon(Icons.directions_bike),
+            MessagesTabPage(),
           ],
         ),
       ),

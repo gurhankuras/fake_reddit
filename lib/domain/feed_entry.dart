@@ -1,9 +1,10 @@
 import 'user.dart';
 
-class FeedEntry {
+class PostEntry {
   final String subreddit;
   final User user;
   final bool isNFSW;
+  final String? bodyText;
   final String contentText;
   final String image;
   final int upvotes;
@@ -12,10 +13,11 @@ class FeedEntry {
   final String date;
   final int commentCount;
 
-  FeedEntry({
+  PostEntry({
     required this.subreddit,
     required this.user,
     required this.isNFSW,
+    this.bodyText,
     required this.contentText,
     required this.image,
     required this.upvotes,

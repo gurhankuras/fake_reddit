@@ -7,7 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reddit_clone/domain/community/i_community_service.dart';
+import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
 import '../../domain/i_image_service.dart';
 
 part 'change_community_avatar_event.dart';
@@ -17,7 +17,7 @@ part 'change_community_avatar_bloc.freezed.dart';
 class ChangeCommunityAvatarBloc
     extends Bloc<ChangeCommunityAvatarEvent, ChangeCommunityAvatarState> {
   final IImageService imageService;
-  final ICommunityService communityService;
+  final ISubredditService communityService;
   ChangeCommunityAvatarBloc({
     required this.communityService,
     required this.imageService,
@@ -71,7 +71,7 @@ class ChangeCommunityAvatarBloc
         if (state.croppedImage.isSome()) {
           final failureOrSuccess = await communityService.changeAvatar(
               '123232', state.croppedImage.getOrElse(() => Uint8List(0)));
-          // await Future.delayed(Duration(seconds: 1));
+          // await Future.delayed-(Duration(seconds: 1));
           yield* failureOrSuccess.fold(
             (l) async* {
               yield state.copyWith(saving: false, success: some(false));
