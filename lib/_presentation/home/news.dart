@@ -41,14 +41,15 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    print(_scrollController);
     return MultiBlocListener(
       listeners: [
         BlocListener<HomeTabPageBloc, HomeTabPageState>(
           listenWhen: (previous, current) =>
-              previous.morePostLoading && !current.morePostLoading,
+              (previous.morePostLoading && !current.morePostLoading),
           listener: (context, state) {
-            _refreshController.loadComplete();
+            state.hasReachedMax
+                ? _refreshController.loadNoData()
+                : _refreshController.loadComplete();
           },
         ),
         BlocListener<HomeTabPageBloc, HomeTabPageState>(
@@ -56,6 +57,7 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
               previous.refreshLoading && !current.refreshLoading,
           listener: (context, state) {
             _refreshController.refreshCompleted();
+            _refreshController.loadComplete();
           },
         )
       ],

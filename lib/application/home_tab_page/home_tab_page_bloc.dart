@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
+import 'package:reddit_clone/domain/feed/i_feed_repository.dart';
+import 'package:reddit_clone/domain/feed/i_feed_service.dart';
 import 'package:reddit_clone/domain/feed_entry.dart';
 
 part 'home_tab_page_event.dart';
@@ -10,7 +12,10 @@ part 'home_tab_page_state.dart';
 part 'home_tab_page_bloc.freezed.dart';
 
 class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
-  HomeTabPageBloc() : super(HomeTabPageState.initial());
+  IFeedService feedService;
+  HomeTabPageBloc({
+    required this.feedService,
+  }) : super(HomeTabPageState.initial());
 
   @override
   Stream<HomeTabPageState> mapEventToState(
@@ -19,53 +24,60 @@ class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
     yield* event.map(
       refreshRequested: (e) async* {
         yield state.copyWith(refreshLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: [
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-          ],
-          refreshLoading: false,
+        // await Future.delayed(Duration(seconds: 2));
+        final postsOrFailure = await feedService.getNewsFeed(page: 1, limit: 1);
+        yield* postsOrFailure.fold(
+          (l) async* {
+            yield state.copyWith(refreshLoading: false);
+          },
+          (posts) async* {
+            yield state.copyWith(
+              posts: posts,
+              refreshLoading: false,
+              page: 2,
+              hasReachedMax: false,
+            );
+          },
         );
       },
       loadMoreRequested: (e) async* {
         yield state.copyWith(morePostLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: List.of(state.posts)
-            ..addAll([
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-            ]),
-          morePostLoading: false,
+        final postsOrFailure =
+            await feedService.getNewsFeed(page: state.page, limit: 1);
+
+        yield* postsOrFailure.fold(
+          (l) async* {
+            yield state.copyWith(morePostLoading: false);
+          },
+          (posts) async* {
+            if (posts.isEmpty) {
+              yield state.copyWith(morePostLoading: false, hasReachedMax: true);
+            } else {
+              yield state.copyWith(
+                posts: List.of(state.posts)..addAll(posts),
+                morePostLoading: false,
+                page: state.page + 1,
+              );
+            }
+          },
         );
       },
       fetchingStarted: (e) async* {
         yield state.copyWith(fetchingLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: List.of(state.posts)
-            ..addAll([
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-            ]),
-          fetchingLoading: false,
+        final postsOrFailure =
+            await feedService.getNewsFeed(page: state.page, limit: 1);
+
+        yield* postsOrFailure.fold(
+          (l) async* {
+            yield state.copyWith(fetchingLoading: false);
+          },
+          (posts) async* {
+            yield state.copyWith(
+              posts: List.of(state.posts)..addAll(posts),
+              fetchingLoading: false,
+              page: state.page + 1,
+            );
+          },
         );
       },
     );

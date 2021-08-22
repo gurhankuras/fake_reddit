@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:reddit_clone/_presentation/core/constants.dart';
 
 import '../../domain/comment/comment_data.dart';
 import '../core/app/colors.dart';
@@ -20,6 +24,7 @@ class Comment extends StatefulWidget {
 }
 
 class _CommentState extends State<Comment> {
+  static int maxVisibleCommentCount = 2;
   bool showSubcomments = true;
 
   get isSubcomment => widget.depth != 0;
@@ -55,20 +60,41 @@ class _CommentState extends State<Comment> {
                   onLongPress: widget.hideHandler ?? hideAll,
                   child: CommentHead(commentData: widget.comment),
                 ),
-                if (showSubcomments) Text(widget.comment.text),
                 if (showSubcomments)
-                  _CommentActionBar(
-                      upvotes: widget.comment.upvotes, topLevel: !isSubcomment),
+                  MarkdownBody(
+                      data:
+                          // 'gurhan\n# gurhan\n## gurhan\n### gurhan\n#### gurhan\n##### gurhan\n###### gurhan',
+                          // '> gurhan nasil gidiyor\n>\n> nasil gidiyorsa gidiyor',
+                          // '**gurhan**',
+                          widget.comment.text,
+                      styleSheet: UIConstants.markdownStyleSheet),
+                _CommentActionBar(
+                    upvotes: widget.comment.upvotes, topLevel: !isSubcomment),
                 if (showSubcomments)
                   Column(
                     children: [
-                      ...widget.comment.comments.map(
-                        (subcomment) => Comment(
+                      // ...widget.comment.comments.map(
+                      //   (subcomment) => Comment(
+                      //     depth: widget.depth + 1,
+                      //     comment: subcomment,
+                      //     hideHandler: widget.hideHandler ?? hideAll,
+                      //   ),
+                      // ),
+                      ...List.generate(
+                        min(maxVisibleCommentCount,
+                            widget.comment.comments.length),
+                        (index) => Comment(
                           depth: widget.depth + 1,
-                          comment: subcomment,
+                          comment: widget.comment.comments[index],
                           hideHandler: widget.hideHandler ?? hideAll,
                         ),
                       ),
+                      if (widget.comment.comments.length >
+                          maxVisibleCommentCount)
+                        Container(
+                          child: Text(
+                              '${widget.comment.comments.length - maxVisibleCommentCount} more comment'),
+                        )
                     ],
                   )
               ],
