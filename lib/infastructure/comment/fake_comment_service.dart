@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:dartz/dartz.dart';
 import 'package:faker/faker.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
-import 'package:reddit_clone/domain/comment/comment_data.dart';
-import 'package:reddit_clone/domain/comment/i_comment_service.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
+import '../../domain/comment/comment_data.dart';
+import '../../domain/comment/i_comment_service.dart';
+import '../../domain/core/value_failure.dart';
 
 class Range {
   final int begin;

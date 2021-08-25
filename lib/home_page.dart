@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/core/scroll_controllers.dart';
-import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
-import 'package:reddit_clone/infastructure/feed/fake_feed_service.dart';
-import '_presentation/home/home_tab_page.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
 
-import 'application/auth/auth_bloc.dart';
 import '_presentation/core/app/extensions/string_fill_extension.dart';
 import '_presentation/core/app/search_bar_field.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
+import '_presentation/core/scroll_controllers.dart';
+import '_presentation/home/home_tab_page.dart';
 import '_presentation/home/news.dart';
+import 'application/auth/auth_bloc.dart';
+import 'application/home_tab_page/home_tab_page_bloc.dart';
+import 'infastructure/feed/fake_feed_service.dart';
 import 'routes.dart';
 
 class HomePage extends StatefulWidget {

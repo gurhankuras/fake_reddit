@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reddit_clone/_presentation/inbox/messages_tab_page.dart';
+
+import '../../routes.dart';
 import '../core/app/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/assets.dart';
 import '../core/reusable/scaled_drawer.dart';
 import '../core/size_config.dart';
-import '../../routes.dart';
+import 'messages_tab_page.dart';
 
 class InboxPage extends StatelessWidget {
   const InboxPage({Key? key}) : super(key: key);
@@ -92,7 +93,7 @@ class _ActivityTabPageState extends State<ActivityTabPage>
     with SingleTickerProviderStateMixin {
   late final ScrollController _scrollController;
   late final AnimationController _animationController;
-  late final Animation<double> _opacityAnimation;
+  // late final Animation<double> _opacityAnimation;
 
   @override
   void dispose() {

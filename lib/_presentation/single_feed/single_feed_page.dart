@@ -1,31 +1,26 @@
 import 'dart:math';
 
-import 'package:draggable_widget/draggable_widget.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/assets.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/single_feed/comment_placeholder.dart';
-import 'package:reddit_clone/application/single_feed/single_feed_bloc.dart';
-import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
-import 'package:reddit_clone/infastructure/comment/fake_comment_service.dart';
-
+import '../../application/single_feed/single_feed_bloc.dart';
 import '../../domain/comment/comment_data.dart';
+import '../../domain/feed/post_widget_factory.dart';
 import '../../domain/post_entry.dart';
+import '../../infastructure/comment/fake_comment_service.dart';
+import '../core/app/colors.dart';
+import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/feed_card.dart';
+import '../core/assets.dart';
 import '../core/constants.dart';
 import '../core/reusable/app_header.dart';
 import 'add_comment.dart';
+import 'comment_placeholder.dart';
 import 'comments.dart';
 
 class SingleFeedPage extends StatefulWidget {

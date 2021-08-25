@@ -123,12 +123,16 @@ class DarkModeSettingsGroup extends StatelessWidget {
         SettingsTile(
           text: 'Light Mode',
           leadingIcon: Icons.light_mode_outlined,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
         ),
         SettingsTile(
           text: 'Dark Theme',
           leadingIcon: Icons.dark_mode_outlined,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
         ),
       ],
     );
@@ -167,25 +171,33 @@ class AdvancedSettingsGroup extends StatelessWidget {
         SettingsTile(
           text: 'Default comment sort',
           leadingIcon: Icons.mode_comment_outlined,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
           trailingIcon: null,
         ),
         SettingsTile(
           text: 'Open links',
           leadingIcon: Icons.explore_outlined,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
           trailingIcon: null,
         ),
         SettingsTile(
           text: 'Clear local history',
           leadingIcon: Icons.delete_outlined,
-          onTap: () => print('d'),
+          onTap: () {
+            // TODO
+          },
           trailingIcon: null,
         ),
         SettingsTile(
           text: 'Retry Pending Purchases',
           leadingIcon: Icons.refresh,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
           trailingIcon: null,
         ),
       ],
@@ -247,7 +259,9 @@ class SupportSettingsGroup extends StatelessWidget {
         SettingsTile(
           text: 'Visit r/redditmobile',
           leadingIcon: FontAwesomeIcons.redditAlien,
-          onTap: () => print('tapped'),
+          onTap: () {
+            // TODO
+          },
           trailingIcon: null,
         ),
         SettingsTile(

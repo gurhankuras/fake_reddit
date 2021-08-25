@@ -19,7 +19,6 @@ class GoogleAuthService implements IGoogleAuthService {
       }
       return left(const AuthFailure.unexpected());
     } catch (e) {
-      print(e);
       return left(const AuthFailure.unexpected());
     }
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
-import 'package:reddit_clone/_presentation/core/app/post_card_types.dart';
-import 'package:reddit_clone/_presentation/core/blurred_image.dart';
-import 'package:reddit_clone/domain/user.dart';
+import '../../_presentation/core/app/feed_card.dart';
+import '../../_presentation/core/app/post_card_types.dart';
+import '../../_presentation/core/blurred_image.dart';
+import '../user.dart';
 import '../post_entry.dart';
 
 abstract class IPostWidgetFactory {

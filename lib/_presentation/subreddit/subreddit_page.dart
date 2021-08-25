@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
-import 'package:reddit_clone/_presentation/core/app/post_card_types.dart';
-import 'package:reddit_clone/_presentation/core/app/search_bar_field.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/single_feed/single_feed_page.dart';
-import 'package:reddit_clone/application/subreddit/subreddit_bloc.dart';
-import 'package:reddit_clone/domain/community.dart';
-import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
+import '../../application/subreddit/subreddit_bloc.dart';
+import '../../domain/community.dart';
+import '../../domain/feed/post_widget_factory.dart';
+import '../core/app/colors.dart';
+import '../core/app/extensions/string_fill_extension.dart';
+import '../core/app/search_bar_field.dart';
+import '../core/reusable/app_header.dart';
+import '../core/size_config.dart';
+import '../single_feed/single_feed_page.dart';
 
 class SubredditPage extends StatefulWidget {
   const SubredditPage({Key? key}) : super(key: key);

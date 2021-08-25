@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../application/auth/auth_bloc.dart';
+import '../../routes.dart';
 import '../core/app/colors.dart';
 import '../core/size_config.dart';
-import '../../routes.dart';
-import '../../application/auth/auth_bloc.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    print(MediaQuery.of(context).devicePixelRatio);
+    // print(MediaQuery.of(context).devicePixelRatio);
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeMap(

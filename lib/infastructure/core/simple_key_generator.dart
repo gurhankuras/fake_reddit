@@ -1,6 +1,6 @@
-import '../../domain/i_key_generator.dart';
-
 import 'package:injectable/injectable.dart';
+
+import '../../domain/i_key_generator.dart';
 
 /// [T] is important!! Don't omit it
 /// works with id that's composed of numeric characters only

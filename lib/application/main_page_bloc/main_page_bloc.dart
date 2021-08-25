@@ -27,7 +27,8 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
           context: context,
           button: TextButton(
             onPressed: () {
-              print('Pressed');
+              // TODO
+              // print('Pressed');
             },
             child: Text('VIEW'),
           ),

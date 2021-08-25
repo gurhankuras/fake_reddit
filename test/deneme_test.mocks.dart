@@ -23,6 +23,7 @@ import 'package:reddit_clone/infastructure/core/network_connectivity.dart'
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: unnecessary_parenthesis
 
+// ignore: camel_case_types
 class _FakeBaseOptions_0 extends _i1.Fake implements _i2.BaseOptions {}
 
 class _FakeHttpClientAdapter_1 extends _i1.Fake

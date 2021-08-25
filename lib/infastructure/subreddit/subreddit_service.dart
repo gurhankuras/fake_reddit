@@ -1,27 +1,26 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:path/path.dart' as p;
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mime_type/mime_type.dart';
+import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:mime_type/mime_type.dart';
-import 'package:http_parser/http_parser.dart';
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
 
-import 'package:reddit_clone/domain/comment/comment_data.dart';
-import 'package:reddit_clone/domain/community.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
-import 'package:reddit_clone/domain/i_token_cache_service.dart';
-import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
-import 'package:reddit_clone/infastructure/core/connectivity_dio_checker.dart';
-import 'package:reddit_clone/infastructure/core/token_dio_interceptor.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../_presentation/core/app/feed_card.dart';
+import '../../domain/community.dart';
+import '../../domain/core/value_failure.dart';
+import '../../domain/i_token_cache_service.dart';
+import '../../domain/post_entry.dart';
+import '../../domain/subreddit/i_subreddit_service.dart';
+import '../../injection.dart';
+import '../../utility/app_logger.dart';
+import '../core/connectivity_dio_checker.dart';
+import '../core/token_dio_interceptor.dart';
 
 @LazySingleton(as: ISubredditService)
 class SubredditService implements ISubredditService {

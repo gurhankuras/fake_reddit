@@ -1,10 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
 
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
 import '../../domain/post_entry.dart';
+import '../core/app/extensions/string_fill_extension.dart';
+import '../core/app/feed_card.dart';
+import '../core/reusable/app_header.dart';
 
 class Entry {
   final int upvotes;
@@ -71,7 +71,6 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _pageController.removeListener(_pageControllerListener);
     _pageController.dispose();
@@ -80,7 +79,7 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
 
   @override
   Widget build(BuildContext context) {
-    print('BUILD');
+    // print('BUILD');
 
     return Scaffold(
       backgroundColor: Colors.black,

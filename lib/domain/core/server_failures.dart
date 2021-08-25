@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
 
 part 'server_failures.freezed.dart';
 

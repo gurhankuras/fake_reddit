@@ -5,14 +5,10 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
 import 'package:reddit_clone/domain/core/server_failures.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
 import 'package:reddit_clone/domain/feed/i_feed_repository.dart';
-import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
 import 'package:reddit_clone/domain/i_network_connectivity.dart';
 import 'package:reddit_clone/infastructure/core/network_connectivity.dart';
 import 'package:reddit_clone/infastructure/feed/feed_repository.dart';
-import 'package:reddit_clone/infastructure/feed/feed_service.dart';
 import 'deneme_test.mocks.dart';
 // import 'deneme_test.mocks.dart';
 

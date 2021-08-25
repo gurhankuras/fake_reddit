@@ -1,14 +1,13 @@
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:reddit_clone/_presentation/core/authentication_button.dart';
-import 'package:reddit_clone/_presentation/core/blurred_image.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/visual_content_display/visual_content_display_page.dart';
-import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
-import 'package:reddit_clone/infastructure/image_post_entry_dto.dart';
+import '../../../domain/feed/post_widget_factory.dart';
+import '../../../domain/post_entry.dart';
+import '../../visual_content_display/visual_content_display_page.dart';
+import '../authentication_button.dart';
+import '../blurred_image.dart';
+import '../reusable/app_header.dart';
+import '../size_config.dart';
 
 class SideBySideTextAndImageContent extends StatelessWidget {
   final PostEntry entry;

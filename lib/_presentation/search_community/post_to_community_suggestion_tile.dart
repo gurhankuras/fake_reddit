@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../application/main_page_bloc/main_page_bloc.dart';
 
+import '../../application/main_page_bloc/main_page_bloc.dart';
 import '../../domain/community.dart';
 import '../../routes.dart';
 import '../core/app/colors.dart';

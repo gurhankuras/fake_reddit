@@ -28,13 +28,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         yield const AuthState.unauthenticated();
       },
       gotUserSignedIn: (e) async* {
-        print('gotUserSignIn');
+        // print('gotUserSignIn');
 
         // TODO
         final successOrFailure = await authService.checkIfUserHasTokens();
         yield* successOrFailure.fold(
           (l) async* {
-            print(l);
+            // print(l);
             yield const AuthState.unauthenticated();
           },
           (r) async* {
@@ -43,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         );
       },
       authCheckRequested: (e) async* {
-        print('authCheckRequested');
+        // print('authCheckRequested');
         final failureOrSuccess = await authService.checkIfUserHasTokens();
         yield* failureOrSuccess.fold(
           (f) async* {

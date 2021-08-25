@@ -1,18 +1,19 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+
+import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:bloc/bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
-import '../../domain/i_image_service.dart';
 
+import '../../domain/i_image_service.dart';
+import '../../domain/subreddit/i_subreddit_service.dart';
+
+part 'change_community_avatar_bloc.freezed.dart';
 part 'change_community_avatar_event.dart';
 part 'change_community_avatar_state.dart';
-part 'change_community_avatar_bloc.freezed.dart';
 
 class ChangeCommunityAvatarBloc
     extends Bloc<ChangeCommunityAvatarEvent, ChangeCommunityAvatarState> {

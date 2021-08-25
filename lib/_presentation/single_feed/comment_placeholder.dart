@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
+import '../core/app/colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CommentPlaceHolder extends StatelessWidget {

@@ -1,7 +1,7 @@
-import '../../domain/i_token_cache_service.dart';
-
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/i_token_cache_service.dart';
 
 @injectable
 class TokenDioInterceptor extends Interceptor {

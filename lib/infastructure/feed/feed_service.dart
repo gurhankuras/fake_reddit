@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/core/server_failures.dart';
 
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/feed/i_feed_repository.dart';
-import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
-import 'package:reddit_clone/domain/i_network_connectivity.dart';
+import '../../domain/core/server_failures.dart';
+import '../../domain/feed/i_feed_repository.dart';
+import '../../domain/feed/i_feed_service.dart';
+import '../../domain/post_entry.dart';
 
 class FeedService implements IFeedService {
   final IFeedRepository feedRepository;

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:reddit_clone/domain/user.dart';
+import '../domain/user.dart';
 
 part 'user_dto.g.dart';
 

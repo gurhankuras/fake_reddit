@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+
+import '../core/app/colors.dart';
+import '../core/reusable/app_header.dart';
+import '../core/size_config.dart';
 
 class AddComment extends StatefulWidget {
   const AddComment({
@@ -15,7 +16,7 @@ class AddComment extends StatefulWidget {
 class _AddCommentState extends State<AddComment> {
   @override
   Widget build(BuildContext context) {
-    bool collapsed = true;
+    // bool collapsed = true;
 
     // print(MediaQuery.of(context).viewInsets.bottom);
     return
@@ -53,7 +54,7 @@ class _ExpandedAddCommentState extends State<ExpandedAddComment>
     return GestureDetector(
       onVerticalDragStart: (details) {
         startPosition = details.globalPosition.dy;
-        print(startPosition);
+        // print(startPosition);
       },
       onVerticalDragUpdate: (details) {
         currentPosition = details.globalPosition.dy;
@@ -66,7 +67,6 @@ class _ExpandedAddCommentState extends State<ExpandedAddComment>
         if (startPosition! - currentPosition! > 20) {
           _controller.value = 1.0;
           _controller.forward();
-          print('OK');
         }
       },
       child: Container(

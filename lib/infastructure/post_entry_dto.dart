@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:reddit_clone/infastructure/user_dto.dart';
+import 'user_dto.dart';
 import '../domain/post_entry.dart';
 
 part 'post_entry_dto.g.dart';

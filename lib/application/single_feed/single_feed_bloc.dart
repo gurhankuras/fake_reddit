@@ -3,11 +3,10 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:reddit_clone/_presentation/single_feed/single_feed_page.dart';
-import 'package:reddit_clone/domain/comment/comment_data.dart';
-import 'package:reddit_clone/domain/comment/i_comment_service.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../domain/comment/comment_data.dart';
+import '../../domain/comment/i_comment_service.dart';
+import '../../domain/core/value_failure.dart';
+import '../../utility/app_logger.dart';
 
 part 'single_feed_bloc.freezed.dart';
 part 'single_feed_event.dart';

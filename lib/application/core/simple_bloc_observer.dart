@@ -12,7 +12,7 @@ class SimpleBlocObserver extends BlocObserver {
 
   @override
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    print(error);
+    log.e(error);
     super.onError(bloc, error, stackTrace);
   }
 }

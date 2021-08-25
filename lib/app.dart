@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/scroll_controllers.dart';
 
 import '_presentation/core/app/colors.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';

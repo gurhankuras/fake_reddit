@@ -15,7 +15,6 @@ class PostVoting with ChangeNotifier {
     notifyListeners();
   }
 
-  @override
   void upvote() {
     state.upvote();
     notifyListeners();

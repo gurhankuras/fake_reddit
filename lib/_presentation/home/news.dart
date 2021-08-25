@@ -2,15 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/_presentation/core/constants.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import 'package:reddit_clone/_presentation/core/scroll_controllers.dart';
-import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
-import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
-
-import '../core/app/feed_card.dart';
+import '../../application/home_tab_page/home_tab_page_bloc.dart';
+import '../../domain/feed/post_widget_factory.dart';
+import '../../domain/post_entry.dart';
+import '../core/scroll_controllers.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
-import 'package:reddit_clone/domain/core/server_failures.dart';
+import '../../_presentation/core/app/feed_card.dart';
+import '../../domain/core/server_failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/domain/post_entry.dart';
+import '../../domain/feed/i_feed_service.dart';
+import '../../domain/post_entry.dart';
 
 class FakeFeedService implements IFeedService {
   @override

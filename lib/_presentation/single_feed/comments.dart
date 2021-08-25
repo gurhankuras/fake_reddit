@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:reddit_clone/_presentation/core/constants.dart';
 
 import '../../domain/comment/comment_data.dart';
 import '../core/app/colors.dart';
+import '../core/constants.dart';
 import '../core/size_config.dart';
 
 class Comment extends StatefulWidget {
@@ -91,10 +91,8 @@ class _CommentState extends State<Comment> {
                       ),
                       if (widget.comment.comments.length >
                           maxVisibleCommentCount)
-                        Container(
-                          child: Text(
-                              '${widget.comment.comments.length - maxVisibleCommentCount} more comment'),
-                        )
+                        Text(
+                            '${widget.comment.comments.length - maxVisibleCommentCount} more comment')
                     ],
                   )
               ],

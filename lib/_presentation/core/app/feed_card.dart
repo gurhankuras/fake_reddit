@@ -1,28 +1,20 @@
 import 'dart:ui';
 
 import 'package:clipboard/clipboard.dart';
-import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import 'package:reddit_clone/_presentation/core/app/post_card_types.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/core/authentication_button.dart';
-import 'package:reddit_clone/_presentation/core/blurred_image.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/core/vote_arrows.dart';
-import 'package:reddit_clone/_presentation/post_feed/create_feed_entry_overview_page.dart';
-import 'package:reddit_clone/_presentation/search_community/post_to_community_suggestion_tile.dart';
-import 'package:reddit_clone/application/voting/post_voting.dart';
-import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
-
+import '../../../application/voting/post_voting.dart';
 import '../../../domain/post_entry.dart';
 import '../../../domain/user.dart';
 import '../../../routes.dart';
 import '../../../utility/app_logger.dart';
+import '../../search_community/post_to_community_suggestion_tile.dart';
+import '../app_snackbar.dart';
+import '../size_config.dart';
+import '../vote_arrows.dart';
 import 'app_bottom_modal_sheet.dart';
 import 'colors.dart';
 
