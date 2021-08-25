@@ -169,7 +169,7 @@ class ChangeCommunityAvatarPage extends StatelessWidget {
                             .read<ChangeCommunityAvatarBloc>()
                             .add(const ChangeCommunityAvatarEvent.saved())
                         : null,
-                    child: AppHeader(
+                    child: AppHeaderText(
                       'SAVE',
                       fontSizeFactor: 0.7,
                       color: state.hasAnyChanged

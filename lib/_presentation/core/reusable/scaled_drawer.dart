@@ -44,7 +44,7 @@ class ScaledDrawer extends StatefulWidget {
     required this.drawerWidth,
     this.scaleRange,
     this.curve = _kAnimationCurve,
-    this.dragWidth = 35,
+    this.dragWidth = 25,
     this.controller,
     this.duration,
   }) : super(key: key);

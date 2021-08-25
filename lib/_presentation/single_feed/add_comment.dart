@@ -82,7 +82,7 @@ class _ExpandedAddCommentState extends State<ExpandedAddComment>
               children: [
                 CloseButton(onPressed: () => FocusScope.of(context).unfocus()),
                 const Expanded(
-                  child: AppHeader(
+                  child: AppHeaderText(
                     'Please review community rules',
                     color: AppColors.lightGrey,
                     fontSizeFactor: 0.65,
@@ -98,7 +98,7 @@ class _ExpandedAddCommentState extends State<ExpandedAddComment>
                             10,
                           )),
                       padding: EdgeInsets.all(6),
-                      child: const AppHeader(
+                      child: const AppHeaderText(
                         'RULES',
                         fontSizeFactor: 0.7,
                         fontWeightDelta: 0,

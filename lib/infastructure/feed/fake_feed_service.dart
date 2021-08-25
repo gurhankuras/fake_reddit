@@ -4,7 +4,7 @@ import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
 import 'package:reddit_clone/domain/core/server_failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
 
 class FakeFeedService implements IFeedService {
   @override
@@ -13,7 +13,7 @@ class FakeFeedService implements IFeedService {
     int page = 1,
   }) async {
     await Future.delayed(Duration(seconds: 2));
-    const totalPostCount = 5;
+    const totalPostCount = 50;
     final postsLeftCount = totalPostCount - (page * limit);
     // give last one
     if (postsLeftCount == 0) {

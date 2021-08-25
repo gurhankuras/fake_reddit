@@ -5,7 +5,10 @@ import 'package:reddit_clone/_presentation/core/authentication_button.dart';
 import 'package:reddit_clone/_presentation/core/blurred_image.dart';
 import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
 import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/_presentation/visual_content_display/visual_content_display_page.dart';
+import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
+import 'package:reddit_clone/infastructure/image_post_entry_dto.dart';
 
 class SideBySideTextAndImageContent extends StatelessWidget {
   final PostEntry entry;
@@ -59,11 +62,11 @@ class PostTextContent extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        if (entry.bodyText != null && inPost)
+        if (entry.bodyText != '' && inPost)
           SizedBox(height: SizeConfig.screenWidthPercentage(2)),
-        if (entry.bodyText != null && inPost)
+        if (entry.bodyText != '' && inPost)
           Text(
-            entry.bodyText!,
+            entry.bodyText,
           )
       ],
     );
@@ -78,12 +81,14 @@ class LinkedPostImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => launchURL('https://unsplash.com/photos/7Z03R1wOdmI'),
+      onTap: () => launchURL(entry.url),
       child: Stack(
         children: [
-          BlurredImage(
-            blurred: entry.isNFSW,
-            url: entry.image,
+          Positioned.fill(
+            child: BlurredImage(
+              blurred: entry.isNFSW,
+              url: entry.image,
+            ),
           ),
           // Image.network(mockPostEntry.image),
           Positioned(
@@ -93,7 +98,7 @@ class LinkedPostImage extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(2),
               color: Colors.black.withOpacity(0.6),
-              child: AppHeader(
+              child: AppHeaderText(
                 'imgur.com',
                 fontSizeFactor: 0.6,
                 fontWeightDelta: -1,
@@ -118,14 +123,27 @@ class ImagePostContent extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppHeader(
+        AppHeaderText(
           entry.contentText,
           fontWeightDelta: 0,
           fontSizeFactor: 0.9,
         ),
         SizedBox(height: SizeConfig.screenWidthPercentage(2)),
-        Image.network(
-            'https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => VisualContentDisplayPage(
+                    entries: [mockMixedPosts[1], mockMixedPosts[2]],
+                    currentImageIndex: 0),
+              ),
+            );
+          },
+          child: Image.network(
+            // 'https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'),
+            entry.image,
+          ),
+        )
       ],
     );
   }

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
 import 'package:reddit_clone/domain/feed/i_feed_repository.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
 
 part 'home_tab_page_event.dart';
 part 'home_tab_page_state.dart';

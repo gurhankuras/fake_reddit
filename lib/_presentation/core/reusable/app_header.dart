@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppHeader extends StatelessWidget {
+class AppHeaderText extends StatelessWidget {
   final String text;
   final double fontSizeFactor;
   final int fontWeightDelta;
   final Color color;
-  const AppHeader(
+  const AppHeaderText(
     this.text, {
     Key? key,
     this.fontSizeFactor = 1.15,

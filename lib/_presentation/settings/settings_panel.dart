@@ -16,7 +16,7 @@ class SettingsPanelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const AppHeader(
+          title: const AppHeaderText(
             'Settings',
             fontSizeFactor: 0.85,
           ),
@@ -63,7 +63,7 @@ class SettingsHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: AppHeader(
+      child: AppHeaderText(
         text,
         fontSizeFactor: 0.55,
         color: AppColors.moreLightGrey,

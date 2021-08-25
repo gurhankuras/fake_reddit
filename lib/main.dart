@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/app/post_card_types.dart';
+import 'package:reddit_clone/infastructure/image_post_entry_dto.dart';
+import 'package:reddit_clone/infastructure/user_dto.dart';
 
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/home/home_vm.dart';
@@ -16,7 +19,6 @@ const ALWAYS_FAILING_AUTH = true;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies(Env.dev);
-  // print(ValidatorObject("gurhan", none()).min(3).max(7).get());
   print(await getIt<CacheService>().getString(TokenKeys.ACCESS_TOKEN_KEY));
   print(await getIt<CacheService>().getString(TokenKeys.REFRESH_TOKEN_KEY));
 

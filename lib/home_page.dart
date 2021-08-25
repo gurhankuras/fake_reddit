@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
 import 'package:reddit_clone/_presentation/core/scroll_controllers.dart';
 import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
 import 'package:reddit_clone/infastructure/feed/fake_feed_service.dart';
@@ -34,6 +35,11 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     showSnack(message: 'hahahahaha', context: context);
+        //   },
+        // ),
         appBar: appBar(tabBarWidget, context),
         // backgroundColor: Colors.indigo[800],
 

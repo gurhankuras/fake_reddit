@@ -33,6 +33,7 @@ import 'home_page.dart';
 import 'infastructure/core/image_service.dart';
 import 'injection.dart';
 import 'main_page.dart';
+import './domain/post_entry.dart';
 
 abstract class Routes {
   static const homePage = '/homePage';
@@ -124,7 +125,7 @@ abstract class AppRouter {
         );
       case Routes.singlePostPage:
         return MaterialPageRoute(
-          builder: (context) => const SingleFeedPage(),
+          builder: (context) => SingleFeedPage(settings.arguments as PostEntry),
           settings: settings,
         );
       case Routes.cropImagePage:

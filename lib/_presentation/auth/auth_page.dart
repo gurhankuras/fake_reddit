@@ -111,7 +111,7 @@ class AuthPageBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppHeader(headerText),
+        AppHeaderText(headerText),
         const PoliciesText(),
         if (auth != AuthPageEnum.signup)
           SizedBox(height: SizeConfig.defaultSize),

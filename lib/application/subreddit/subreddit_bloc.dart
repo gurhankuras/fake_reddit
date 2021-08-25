@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reddit_clone/domain/community.dart';
 import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
 
 import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
 

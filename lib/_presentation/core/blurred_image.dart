@@ -19,7 +19,7 @@ class BlurredImage extends StatelessWidget {
         imageFilter: blurred
             ? ImageFilter.blur(sigmaX: 5, sigmaY: 5)
             : ImageFilter.blur(),
-        child: Image.network(url),
+        child: Image.network(url, fit: BoxFit.cover),
       ),
     );
   }

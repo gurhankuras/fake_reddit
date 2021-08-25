@@ -20,9 +20,9 @@ abstract class DioModule {
   BaseOptions get baseOptions => BaseOptions(
         baseUrl: _baseUrl,
         receiveDataWhenStatusError: true,
-        receiveTimeout: 5000,
-        connectTimeout: 5000,
-        sendTimeout: 5000,
+        receiveTimeout: 500,
+        connectTimeout: 500,
+        sendTimeout: 500,
       );
 
   @injectable

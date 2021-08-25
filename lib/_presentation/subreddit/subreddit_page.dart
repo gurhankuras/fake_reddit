@@ -4,12 +4,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/app/colors.dart';
 import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
 import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
+import 'package:reddit_clone/_presentation/core/app/post_card_types.dart';
 import 'package:reddit_clone/_presentation/core/app/search_bar_field.dart';
 import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
 import 'package:reddit_clone/_presentation/core/size_config.dart';
 import 'package:reddit_clone/_presentation/single_feed/single_feed_page.dart';
 import 'package:reddit_clone/application/subreddit/subreddit_bloc.dart';
 import 'package:reddit_clone/domain/community.dart';
+import 'package:reddit_clone/domain/feed/post_widget_factory.dart';
 
 class SubredditPage extends StatefulWidget {
   const SubredditPage({Key? key}) : super(key: key);
@@ -22,6 +24,7 @@ class _SubredditPageState extends State<SubredditPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController animationController;
   late final Animation<double> opacityAnimation;
+  final IPostWidgetFactory postFactory = PostWidgetFactory();
 
   @override
   void initState() {
@@ -42,6 +45,9 @@ class _SubredditPageState extends State<SubredditPage>
     return Scaffold(
       body: NotificationListener<ScrollUpdateNotification>(
         onNotification: (notification) {
+          if (animationController.value >= 1) {
+            return true;
+          }
           animationController.value = notification.metrics.pixels / 20;
           print(animationController.value);
           return true;
@@ -104,11 +110,19 @@ class _SubredditPageState extends State<SubredditPage>
                   (a) => SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        return PostCard(
-                          inPost: false,
-                          inSubreddit: true,
-                          entry: mockPostEntry,
+                        return postFactory.create(
+                          mockMixedPosts[index % 4],
+                          options: PostWidgetFactoryOptions(
+                              inSubreddit: true, inPost: false),
                         );
+
+                        // return PostCard(
+                        //   inPost: false,
+                        //   inSubreddit: true,
+                        //   entry: mockPostEntry,
+                        //   contentWidget: PostTextContent(
+                        //       entry: mockPostEntry, inPost: false),
+                        // );
                       },
                       childCount: 20,
                     ),
@@ -138,7 +152,7 @@ class SubredditHead extends StatelessWidget {
         children: [
           Row(
             children: [
-              AppHeader(
+              AppHeaderText(
                 subredditInfo.name.toSubreddit,
                 fontSizeFactor: 0.85,
                 fontWeightDelta: 0,
@@ -186,7 +200,7 @@ class SubredditDescription extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: AppHeader(
+          child: AppHeaderText(
             description,
             fontSizeFactor: 0.68,
             fontWeightDelta: -1,
@@ -212,7 +226,7 @@ class SubredditMemberStatistics extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: AppHeader(
+          child: AppHeaderText(
             '$memberCount Sacrifices • $onlineCount With Grasses on',
             color: AppColors.moreLightGrey,
             fontSizeFactor: 0.65,

@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:dartz/dartz.dart';
 import 'package:reddit_clone/domain/community.dart';
 import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
 
 abstract class ISubredditService {
   Future<Either<ValueFailure<String>, Unit>> changeAvatar(

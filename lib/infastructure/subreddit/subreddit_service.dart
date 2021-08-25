@@ -15,7 +15,7 @@ import 'package:reddit_clone/_presentation/core/app/feed_card.dart';
 import 'package:reddit_clone/domain/comment/comment_data.dart';
 import 'package:reddit_clone/domain/community.dart';
 import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/feed_entry.dart';
+import 'package:reddit_clone/domain/post_entry.dart';
 import 'package:reddit_clone/domain/i_token_cache_service.dart';
 import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
 import 'package:reddit_clone/infastructure/core/connectivity_dio_checker.dart';
