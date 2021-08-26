@@ -1,8 +1,15 @@
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../../domain/feed/post_widget_factory.dart';
-import '../../../domain/post_entry.dart';
+import 'package:reddit_clone/_presentation/core/constants/colors.dart';
+import 'package:reddit_clone/utility/launch_url.dart';
+
+import '../../../domain/post/image_post_entry.dart';
+import '../../../domain/post/link_post_entry.dart';
+import '../../../domain/post/post_entry.dart';
+import '../../../domain/post/text_post_entry.dart';
+import '../../../utility/mock_objects.dart';
+import '../../post_widget_factory.dart';
 import '../../visual_content_display/visual_content_display_page.dart';
 import '../authentication_button.dart';
 import '../blurred_image.dart';
@@ -12,10 +19,12 @@ import '../size_config.dart';
 class SideBySideTextAndImageContent extends StatelessWidget {
   final PostEntry entry;
   final Widget image;
+  final bool inPost;
   const SideBySideTextAndImageContent({
     Key? key,
     required this.entry,
     required this.image,
+    required this.inPost,
   }) : super(key: key);
 
   @override
@@ -24,10 +33,11 @@ class SideBySideTextAndImageContent extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: DropCapText(
         entry.contentText,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w500,
-        ),
+        style: Theme.of(context).textTheme.headline6?.apply(
+              fontSizeFactor: 0.9,
+              fontWeightDelta: 0,
+              color: entry.visited && !inPost ? AppColors.grey : null,
+            ),
         dropCapPadding: EdgeInsets.all(5),
         dropCapPosition: DropCapPosition.end,
         dropCap: DropCap(
@@ -41,7 +51,7 @@ class SideBySideTextAndImageContent extends StatelessWidget {
 }
 
 class PostTextContent extends StatelessWidget {
-  final PostEntry entry;
+  final TextPostEntry entry;
   final bool inPost;
   const PostTextContent({
     Key? key,
@@ -51,16 +61,26 @@ class PostTextContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(entry.visited);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        // Text(entry.contentText,
+        //     style: Theme.of(context).textTheme.headline6?.apply(
+        //           fontSizeFactor: 0.9,
+        //           color: entry.visited && !inPost ? AppColors.grey : null,
+        //         )
+        AppHeaderText(
           entry.contentText,
-          style: const TextStyle(
-            fontSize: 17,
-            fontWeight: FontWeight.w500,
-          ),
+          fontWeightDelta: 0,
+          fontSizeFactor: 0.9,
+          color: entry.visited && !inPost ? AppColors.grey : Colors.white,
         ),
+        //  TextStyle(
+        //   fontSize: 17,
+        //   fontWeight: FontWeight.w500,
+        // ),
+        // ),
         if (entry.bodyText != '' && inPost)
           SizedBox(height: SizeConfig.screenWidthPercentage(2)),
         if (entry.bodyText != '' && inPost)
@@ -74,8 +94,7 @@ class PostTextContent extends StatelessWidget {
 
 class LinkedPostImage extends StatelessWidget {
   const LinkedPostImage({Key? key, required this.entry}) : super(key: key);
-
-  final PostEntry entry;
+  final LinkPostEntry entry;
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +105,7 @@ class LinkedPostImage extends StatelessWidget {
           Positioned.fill(
             child: BlurredImage(
               blurred: entry.isNFSW,
-              url: entry.image,
+              url: entry.linkImage,
             ),
           ),
           // Image.network(mockPostEntry.image),
@@ -111,10 +130,12 @@ class LinkedPostImage extends StatelessWidget {
 }
 
 class ImagePostContent extends StatelessWidget {
-  final PostEntry entry;
+  final ImagePostEntry entry;
+  final bool inPost;
   const ImagePostContent({
     Key? key,
     required this.entry,
+    required this.inPost,
   }) : super(key: key);
 
   @override
@@ -126,6 +147,7 @@ class ImagePostContent extends StatelessWidget {
           entry.contentText,
           fontWeightDelta: 0,
           fontSizeFactor: 0.9,
+          color: entry.visited && !inPost ? AppColors.grey : Colors.white,
         ),
         SizedBox(height: SizeConfig.screenWidthPercentage(2)),
         GestureDetector(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/bloc/create_feed_bloc.dart';
 
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import 'create_feed_entry_page.dart';
 import 'feed_type_button.dart';
 

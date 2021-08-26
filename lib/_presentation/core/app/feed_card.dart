@@ -1,24 +1,21 @@
 import 'dart:ui';
 
-import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/infastructure/core/cache_service.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../../application/voting/post_voting.dart';
-import '../../../domain/post_entry.dart';
-import '../../../domain/user.dart';
+import '../../../domain/post/post_entry.dart';
 import '../../../routes.dart';
-import '../../../utility/app_logger.dart';
 import '../../search_community/post_to_community_suggestion_tile.dart';
-import '../app_snackbar.dart';
+import '../constants/colors.dart';
+import '../modal_bottom_sheet/post_more_actions_modal_sheet.dart';
 import '../size_config.dart';
 import '../vote_arrows.dart';
-import 'app_bottom_modal_sheet.dart';
-import 'colors.dart';
 
-class PostCard extends StatelessWidget {
+class PostCard extends StatefulWidget {
   final bool inSubreddit;
   final bool inPost;
   final PostEntry entry;
@@ -31,23 +28,35 @@ class PostCard extends StatelessWidget {
     required this.contentWidget,
   }) : super(key: key);
 
-  void _navigateToSinglePostPage(BuildContext context) =>
-      Navigator.of(context).pushNamed(Routes.singlePostPage, arguments: entry);
+  @override
+  _PostCardState createState() => _PostCardState();
+}
+
+class _PostCardState extends State<PostCard> {
+  void _navigateToSinglePostPage(BuildContext context) {
+    // Future.delayed(Duration(seconds: 1), () {
+    //   setState(() {});
+    // });
+    Navigator.of(context)
+        .pushNamed(Routes.singlePostPage, arguments: widget.entry);
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: !inPost ? () => _navigateToSinglePostPage(context) : null,
+      onTap: !widget.inPost ? () => _navigateToSinglePostPage(context) : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Container(
           decoration: const BoxDecoration(color: AppColors.lightBlack),
           width: double.infinity,
           child: PostCardBody(
-            isNSFW: entry.isNFSW,
-            inSubreddit: inSubreddit,
-            inPost: inPost,
-            content: contentWidget,
+            // isNSFW: entry.isNFSW,
+
+            post: widget.entry,
+            inSubreddit: widget.inSubreddit,
+            inPost: widget.inPost,
+            content: widget.contentWidget,
           ),
         ),
       ),
@@ -60,14 +69,14 @@ class PostCardBody extends StatelessWidget {
     Key? key,
     required this.inSubreddit,
     required this.content,
-    required this.isNSFW,
     required this.inPost,
+    required this.post,
   }) : super(key: key);
 
-  final bool isNSFW;
   final bool inSubreddit;
   final Widget content;
   final bool inPost;
+  final PostEntry post;
 
   @override
   Widget build(BuildContext context) {
@@ -75,16 +84,19 @@ class PostCardBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         PostTopInfoTile(
-          entry: mockPostEntry,
+          entry: post,
           inSubreddit: inSubreddit,
         ),
-        if (isNSFW)
+        if (post.isNFSW)
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: NSFWWarning(),
+            child: NSFWWarning(
+              darkened: post.visited,
+              inPost: inPost,
+            ),
           ),
         content,
-        if (!inPost) PostActionBar(entry: mockPostEntry)
+        if (!inPost) PostActionBar(entry: post)
       ],
     );
   }
@@ -182,70 +194,6 @@ class PostTopInfoSubtitle extends StatelessWidget {
         Text(' • ', style: textStyle),
         Text('i.redd.it', style: textStyle),
       ],
-    );
-  }
-}
-
-Future<void> showPostMoreSheet(BuildContext pageContext, PostEntry post) async {
-  final action = await showModalBottomSheet<String?>(
-    context: pageContext,
-    enableDrag: false,
-    builder: (BuildContext context) {
-      return AppModalBottomSheet(
-        tiles: [
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.share,
-            text: 'Share',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.bookmark_outline,
-            text: 'Save',
-          ),
-          ModelSheetTile(
-            onAction: () {
-              FlutterClipboard.copy(post.contentText).then((_) async {
-                Navigator.pop(context, 'copy');
-              });
-            },
-            icon: Icons.copy_all_outlined,
-            text: 'Copy text',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.flag_outlined,
-            text: 'Report',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.block_outlined,
-            text: 'Block User',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.remove_red_eye_outlined,
-            text: 'Hide',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.call_missed_outgoing,
-            text: 'Crosspost to a community',
-          ),
-          ModelSheetTile(
-            onAction: () => log.i('onTap!'),
-            icon: Icons.chat_outlined,
-            text: 'Share to chat',
-          ),
-        ],
-      );
-    },
-  );
-  if (action == 'copy') {
-    showSnack(
-      message: 'Your copy is ready for pasta!',
-      context: pageContext,
-      indicatorColor: Colors.green,
     );
   }
 }
@@ -352,21 +300,3 @@ class PostAction extends StatelessWidget {
     );
   }
 }
-
-PostEntry get mockPostEntry => PostEntry(
-      type: 1,
-      subreddit: 'berserklejerk',
-      // bodyText: 'nasilsin hahahhaha',
-      user: User(
-        nickname: 'TheCompleteMental',
-        image:
-            'https://cdnb.artstation.com/p/assets/images/images/024/649/867/large/hugo-tahar-berserk-guts-2.jpg?1583101136',
-      ),
-      isNFSW: true,
-      contentText: lorem(paragraphs: 1, words: 40),
-      // image:
-      //     'https://cdnb.artstation.com/p/assets/images/images/024/649/867/large/hugo-tahar-berserk-guts-2.jpg?1583101136',
-      upvotes: 244,
-      date: '4h',
-      commentCount: 432, bodyText: '', image: '', url: '',
-    );

@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import '../../domain/core/server_failures.dart';
 import '../../domain/feed/i_feed_repository.dart';
 import '../../domain/i_network_connectivity.dart';
-import '../../domain/post_entry.dart';
+import '../../domain/post/post_entry.dart';
 
 const kImpossibleHttpCode = 600;
 

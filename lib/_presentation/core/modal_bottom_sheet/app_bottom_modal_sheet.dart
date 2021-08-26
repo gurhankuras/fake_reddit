@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../constants/colors.dart';
 
 class AppModalBottomSheet extends StatelessWidget {
   final List<Widget> tiles;
@@ -79,32 +79,3 @@ class ModelSheetTile extends StatelessWidget {
     );
   }
 }
-
-// GestureDetector(
-          //   onTap: () {
-          //     log.i('onTap!');
-          //   },
-          //   onLongPressEnd: (_) {
-          //     log.i('LongPressEnd!');
-          //   },
-          //   child: SizedBox(
-          //     // width: double.infinity,
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(16.0),
-          //       child: Row(
-          //         // mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           Padding(
-          //             padding: const EdgeInsets.only(right: 16.0),
-          //             child: Icon(Icons.share),
-          //           ),
-          //           Text(
-          //             'Share',
-          //             style: theme.textTheme.bodyText1
-          //                 ?.copyWith(color: AppColors.iron),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),

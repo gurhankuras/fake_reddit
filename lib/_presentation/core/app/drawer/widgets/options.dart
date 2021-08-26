@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../colors.dart';
+import '../../../constants/colors.dart';
 
 class Options extends StatelessWidget {
   const Options({Key? key}) : super(key: key);

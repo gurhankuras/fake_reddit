@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../routes.dart';
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
-import '../core/assets.dart';
+import '../core/constants/assets.dart';
 import '../core/reusable/scaled_drawer.dart';
 import '../core/size_config.dart';
 import 'messages_tab_page.dart';

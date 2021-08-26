@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
+import '../constants/colors.dart';
 
 class SearchBarField extends StatelessWidget {
   final String hintText;

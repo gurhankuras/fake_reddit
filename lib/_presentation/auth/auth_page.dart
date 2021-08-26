@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../core/app/app_button.dart';
-import '../core/app/colors.dart';
-import '../core/assets.dart';
+import '../core/button/app_button.dart';
+import '../core/constants/colors.dart';
+import '../core/constants/assets.dart';
 import '../core/authentication_button.dart';
 import '../core/reusable/app_header.dart';
 import '../core/reusable/text_divider_line.dart';

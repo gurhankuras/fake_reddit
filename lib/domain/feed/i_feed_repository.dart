@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../core/server_failures.dart';
-import '../post_entry.dart';
+import '../post/post_entry.dart';
 
 abstract class IFeedRepository {
   Future<Either<ServerFailure, List<PostEntry>>> getNewsFeed({

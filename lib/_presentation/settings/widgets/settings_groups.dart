@@ -1,11 +1,11 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit_clone/utility/launch_url.dart';
 
+import '../../../application/settings/app_settings.dart';
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/authentication_button.dart';
-import '../constants.dart';
 import 'settings_group.dart';
 import 'settings_tile.dart';
 
@@ -90,10 +90,26 @@ class ViewOptionsSettingsGroup extends StatelessWidget {
           leadingIcon: Icons.text_fields,
           onTap: () => print('tapped'),
         ),
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.reduceAwardAnimations,
-          text: 'Reduce award animations',
-          leadingIcon: Icons.remove_red_eye_outlined,
+        Consumer<AppSettings>(
+          builder: (context, settings, child) => SettingsSwitchTile(
+            // cacheKey: SettingsKeys.reduceAwardAnimations,
+
+            text: 'Reduce award animations',
+            leadingIcon: Icons.remove_red_eye_outlined,
+            onChanged: (bool value) {
+              settings.toggleReduceAwardAnimations();
+            },
+            value: settings.reduceAwardAnimations,
+            // propertySelector: (settings) => settings.swipeToCollapseComments,
+            // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
+          ),
+          // child: SettingsSwitchTile(
+          //   // cacheKey: SettingsKeys.reduceAwardAnimations,
+          //   text: 'Reduce award animations',
+          //   leadingIcon: Icons.remove_red_eye_outlined, onChanged: (bool value) {  }, value: null,
+          //   // propertySelector: (settings) => settings.swipeToCollapseComments,
+          //   // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
+          // ),
         ),
       ],
     );
@@ -109,17 +125,17 @@ class DarkModeSettingsGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsGroup(
       children: [
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.automaticMode,
-          text:
-              'Automatic (follow ${Platform.isIOS ? 'iOS' : 'Android'} setting)',
-          leadingIcon: Icons.settings_outlined,
-        ),
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.darkMode,
-          text: 'Dark Mode',
-          leadingIcon: Icons.dark_mode_outlined,
-        ),
+        // SettingsSwitchTile(
+        //   cacheKey: SettingsKeys.automaticMode,
+        //   text:
+        //       'Automatic (follow ${Platform.isIOS ? 'iOS' : 'Android'} setting)',
+        //   leadingIcon: Icons.settings_outlined,
+        // ),
+        // SettingsSwitchTile(
+        //   cacheKey: SettingsKeys.darkMode,
+        //   text: 'Dark Mode',
+        //   leadingIcon: Icons.dark_mode_outlined,
+        // ),
         SettingsTile(
           text: 'Light Mode',
           leadingIcon: Icons.light_mode_outlined,
@@ -148,26 +164,29 @@ class AdvancedSettingsGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return SettingsGroup(
       children: [
-        SettingsSwitchTile(
-          text: 'Swipe to collapse comments',
-          leadingIcon: Icons.keyboard_arrow_up,
-          cacheKey: SettingsKeys.collapseComments,
-        ),
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.savedImageAttribution,
-          text: 'Saved image attribution',
-          leadingIcon: Icons.image_outlined,
-        ),
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.quietAudioMode,
-          text: 'Quiet audio mode',
-          leadingIcon: Icons.volume_off_outlined,
-        ),
-        SettingsSwitchTile(
-          cacheKey: SettingsKeys.recentCommunities,
-          text: 'Recent communities',
-          leadingIcon: Icons.access_time_outlined,
-        ),
+        // SettingsSwitchTile(
+        //   text: 'Swipe to collapse comments',
+        //   leadingIcon: Icons.keyboard_arrow_up,
+        //   propertySelector: (settings) => settings.swipeToCollapseComments,
+        //   setterFunction: (settings) => settings.toggleReduceAwardAnimations(),
+        //   // cacheKey: SettingsKeys.collapseComments,
+
+        // ),
+        // SettingsSwitchTile(
+        //   cacheKey: SettingsKeys.savedImageAttribution,
+        //   text: 'Saved image attribution',
+        //   leadingIcon: Icons.image_outlined,
+        // ),
+        // SettingsSwitchTile(
+        //   cacheKey: SettingsKeys.quietAudioMode,
+        //   text: 'Quiet audio mode',
+        //   leadingIcon: Icons.volume_off_outlined,
+        // ),
+        // SettingsSwitchTile(
+        //   cacheKey: SettingsKeys.recentCommunities,
+        //   text: 'Recent communities',
+        //   leadingIcon: Icons.access_time_outlined,
+        // ),
         SettingsTile(
           text: 'Default comment sort',
           leadingIcon: Icons.mode_comment_outlined,

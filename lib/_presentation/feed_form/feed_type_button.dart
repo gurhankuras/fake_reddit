@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/filled_circle_icon.dart';
 import 'create_feed_entry_page.dart';
 

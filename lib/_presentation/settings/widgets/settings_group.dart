@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../core/app/colors.dart';
+import '../../core/constants/colors.dart';
 
 class SettingsGroup extends StatelessWidget {
   final List<Widget> children;

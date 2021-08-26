@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../application/bloc/create_feed_bloc.dart';
 import '../../domain/image_data.dart';
 import '../../routes.dart';
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/app_snackbar.dart';
 import 'text_feed_edit.dart';
 

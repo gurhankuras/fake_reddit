@@ -5,8 +5,8 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../application/home_tab_page/home_tab_page_bloc.dart';
-import '../../domain/feed/post_widget_factory.dart';
-import '../../domain/post_entry.dart';
+import '../post_widget_factory.dart';
+import '../../domain/post/post_entry.dart';
 import '../core/scroll_controllers.dart';
 
 class News extends StatefulWidget {
@@ -66,8 +66,6 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
           if (state.fetchingLoading) {
             return Center(child: CircularProgressIndicator());
           }
-          // return Scrollbar(
-          // child:
           return SmartRefresher(
             enablePullDown: true,
             enablePullUp: true,
@@ -79,9 +77,6 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
               completeIcon: null,
               completeDuration: Duration.zero,
               releaseIcon: null,
-
-              // refreshingIcon: ,
-              // idleIcon: null,
             ),
             footer: refresherFooter(),
             controller: _refreshController,
@@ -106,28 +101,6 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
                   },
                 ),
               ],
-              // slivers: [
-              //   // SliverToBoxAdapter(
-              //   //   child: GestureDetector(
-              //   //     onTap: scrollToNextPost,
-              //   //     child: Container(
-              //   //       width: 50,
-              //   //       height: 50,
-              //   //       color: Colors.indigo,
-              //   //     ),
-              //   //   ),
-              //   // ),
-              //   BlocBuilder<HomeTabPageBloc, HomeTabPageState>(
-              //     // buildWhen: (previous, current) =>
-              //     //     previous.posts != current.posts,
-              //     builder: (context, state) {
-              //       return _NewsPosts(
-              //         posts: state.posts,
-              //         itemScrollController: itemScrollController,
-              //       );
-              //     },
-              //   )
-              // ],
             ),
           );
           // );
@@ -191,9 +164,6 @@ class _NewsPosts extends StatelessWidget {
 
   final ItemScrollController itemScrollController;
   final RefreshController refreshController;
-  // final ItemPositionsListener itemPositionsListener =
-  //     ItemPositionsListener.create();
-  // final int currentIndex;
 
   const _NewsPosts({
     Key? key,
@@ -205,25 +175,16 @@ class _NewsPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final IPostWidgetFactory postFactory = PostWidgetFactory();
-    print(posts.length);
-    return
-        // ScrollablePositionedList.builder(
-        //   // physics: UIConstants.physics,
-        //   itemCount: posts.length,
-        //   itemBuilder: (context, index) => postFactory.create(
-        //     posts[index],
-        //     options: PostWidgetFactoryOptions(inSubreddit: false, inPost: false),
-        //   ),
-        //   itemScrollController: itemScrollController,
-        // );
-
-        SliverList(
+    // print(posts.length);
+    return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
           return postFactory.create(
             posts[index],
-            options:
-                PostWidgetFactoryOptions(inSubreddit: false, inPost: false),
+            options: PostWidgetFactoryOptions(
+              inSubreddit: false,
+              inPost: false,
+            ),
           );
         },
         childCount: posts.length,

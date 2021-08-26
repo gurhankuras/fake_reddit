@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/domain/feed/i_feed_service.dart';
+import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '_presentation/core/app/extensions/string_fill_extension.dart';
 import '_presentation/core/app/search_bar_field.dart';
@@ -10,6 +13,7 @@ import '_presentation/home/home_tab_page.dart';
 import '_presentation/home/news.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/home_tab_page/home_tab_page_bloc.dart';
+import 'infastructure/core/cache_service.dart';
 import 'infastructure/feed/fake_feed_service.dart';
 import 'routes.dart';
 
@@ -46,9 +50,9 @@ class _HomePageState extends State<HomePage> {
             MultiProvider(
               providers: [
                 BlocProvider(
-                  create: (context) =>
-                      HomeTabPageBloc(feedService: FakeFeedService())
-                        ..add(HomeTabPageEvent.fetchingStarted()),
+                  create: (context) => HomeTabPageBloc(
+                    feedService: getIt<IFeedService>(),
+                  )..add(HomeTabPageEvent.fetchingStarted()),
                 ),
                 Provider.value(value: scrollControllers)
               ],

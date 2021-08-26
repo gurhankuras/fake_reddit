@@ -5,9 +5,9 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/community.dart';
+import '../../domain/subreddit/subreddit_info.dart';
 import '../../domain/core/value_failure.dart';
-import '../../domain/post_entry.dart';
+import '../../domain/post/post_entry.dart';
 import '../../domain/subreddit/i_subreddit_service.dart';
 
 part 'subreddit_bloc.freezed.dart';

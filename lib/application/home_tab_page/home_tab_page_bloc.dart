@@ -4,13 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/feed/i_feed_service.dart';
-import '../../domain/post_entry.dart';
+import '../../domain/post/post_entry.dart';
 
 part 'home_tab_page_bloc.freezed.dart';
 part 'home_tab_page_event.dart';
 part 'home_tab_page_state.dart';
 
 class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
+  static int postLimit = 10;
   IFeedService feedService;
   HomeTabPageBloc({
     required this.feedService,
@@ -24,7 +25,8 @@ class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
       refreshRequested: (e) async* {
         yield state.copyWith(refreshLoading: true);
         // await Future.delayed(Duration(seconds: 2));
-        final postsOrFailure = await feedService.getNewsFeed(page: 1, limit: 1);
+        final postsOrFailure =
+            await feedService.getNewsFeed(page: 1, limit: postLimit);
         yield* postsOrFailure.fold(
           (l) async* {
             yield state.copyWith(refreshLoading: false);
@@ -42,7 +44,7 @@ class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
       loadMoreRequested: (e) async* {
         yield state.copyWith(morePostLoading: true);
         final postsOrFailure =
-            await feedService.getNewsFeed(page: state.page, limit: 1);
+            await feedService.getNewsFeed(page: state.page, limit: postLimit);
 
         yield* postsOrFailure.fold(
           (l) async* {
@@ -64,7 +66,7 @@ class HomeTabPageBloc extends Bloc<HomeTabPageEvent, HomeTabPageState> {
       fetchingStarted: (e) async* {
         yield state.copyWith(fetchingLoading: true);
         final postsOrFailure =
-            await feedService.getNewsFeed(page: state.page, limit: 1);
+            await feedService.getNewsFeed(page: state.page, limit: postLimit);
 
         yield* postsOrFailure.fold(
           (l) async* {

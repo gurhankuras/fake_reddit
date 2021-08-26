@@ -7,7 +7,9 @@ import '_presentation/home/home_vm.dart';
 import 'app.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/core/simple_bloc_observer.dart';
+import 'application/settings/app_settings.dart';
 import 'domain/env.dart';
+import 'infastructure/core/cache_service.dart';
 import 'injection.dart';
 
 const ALWAYS_FAILING_AUTH = true;
@@ -32,6 +34,11 @@ void main() async {
             create: (context) =>
                 getIt<AuthBloc>()..add(const AuthEvent.gotUserSignedIn())),
         ChangeNotifierProvider(create: (context) => HomeVM()),
+        ChangeNotifierProvider(
+            lazy: false,
+            create: (context) => AppSettings(
+                  cacheService: getIt<CacheService>(),
+                )),
       ],
       child: MyApp(),
     ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
 

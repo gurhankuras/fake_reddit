@@ -5,10 +5,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../feed_form/create_feed_entry_page.dart';
 import 'content_preview.dart';
 import '../../application/bloc/create_feed_bloc.dart';
-import '../../domain/community.dart';
+import '../../domain/subreddit/subreddit_info.dart';
 import '../../routes.dart';
 
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/base_app_action_chip.dart';
 import '../core/size_config.dart';
 

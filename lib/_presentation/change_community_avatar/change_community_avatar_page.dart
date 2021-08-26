@@ -9,8 +9,8 @@ import '../core/app_snackbar.dart';
 import '../core/reusable/app_header.dart';
 import '../../application/change_community_avatar/change_community_avatar_bloc.dart';
 
-import '../core/app/app_bottom_modal_sheet.dart';
-import '../core/app/colors.dart';
+import '../core/modal_bottom_sheet/app_bottom_modal_sheet.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/snap_list_view.dart';
 import '../core/size_config.dart';
 import 'crop_image_page.dart';

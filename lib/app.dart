@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import '_presentation/core/app/colors.dart';
+import '_presentation/core/constants/colors.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/splash/splash_page.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';

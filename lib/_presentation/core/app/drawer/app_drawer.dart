@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../settings/settings_panel.dart';
 import '../../reusable/scaled_drawer.dart';
-import '../colors.dart';
+import '../../constants/colors.dart';
 import 'widgets/options.dart';
 import 'widgets/user_info.dart';
 

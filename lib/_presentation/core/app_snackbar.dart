@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'app/colors.dart';
+import 'constants/colors.dart';
 
 void showSnack({
   required String message,

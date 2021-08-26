@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/bloc/create_feed_bloc.dart';
-import '../../domain/community.dart';
+import '../../domain/subreddit/subreddit_info.dart';
 import '../../routes.dart';
-import '../core/app/app_bottom_modal_sheet.dart';
-import '../core/app/colors.dart';
+import '../core/modal_bottom_sheet/app_bottom_modal_sheet.dart';
+import '../core/constants/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/size_config.dart';
 import '../post_feed/create_feed_entry_overview_page.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app/colors.dart';
+import '../constants/colors.dart';
 
 class AppTextInput extends StatelessWidget {
   final String hintText;

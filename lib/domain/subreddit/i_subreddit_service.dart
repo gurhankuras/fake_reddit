@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 
-import '../community.dart';
+import 'subreddit_info.dart';
 import '../core/value_failure.dart';
-import '../post_entry.dart';
+import '../post/post_entry.dart';
 
 abstract class ISubredditService {
   Future<Either<ValueFailure<String>, Unit>> changeAvatar(

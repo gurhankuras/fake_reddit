@@ -1,27 +1,21 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../domain/post_entry.dart';
+import '../../domain/post/image_post_entry.dart';
+import '../../domain/post/post_entry.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/feed_card.dart';
 import '../core/reusable/app_header.dart';
 
-class Entry {
-  final int upvotes;
-  final int commentCount;
-  final String url;
-  final String title;
-  final String subredditName;
-  final bool hasSaved;
-  Entry({
-    required this.upvotes,
-    required this.commentCount,
-    required this.url,
-    required this.title,
-    required this.subredditName,
-    this.hasSaved = false,
-  });
-}
+final _actionBarGradient = LinearGradient(
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+  stops: [0.25, 1],
+  colors: [
+    Colors.black.withOpacity(0.8),
+    Colors.black.withOpacity(0.05),
+  ],
+);
 
 class VisualContentDisplayPage extends StatefulWidget {
   final List<PostEntry> entries;
@@ -37,6 +31,7 @@ class VisualContentDisplayPage extends StatefulWidget {
       _VisualContentDisplayPageState();
 }
 
+// TODO REFACTOR
 class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
     with SingleTickerProviderStateMixin {
   bool showOverlay = true;
@@ -46,10 +41,6 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
   late Animation<double> _opacityAnimation;
 
   void _pageControllerListener() {
-    // print((_pageController.page! - currentIndex).abs());
-    // print(_opacityAnimation.value);
-    // _animationController.value = _pageController.page! - currentIndex;
-    // _animationController.value = _pageController.page!;
     _animationController.value = (_pageController.page! - currentIndex).abs();
   }
 
@@ -61,12 +52,17 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
       initialPage: currentIndex,
     );
     _pageController.addListener(_pageControllerListener);
+    setUpAnimation();
+  }
+
+  void setUpAnimation() {
     _animationController = AnimationController(vsync: this);
     final curvedAnimation = CurvedAnimation(
-        parent: _animationController, curve: Interval(0.0, 0.5));
+      parent: _animationController,
+      curve: Interval(0.0, 0.5),
+    );
     _opacityAnimation =
         Tween<double>(begin: 1.0, end: 0).animate(curvedAnimation);
-    // currentIndex = 0;
   }
 
   @override
@@ -79,8 +75,6 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
 
   @override
   Widget build(BuildContext context) {
-    // print('BUILD');
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -92,7 +86,7 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
             children: [
               ExtendedImageGesturePageView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  var item = widget.entries[index].image;
+                  var item = (widget.entries[index] as ImagePostEntry).image;
                   Widget image = ExtendedImage.network(
                     item,
                     fit: BoxFit.contain,
@@ -164,16 +158,7 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
                     child: PostActionBar(
                       entry: widget.entries[currentIndex],
                       contentColor: Colors.white,
-                      gradient: LinearGradient(
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                        stops: [0.25, 1],
-                        colors: [
-                          Colors.black.withOpacity(0.8),
-                          Colors.black.withOpacity(0.05),
-                          // Colors.transparent
-                        ],
-                      ),
+                      gradient: _actionBarGradient,
                     ),
                   ),
                 ),

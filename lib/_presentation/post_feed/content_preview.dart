@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../../application/bloc/create_feed_bloc.dart';
 
 class ContentPreview extends StatelessWidget {

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/_presentation/core/app/colors.dart';
+import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 
 class AdditionalUserInfo extends StatefulWidget {
   const AdditionalUserInfo({

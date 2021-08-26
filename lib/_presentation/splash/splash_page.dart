@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../routes.dart';
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/size_config.dart';
 
 class SplashPage extends StatelessWidget {

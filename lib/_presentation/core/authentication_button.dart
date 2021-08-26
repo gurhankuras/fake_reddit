@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:reddit_clone/utility/launch_url.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'app/colors.dart';
-import 'assets.dart';
+import 'constants/colors.dart';
+import 'constants/assets.dart';
 import 'size_config.dart';
 
 enum AuthMethods {
@@ -66,48 +67,16 @@ class AuthButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          // primary: Colors.white,
-          // padding: EdgeInsets.zero,
           side: const BorderSide(
             style: BorderStyle.solid,
             color: Colors.blue,
             // width: 10,
           ),
-
           shape: const StadiumBorder(),
         ),
       ),
     );
   }
-}
-
-void showSignUpSheet(BuildContext context) {
-  showModalBottomSheet<void>(
-    // backgroundColor: Colors.white,
-    context: context,
-    enableDrag: false,
-    builder: (BuildContext context) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(height: SizeConfig.defaultSize * 2),
-          const _Header(),
-          SizedBox(height: SizeConfig.defaultSize),
-          PoliciesText(
-            width: SizeConfig.screenWidthPercentage(65),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: SizeConfig.defaultSize),
-          AuthButton(auth: AuthMethods.google, onPressed: () {}),
-          AuthButton(auth: AuthMethods.apple, onPressed: () {}),
-          AuthButton(auth: AuthMethods.email, onPressed: () {}),
-          const AgreementCheck(),
-          const AlreadyRedditor(),
-          SizedBox(height: SizeConfig.defaultSize * 1.5),
-        ],
-      );
-    },
-  );
 }
 
 class AlreadyRedditor extends StatelessWidget {
@@ -192,20 +161,6 @@ class _AgreementCheckState extends State<AgreementCheck> {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      'Create an account to continue',
-      style: Theme.of(context).textTheme.headline6?.apply(fontSizeFactor: 0.9),
-    );
-  }
-}
-
 class PoliciesText extends StatelessWidget {
   final double? width;
   final TextAlign textAlign;
@@ -255,8 +210,5 @@ class PoliciesText extends StatelessWidget {
   }
 }
 
-final userAgreementUrl = 'https://www.redditinc.com/policies/user-agreement';
-final privacyPolicyUrl = 'https://www.redditinc.com/policies/privacy-policy';
-
-void launchURL(String url) async =>
-    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+const userAgreementUrl = 'https://www.redditinc.com/policies/user-agreement';
+const privacyPolicyUrl = 'https://www.redditinc.com/policies/privacy-policy';

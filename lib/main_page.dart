@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 
-import '_presentation/core/app/colors.dart';
+import '_presentation/core/constants/colors.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
 import '_presentation/core/authentication_button.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';

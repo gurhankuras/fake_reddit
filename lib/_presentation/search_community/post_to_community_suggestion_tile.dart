@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../application/main_page_bloc/main_page_bloc.dart';
-import '../../domain/community.dart';
+import '../../domain/subreddit/subreddit_info.dart';
 import '../../routes.dart';
-import '../core/app/colors.dart';
 import '../core/app/extensions/int_extension.dart';
 import '../core/app/extensions/string_fill_extension.dart';
+import '../core/constants/colors.dart';
 
 class PostToCommunitySuggestionTile extends StatelessWidget {
   final SubredditInfo community;
@@ -35,7 +35,7 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
       subtitle: Row(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (community.isNSFW) NSFWWarning(),
+          if (community.isNSFW) NSFWWarning(inPost: false),
           if (community.isNSFW) Text(' • ', style: subtitleTextStyle),
           Text('${community.onlineCount.to()} online',
               style: subtitleTextStyle),
@@ -48,8 +48,12 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
 }
 
 class NSFWWarning extends StatelessWidget {
+  final bool darkened;
+  final bool inPost;
   const NSFWWarning({
     Key? key,
+    this.darkened = false,
+    required this.inPost,
   }) : super(key: key);
 
   @override
@@ -57,14 +61,16 @@ class NSFWWarning extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.caption?.copyWith(
           fontSize: 13,
           fontWeight: FontWeight.w700,
-          color: Colors.pinkAccent[400]!,
+          color:
+              darkened && !inPost ? AppColors.camelot : Colors.pinkAccent[400]!,
         );
     return Row(
       children: [
         Icon(
           Icons.report_problem,
           size: 13,
-          color: Colors.pinkAccent[400]!,
+          color:
+              darkened && !inPost ? AppColors.camelot : Colors.pinkAccent[400]!,
         ),
         const SizedBox(width: 4),
         Text('NSFW', style: textStyle),

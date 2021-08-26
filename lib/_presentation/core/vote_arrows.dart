@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../application/voting/post_voting.dart';
-import '../../domain/post_entry.dart';
-import 'app/colors.dart';
+import '../../domain/post/post_entry.dart';
+import 'constants/colors.dart';
 import 'app/feed_card.dart';
 
 typedef AnimationStatusListener = void Function(AnimationStatus status);
@@ -47,9 +47,13 @@ class _UpvoteButtonState extends State<UpvoteButton>
   @override
   void dispose() {
     super.dispose();
-    _upvoteController.removeStatusListener(_upvoteAnimationStatusListener!);
-    _downArrowController
-        .removeStatusListener(_downvoteAnimationStatusListener!);
+    if (_upvoteAnimationStatusListener != null) {
+      _upvoteController.removeStatusListener(_upvoteAnimationStatusListener!);
+    }
+    if (_downvoteAnimationStatusListener != null) {
+      _downArrowController
+          .removeStatusListener(_downvoteAnimationStatusListener!);
+    }
     _upvoteController.dispose();
     _downArrowController.dispose();
   }

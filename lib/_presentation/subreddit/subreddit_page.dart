@@ -1,15 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:reddit_clone/_presentation/core/button/circle_bordered_icon_button.dart';
+import 'package:reddit_clone/domain/post/post_entry.dart';
+
 import '../../application/subreddit/subreddit_bloc.dart';
-import '../../domain/community.dart';
-import '../../domain/feed/post_widget_factory.dart';
-import '../core/app/colors.dart';
+import '../../domain/subreddit/subreddit_info.dart';
+import '../../utility/mock_objects.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/search_bar_field.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
+import '../post_widget_factory.dart';
 import '../single_feed/single_feed_page.dart';
+
+const _kAnimationEndScrollHeight = 20;
 
 class SubredditPage extends StatefulWidget {
   const SubredditPage({Key? key}) : super(key: key);
@@ -27,9 +33,19 @@ class _SubredditPageState extends State<SubredditPage>
   @override
   void initState() {
     super.initState();
+    setUpAnimations();
+  }
+
+  void setUpAnimations() {
     animationController = AnimationController(vsync: this);
     opacityAnimation =
-        Tween<double>(begin: 1.0, end: 0).animate(animationController);
+        Tween<double>(begin: 1.0, end: 0.0).animate(animationController);
+  }
+
+  bool _onScrolled(ScrollUpdateNotification notification) {
+    animationController.value =
+        notification.metrics.pixels / _kAnimationEndScrollHeight;
+    return true;
   }
 
   @override
@@ -42,95 +58,105 @@ class _SubredditPageState extends State<SubredditPage>
   Widget build(BuildContext context) {
     return Scaffold(
       body: NotificationListener<ScrollUpdateNotification>(
-        onNotification: (notification) {
-          if (animationController.value >= 1) {
-            return true;
-          }
-          animationController.value = notification.metrics.pixels / 20;
-          print(animationController.value);
-          return true;
-        },
+        onNotification: _onScrolled,
         child: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              floating: false,
-              pinned: true,
-              title: BlocBuilder<SubredditBloc, SubredditState>(
-                builder: (context, state) {
-                  return SearchBarField(hintText: 'r/berserklejerk');
-                },
-              ),
-              expandedHeight: 120,
-              flexibleSpace:
-                  SubredditFlexibleSpaceBar(opacityAnimation: opacityAnimation),
-              actions: [
-                AppBarActionButton(icon: Icons.share),
-                AppBarActionButton(icon: Icons.more_horiz),
-              ],
-            ),
+            _SubredditAppBar(opacityAnimation: opacityAnimation),
             BlocBuilder<SubredditBloc, SubredditState>(
               buildWhen: (previous, current) =>
                   previous.subredditInfo != current.subredditInfo ||
                   previous.subredditInfoLoading != current.subredditInfoLoading,
-              builder: (context, state) {
-                if (state.subredditInfoLoading) {
-                  return SliverToBoxAdapter(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-                return state.subredditInfo.fold(
-                  () => SliverToBoxAdapter(
-                    child: Text('Bir hata oldu'),
-                  ),
-                  (info) => SliverToBoxAdapter(
-                    child: SubredditHead(subredditInfo: info),
-                  ),
-                );
-              },
+              builder: _subredditHeadBuilder,
             ),
             BlocBuilder<SubredditBloc, SubredditState>(
               buildWhen: (previous, current) =>
                   previous.posts != current.posts ||
                   previous.postsLoading != current.postsLoading,
-              builder: (context, state) {
-                if (state.postsLoading) {
-                  return SliverToBoxAdapter(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  );
-                }
-
-                return state.posts.fold(
-                  () => FailureImage(),
-                  (a) => SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return postFactory.create(
-                          mockMixedPosts[index % 4],
-                          options: PostWidgetFactoryOptions(
-                              inSubreddit: true, inPost: false),
-                        );
-
-                        // return PostCard(
-                        //   inPost: false,
-                        //   inSubreddit: true,
-                        //   entry: mockPostEntry,
-                        //   contentWidget: PostTextContent(
-                        //       entry: mockPostEntry, inPost: false),
-                        // );
-                      },
-                      childCount: 20,
-                    ),
-                  ),
-                );
-              },
+              builder: _subredditPostsBuilder,
             )
           ],
         ),
       ),
+    );
+  }
+
+  Widget _subredditPostsBuilder(BuildContext context, SubredditState state) {
+    if (state.postsLoading) {
+      return SliverToBoxAdapter(
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    return state.posts.fold(
+      () => FailureImage(),
+      (posts) => _SubredditPosts(postFactory: postFactory, posts: posts),
+    );
+  }
+
+  Widget _subredditHeadBuilder(BuildContext context, SubredditState state) {
+    if (state.subredditInfoLoading) {
+      return SliverToBoxAdapter(
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
+    return state.subredditInfo.fold(
+      () => SliverToBoxAdapter(child: Text('Bir hata oldu')),
+      (info) => SliverToBoxAdapter(child: SubredditHead(subredditInfo: info)),
+    );
+  }
+}
+
+class _SubredditPosts extends StatelessWidget {
+  final List<PostEntry> posts;
+  const _SubredditPosts({
+    Key? key,
+    required this.posts,
+    required this.postFactory,
+  }) : super(key: key);
+
+  final IPostWidgetFactory postFactory;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return postFactory.create(
+            posts[index],
+            options: PostWidgetFactoryOptions(inSubreddit: true, inPost: false),
+          );
+        },
+        childCount: posts.length,
+      ),
+    );
+  }
+}
+
+class _SubredditAppBar extends StatelessWidget {
+  const _SubredditAppBar({
+    Key? key,
+    required this.opacityAnimation,
+  }) : super(key: key);
+
+  final Animation<double> opacityAnimation;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      floating: false,
+      pinned: true,
+      title: BlocBuilder<SubredditBloc, SubredditState>(
+        builder: (context, state) {
+          return SearchBarField(hintText: 'r/berserklejerk');
+        },
+      ),
+      expandedHeight: 120,
+      flexibleSpace:
+          SubredditFlexibleSpaceBar(opacityAnimation: opacityAnimation),
+      actions: [
+        AppBarActionButton(icon: Icons.share),
+        AppBarActionButton(icon: Icons.more_horiz),
+      ],
     );
   }
 }
@@ -156,22 +182,9 @@ class SubredditHead extends StatelessWidget {
                 fontWeightDelta: 0,
               ),
               Spacer(),
-              const CircleBorderedIcon(),
+              const CircleBorderedIconButton(),
               SizedBox(width: SizeConfig.screenWidthPercentage(2)),
-              OutlinedButton(
-                onPressed: () {},
-                child: Text(
-                  'Joined',
-                  style: Theme.of(context).textTheme.bodyText1?.apply(
-                        color: Colors.red,
-                      ),
-                ),
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  side: const BorderSide(color: Colors.red),
-                  shape: const StadiumBorder(),
-                ),
-              )
+              _JoinButton()
             ],
           ),
           SubredditMemberStatistics(
@@ -181,6 +194,31 @@ class SubredditHead extends StatelessWidget {
           SizedBox(height: SizeConfig.screenHeightPercentage(1)),
           SubredditDescription(subredditInfo.description)
         ],
+      ),
+    );
+  }
+}
+
+// TODO genellestir
+class _JoinButton extends StatelessWidget {
+  const _JoinButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return OutlinedButton(
+      onPressed: () {},
+      child: Text(
+        'Joined',
+        style: Theme.of(context).textTheme.bodyText1?.apply(
+              color: Colors.red,
+            ),
+      ),
+      style: OutlinedButton.styleFrom(
+        padding: EdgeInsets.zero,
+        side: const BorderSide(color: Colors.red),
+        shape: const StadiumBorder(),
       ),
     );
   }
@@ -232,28 +270,6 @@ class SubredditMemberStatistics extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class CircleBorderedIcon extends StatelessWidget {
-  const CircleBorderedIcon({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red,
-        ),
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Icon(
-        Icons.notifications_off,
-        color: Colors.red,
-      ),
     );
   }
 }

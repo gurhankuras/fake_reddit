@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../core/app/colors.dart';
-import '../../../infastructure/core/cache_service.dart';
 
-import '../../../injection.dart';
+import '../../core/constants/colors.dart';
 
 mixin SettingsTileMixin {
   Widget title(String text, BuildContext context) => Text(
@@ -143,55 +141,54 @@ class _SettingsTileState extends State<SettingsTile> {
   }
 }
 
-class SettingsSwitchTile extends StatefulWidget with SettingsTileMixin {
-  final String cacheKey;
+class SettingsSwitchTile extends StatelessWidget with SettingsTileMixin {
+  // final String cacheKey;
+  // final bool Function(AppSettings settings) propertySelector;
+  // final VoidCallback Function(AppSettings settings) setterFunction;
   final IconData leadingIcon;
   final String text;
+  final bool value;
+  final ValueChanged<bool> onChanged;
   // final ValueChanged<bool> onSwitchChanged;
   SettingsSwitchTile({
     Key? key,
-    required this.cacheKey,
     required this.leadingIcon,
     required this.text,
-    // required this.onSwitchChanged,
+    required this.value,
+    required this.onChanged,
   }) : super(key: key);
 
-  @override
-  _SettingsSwitchTileState createState() => _SettingsSwitchTileState();
-}
+//   @override
+//   _SettingsSwitchTileState createState() => _SettingsSwitchTileState();
+// }
 
-class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
-  bool switched = false;
+// class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
+//   // bool switched = false;
 
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () async {
-      final s = await getIt<CacheService>().getBool(widget.cacheKey);
-      setState(() {
-        switched = s.getOrElse(() => false);
-      });
-    });
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     Future.delayed(Duration.zero, () async {
+//       final s = await getIt<CacheService>().getBool(widget.cacheKey);
+//       setState(() {
+//         switched = s.getOrElse(() => false);
+//       });
+//     });
+//   }
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
       leading: Icon(
-        widget.leadingIcon,
+        leadingIcon,
         color: AppColors.iron,
       ),
-      title: widget.title(widget.text, context),
+      title: title(text, context),
       trailing: CupertinoSwitch(
-        value: switched,
+        value: value,
         activeColor: Colors.blue,
-        onChanged: (value) {
-          setState(() {
-            switched = value;
-          });
-          getIt<CacheService>().setBool(widget.cacheKey, value);
-        },
+        onChanged: onChanged,
       ),
     );
   }

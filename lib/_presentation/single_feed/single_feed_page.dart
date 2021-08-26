@@ -6,19 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
+import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
+import 'package:reddit_clone/infastructure/core/cache_service.dart';
+import 'package:reddit_clone/injection.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 import '../../application/single_feed/single_feed_bloc.dart';
 import '../../domain/comment/comment_data.dart';
-import '../../domain/feed/post_widget_factory.dart';
-import '../../domain/post_entry.dart';
+import '../../domain/post/post_entry.dart';
 import '../../infastructure/comment/fake_comment_service.dart';
-import '../core/app/colors.dart';
+import '../core/constants/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/feed_card.dart';
-import '../core/assets.dart';
-import '../core/constants.dart';
+import '../core/constants/assets.dart';
 import '../core/reusable/app_header.dart';
+import '../post_widget_factory.dart';
 import 'add_comment.dart';
 import 'comment_placeholder.dart';
 import 'comments.dart';
@@ -55,9 +58,14 @@ class _SingleFeedPageState extends State<SingleFeedPage>
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SingleFeedBloc(
-          commentService:
-              FakeCommentService(depth: 3, engine: Random(), faker: Faker()))
-        ..add(const SingleFeedEvent.commentsFetchingStarted()),
+        commentService: FakeCommentService(
+          depth: 3,
+          engine: Random(),
+          faker: Faker(),
+        ),
+        cacheService: getIt<CacheService>(),
+        // post: widget.entry,
+      )..add(SingleFeedEvent.postVisited(widget.entry)),
       child: Scaffold(
         appBar: AppBar(
           title:

@@ -6,4 +6,5 @@ class SingleFeedEvent with _$SingleFeedEvent {
       _CommentsFetchingStarted;
   const factory SingleFeedEvent.commentFilteringChanged() =
       _CommentFilteringChanged;
+  const factory SingleFeedEvent.postVisited(PostEntry post) = _PostVisited;
 }
