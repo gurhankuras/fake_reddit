@@ -12,7 +12,7 @@ import '_presentation/core/scroll_controllers.dart';
 import '_presentation/home/home_tab_page.dart';
 import '_presentation/home/news.dart';
 import 'application/auth/auth_bloc.dart';
-import 'application/home_tab_page/home_tab_page_bloc.dart';
+import 'application/home_tab_page/feed_bloc.dart';
 import 'infastructure/core/cache_service.dart';
 import 'infastructure/feed/fake_feed_service.dart';
 import 'routes.dart';
@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
             MultiProvider(
               providers: [
                 BlocProvider(
-                  create: (context) => HomeTabPageBloc(
+                  create: (context) => FeedBloc(
                     feedService: getIt<IFeedService>(),
-                  )..add(HomeTabPageEvent.fetchingStarted()),
+                  )..add(FeedEvent.fetchingStarted()),
                 ),
                 Provider.value(value: scrollControllers)
               ],

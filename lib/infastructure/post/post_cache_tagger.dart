@@ -13,7 +13,7 @@ class PostCacheTagger implements IPostCacheTagger {
   @override
   PostEntry tag(PostEntry post) {
     if (cacheService.prefs.getString(post.id) != null) {
-      post.setVisited(true);
+      return post.copyWith(visited: true);
     }
     return post;
   }

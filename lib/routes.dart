@@ -3,7 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
+import 'package:reddit_clone/_presentation/post/post_page.dart';
+import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 
 import '_presentation/auth/login_page.dart';
 import '_presentation/auth/sign_up_page.dart';
@@ -14,7 +15,6 @@ import '_presentation/feed_form/create_feed_entry_page.dart';
 import '_presentation/home/search_page.dart';
 import '_presentation/post_feed/create_feed_entry_overview_page.dart';
 import '_presentation/search_community/post_feed_search_page.dart';
-import '_presentation/single_feed/single_feed_page.dart';
 import '_presentation/splash/splash_page.dart';
 import '_presentation/subreddit/subreddit_page.dart';
 import 'application/auth/auth_bloc.dart';
@@ -124,8 +124,14 @@ abstract class AppRouter {
           settings: settings,
         );
       case Routes.singlePostPage:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final bloc = arguments['homeTabBloc'] as FeedBloc;
         return MaterialPageRoute(
-          builder: (context) => SingleFeedPage(settings.arguments as PostEntry),
+          builder: (context) => BlocProvider.value(
+            value: bloc,
+            // create: (context) => SubjectBloc(),
+            child: PostPage(arguments['post'] as PostEntry),
+          ),
           settings: settings,
         );
       case Routes.cropImagePage:

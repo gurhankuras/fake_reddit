@@ -11,10 +11,10 @@ import '../../../domain/post/text_post_entry.dart';
 import '../../../utility/mock_objects.dart';
 import '../../post_widget_factory.dart';
 import '../../visual_content_display/visual_content_display_page.dart';
-import '../authentication_button.dart';
-import '../blurred_image.dart';
-import '../reusable/app_header.dart';
-import '../size_config.dart';
+import '../../core/authentication_button.dart';
+import '../../core/blurred_image.dart';
+import '../../core/reusable/app_header.dart';
+import '../../core/size_config.dart';
 
 class SideBySideTextAndImageContent extends StatelessWidget {
   final PostEntry entry;
@@ -30,7 +30,7 @@ class SideBySideTextAndImageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: DropCapText(
         entry.contentText,
         style: Theme.of(context).textTheme.headline6?.apply(
@@ -38,7 +38,7 @@ class SideBySideTextAndImageContent extends StatelessWidget {
               fontWeightDelta: 0,
               color: entry.visited && !inPost ? AppColors.grey : null,
             ),
-        dropCapPadding: EdgeInsets.all(5),
+        dropCapPadding: EdgeInsets.all(2),
         dropCapPosition: DropCapPosition.end,
         dropCap: DropCap(
           width: 100,
@@ -61,7 +61,6 @@ class PostTextContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(entry.visited);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

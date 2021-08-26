@@ -6,39 +6,43 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/application/home_tab_page/home_tab_page_bloc.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
+import 'package:reddit_clone/application/post/post_content/post_content_bloc.dart';
+import 'package:reddit_clone/infastructure/post/post_service.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import '../../application/single_feed/single_feed_bloc.dart';
+import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
+import 'package:reddit_clone/application/post/post_comment/post_comment_bloc.dart';
+import 'package:reddit_clone/infastructure/core/cache_service.dart';
+import 'package:reddit_clone/injection.dart';
+
 import '../../domain/comment/comment_data.dart';
 import '../../domain/post/post_entry.dart';
 import '../../infastructure/comment/fake_comment_service.dart';
-import '../core/constants/colors.dart';
 import '../core/app/extensions/string_fill_extension.dart';
-import '../core/app/feed_card.dart';
+import 'widgets/post_card.dart';
 import '../core/constants/assets.dart';
+import '../core/constants/colors.dart';
 import '../core/reusable/app_header.dart';
 import '../post_widget_factory.dart';
 import 'add_comment.dart';
 import 'comment_placeholder.dart';
 import 'comments.dart';
 
-class SingleFeedPage extends StatefulWidget {
+class PostPage extends StatefulWidget {
   final IPostWidgetFactory postFactory = PostWidgetFactory();
-  final PostEntry entry;
-  SingleFeedPage(
-    this.entry, {
+  final PostEntry post;
+  PostPage(
+    this.post, {
     Key? key,
   }) : super(key: key);
 
   @override
-  _SingleFeedPageState createState() => _SingleFeedPageState();
+  _PostPageState createState() => _PostPageState();
 }
 
-class _SingleFeedPageState extends State<SingleFeedPage>
+class _PostPageState extends State<PostPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController controller;
 
@@ -57,7 +61,8 @@ class _SingleFeedPageState extends State<SingleFeedPage>
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SingleFeedBloc(
+      create: (context) => PostCommentBloc(
+        postId: widget.post.id,
         commentService: FakeCommentService(
           depth: 3,
           engine: Random(),
@@ -65,11 +70,13 @@ class _SingleFeedPageState extends State<SingleFeedPage>
         ),
         cacheService: getIt<CacheService>(),
         // post: widget.entry,
-      )..add(SingleFeedEvent.postVisited(widget.entry)),
+      )..add(PostCommentEvent.commentsFetchingStarted()),
       child: Scaffold(
         appBar: AppBar(
-          title:
-              _FadingTitle(animationController: controller, post: widget.entry),
+          title: _FadingTitle(
+            animationController: controller,
+            post: widget.post,
+          ),
           centerTitle: true,
           actions: actions,
         ),
@@ -79,7 +86,7 @@ class _SingleFeedPageState extends State<SingleFeedPage>
               child: SingleFeedScrollBody(
                 animationController: controller,
                 postFactory: widget.postFactory,
-                post: widget.entry,
+                post: widget.post,
               ),
             ),
             AddComment()
@@ -185,9 +192,16 @@ class SingleFeedScrollBody extends StatelessWidget {
                 ),
               ),
               SliverPinnedHeader(
-                child: _InPostActionBar(
-                  post: post,
-                  scrollToComments: _scrollToComments,
+                child: BlocProvider(
+                  create: (context) => PostContentBloc(
+                    postService: PostService(),
+                    cacheService: getIt<CacheService>(),
+                    homeTabBloc: context.read<FeedBloc>(),
+                  )..add(PostContentEvent.metaDataFetchinStarted(post.id)),
+                  child: _InPostActionBar(
+                    post: post,
+                    scrollToComments: _scrollToComments,
+                  ),
                 ),
               ),
               SliverToBoxAdapter(
@@ -197,7 +211,7 @@ class SingleFeedScrollBody extends StatelessWidget {
                   child: CommentFilter(),
                 ),
               ),
-              BlocBuilder<SingleFeedBloc, SingleFeedState>(
+              BlocBuilder<PostCommentBloc, PostCommentState>(
                 builder: (context, state) {
                   return state.map(
                     initial: (_) => const CommentPlaceholderList(),
@@ -217,6 +231,7 @@ class SingleFeedScrollBody extends StatelessWidget {
 }
 
 class _InPostActionBar extends StatelessWidget {
+  final PostEntry post;
   final VoidCallback scrollToComments;
   const _InPostActionBar({
     Key? key,
@@ -224,15 +239,33 @@ class _InPostActionBar extends StatelessWidget {
     required this.post,
   }) : super(key: key);
 
-  final PostEntry post;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: PostActionBar(
-        entry: post,
-        onTapComments: scrollToComments,
+      child: BlocBuilder<PostContentBloc, PostContentState>(
+        builder: (context, state) {
+          return state.maybeMap(
+            fetched: (state) => PostActionBar(
+              commentCount: state.commentCount,
+              upvotes: state.upvotes,
+              postId: post.id,
+              onTapComments: scrollToComments,
+            ),
+            orElse: () => PostActionBar(
+              commentCount: post.commentCount,
+              postId: post.id,
+              upvotes: post.upvotes,
+              onTapComments: scrollToComments,
+            ),
+            // failed: (state) => PostActionBar(
+            //   commentCount: commentCount,
+            //   postId: post.id,
+            //   upvotes: ,
+            //   onTapComments: scrollToComments,
+            // ),
+          );
+        },
       ),
     );
   }

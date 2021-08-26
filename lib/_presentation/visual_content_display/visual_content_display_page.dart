@@ -1,10 +1,11 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
 
 import '../../domain/post/image_post_entry.dart';
 import '../../domain/post/post_entry.dart';
 import '../core/app/extensions/string_fill_extension.dart';
-import '../core/app/feed_card.dart';
+import '../post/widgets/post_card.dart';
 import '../core/reusable/app_header.dart';
 
 final _actionBarGradient = LinearGradient(
@@ -75,6 +76,7 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
 
   @override
   Widget build(BuildContext context) {
+    final post = widget.entries[currentIndex];
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -156,7 +158,9 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
                   child: FadeTransition(
                     opacity: _opacityAnimation,
                     child: PostActionBar(
-                      entry: widget.entries[currentIndex],
+                      commentCount: post.commentCount,
+                      postId: post.id,
+                      upvotes: post.upvotes,
                       contentColor: Colors.white,
                       gradient: _actionBarGradient,
                     ),

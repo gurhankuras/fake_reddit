@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'single_feed_bloc.dart';
+part of 'post_comment_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$SingleFeedEventTearOff {
-  const _$SingleFeedEventTearOff();
+class _$PostCommentEventTearOff {
+  const _$PostCommentEventTearOff();
 
   _CommentsFetchingStarted commentsFetchingStarted() {
     return const _CommentsFetchingStarted();
@@ -23,31 +23,23 @@ class _$SingleFeedEventTearOff {
   _CommentFilteringChanged commentFilteringChanged() {
     return const _CommentFilteringChanged();
   }
-
-  _PostVisited postVisited(PostEntry post) {
-    return _PostVisited(
-      post,
-    );
-  }
 }
 
 /// @nodoc
-const $SingleFeedEvent = _$SingleFeedEventTearOff();
+const $PostCommentEvent = _$PostCommentEventTearOff();
 
 /// @nodoc
-mixin _$SingleFeedEvent {
+mixin _$PostCommentEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() commentsFetchingStarted,
     required TResult Function() commentFilteringChanged,
-    required TResult Function(PostEntry post) postVisited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? commentsFetchingStarted,
     TResult Function()? commentFilteringChanged,
-    TResult Function(PostEntry post)? postVisited,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,34 +49,32 @@ mixin _$SingleFeedEvent {
         commentsFetchingStarted,
     required TResult Function(_CommentFilteringChanged value)
         commentFilteringChanged,
-    required TResult Function(_PostVisited value) postVisited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
     TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
-    TResult Function(_PostVisited value)? postVisited,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SingleFeedEventCopyWith<$Res> {
-  factory $SingleFeedEventCopyWith(
-          SingleFeedEvent value, $Res Function(SingleFeedEvent) then) =
-      _$SingleFeedEventCopyWithImpl<$Res>;
+abstract class $PostCommentEventCopyWith<$Res> {
+  factory $PostCommentEventCopyWith(
+          PostCommentEvent value, $Res Function(PostCommentEvent) then) =
+      _$PostCommentEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SingleFeedEventCopyWithImpl<$Res>
-    implements $SingleFeedEventCopyWith<$Res> {
-  _$SingleFeedEventCopyWithImpl(this._value, this._then);
+class _$PostCommentEventCopyWithImpl<$Res>
+    implements $PostCommentEventCopyWith<$Res> {
+  _$PostCommentEventCopyWithImpl(this._value, this._then);
 
-  final SingleFeedEvent _value;
+  final PostCommentEvent _value;
   // ignore: unused_field
-  final $Res Function(SingleFeedEvent) _then;
+  final $Res Function(PostCommentEvent) _then;
 }
 
 /// @nodoc
@@ -96,7 +86,7 @@ abstract class _$CommentsFetchingStartedCopyWith<$Res> {
 
 /// @nodoc
 class __$CommentsFetchingStartedCopyWithImpl<$Res>
-    extends _$SingleFeedEventCopyWithImpl<$Res>
+    extends _$PostCommentEventCopyWithImpl<$Res>
     implements _$CommentsFetchingStartedCopyWith<$Res> {
   __$CommentsFetchingStartedCopyWithImpl(_CommentsFetchingStarted _value,
       $Res Function(_CommentsFetchingStarted) _then)
@@ -114,7 +104,7 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
 
   @override
   String toString() {
-    return 'SingleFeedEvent.commentsFetchingStarted()';
+    return 'PostCommentEvent.commentsFetchingStarted()';
   }
 
   @override
@@ -130,7 +120,6 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   TResult when<TResult extends Object?>({
     required TResult Function() commentsFetchingStarted,
     required TResult Function() commentFilteringChanged,
-    required TResult Function(PostEntry post) postVisited,
   }) {
     return commentsFetchingStarted();
   }
@@ -140,7 +129,6 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? commentsFetchingStarted,
     TResult Function()? commentFilteringChanged,
-    TResult Function(PostEntry post)? postVisited,
     required TResult orElse(),
   }) {
     if (commentsFetchingStarted != null) {
@@ -156,7 +144,6 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
         commentsFetchingStarted,
     required TResult Function(_CommentFilteringChanged value)
         commentFilteringChanged,
-    required TResult Function(_PostVisited value) postVisited,
   }) {
     return commentsFetchingStarted(this);
   }
@@ -166,7 +153,6 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
     TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
-    TResult Function(_PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (commentsFetchingStarted != null) {
@@ -176,7 +162,7 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   }
 }
 
-abstract class _CommentsFetchingStarted implements SingleFeedEvent {
+abstract class _CommentsFetchingStarted implements PostCommentEvent {
   const factory _CommentsFetchingStarted() = _$_CommentsFetchingStarted;
 }
 
@@ -189,7 +175,7 @@ abstract class _$CommentFilteringChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$CommentFilteringChangedCopyWithImpl<$Res>
-    extends _$SingleFeedEventCopyWithImpl<$Res>
+    extends _$PostCommentEventCopyWithImpl<$Res>
     implements _$CommentFilteringChangedCopyWith<$Res> {
   __$CommentFilteringChangedCopyWithImpl(_CommentFilteringChanged _value,
       $Res Function(_CommentFilteringChanged) _then)
@@ -207,7 +193,7 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
 
   @override
   String toString() {
-    return 'SingleFeedEvent.commentFilteringChanged()';
+    return 'PostCommentEvent.commentFilteringChanged()';
   }
 
   @override
@@ -223,7 +209,6 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   TResult when<TResult extends Object?>({
     required TResult Function() commentsFetchingStarted,
     required TResult Function() commentFilteringChanged,
-    required TResult Function(PostEntry post) postVisited,
   }) {
     return commentFilteringChanged();
   }
@@ -233,7 +218,6 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? commentsFetchingStarted,
     TResult Function()? commentFilteringChanged,
-    TResult Function(PostEntry post)? postVisited,
     required TResult orElse(),
   }) {
     if (commentFilteringChanged != null) {
@@ -249,7 +233,6 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
         commentsFetchingStarted,
     required TResult Function(_CommentFilteringChanged value)
         commentFilteringChanged,
-    required TResult Function(_PostVisited value) postVisited,
   }) {
     return commentFilteringChanged(this);
   }
@@ -259,7 +242,6 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
     TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
-    TResult Function(_PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (commentFilteringChanged != null) {
@@ -269,135 +251,13 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   }
 }
 
-abstract class _CommentFilteringChanged implements SingleFeedEvent {
+abstract class _CommentFilteringChanged implements PostCommentEvent {
   const factory _CommentFilteringChanged() = _$_CommentFilteringChanged;
 }
 
 /// @nodoc
-abstract class _$PostVisitedCopyWith<$Res> {
-  factory _$PostVisitedCopyWith(
-          _PostVisited value, $Res Function(_PostVisited) then) =
-      __$PostVisitedCopyWithImpl<$Res>;
-  $Res call({PostEntry post});
-}
-
-/// @nodoc
-class __$PostVisitedCopyWithImpl<$Res>
-    extends _$SingleFeedEventCopyWithImpl<$Res>
-    implements _$PostVisitedCopyWith<$Res> {
-  __$PostVisitedCopyWithImpl(
-      _PostVisited _value, $Res Function(_PostVisited) _then)
-      : super(_value, (v) => _then(v as _PostVisited));
-
-  @override
-  _PostVisited get _value => super._value as _PostVisited;
-
-  @override
-  $Res call({
-    Object? post = freezed,
-  }) {
-    return _then(_PostVisited(
-      post == freezed
-          ? _value.post
-          : post // ignore: cast_nullable_to_non_nullable
-              as PostEntry,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_PostVisited implements _PostVisited {
-  const _$_PostVisited(this.post);
-
-  @override
-  final PostEntry post;
-
-  @override
-  String toString() {
-    return 'SingleFeedEvent.postVisited(post: $post)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _PostVisited &&
-            (identical(other.post, post) ||
-                const DeepCollectionEquality().equals(other.post, post)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(post);
-
-  @JsonKey(ignore: true)
-  @override
-  _$PostVisitedCopyWith<_PostVisited> get copyWith =>
-      __$PostVisitedCopyWithImpl<_PostVisited>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() commentsFetchingStarted,
-    required TResult Function() commentFilteringChanged,
-    required TResult Function(PostEntry post) postVisited,
-  }) {
-    return postVisited(post);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? commentsFetchingStarted,
-    TResult Function()? commentFilteringChanged,
-    TResult Function(PostEntry post)? postVisited,
-    required TResult orElse(),
-  }) {
-    if (postVisited != null) {
-      return postVisited(post);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_CommentsFetchingStarted value)
-        commentsFetchingStarted,
-    required TResult Function(_CommentFilteringChanged value)
-        commentFilteringChanged,
-    required TResult Function(_PostVisited value) postVisited,
-  }) {
-    return postVisited(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
-    TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
-    TResult Function(_PostVisited value)? postVisited,
-    required TResult orElse(),
-  }) {
-    if (postVisited != null) {
-      return postVisited(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _PostVisited implements SingleFeedEvent {
-  const factory _PostVisited(PostEntry post) = _$_PostVisited;
-
-  PostEntry get post => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$PostVisitedCopyWith<_PostVisited> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$SingleFeedStateTearOff {
-  const _$SingleFeedStateTearOff();
+class _$PostCommentStateTearOff {
+  const _$PostCommentStateTearOff();
 
   _Initial initial() {
     return const _Initial();
@@ -421,10 +281,10 @@ class _$SingleFeedStateTearOff {
 }
 
 /// @nodoc
-const $SingleFeedState = _$SingleFeedStateTearOff();
+const $PostCommentState = _$PostCommentStateTearOff();
 
 /// @nodoc
-mixin _$SingleFeedState {
+mixin _$PostCommentState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -462,20 +322,20 @@ mixin _$SingleFeedState {
 }
 
 /// @nodoc
-abstract class $SingleFeedStateCopyWith<$Res> {
-  factory $SingleFeedStateCopyWith(
-          SingleFeedState value, $Res Function(SingleFeedState) then) =
-      _$SingleFeedStateCopyWithImpl<$Res>;
+abstract class $PostCommentStateCopyWith<$Res> {
+  factory $PostCommentStateCopyWith(
+          PostCommentState value, $Res Function(PostCommentState) then) =
+      _$PostCommentStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$SingleFeedStateCopyWithImpl<$Res>
-    implements $SingleFeedStateCopyWith<$Res> {
-  _$SingleFeedStateCopyWithImpl(this._value, this._then);
+class _$PostCommentStateCopyWithImpl<$Res>
+    implements $PostCommentStateCopyWith<$Res> {
+  _$PostCommentStateCopyWithImpl(this._value, this._then);
 
-  final SingleFeedState _value;
+  final PostCommentState _value;
   // ignore: unused_field
-  final $Res Function(SingleFeedState) _then;
+  final $Res Function(PostCommentState) _then;
 }
 
 /// @nodoc
@@ -485,7 +345,7 @@ abstract class _$InitialCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$InitialCopyWithImpl<$Res> extends _$SingleFeedStateCopyWithImpl<$Res>
+class __$InitialCopyWithImpl<$Res> extends _$PostCommentStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
       : super(_value, (v) => _then(v as _Initial));
@@ -501,7 +361,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'SingleFeedState.initial()';
+    return 'PostCommentState.initial()';
   }
 
   @override
@@ -565,7 +425,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements SingleFeedState {
+abstract class _Initial implements PostCommentState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -576,7 +436,7 @@ abstract class _$LoadingCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadingCopyWithImpl<$Res> extends _$SingleFeedStateCopyWithImpl<$Res>
+class __$LoadingCopyWithImpl<$Res> extends _$PostCommentStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
       : super(_value, (v) => _then(v as _Loading));
@@ -592,7 +452,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'SingleFeedState.loading()';
+    return 'PostCommentState.loading()';
   }
 
   @override
@@ -656,7 +516,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements SingleFeedState {
+abstract class _Loading implements PostCommentState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -670,7 +530,7 @@ abstract class _$FetchingCompletedCopyWith<$Res> {
 
 /// @nodoc
 class __$FetchingCompletedCopyWithImpl<$Res>
-    extends _$SingleFeedStateCopyWithImpl<$Res>
+    extends _$PostCommentStateCopyWithImpl<$Res>
     implements _$FetchingCompletedCopyWith<$Res> {
   __$FetchingCompletedCopyWithImpl(
       _FetchingCompleted _value, $Res Function(_FetchingCompleted) _then)
@@ -702,7 +562,7 @@ class _$_FetchingCompleted implements _FetchingCompleted {
 
   @override
   String toString() {
-    return 'SingleFeedState.fetchingCompleted(comments: $comments)';
+    return 'PostCommentState.fetchingCompleted(comments: $comments)';
   }
 
   @override
@@ -776,7 +636,7 @@ class _$_FetchingCompleted implements _FetchingCompleted {
   }
 }
 
-abstract class _FetchingCompleted implements SingleFeedState {
+abstract class _FetchingCompleted implements PostCommentState {
   const factory _FetchingCompleted(List<CommentData> comments) =
       _$_FetchingCompleted;
 
@@ -798,7 +658,7 @@ abstract class _$FetchingFailedCopyWith<$Res> {
 
 /// @nodoc
 class __$FetchingFailedCopyWithImpl<$Res>
-    extends _$SingleFeedStateCopyWithImpl<$Res>
+    extends _$PostCommentStateCopyWithImpl<$Res>
     implements _$FetchingFailedCopyWith<$Res> {
   __$FetchingFailedCopyWithImpl(
       _FetchingFailed _value, $Res Function(_FetchingFailed) _then)
@@ -837,7 +697,7 @@ class _$_FetchingFailed implements _FetchingFailed {
 
   @override
   String toString() {
-    return 'SingleFeedState.fetchingFailed(failure: $failure)';
+    return 'PostCommentState.fetchingFailed(failure: $failure)';
   }
 
   @override
@@ -910,7 +770,7 @@ class _$_FetchingFailed implements _FetchingFailed {
   }
 }
 
-abstract class _FetchingFailed implements SingleFeedState {
+abstract class _FetchingFailed implements PostCommentState {
   const factory _FetchingFailed(ValueFailure<String> failure) =
       _$_FetchingFailed;
 

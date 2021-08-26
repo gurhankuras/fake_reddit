@@ -28,4 +28,32 @@ class ImagePostEntry extends PostEntry {
           id: id,
           visited: visited,
         );
+
+  @override
+  ImagePostEntry copyWith({
+    String? subreddit,
+    User? user,
+    bool? isNFSW,
+    String? id,
+    String? contentText,
+    int? type,
+    int? upvotes,
+    String? date,
+    int? commentCount,
+    bool? visited,
+  }) {
+    return ImagePostEntry(
+      subreddit: subreddit ?? this.subreddit,
+      user: user ?? this.user,
+      isNFSW: isNFSW ?? this.isNFSW,
+      id: id ?? this.id,
+      contentText: contentText ?? this.contentText,
+      type: type ?? this.type,
+      upvotes: upvotes ?? this.upvotes,
+      date: date ?? this.date,
+      commentCount: commentCount ?? this.commentCount,
+      visited: visited ?? this.visited,
+      image: image,
+    );
+  }
 }

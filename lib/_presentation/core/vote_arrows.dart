@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
 
 import '../../application/voting/post_voting.dart';
 import '../../domain/post/post_entry.dart';
 import 'constants/colors.dart';
-import 'app/feed_card.dart';
+import '../post/widgets/post_card.dart';
 
 typedef AnimationStatusListener = void Function(AnimationStatus status);
 
 class UpvoteButton extends StatefulWidget {
   const UpvoteButton({
     Key? key,
-    required this.entry,
+    // required this.entry,
   }) : super(key: key);
 
-  final PostEntry entry;
+  // final PostEntry entry;
 
   @override
   _UpvoteButtonState createState() => _UpvoteButtonState();

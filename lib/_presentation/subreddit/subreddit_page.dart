@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:reddit_clone/_presentation/core/button/circle_bordered_icon_button.dart';
+import 'package:reddit_clone/_presentation/post/post_page.dart';
 import 'package:reddit_clone/domain/post/post_entry.dart';
 
 import '../../application/subreddit/subreddit_bloc.dart';
@@ -13,7 +14,6 @@ import '../core/constants/colors.dart';
 import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
 import '../post_widget_factory.dart';
-import '../single_feed/single_feed_page.dart';
 
 const _kAnimationEndScrollHeight = 20;
 

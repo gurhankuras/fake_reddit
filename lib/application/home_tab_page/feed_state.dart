@@ -1,17 +1,17 @@
-part of 'home_tab_page_bloc.dart';
+part of 'feed_bloc.dart';
 
 @freezed
-class HomeTabPageState with _$HomeTabPageState {
-  const factory HomeTabPageState({
+class FeedState with _$FeedState {
+  const factory FeedState({
     required bool hasReachedMax,
     required List<PostEntry> posts,
     required bool fetchingLoading,
     required bool refreshLoading,
     required bool morePostLoading,
     required int page,
-  }) = _HomeTabPageState;
+  }) = _FeedState;
 
-  factory HomeTabPageState.initial() => HomeTabPageState(
+  factory FeedState.initial() => FeedState(
         hasReachedMax: false,
         posts: [],
         fetchingLoading: false,

@@ -14,6 +14,10 @@ part 'subreddit_bloc.freezed.dart';
 part 'subreddit_event.dart';
 part 'subreddit_state.dart';
 
+// TODO split into 2 bloc
+// - feed bloc
+// - subreddit info bloc
+
 @injectable
 class SubredditBloc extends Bloc<SubredditEvent, SubredditState> {
   final ISubredditService subredditService;

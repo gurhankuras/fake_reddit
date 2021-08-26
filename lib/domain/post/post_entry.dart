@@ -7,10 +7,10 @@ class PostEntry {
   final String id;
   final String contentText;
   final int type;
-  int upvotes;
+  final int upvotes;
   final String date;
-  int commentCount;
-  bool visited;
+  final int commentCount;
+  final bool visited;
 
   PostEntry({
     required this.subreddit,
@@ -25,9 +25,9 @@ class PostEntry {
     required this.visited,
   });
 
-  void setVisited(bool val) {
-    visited = val;
-  }
+  // void setVisited(bool val) {
+  //   visited = val;
+  // }
   // PostEntry copyWith({
   //   String? subreddit,
   //   User? user,
@@ -53,4 +53,30 @@ class PostEntry {
   //     visited: visited ?? this.visited,
   //   );
   // }
+
+  PostEntry copyWith({
+    String? subreddit,
+    User? user,
+    bool? isNFSW,
+    String? id,
+    String? contentText,
+    int? type,
+    int? upvotes,
+    String? date,
+    int? commentCount,
+    bool? visited,
+  }) {
+    return PostEntry(
+      subreddit: subreddit ?? this.subreddit,
+      user: user ?? this.user,
+      isNFSW: isNFSW ?? this.isNFSW,
+      id: id ?? this.id,
+      contentText: contentText ?? this.contentText,
+      type: type ?? this.type,
+      upvotes: upvotes ?? this.upvotes,
+      date: date ?? this.date,
+      commentCount: commentCount ?? this.commentCount,
+      visited: visited ?? this.visited,
+    );
+  }
 }

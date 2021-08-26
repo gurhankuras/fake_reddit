@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-import '../../application/home_tab_page/home_tab_page_bloc.dart';
+import '../../application/home_tab_page/feed_bloc.dart';
 import '../post_widget_factory.dart';
 import '../../domain/post/post_entry.dart';
 import '../core/scroll_controllers.dart';
@@ -59,7 +60,7 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
         loadListener(),
         refreshListener(),
       ],
-      child: BlocBuilder<HomeTabPageBloc, HomeTabPageState>(
+      child: BlocBuilder<FeedBloc, FeedState>(
         buildWhen: (previous, current) =>
             previous.fetchingLoading != current.fetchingLoading,
         builder: (context, state) {
@@ -80,16 +81,14 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
             ),
             footer: refresherFooter(),
             controller: _refreshController,
-            onRefresh: () => context
-                .read<HomeTabPageBloc>()
-                .add(HomeTabPageEvent.refreshRequested()),
-            onLoading: () => context
-                .read<HomeTabPageBloc>()
-                .add(HomeTabPageEvent.loadMoreRequested()),
+            onRefresh: () =>
+                context.read<FeedBloc>().add(FeedEvent.refreshRequested()),
+            onLoading: () =>
+                context.read<FeedBloc>().add(FeedEvent.loadMoreRequested()),
             child: CustomScrollView(
               controller: _scrollController,
               slivers: [
-                BlocBuilder<HomeTabPageBloc, HomeTabPageState>(
+                BlocBuilder<FeedBloc, FeedState>(
                   // buildWhen: (previous, current) =>
                   //     previous.posts != current.posts,
                   builder: (context, state) {
@@ -109,8 +108,8 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  BlocListener<HomeTabPageBloc, HomeTabPageState> refreshListener() {
-    return BlocListener<HomeTabPageBloc, HomeTabPageState>(
+  BlocListener<FeedBloc, FeedState> refreshListener() {
+    return BlocListener<FeedBloc, FeedState>(
       listenWhen: (previous, current) =>
           previous.refreshLoading && !current.refreshLoading,
       listener: (context, state) {
@@ -120,8 +119,8 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
     );
   }
 
-  BlocListener<HomeTabPageBloc, HomeTabPageState> loadListener() {
-    return BlocListener<HomeTabPageBloc, HomeTabPageState>(
+  BlocListener<FeedBloc, FeedState> loadListener() {
+    return BlocListener<FeedBloc, FeedState>(
       listenWhen: (previous, current) =>
           (previous.morePostLoading && !current.morePostLoading),
       listener: (context, state) {
@@ -175,15 +174,19 @@ class _NewsPosts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final IPostWidgetFactory postFactory = PostWidgetFactory();
+    final feedBloc = context.read<FeedBloc>();
     // print(posts.length);
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          return postFactory.create(
-            posts[index],
-            options: PostWidgetFactoryOptions(
-              inSubreddit: false,
-              inPost: false,
+          return BlocProvider.value(
+            value: feedBloc,
+            child: postFactory.create(
+              posts[index],
+              options: PostWidgetFactoryOptions(
+                inSubreddit: false,
+                inPost: false,
+              ),
             ),
           );
         },

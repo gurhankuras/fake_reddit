@@ -4,8 +4,8 @@ import '../domain/post/image_post_entry.dart';
 import '../domain/post/link_post_entry.dart';
 import '../domain/post/post_entry.dart';
 import '../domain/post/text_post_entry.dart';
-import 'core/app/feed_card.dart';
-import 'core/app/post_card_types.dart';
+import 'post/widgets/post_card.dart';
+import 'post/widgets/post_card_types.dart';
 import 'core/blurred_image.dart';
 
 abstract class IPostWidgetFactory {
