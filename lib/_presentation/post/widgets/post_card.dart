@@ -17,7 +17,7 @@ import '../../search_community/post_to_community_suggestion_tile.dart';
 import '../../core/constants/colors.dart';
 import '../../core/modal_bottom_sheet/post_more_actions_modal_sheet.dart';
 import '../../core/size_config.dart';
-import '../../core/vote_arrows.dart';
+import 'vote_arrows.dart';
 
 class PostCard extends StatelessWidget {
   final bool inSubreddit;

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/vote_arrows.dart';
+import 'package:reddit_clone/_presentation/post/widgets/vote_arrows.dart';
+import 'package:reddit_clone/application/voting/bloc/vote_bloc.dart';
 import 'package:reddit_clone/application/voting/post_voting.dart';
 
 class PostActionBar extends StatelessWidget {
@@ -44,12 +46,14 @@ class PostActionBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ChangeNotifierProvider(
-              create: (context) => PostVoting(upvotes: upvotes),
-              child: UpvoteButton(
-                  // entry: entry
-                  ),
+            BlocProvider(
+              create: (context) => VoteBloc(upvotes),
+              child: UpvoteButton(),
             ),
+            // ChangeNotifierProvider(
+            //   create: (context) => PostVoting(upvotes: upvotes),
+            //   child: UpvoteButton(),
+            // ),
             PostAction(
               icon: const FaIcon(FontAwesomeIcons.commentAlt),
               text: commentCount == 0 ? 'Comment' : commentCount.toString(),

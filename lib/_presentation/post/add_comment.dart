@@ -5,8 +5,12 @@ import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
 
 class AddComment extends StatefulWidget {
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? textController;
   const AddComment({
     Key? key,
+    this.onChanged,
+    this.textController,
   }) : super(key: key);
 
   @override
@@ -24,7 +28,10 @@ class _AddCommentState extends State<AddComment> {
         // ? _CollapsedAddComment()
         // :
         // ExpandedAddComment();
-        _CollapsedAddComment();
+        _CollapsedAddComment(
+      onChanged: widget.onChanged,
+      textController: widget.textController,
+    );
   }
 }
 
@@ -39,36 +46,36 @@ class ExpandedAddComment extends StatefulWidget {
 
 class _ExpandedAddCommentState extends State<ExpandedAddComment>
     with SingleTickerProviderStateMixin {
-  double? startPosition;
-  double? currentPosition;
-  late final AnimationController _controller;
+  // double? startPosition;
+  // double? currentPosition;
+  // late final AnimationController _controller;
   @override
   void initState() {
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
+    // _controller = AnimationController(
+    //     vsync: this, duration: const Duration(milliseconds: 200));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragStart: (details) {
-        startPosition = details.globalPosition.dy;
-        // print(startPosition);
-      },
-      onVerticalDragUpdate: (details) {
-        currentPosition = details.globalPosition.dy;
-        _controller.value = (SizeConfig.screenHeight - currentPosition!) /
-            SizeConfig.screenHeight;
-        setState(() {});
-        // print(_controller.value);
-      },
-      onVerticalDragEnd: (details) {
-        if (startPosition! - currentPosition! > 20) {
-          _controller.value = 1.0;
-          _controller.forward();
-        }
-      },
+      // onVerticalDragStart: (details) {
+      //   startPosition = details.globalPosition.dy;
+      //   // print(startPosition);
+      // },
+      // onVerticalDragUpdate: (details) {
+      //   currentPosition = details.globalPosition.dy;
+      //   _controller.value = (SizeConfig.screenHeight - currentPosition!) /
+      //       SizeConfig.screenHeight;
+      //   setState(() {});
+      //   // print(_controller.value);
+      // },
+      // onVerticalDragEnd: (details) {
+      //   if (startPosition! - currentPosition! > 20) {
+      //     _controller.value = 1.0;
+      //     _controller.forward();
+      //   }
+      // },
       child: Container(
         decoration: const BoxDecoration(
           color: AppColors.lightBlack,
@@ -141,8 +148,12 @@ class _ExpandedAddCommentState extends State<ExpandedAddComment>
 }
 
 class _CollapsedAddComment extends StatelessWidget {
+  final ValueChanged<String>? onChanged;
+  final TextEditingController? textController;
   const _CollapsedAddComment({
     Key? key,
+    this.onChanged,
+    this.textController,
   }) : super(key: key);
 
   @override
@@ -161,6 +172,8 @@ class _CollapsedAddComment extends StatelessWidget {
           SizedBox(width: SizeConfig.screenWidthPercentage(2)),
           Expanded(
               child: TextField(
+            controller: textController,
+            onChanged: onChanged,
             decoration: InputDecoration(
               isDense: true,
               hintText: 'Add a comment',

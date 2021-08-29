@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/chat/chat_nav_page.dart';
 import 'package:reddit_clone/_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 
 import '_presentation/core/constants/colors.dart';
@@ -181,6 +182,8 @@ class MainPageState extends State<MainPage> {
             style: TextStyle(color: Colors.white),
           ),
         ),
+
+        ChatNavPage(),
         InboxPage()
       ],
     );

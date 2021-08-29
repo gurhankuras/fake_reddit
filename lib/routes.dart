@@ -3,7 +3,9 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/chat/chat_page.dart';
 import 'package:reddit_clone/_presentation/post/post_page.dart';
+import 'package:reddit_clone/application/chat/chat/chat_bloc.dart';
 import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 
 import '_presentation/auth/login_page.dart';
@@ -42,6 +44,8 @@ abstract class Routes {
   static const signupPage = '/signupPage';
   static const loginPage = '/loginPage';
   static const singlePostPage = '/singlePostPage';
+
+  static const chatPage = '/chatPage';
 
   static const subredditPage = '/r';
 
@@ -147,6 +151,15 @@ abstract class AppRouter {
       case Routes.homePage:
         return MaterialPageRoute(
           builder: (_) => const HomePage(),
+          settings: settings,
+        );
+
+      case Routes.chatPage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ChatBloc()..add(ChatEvent.messagedLoaded()),
+            child: ChatPage(),
+          ),
           settings: settings,
         );
       case Routes.postFeedSearchPage:
