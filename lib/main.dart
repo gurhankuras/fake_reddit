@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,8 @@ void main() async {
   await configureDependencies(Env.dev);
   // print(await getIt<CacheService>().getString(TokenKeys.ACCESS_TOKEN_KEY));
   // print(await getIt<CacheService>().getString(TokenKeys.REFRESH_TOKEN_KEY));
+
+  await Firebase.initializeApp();
 
   Bloc.observer = SimpleBlocObserver();
   // Logger.level = Level.wtf;

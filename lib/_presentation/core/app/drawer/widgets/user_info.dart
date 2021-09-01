@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/size_config.dart';
 
 import '../../../reusable/scaled_drawer.dart';
 import '../../../button/app_button.dart';
@@ -20,32 +21,38 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Column(
-          children: [
-            Container(
-              width: 100,
-              height: 150,
-              color: Colors.white,
-            ),
-            const UserName(name: 'Brilliant_Program232'),
-            const OnlineStatus(),
-            const SizedBox(height: 10),
-            AppButton.icon(
-              // text: Text(
-              //   'Style Avatar',
-              //   style: Theme.of(context)
-              //       .textTheme
-              //       .bodyText1
-              //       ?.copyWith(fontWeight: FontWeight.w800),
-              // ),
-              text: 'Style Avatar',
-              icon: FontAwesomeIcons.tshirt,
-              onTap: () {
-                // TODO
-              },
-            ),
-            const AdditionalUserInfo()
-          ],
+        Positioned(
+          // top: 20,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              SizedBox(
+                width: SizeConfig.screenWidthPercentage(35),
+                child: AspectRatio(
+                  aspectRatio: 6 / 7,
+                  child: Image.network('https://i.redd.it/26s9eejm8vz51.png'),
+                ),
+              ),
+              const UserName(name: 'Brilliant_Program232'),
+              const OnlineStatus(),
+              const SizedBox(height: 10),
+              AppButton.icon(
+                // text: Text(
+                //   'Style Avatar',
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .bodyText1
+                //       ?.copyWith(fontWeight: FontWeight.w800),
+                // ),
+                text: 'Style Avatar',
+                icon: FontAwesomeIcons.tshirt,
+                onTap: () {
+                  // TODO
+                },
+              ),
+              const AdditionalUserInfo()
+            ],
+          ),
         ),
         CloseButton(/*closeDrawer: closeDrawer*/),
       ],

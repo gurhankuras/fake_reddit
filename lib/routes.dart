@@ -157,7 +157,7 @@ abstract class AppRouter {
       case Routes.chatPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChatBloc()..add(ChatEvent.messagedLoaded()),
+            create: (context) => ChatBloc(),
             child: ChatPage(),
           ),
           settings: settings,

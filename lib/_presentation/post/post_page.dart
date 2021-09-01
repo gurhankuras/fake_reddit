@@ -89,7 +89,7 @@ class _PostPageState extends State<PostPage>
                 post: widget.post,
               ),
             ),
-            AddComment()
+            AddComment(hintText: 'Add a comment')
           ],
         ),
       ),

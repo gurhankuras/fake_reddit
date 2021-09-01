@@ -22,6 +22,7 @@ class AppDrawer extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
+          // const SizedBox(height: 25),
           const UserInfo(),
           const Expanded(
             child: Options(),

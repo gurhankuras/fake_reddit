@@ -7,4 +7,6 @@ abstract class Assets {
   static const shibaInu = 'assets/shiba-inu.svg';
   static const spinner = 'assets/spinner.gif';
   static const redditFailure = 'assets/reddit-failure.png';
+  static const coin = 'assets/coin.svg';
+  static const play_button = 'assets/play-button.svg';
 }
