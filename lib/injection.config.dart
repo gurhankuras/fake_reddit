@@ -5,40 +5,54 @@
 // **************************************************************************
 
 import 'package:dio/dio.dart' as _i3;
+import 'package:firebase_messaging/firebase_messaging.dart' as _i4;
+import 'package:flutter/material.dart' as _i37;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart'
+    as _i5;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:shared_preferences/shared_preferences.dart' as _i30;
+import 'package:shared_preferences/shared_preferences.dart' as _i43;
 
-import 'application/auth/auth_bloc.dart' as _i25;
-import 'application/auth/login_form/login_form_bloc.dart' as _i27;
-import 'application/auth/sign_up_form/sign_up_form_bloc.dart' as _i11;
-import 'application/subreddit/subreddit_bloc.dart' as _i20;
-import 'domain/auth/i_auth_service.dart' as _i26;
-import 'domain/auth/i_google_auth_service.dart' as _i4;
-import 'domain/auth/sign_up_verificator.dart' as _i12;
-import 'domain/auth/token_cache_service.dart' as _i31;
-import 'domain/feed/i_feed_service.dart' as _i23;
-import 'domain/i_image_service.dart' as _i7;
-import 'domain/i_key_generator.dart' as _i9;
-import 'domain/i_network_connectivity.dart' as _i14;
-import 'domain/i_token_cache_service.dart' as _i22;
-import 'domain/post/i_post_cache_tagger.dart' as _i15;
-import 'domain/subreddit/i_subreddit_service.dart' as _i18;
-import 'infastructure/auth/auth_service.dart' as _i32;
-import 'infastructure/auth/google_auth_service.dart' as _i5;
-import 'infastructure/auth/i_sign_up_verificator.dart' as _i28;
-import 'infastructure/core/cache_service.dart' as _i17;
-import 'infastructure/core/connectivity_dio_checker.dart' as _i13;
-import 'infastructure/core/image_service.dart' as _i8;
-import 'infastructure/core/network_connectivity.dart' as _i29;
-import 'infastructure/core/simple_key_generator.dart' as _i10;
-import 'infastructure/core/token_dio_interceptor.dart' as _i21;
-import 'infastructure/feed/fake_feed_service.dart' as _i24;
-import 'infastructure/post/post_cache_tagger.dart' as _i16;
-import 'infastructure/subreddit/subreddit_service.dart' as _i19;
+import 'application/auth/auth_bloc.dart' as _i34;
+import 'application/auth/login_form/login_form_bloc.dart' as _i36;
+import 'application/auth/sign_up_form/sign_up_form_bloc.dart' as _i19;
+import 'application/navigation_service.dart' as _i41;
+import 'application/notification/bloc/notification_bloc.dart' as _i42;
+import 'application/snackbar_service.dart' as _i14;
+import 'application/subreddit/subreddit_bloc.dart' as _i29;
+import 'domain/auth/i_auth_service.dart' as _i35;
+import 'domain/auth/i_google_auth_service.dart' as _i7;
+import 'domain/auth/token_cache_service.dart' as _i44;
+import 'domain/auth/user_remote_checker.dart' as _i16;
+import 'domain/feed/i_feed_service.dart' as _i32;
+import 'domain/i_image_service.dart' as _i9;
+import 'domain/i_key_generator.dart' as _i11;
+import 'domain/i_network_connectivity.dart' as _i21;
+import 'domain/i_snackbar_service.dart' as _i13;
+import 'domain/i_socket_manager.dart' as _i39;
+import 'domain/i_token_cache_service.dart' as _i31;
+import 'domain/post/i_post_cache_tagger.dart' as _i24;
+import 'domain/subreddit/i_subreddit_service.dart' as _i27;
+import 'infastructure/auth/auth_service.dart' as _i45;
+import 'infastructure/auth/google_auth_service.dart' as _i8;
+import 'infastructure/auth/i_user_remote_checker.dart' as _i15;
+import 'infastructure/chat/chat_messages_repository.dart' as _i22;
+import 'infastructure/chat/chat_messages_service.dart' as _i23;
+import 'infastructure/core/cache_service.dart' as _i26;
+import 'infastructure/core/connectivity_dio_checker.dart' as _i20;
+import 'infastructure/core/image_service.dart' as _i10;
+import 'infastructure/core/network_connectivity.dart' as _i38;
+import 'infastructure/core/simple_key_generator.dart' as _i12;
+import 'infastructure/core/token_dio_interceptor.dart' as _i30;
+import 'infastructure/feed/fake_feed_service.dart' as _i33;
+import 'infastructure/notification/local_notifications_service.dart' as _i17;
+import 'infastructure/notification/push_notification_service.dart' as _i18;
+import 'infastructure/post/post_cache_tagger.dart' as _i25;
+import 'infastructure/socket_manager.dart' as _i40;
+import 'infastructure/subreddit/subreddit_service.dart' as _i28;
 import 'infastructure/third_party_modules.dart'
-    as _i33; // ignore_for_file: unnecessary_lambdas
+    as _i46; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -46,58 +60,92 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
     {String? environment, _i2.EnvironmentFilter? environmentFilter}) async {
   final gh = _i2.GetItHelper(get, environment, environmentFilter);
   final dioModule = _$DioModule();
+  final firebaseModule = _$FirebaseModule();
+  final localNotificationsModule = _$LocalNotificationsModule();
+  final navigatorKeyModule = _$NavigatorKeyModule();
   final googleSignInModule = _$GoogleSignInModule();
   final sharedPrefsModule = _$SharedPrefsModule();
   gh.factory<_i3.BaseOptions>(() => dioModule.baseOptions,
       instanceName: 'BaseOptions');
   gh.factory<_i3.Dio>(
       () => dioModule.dio(get<_i3.BaseOptions>(instanceName: 'BaseOptions')));
-  gh.lazySingleton<_i4.IGoogleAuthService>(
-      () => _i5.GoogleAuthService(googleSignIn: get<_i6.GoogleSignIn>()));
-  gh.lazySingleton<_i7.IImageService>(() => _i8.ImageService());
-  gh.lazySingleton<_i9.IKeyGenerator>(() => _i10.SimpleTypeKeyGenerator());
-  gh.lazySingleton<_i11.SignUpFormatValidator>(
-      () => _i11.SignUpFormatValidator());
-  gh.lazySingleton<_i12.SignUpVerificator>(() => _i12.SignUpVerificator());
-  gh.factory<_i13.ConnectivityDioChecker>(
-      () => _i13.ConnectivityDioChecker(get<_i14.INetworkConnectivity>()));
-  gh.lazySingleton<_i15.IPostCacheTagger>(
-      () => _i16.PostCacheTagger(cacheService: get<_i17.CacheService>()));
-  gh.lazySingleton<_i18.ISubredditService>(() => _i19.SubredditService(
-      dio: get<_i3.Dio>(), tagger: get<_i15.IPostCacheTagger>()));
-  gh.factory<_i20.SubredditBloc>(() =>
-      _i20.SubredditBloc(subredditService: get<_i18.ISubredditService>()));
-  gh.factory<_i21.TokenDioInterceptor>(() => _i21.TokenDioInterceptor(
-      tokenCacheService: get<_i22.ITokenCacheService>()));
-  gh.lazySingleton<_i23.IFeedService>(
-      () => _i24.FakeFeedService(tagger: get<_i15.IPostCacheTagger>()));
-  gh.factory<_i25.AuthBloc>(
-      () => _i25.AuthBloc(authService: get<_i26.IAuthService>()));
-  gh.factory<_i27.LoginFormBloc>(() => _i27.LoginFormBloc(
-      authBloc: get<_i25.AuthBloc>(), authService: get<_i26.IAuthService>()));
-  gh.factory<_i11.SignUpFormBloc>(() => _i11.SignUpFormBloc(
-      authBloc: get<_i25.AuthBloc>(),
-      authService: get<_i26.IAuthService>(),
-      verificator: get<_i28.ISignUpVerificator>(),
-      formatValidator: get<_i11.SignUpFormatValidator>()));
-  gh.singleton<_i6.GoogleSignIn>(googleSignInModule.googleSignIn);
-  gh.singleton<_i14.INetworkConnectivity>(_i29.NetworkConnectivity());
-  await gh.singletonAsync<_i30.SharedPreferences>(() => sharedPrefsModule.prefs,
+  gh.lazySingleton<_i4.FirebaseMessaging>(
+      () => firebaseModule.firebaseMessaging);
+  gh.lazySingleton<_i5.FlutterLocalNotificationsPlugin>(
+      () => localNotificationsModule.localNotifications);
+  gh.lazySingleton<_i6.GoogleSignIn>(() => googleSignInModule.googleSignIn);
+  gh.lazySingleton<_i7.IGoogleAuthService>(
+      () => _i8.GoogleAuthService(googleSignIn: get<_i6.GoogleSignIn>()));
+  gh.lazySingleton<_i9.IImageService>(() => _i10.ImageService());
+  gh.lazySingleton<_i11.IKeyGenerator>(() => _i12.SimpleTypeKeyGenerator());
+  gh.lazySingleton<_i13.ISnackbarService>(() => _i14.SnackbarService());
+  gh.lazySingleton<_i15.IUserRemoteChecker>(() => _i16.UserRemoteChecker());
+  gh.lazySingleton<_i17.LocalNotificationsService>(() =>
+      _i17.LocalNotificationsService(
+          localNotifications: get<_i5.FlutterLocalNotificationsPlugin>()));
+  gh.lazySingleton<_i18.PushNotificationService>(() =>
+      _i18.PushNotificationService(
+          get<_i4.FirebaseMessaging>(), get<_i17.LocalNotificationsService>()));
+  gh.lazySingleton<_i19.SignUpFormatValidator>(
+      () => _i19.SignUpFormatValidator());
+  gh.factory<_i20.ConnectivityDioChecker>(
+      () => _i20.ConnectivityDioChecker(get<_i21.INetworkConnectivity>()));
+  gh.lazySingleton<_i22.IChatMessagesRepository>(() =>
+      _i22.ChatMessagesRepository(
+          dio: get<_i3.Dio>(), network: get<_i21.INetworkConnectivity>()));
+  gh.lazySingleton<_i23.IChatMessagesService>(() => _i23.ChatMessagesService(
+      chatMessagesRepository: get<_i22.IChatMessagesRepository>()));
+  gh.lazySingleton<_i24.IPostCacheTagger>(
+      () => _i25.PostCacheTagger(cacheService: get<_i26.CacheService>()));
+  gh.lazySingleton<_i27.ISubredditService>(() => _i28.SubredditService(
+      dio: get<_i3.Dio>(), tagger: get<_i24.IPostCacheTagger>()));
+  gh.factory<_i29.SubredditBloc>(() =>
+      _i29.SubredditBloc(subredditService: get<_i27.ISubredditService>()));
+  gh.factory<_i30.TokenDioInterceptor>(() => _i30.TokenDioInterceptor(
+      tokenCacheService: get<_i31.ITokenCacheService>()));
+  gh.lazySingleton<_i32.IFeedService>(
+      () => _i33.FakeFeedService(tagger: get<_i24.IPostCacheTagger>()));
+  gh.factory<_i34.AuthBloc>(
+      () => _i34.AuthBloc(authService: get<_i35.IAuthService>()));
+  gh.factory<_i36.LoginFormBloc>(() => _i36.LoginFormBloc(
+      authBloc: get<_i34.AuthBloc>(),
+      authService: get<_i35.IAuthService>(),
+      snackService: get<_i13.ISnackbarService>()));
+  gh.factory<_i19.SignUpFormBloc>(() => _i19.SignUpFormBloc(
+      authBloc: get<_i34.AuthBloc>(),
+      snackbarService: get<_i13.ISnackbarService>(),
+      authService: get<_i35.IAuthService>(),
+      checker: get<_i15.IUserRemoteChecker>(),
+      formatValidator: get<_i19.SignUpFormatValidator>()));
+  gh.singleton<_i37.GlobalKey<_i37.NavigatorState>>(
+      navigatorKeyModule.navigatorKey);
+  gh.singleton<_i21.INetworkConnectivity>(_i38.NetworkConnectivity());
+  gh.singleton<_i39.ISocketManager>(_i40.SocketManager());
+  gh.singleton<_i41.NavigationService>(_i41.NavigationService());
+  gh.singleton<_i42.NotificationBloc>(
+      _i42.NotificationBloc(socketManager: get<_i39.ISocketManager>()));
+  await gh.singletonAsync<_i43.SharedPreferences>(() => sharedPrefsModule.prefs,
       preResolve: true);
-  gh.singleton<_i17.CacheService>(_i17.CacheService(
-      keyGenerator: get<_i9.IKeyGenerator>(),
-      prefs: get<_i30.SharedPreferences>()));
-  gh.singleton<_i22.ITokenCacheService>(
-      _i31.TokenCacheService(cacheService: get<_i17.CacheService>()));
-  gh.singleton<_i26.IAuthService>(_i32.AuthService(
+  gh.singleton<_i26.CacheService>(_i26.CacheService(
+      keyGenerator: get<_i11.IKeyGenerator>(),
+      prefs: get<_i43.SharedPreferences>()));
+  gh.singleton<_i31.ITokenCacheService>(
+      _i44.TokenCacheService(cacheService: get<_i26.CacheService>()));
+  gh.singleton<_i35.IAuthService>(_i45.AuthService(
       dio: get<_i3.Dio>(),
-      tokenService: get<_i22.ITokenCacheService>(),
-      googleAuthService: get<_i4.IGoogleAuthService>()));
+      tokenService: get<_i31.ITokenCacheService>(),
+      googleAuthService: get<_i7.IGoogleAuthService>()));
   return get;
 }
 
-class _$DioModule extends _i33.DioModule {}
+class _$DioModule extends _i46.DioModule {}
 
-class _$GoogleSignInModule extends _i33.GoogleSignInModule {}
+class _$FirebaseModule extends _i46.FirebaseModule {}
 
-class _$SharedPrefsModule extends _i33.SharedPrefsModule {}
+class _$LocalNotificationsModule extends _i46.LocalNotificationsModule {}
+
+class _$NavigatorKeyModule extends _i46.NavigatorKeyModule {}
+
+class _$GoogleSignInModule extends _i46.GoogleSignInModule {}
+
+class _$SharedPrefsModule extends _i46.SharedPrefsModule {}

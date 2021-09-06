@@ -2,14 +2,16 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
 
 import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/auth/model/login_credentials.dart';
 import '../../../domain/core/value_failure.dart';
 import '../../../utility/app_logger.dart';
-
 import '../auth_bloc.dart';
 
 part 'login_form_bloc.freezed.dart';
@@ -20,9 +22,11 @@ part 'login_form_state.dart';
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final AuthBloc authBloc;
   final IAuthService authService;
+  final ISnackbarService snackService;
   LoginFormBloc({
     required this.authBloc,
     required this.authService,
+    required this.snackService,
   }) : super(LoginFormState.initial()) {
     log.v('LoginFormBloc created!');
   }
@@ -64,10 +68,15 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         );
 
         yield* failureOrSuccess.fold(
-          (l) async* {
+          (failure) async* {
+            snackService.show(
+                message: failure.message, indicatorColor: Colors.red);
+            print('FAILED');
+            print(failure);
             yield state.copyWith(isSubmitting: false);
           },
           (r) async* {
+            print('SUCCEED');
             authBloc.add(const AuthEvent.authCheckRequested());
             yield state.copyWith(isSubmitting: false);
           },

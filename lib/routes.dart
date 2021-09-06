@@ -7,6 +7,10 @@ import 'package:reddit_clone/_presentation/chat/chat_page.dart';
 import 'package:reddit_clone/_presentation/post/post_page.dart';
 import 'package:reddit_clone/application/chat/chat/chat_bloc.dart';
 import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
+import 'package:reddit_clone/domain/i_socket_manager.dart';
+import 'package:reddit_clone/infastructure/auth/i_user_remote_checker.dart';
+import 'package:reddit_clone/infastructure/chat/chat_messages_service.dart';
 
 import '_presentation/auth/login_page.dart';
 import '_presentation/auth/sign_up_page.dart';
@@ -27,19 +31,19 @@ import 'application/change_community_avatar/change_community_avatar_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/subreddit/subreddit_bloc.dart';
 import 'domain/auth/i_auth_service.dart';
-import 'domain/auth/sign_up_verificator.dart';
+import 'domain/auth/user_remote_checker.dart';
 import 'domain/subreddit/subreddit_info.dart';
 import 'domain/i_image_service.dart';
 import 'domain/post/post_entry.dart';
 import 'domain/subreddit/i_subreddit_service.dart';
-import 'home_page.dart';
+import 'home_nav_page.dart';
 import 'infastructure/core/image_service.dart';
 import 'injection.dart';
-import 'main_page.dart';
+import 'bottom_nav_page.dart';
 
 abstract class Routes {
-  static const homePage = '/homePage';
-  static const mainPage = '/mainPage';
+  static const homeNavPage = '/homeNavPage';
+  static const bottomNavPage = '/bottomNavPage';
   static const splashPage = '/splash';
   static const signupPage = '/signupPage';
   static const loginPage = '/loginPage';
@@ -60,7 +64,7 @@ abstract class Routes {
 abstract class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case Routes.mainPage:
+      case Routes.bottomNavPage:
         return MaterialPageRoute(
           builder: (_) => MultiProvider(
             providers: [
@@ -68,10 +72,10 @@ abstract class AppRouter {
                 create: (context) => MainPageBloc(context: context),
               ),
               Provider(
-                create: (context) => ScrollControllers(),
+                create: (context) => HomeControllerManager(),
               ),
             ],
-            child: const MainPage(),
+            child: const BottomNavPage(),
           ),
           settings: settings,
         );
@@ -80,8 +84,9 @@ abstract class AppRouter {
         return PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
             create: (context) => SignUpFormBloc(
+              snackbarService: getIt<ISnackbarService>(),
               authBloc: context.read<AuthBloc>(),
-              verificator: SignUpVerificator(),
+              checker: getIt<IUserRemoteChecker>(),
               formatValidator: SignUpFormatValidator(),
               authService: getIt<IAuthService>(),
             ),
@@ -98,6 +103,7 @@ abstract class AppRouter {
             create: (context) => LoginFormBloc(
               authBloc: context.read<AuthBloc>(),
               authService: getIt<IAuthService>(),
+              snackService: getIt<ISnackbarService>(),
             ),
             child: LoginPage(animation: animation),
           ),
@@ -148,16 +154,19 @@ abstract class AppRouter {
           ),
           settings: settings,
         );
-      case Routes.homePage:
+      case Routes.homeNavPage:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(),
+          builder: (_) => const HomeNavPage(),
           settings: settings,
         );
 
       case Routes.chatPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChatBloc(),
+            create: (context) => ChatBloc(
+              chatMessagesService: getIt<IChatMessagesService>(),
+              socketManager: getIt<ISocketManager>(),
+            )..add(ChatEvent.messagesFetchingStarted()),
             child: ChatPage(),
           ),
           settings: settings,

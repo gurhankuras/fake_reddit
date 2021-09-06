@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,6 +41,25 @@ abstract class SharedPrefsModule {
 
 @module
 abstract class GoogleSignInModule {
-  @Singleton()
+  @LazySingleton()
   GoogleSignIn get googleSignIn => GoogleSignIn();
+}
+
+@module
+abstract class FirebaseModule {
+  @LazySingleton()
+  FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
+}
+
+@module
+abstract class LocalNotificationsModule {
+  @LazySingleton()
+  FlutterLocalNotificationsPlugin get localNotifications =>
+      FlutterLocalNotificationsPlugin();
+}
+
+@module
+abstract class NavigatorKeyModule {
+  @Singleton()
+  GlobalKey<NavigatorState> get navigatorKey => GlobalKey<NavigatorState>();
 }

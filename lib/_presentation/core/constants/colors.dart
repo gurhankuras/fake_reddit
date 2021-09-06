@@ -13,11 +13,16 @@ abstract class AppColors {
   static const Color iron = Color(0xFFd1d2d4);
 
   static const Color grey = Color(0xFF757776);
+  static const Color greyBlack = Color(0xFF3E3F3F);
+  static const Color darkgreyBlack = Color(0xFF302F2F);
 
   static const Color green = Colors.green;
+  static const Color lightGreen = Color(0xFF08FF1D);
+
   static const Color red = Color(0xFFec0924);
   static const Color orange = Color(0xFFfe851a);
   static final Color pink = Colors.pinkAccent[400]!;
+  static const Color blue = Color(0xFF0D6CFC);
 
   static const Color camelot = Color(0xFF7A2E4A);
 

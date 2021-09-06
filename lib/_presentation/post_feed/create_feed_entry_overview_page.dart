@@ -80,8 +80,8 @@ class CreateFeedEntryOverviewPage extends StatelessWidget {
         Center(
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context)
-                  .popUntil((route) => route.settings.name == Routes.mainPage);
+              Navigator.of(context).popUntil(
+                  (route) => route.settings.name == Routes.bottomNavPage);
               context.read<CreateFeedBloc>().add(CreateFeedEvent.feedPosted());
             },
             child: BlocBuilder<CreateFeedBloc, CreateFeedState>(

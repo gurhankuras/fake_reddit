@@ -109,25 +109,7 @@ class _ActivityTabPageState extends State<ActivityTabPage>
     _scrollController = ScrollController();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    // _opacityAnimation =
-    _scrollController.addListener(() async {
-      // print(_scrollController.position.minScrollExtent);
-      print(_scrollController.offset + 50);
-      _animationController.value = -_scrollController.offset / 50;
-      if (_scrollController.position.minScrollExtent >=
-          _scrollController.offset + 50) {
-        print('Gecti');
-        if (!isLoading) {
-          setState(() {
-            isLoading = true;
-          });
-          await Future.delayed(Duration(seconds: 3));
-          setState(() {
-            isLoading = false;
-          });
-        }
-      }
-    });
+
     super.initState();
   }
 
@@ -147,29 +129,6 @@ class _ActivityTabPageState extends State<ActivityTabPage>
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // if (isLoading)
-              // AnimatedBuilder(
-              //   animation: _animationController,
-              //   builder: (context, child) => FadeTransition(
-              //     opacity: _animationController,
-              //     child: child,
-              //     // padding: EdgeInsets.only(bottom: -_scrollController.offset),
-              //   ),
-              //   child:
-
-              // RefreshIndicator(
-              //     child: CircularProgressIndicator(),
-              //     onRefresh: () async {
-              //       await Future.delayed(
-              //           Duration(seconds: 2), () => print('asdasdsad'));
-              //     }),
-              // ),
-              // Container(
-              //   color: Colors.green,
-              //   height: 100,
-              //   width: double.infinity,
-              // ),
-
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(

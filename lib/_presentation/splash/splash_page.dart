@@ -1,25 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/application/navigation_service.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../routes.dart';
 import '../core/constants/colors.dart';
 import '../core/size_config.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    // print(MediaQuery.of(context).devicePixelRatio);
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeMap(
-          initial: (state) {},
-          orElse: () =>
-              Navigator.of(context).pushReplacementNamed(Routes.mainPage),
-        );
+            initial: (state) {},
+            orElse: () => getIt<NavigationService>()
+                .replaceAndNavigateTo(Routes.bottomNavPage));
       },
       child: Container(
         color: AppColors.splashBackground,
@@ -28,11 +38,7 @@ class SplashPage extends StatelessWidget {
             children: [
               const Spacer(),
               SizedBox(
-                width: SizeConfig.screenHeightPercentage(12)
-                //  *
-                //     MediaQuery.of(context).devicePixelRatio /
-                //     2.65,
-                ,
+                width: SizeConfig.screenHeightPercentage(12),
                 child: Image.asset(
                   'assets/reddit-logo.png',
                 ),

@@ -20,57 +20,72 @@ import 'infastructure/core/cache_service.dart';
 import 'infastructure/feed/fake_feed_service.dart';
 import 'routes.dart';
 
-class HomePage extends StatefulWidget {
+class HomeNavPage extends StatefulWidget {
   // final Function? openDrawer;
-  const HomePage({
+  const HomeNavPage({
     Key? key,
     // required this.openDrawer,
   }) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeNavPageState createState() => _HomeNavPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeNavPageState extends State<HomeNavPage>
+    with SingleTickerProviderStateMixin {
+  late final TabController tabController;
+  @override
+  void initState() {
+    super.initState();
+    tabController = TabController(length: 3, vsync: this);
+    context.read<HomeControllerManager>().tabController = tabController;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final scrollControllers = context.read<ScrollControllers>();
+    final scrollControllers = context.read<HomeControllerManager>();
     final tabBarWidget = tabBar;
 
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {
-        //     showSnack(message: 'hahahahaha', context: context);
-        //   },
-        // ),
-        appBar: appBar(tabBarWidget, context),
-        // backgroundColor: Colors.indigo[800],
+    return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     showSnack(message: 'hahahahaha', context: context);
+      //   },
+      // ),
+      appBar: appBar(tabBarWidget, context),
+      // backgroundColor: Colors.indigo[800],
 
-        body: TabBarView(
-          children: [
-            MultiProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => FeedBloc(
-                    feedService: getIt<IFeedService>(),
-                  )..add(FeedEvent.fetchingStarted()),
-                ),
-                Provider.value(value: scrollControllers)
-              ],
-              child: News(),
-            ),
-            HomeTabPage(),
-            Icon(Icons.directions_bike),
-          ],
-        ),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          MultiProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => FeedBloc(
+                  feedService: getIt<IFeedService>(),
+                )..add(FeedEvent.fetchingStarted()),
+              ),
+              Provider.value(value: scrollControllers)
+            ],
+            child: News(),
+          ),
+          Provider.value(
+            value: scrollControllers,
+            child: HomeTabPage(),
+          ),
+          Center(
+              child: CircularProgressIndicator(
+            // backgroundColor: Colors.orange,
+            color: Colors.orange,
+          )),
+        ],
       ),
     );
   }
 
   TabBar get tabBar {
     return TabBar(
+      controller: tabController,
       indicatorSize: TabBarIndicatorSize.label,
       labelPadding: const EdgeInsets.symmetric(horizontal: 10),
       tabs: [
@@ -175,8 +190,8 @@ class _HomePageState extends State<HomePage> {
 }
 
 class NavigationItem {
-  final Icon selectedIcon;
-  final Icon unselectedIcon;
+  final Widget selectedIcon;
+  final Widget unselectedIcon;
   final int index;
 
   const NavigationItem({

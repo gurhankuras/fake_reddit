@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
@@ -11,6 +12,7 @@ import 'package:reddit_clone/_presentation/core/size_config.dart';
 import 'package:reddit_clone/_presentation/core/slivered_circular_progress_indicator.dart';
 import 'package:reddit_clone/_presentation/post/add_comment.dart';
 import 'package:reddit_clone/application/chat/chat/chat_bloc.dart';
+import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
 
 class ChatMessage {
   final String text;
@@ -36,11 +38,37 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late final TextEditingController _messageTextController;
   late final ScrollController _scrollController;
+
+  bool call = false;
   @override
   void initState() {
     super.initState();
     _messageTextController = TextEditingController();
     _scrollController = ScrollController();
+    // _scrollController.addListener(() {
+    //   // print(
+    //   //     '${_scrollController.offset} max: (${_scrollController.position.maxScrollExtent})');
+    // });
+    // _scrollController.addListener(() {
+    //   _isTop();
+    // });
+  }
+
+  void _onScroll() {
+    // if (_isTop) print('TOP');
+  }
+
+  void _isTop() {
+    // if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+
+    if (!call) {
+      print(currentScroll < (maxScroll * 0.45));
+      return;
+    } else if (currentScroll < (maxScroll * 0.45)) {
+      call = true;
+    }
   }
 
   @override
@@ -59,7 +87,7 @@ class _ChatPageState extends State<ChatPage> {
             child: Scrollbar(
               child: CustomScrollView(
                 controller: _scrollController,
-                physics: UIConstants.physics,
+                scrollBehavior: ScrollBehavior().copyWith(overscroll: false),
                 slivers: [
                   SliverToBoxAdapter(
                     child: ChatUserInfo(),
@@ -67,19 +95,41 @@ class _ChatPageState extends State<ChatPage> {
                   BlocBuilder<ChatBloc, ChatState>(
                     builder: (context, state) {
                       return state.loading
-                          ? SliveredCircularProgressIndicator()
+                          ? SliverToBoxAdapter(
+                              child: Text('Loading...'),
+                            )
+                          // SliveredCircularProgressIndicator()
                           : ChatMessages(messages: state.messages);
                     },
-                  )
+                  ),
                 ],
               ),
             ),
           ),
-          // SizedBox(height: 5),
+          // ),
+          SizedBox(height: 5),
           _buildTypeIndicator(),
-          _buildMessageInput()
+          BlocListener<ChatBloc, ChatState>(
+            listenWhen: (previous, current) =>
+                previous.messages.length < current.messages.length,
+            listener: (context, state) {
+              WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                _scrollController
+                    .animateTo(
+                  _scrollController.position.maxScrollExtent,
+                  curve: Curves.easeIn,
+                  duration: Duration(milliseconds: 300),
+                )
+                    .then((_) {
+                  // context.read<ChatBloc>().add(ChatEvent.toggleLoadMore(true));
+                });
+              });
+            },
+            child: _buildMessageInput(),
+          )
         ],
       ),
+      // )
     );
   }
 
@@ -140,7 +190,7 @@ class ChatSendButton extends StatelessWidget {
     messageTextController.clear();
     // scrollController.position.maxScrollExtent doesn't update after item was added to list.
     // we need this workaround
-    Future.delayed(Duration(milliseconds: 100), () {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       scrollController.animateTo(
         scrollController.position.maxScrollExtent,
         curve: Curves.easeIn,
@@ -177,7 +227,7 @@ class ChatSendButton extends StatelessWidget {
 }
 
 class ChatMessages extends StatelessWidget {
-  final List<ChatMessage> messages;
+  final List<ChatMessageDTO> messages;
   const ChatMessages({
     Key? key,
     required this.messages,
@@ -190,16 +240,21 @@ class ChatMessages extends StatelessWidget {
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
+            // print(index);
+            // if (index == 4) {
+            // context.read<ChatBloc>().add(ChatEvent.loadedMoreMessage());
+            // }
             if (index == 0) {
               return ChatMessageBlock(messages[index], hasHead: true);
             }
-            final hasHead = messages[index].senderName !=
-                    messages[index - 1].senderName ||
-                DateTime.parse(messages[index].sentAt)
-                        .difference(DateTime.parse(messages[index - 1].sentAt))
-                        .inMinutes >
-                    3;
-            return ChatMessageBlock(messages[index], hasHead: hasHead);
+            // final hasHead =
+            //     messages[index].user.name != messages[index - 1].user.name ||
+            //         DateTime.parse(messages[index].createdAt!)
+            //                 .difference(
+            //                     DateTime.parse(messages[index - 1].createdAt!))
+            //                 .inMinutes >
+            //             3;
+            return ChatMessageBlock(messages[index], hasHead: true);
           },
           childCount: messages.length,
         ),
@@ -209,7 +264,7 @@ class ChatMessages extends StatelessWidget {
 }
 
 class ChatMessageBlock extends StatelessWidget {
-  final ChatMessage message;
+  final ChatMessageDTO message;
   final bool hasHead;
   const ChatMessageBlock(
     this.message, {
@@ -251,7 +306,7 @@ class ChatText extends StatelessWidget {
 }
 
 class ChatMessageHead extends StatelessWidget {
-  final ChatMessage message;
+  final ChatMessageDTO message;
   const ChatMessageHead(
     this.message, {
     Key? key,
@@ -265,21 +320,21 @@ class ChatMessageHead extends StatelessWidget {
         CircleAvatar(
           maxRadius: 16,
           backgroundColor: Colors.transparent,
-          backgroundImage: NetworkImage(message.senderAvatar),
+          backgroundImage: NetworkImage(message.user.avatar),
         ),
         SizedBox(width: SizeConfig.screenWidthPercentage(1.5)),
         Row(
           children: [
             AppHeaderText(
-              message.senderName,
+              message.user.name,
               fontSizeFactor: 0.7,
             ),
             SizedBox(width: SizeConfig.screenWidthPercentage(1.5)),
-            AppHeaderText(
-              DateFormat('h:mm a').format(DateTime.parse(message.sentAt)),
-              fontSizeFactor: 0.6,
-              color: AppColors.lightGrey,
-            ),
+            // AppHeaderText(
+            //   DateFormat('h:mm a').format(DateTime.parse(message.createdAt!)),
+            //   fontSizeFactor: 0.6,
+            //   color: AppColors.lightGrey,
+            // ),
           ],
         )
       ],

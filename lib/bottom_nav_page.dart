@@ -1,13 +1,16 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/chat/chat_nav_page.dart';
-import 'package:reddit_clone/_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 
-import '_presentation/core/constants/colors.dart';
+import '_presentation/browse/browse_navigator.dart';
+import '_presentation/chat/chat_nav_page.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
-import '_presentation/core/authentication_button.dart';
+import '_presentation/core/constants/colors.dart';
+import '_presentation/core/constants/env.dart';
+import '_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/scroll_controllers.dart';
 import '_presentation/core/size_config.dart';
@@ -15,19 +18,26 @@ import '_presentation/home/home_vm.dart';
 import '_presentation/inbox/inbox_page.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
-import 'home_page.dart';
+import 'application/notification/bloc/notification_bloc.dart';
+import 'home_nav_page.dart';
+import 'infastructure/notification/push_notification_service.dart';
+import 'injection.dart';
 import 'routes.dart';
 
-class MainPage extends StatefulWidget {
-  const MainPage({
+class BottomNavPage extends StatefulWidget {
+  const BottomNavPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  MainPageState createState() => MainPageState();
+  BottomNavPageState createState() => BottomNavPageState();
 }
 
-class MainPageState extends State<MainPage> {
+// Future<void> backgroundNotificationHandler(RemoteMessage message) async {
+//   getIt<NavigationService>().navigateTo(Routes.chatPage);
+// }
+
+class BottomNavPageState extends State<BottomNavPage> {
   late PageController _pageController;
   late MyDrawerController drawerController;
   // late ScrollController scrollController;
@@ -36,7 +46,9 @@ class MainPageState extends State<MainPage> {
   void initState() {
     _pageController = PageController();
     drawerController = context.read<MyDrawerController>();
-    // scrollController = ScrollController();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+      await getIt<PushNotificationService>().initiliase();
+    });
     super.initState();
   }
 
@@ -55,8 +67,9 @@ class MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    print(dotenv.env[EnvKeys.GIPHY_API_KEY]);
     SizeConfig().init(context);
-    print(context.read<ScrollControllers>());
+    print(context.read<HomeControllerManager>());
 
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
@@ -64,11 +77,10 @@ class MainPageState extends State<MainPage> {
           orElse: () => null,
           unauthenticated: (value) =>
               Navigator.of(context).pushNamedAndRemoveUntil(
-            Routes.mainPage,
+            Routes.bottomNavPage,
             (route) => false,
           ),
         );
-        // TODO: implement listener
       },
       child: ScaledDrawer(
         curve: Curves.easeInOut,
@@ -101,32 +113,24 @@ class MainPageState extends State<MainPage> {
   void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
     if (currentIndex == 2) {
       context.read<AuthBloc>().state.maybeMap(
-            // initial: initial,
-            // unauthenticated: unauthenticated,
             authenticated: (_) => Navigator.of(context).pushNamed(
                 Routes.postFeedSearchPage,
                 arguments: context.read<MainPageBloc>()),
             orElse: () => showSignUpSheet(context),
           );
       return;
-    }
-    if (currentIndex != bottomNavigationViewModel.currentPage) {
+    } else if (currentIndex != bottomNavigationViewModel.currentPage) {
       _pageController.jumpToPage(currentIndex);
       bottomNavigationViewModel.changePage(currentIndex);
-    } else {
-      final scrollControllers = context.read<ScrollControllers>();
-      // scrollControllers.initNews();
-      scrollControllers.newsScrollController?.animateTo(0,
-          duration: Duration(milliseconds: 200), curve: Curves.easeIn);
+    } else if (bottomNavigationViewModel.currentPage == 0) {
+      final scrollControllers = context.read<HomeControllerManager>();
+      scrollControllers.scrollToStartOrRefresh();
     }
-    // else {
-    //   scrollController.animateTo(0,
-    //       duration: Duration(milliseconds: 300), curve: Curves.easeInOut);
-    // }
   }
 
   List<NavigationItem> get navigationItems {
-    return const <NavigationItem>[
+    // print(context.read<NotificationBloc>());
+    return <NavigationItem>[
       NavigationItem(
         index: 0,
         unselectedIcon: Icon(Icons.home_outlined),
@@ -145,7 +149,24 @@ class MainPageState extends State<MainPage> {
       NavigationItem(
         index: 3,
         selectedIcon: Icon(FontAwesomeIcons.solidCommentDots),
-        unselectedIcon: Icon(FontAwesomeIcons.commentDots),
+        unselectedIcon:
+            // Icon(FontAwesomeIcons.commentDots)
+            BlocBuilder<NotificationBloc, NotificationState>(
+          builder: (context, state) {
+            return state.info.fold(
+              () => Icon(FontAwesomeIcons.commentDots),
+              (inf) {
+                return inf.unreadMessagesCount != 0
+                    ? Badge(
+                        badgeContent: Text(inf.unreadMessagesCount.toString()),
+                        child: Icon(FontAwesomeIcons.commentDots),
+                        position: BadgePosition.topEnd(end: -10, top: -10),
+                      )
+                    : Icon(FontAwesomeIcons.commentDots);
+              },
+            );
+          },
+        ),
       ),
       NavigationItem(
         index: 4,
@@ -156,7 +177,7 @@ class MainPageState extends State<MainPage> {
   }
 
   Widget buildPage() {
-    final scrollControllers = context.read<ScrollControllers>();
+    final scrollControllers = context.read<HomeControllerManager>();
     return PageView(
       controller: _pageController,
       physics: const NeverScrollableScrollPhysics(),
@@ -164,18 +185,10 @@ class MainPageState extends State<MainPage> {
         // Provider.value(value:
         Provider.value(
           value: scrollControllers,
-          child: const HomePage(),
+          child: const HomeNavPage(),
         ),
         // ),
-        Scaffold(
-          appBar: AppBar(),
-          body: const Center(
-            child: Text(
-              'HAHAHAHAHAHA',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
+        BrowseNavigator(),
         const Center(
           child: Text(
             'Index 3: Settings',

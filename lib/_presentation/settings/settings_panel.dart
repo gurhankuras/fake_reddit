@@ -31,19 +31,19 @@ class SettingsPanelPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SettingsHeader('ACCOUNT SETTINGS'),
+                const SubsectionHeader('ACCOUNT SETTINGS'),
                 const AccountSettingsGroup(),
-                const SettingsHeader('REDDIT PREMIUM'),
+                const SubsectionHeader('REDDIT PREMIUM'),
                 const PremiumSettingsGroup(),
-                const SettingsHeader('VIEW OPTIONS'),
+                const SubsectionHeader('VIEW OPTIONS'),
                 const ViewOptionsSettingsGroup(),
-                const SettingsHeader('DARK MODE'),
+                const SubsectionHeader('DARK MODE'),
                 const DarkModeSettingsGroup(),
-                const SettingsHeader('ADVANCED'),
+                const SubsectionHeader('ADVANCED'),
                 const AdvancedSettingsGroup(),
-                const SettingsHeader('ABOUT'),
+                const SubsectionHeader('ABOUT'),
                 const AboutSettingsGroup(),
-                const SettingsHeader('SUPPORT'),
+                const SubsectionHeader('SUPPORT'),
                 const SupportSettingsGroup(),
               ],
             ),
@@ -52,9 +52,9 @@ class SettingsPanelPage extends StatelessWidget {
   }
 }
 
-class SettingsHeader extends StatelessWidget {
+class SubsectionHeader extends StatelessWidget {
   final String text;
-  const SettingsHeader(
+  const SubsectionHeader(
     this.text, {
     Key? key,
   }) : super(key: key);

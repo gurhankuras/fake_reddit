@@ -5,6 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:reddit_clone/domain/core/constants/endpoints.dart';
+import 'package:reddit_clone/domain/core/failure.dart';
+import 'package:reddit_clone/domain/core/response_error.dart';
+import 'package:reddit_clone/infastructure/core/dio_error_handler.dart';
 
 import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_service.dart';
@@ -19,6 +23,8 @@ import '../core/token_dio_interceptor.dart';
 import 'dto/credentials_dto.dart';
 import 'dto/login_credentials_dto.dart';
 import 'dto/user_tokens_dto.dart';
+
+part './auth_service_failure_handlers.dart';
 
 @Singleton(as: IAuthService)
 class AuthService implements IAuthService {
@@ -52,67 +58,45 @@ class AuthService implements IAuthService {
   // - refresh token expired
   // - user logged out explicitly
   @override
-  Future<Either<AuthFailure, Unit>> loginWithEmail({
+  Future<Either<Failure, Unit>> loginWithEmail({
     required LoginCredentials credentials,
   }) async {
+    final credentialsDto = LoginCredentialsDTO.fromDomain(credentials).toJson();
     try {
-      final response = await dio.post(
-        '/sessions',
-        data: LoginCredentialsDTO.fromDomain(credentials).toJson(),
-      );
+      final response = await dio.post(Endpoints.login, data: credentialsDto);
+      return right(unit);
+    } catch (error) {
+      // handle other errors before makeRemoteFailure
 
-      if (response.statusCode != HttpStatus.ok) {
-        return left(const AuthFailure.serverError());
-      }
-      if (response.data is Map) {
-        final tokens = UserTokensDTO.fromJson(response.data).toDomain();
-        // ignore: unawaited_futures
-        tokenService.setAccessToken(tokens.accessToken);
-        // ignore: unawaited_futures
-        tokenService.setRefreshToken(tokens.refreshToken);
-        return right(unit);
-      }
-      return left(const AuthFailure.serverError());
-    } catch (e) {
-      return left(mapTryErrorToFailure(e));
+      final failure = makeRemoteFailure(error, makeFailureLogin);
+      return left(failure);
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signUp({
+  Future<Either<Failure, Unit>> signUp({
     required Credentials credentials,
   }) async {
+    final credentialsDto = CredentialsDTO.fromDomain(credentials).toJson();
     try {
-      final response = await dio.post(
-        '/users',
-        data: CredentialsDTO.fromDomain(credentials).toJson(),
-      );
+      final response = await dio.post(Endpoints.register, data: credentialsDto);
+      return right(unit);
+    } catch (error) {
+      // handle other errors before makeRemoteFailure
 
-      if (response.statusCode != HttpStatus.ok) {
-        return left(const AuthFailure.serverError());
-      }
-      if (response.data is Map) {
-        return right(unit);
-      }
-      return left(const AuthFailure.serverError());
-    } catch (e) {
-      return left(mapTryErrorToFailure(e));
+      final failure = makeRemoteFailure(error, makeFailureRegister);
+      return left(failure);
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> checkIfUserHasTokens() async {
+  Future<Either<Failure, Unit>> checkIfUserHasTokens() async {
     try {
-      final response = await dio.get('/protected');
-      print(response);
-      if (response.statusCode == HttpStatus.forbidden) {
-        return left(AuthFailure.tokenNotFound());
-      } else if (response.statusCode != HttpStatus.ok) {
-        return left(AuthFailure.serverError());
-      }
+      final response = await dio.get(Endpoints.protected);
       return right(unit);
-    } catch (e) {
-      return left(mapTryErrorToFailure(e));
+    } catch (error) {
+      final failure = makeRemoteFailure(error, makeProtectedFailure);
+      return left(failure);
     }
   }
 
@@ -120,14 +104,14 @@ class AuthService implements IAuthService {
   @override
   Future<void> logOut() async {
     try {
-      final response = await dio.delete(
-        '/sessions',
-      );
+      // final response = await dio.delete(
+      //   '/sessions',
+      // );
 
-      if (response.statusCode == HttpStatus.ok) {
-        await tokenService.clear();
-        await googleAuthService.logOut();
-      }
+      // if (response.statusCode == HttpStatus.ok) {
+      await tokenService.clear();
+      // await googleAuthService.logOut();
+      // }
     } on DioError catch (_) {
       //   if (e.error is NotConnected) {
       //     return left(e.error);
@@ -140,7 +124,7 @@ class AuthService implements IAuthService {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> loginWithGoogle() async {
+  Future<Either<Failure, Unit>> loginWithGoogle() async {
     final userOrFailure = await googleAuthService.login();
     try {
       final user = userOrFailure.fold(
@@ -148,7 +132,7 @@ class AuthService implements IAuthService {
         (user) => user,
       );
       if (user == null) {
-        return userOrFailure.map((r) => unit);
+        return left(Failure(""));
       }
 
       final response = await dio.post(
@@ -161,7 +145,7 @@ class AuthService implements IAuthService {
       );
 
       if (response.statusCode != HttpStatus.ok) {
-        return left(const AuthFailure.serverError());
+        return left(const Failure(""));
       }
       if (response.data is Map) {
         final tokens = UserTokensDTO.fromJson(response.data).toDomain();
@@ -171,21 +155,21 @@ class AuthService implements IAuthService {
         tokenService.setRefreshToken(tokens.refreshToken);
         return right(unit);
       }
-      return left(const AuthFailure.serverError());
+      return left(const Failure(""));
     } catch (e) {
-      return left(mapTryErrorToFailure(e));
+      return left(const Failure(""));
     }
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> signUpWithGoogle() async {
+  Future<Either<Failure, Unit>> signUpWithGoogle() async {
     final userOrFailure = await googleAuthService.login();
     final user = userOrFailure.fold(
       (failure) => null,
       (user) => user,
     );
     if (user == null) {
-      return userOrFailure.map((r) => unit);
+      return left(Failure(""));
     }
     try {
       final response = await dio.post(
@@ -198,34 +182,14 @@ class AuthService implements IAuthService {
       );
 
       if (response.statusCode != HttpStatus.ok) {
-        return left(const AuthFailure.serverError());
+        return left(const Failure(""));
       }
       if (response.data is Map) {
         return right(unit);
       }
-      return left(const AuthFailure.serverError());
+      return left(const Failure(""));
     } catch (e) {
-      return left(mapTryErrorToFailure(e));
+      return left(const Failure(""));
     }
   }
 }
-
-AuthFailure mapTryErrorToFailure(Object e) {
-  if (e is DioError) {
-    if (e.error is NotConnected) {
-      return e.error;
-    }
-    return AuthFailure.serverError();
-  }
-  return AuthFailure.unexpected();
-}
-
-// error: true,
-// logPrint: log.i,
-// maxWidth: 200,
-// request: true,
-// requestBody: true,
-// requestHeader: true,
-// responseBody: true,
-// responseHeader: true,
-// compact: false,

@@ -1,3 +1,5 @@
+import 'package:reddit_clone/domain/core/failure.dart';
+
 import '../../domain/i_network_connectivity.dart';
 
 import '../../../domain/auth/auth_failure.dart';
@@ -17,7 +19,7 @@ class ConnectivityDioChecker extends Interceptor {
     if (!hasConnection) {
       return handler.reject(DioError(
         requestOptions: options,
-        error: AuthFailure.notConnected(),
+        error: Failure.unexpected(''),
       ));
     }
     handler.next(options);

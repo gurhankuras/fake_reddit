@@ -5,11 +5,13 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
+
 import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/auth/model/credentials.dart';
 import '../../../domain/auth/model/login_credentials.dart';
 import '../../../domain/core/value_failure.dart';
-import '../../../infastructure/auth/i_sign_up_verificator.dart';
+import '../../../infastructure/auth/i_user_remote_checker.dart';
 import '../../../utility/app_logger.dart';
 import '../auth_bloc.dart';
 
@@ -21,14 +23,16 @@ part 'sign_up_form_state.dart';
 class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final AuthBloc authBloc;
   final IAuthService authService;
-  final ISignUpVerificator verificator;
+  final IUserRemoteChecker checker;
   final SignUpFormatValidator formatValidator;
+  final ISnackbarService snackbarService;
 
   SignUpFormBloc({
     required this.authBloc,
     required this.authService,
-    required this.verificator,
+    required this.checker,
     required this.formatValidator,
+    required this.snackbarService,
   }) : super(SignUpFormState.initial(formatValidator)) {
     log.v('SignUpFormBloc created!');
   }
@@ -45,7 +49,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           () async* {
             yield state.copyWith(checkingUsername: true);
             final noneOrVerificationFailure =
-                await verificator.username(e.username);
+                await checker.username(e.username);
             yield state.copyWith(
               checkingUsername: false,
               username: e.username,
@@ -79,7 +83,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
           // passed format checked now go to server and check if email already exists
           () async* {
             yield state.copyWith(checkingEmail: true);
-            final noneOrVerificationFailure = await verificator.email(e.email);
+            final noneOrVerificationFailure = await checker.email(e.email);
             yield state.copyWith(
               checkingEmail: false,
               email: e.email,
@@ -131,7 +135,8 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
         );
 
         yield* failureOrSuccess.fold(
-          (l) async* {
+          (f) async* {
+            snackbarService.error(f.message);
             // yield state.copyWith(isSubmitting: false);
             yield state;
           },
@@ -143,7 +148,8 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
               ),
             );
             yield* signInOrFailure.fold(
-              (l) async* {
+              (f) async* {
+                snackbarService.error(f.message);
                 yield state;
               },
               (r) async* {

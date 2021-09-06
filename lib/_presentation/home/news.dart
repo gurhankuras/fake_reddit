@@ -2,13 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import '../../application/home_tab_page/feed_bloc.dart';
-import '../post_widget_factory.dart';
 import '../../domain/post/post_entry.dart';
 import '../core/scroll_controllers.dart';
+import '../post_widget_factory.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
@@ -18,8 +17,7 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: false);
+  late final RefreshController _refreshController;
   late final ScrollController _scrollController;
 
   final ItemScrollController itemScrollController = ItemScrollController();
@@ -37,12 +35,12 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
 
   @override
   void initState() {
-    final scrollControllers = context.read<ScrollControllers>();
-
-    if (context.read<ScrollControllers>().newsScrollController == null) {
-      scrollControllers.initNews();
-    }
-    _scrollController = context.read<ScrollControllers>().newsScrollController!;
+    final scrollControllers = context.read<HomeControllerManager>();
+    final scrollManager = context.read<HomeControllerManager>();
+    _scrollController =
+        scrollManager.getScrollController(HomeScrollersEnum.news);
+    _refreshController =
+        scrollManager.getRefreshController(HomeScrollersEnum.news);
     super.initState();
   }
 

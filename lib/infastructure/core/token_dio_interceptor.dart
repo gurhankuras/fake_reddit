@@ -30,7 +30,8 @@ class TokenDioInterceptor extends Interceptor {
   @override
   Future<void> onResponse(
       Response response, ResponseInterceptorHandler handler) async {
-    final accessToken = response.headers.value('x-access-token');
+    final accessToken = response.headers.value('authorization');
+    // print(response.headers);
     if (accessToken != null) {
       // ignore: unawaited_futures
       tokenCacheService.setAccessToken(accessToken);

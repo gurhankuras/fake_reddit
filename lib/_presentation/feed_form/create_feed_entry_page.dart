@@ -51,7 +51,7 @@ class CreateFeedEntryPage extends StatelessWidget {
       leading: CloseButton(
         onPressed: () {
           Navigator.of(context)
-              .popUntil((route) => route.settings.name == Routes.mainPage);
+              .popUntil((route) => route.settings.name == Routes.bottomNavPage);
         },
       ),
       actions: actions(context, bloc),
