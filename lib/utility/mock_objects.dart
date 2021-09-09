@@ -1,16 +1,13 @@
 import 'package:flutter_lorem/flutter_lorem.dart';
-import 'package:reddit_clone/domain/image_data.dart';
-import 'package:uuid/uuid.dart';
+import 'package:reddit_clone/domain/subreddit/subreddit_rule.dart';
 
-import '../domain/post/image_post_entry.dart';
-import '../domain/post/link_post_entry.dart';
-import '../domain/post/post_entry.dart';
-import '../domain/post/text_post_entry.dart';
 import '../domain/core/user.dart';
+import '../domain/image_data.dart';
+import '../domain/post/post_entry.dart';
 
 List<PostEntry> mockMixedPosts = [
-  TextPostEntry(
-    type: 1,
+  PostEntry(
+    type: PostType.text,
     isNFSW: true,
     bodyText: 'This is body text',
     commentCount: 5,
@@ -24,8 +21,8 @@ List<PostEntry> mockMixedPosts = [
         nickname: 'gurhankuras'),
     id: '1234567',
   ),
-  ImagePostEntry(
-    type: 2,
+  PostEntry(
+    type: PostType.image,
     isNFSW: false,
     commentCount: 14,
     contentText: 'What a beautiful scene!',
@@ -40,8 +37,8 @@ List<PostEntry> mockMixedPosts = [
         nickname: 'nicetoknoww'),
     id: '12345678',
   ),
-  ImagePostEntry(
-    type: 2,
+  PostEntry(
+    type: PostType.image,
     isNFSW: true,
     // bodyText: lorem(paragraphs: 1, words: 30),
     commentCount: 2,
@@ -57,8 +54,8 @@ List<PostEntry> mockMixedPosts = [
         nickname: 'hahatani'),
     id: '123456789',
   ),
-  LinkPostEntry(
-    type: 3,
+  PostEntry(
+    type: PostType.link,
     isNFSW: false,
     url: 'imgur.com',
     commentCount: 2,
@@ -74,8 +71,8 @@ List<PostEntry> mockMixedPosts = [
         nickname: 'hahatani'),
     id: '1234567891',
   ),
-  LinkPostEntry(
-    type: 3,
+  PostEntry(
+    type: PostType.link,
     isNFSW: true,
     url: 'imgur.com',
     commentCount: 2,
@@ -93,8 +90,8 @@ List<PostEntry> mockMixedPosts = [
   ),
 ];
 
-PostEntry mockPostEntry = TextPostEntry(
-  type: 1,
+PostEntry mockPostEntry = PostEntry(
+  type: PostType.text,
   subreddit: 'berserklejerk',
   // bodyText: 'nasilsin hahahhaha',
   user: User(
@@ -109,3 +106,32 @@ PostEntry mockPostEntry = TextPostEntry(
   commentCount: 432, bodyText: lorem(paragraphs: 1, words: 30),
   id: uuid.v4(),
 );
+
+List<SubredditRule> get fakeRules => [
+      SubredditRule(
+        header: 'Appropriate Content',
+        content:
+            'Content posted to /r/nextfuckinglevel should be a gif or video tha represents something impressive, be it an action, object, a skill, moment, a fact that is above all others. Posts should elicit a reaction of "that is next level" from viewers (different from "wow that\'s cool")',
+      ),
+      SubredditRule(
+        header: 'Use Descriptive Title',
+        content:
+            'Content posted to /r/nextfuckinglevel should be a gif or video tha represents something impressive, be it an action, object, a skill, moment, a fact that is above all others. Posts should elicit a reaction of "that is next level" from viewers (different from "wow that\'s cool")',
+      ),
+      SubredditRule(
+        header:
+            'All spoilers must be appropriately tagged/flaired flaired flaired',
+        content:
+            'Spoilers don\'t expire. So treat them appropriately as there are always new readers. Please use reddit\'s spoiler tagsa and flairs to',
+      ),
+      SubredditRule(
+        header: 'Use Descriptive Title',
+        content:
+            'Content posted to /r/nextfuckinglevel should be a gif or video ',
+      ),
+      SubredditRule(
+        header: 'Use Descriptive Title',
+        content:
+            'Content posted to /r/nextfuckinglevel should be a gif or video tha represents something impressive, be it an action, object, a skill, moment, a fact that is above all others. Posts should elicit a reaction of "that is next level" from viewers (different from "wow that\'s cool")',
+      ),
+    ];

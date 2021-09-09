@@ -5,11 +5,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../domain/feed/i_feed_service.dart';
 import '../../domain/post/post_entry.dart';
+import 'package:injectable/injectable.dart';
 
 part 'feed_bloc.freezed.dart';
 part 'feed_event.dart';
 part 'feed_state.dart';
 
+@injectable
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   static int postLimit = 10;
   IFeedService feedService;

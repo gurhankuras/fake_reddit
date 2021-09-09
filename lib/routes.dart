@@ -3,14 +3,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/chat/chat_page.dart';
-import 'package:reddit_clone/_presentation/post/post_page.dart';
-import 'package:reddit_clone/application/chat/chat/chat_bloc.dart';
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
-import 'package:reddit_clone/domain/i_snackbar_service.dart';
-import 'package:reddit_clone/domain/i_socket_manager.dart';
-import 'package:reddit_clone/infastructure/auth/i_user_remote_checker.dart';
-import 'package:reddit_clone/infastructure/chat/chat_messages_service.dart';
 
 import '_presentation/auth/login_page.dart';
 import '_presentation/auth/sign_up_page.dart';
@@ -18,7 +10,11 @@ import '_presentation/change_community_avatar/change_community_avatar_page.dart'
 import '_presentation/change_community_avatar/crop_image_page.dart';
 import '_presentation/core/scroll_controllers.dart';
 import '_presentation/feed_form/create_feed_entry_page.dart';
-import '_presentation/home/search_page.dart';
+import '_presentation/main_navigation_pages/browse/empty_page.dart';
+import '_presentation/main_navigation_pages/chat/chat_page.dart';
+import '_presentation/main_navigation_pages/home/home_nav_page.dart';
+import '_presentation/main_navigation_pages/home/search_page.dart';
+import '_presentation/post/post_page.dart';
 import '_presentation/post_feed/create_feed_entry_overview_page.dart';
 import '_presentation/search_community/post_feed_search_page.dart';
 import '_presentation/splash/splash_page.dart';
@@ -28,18 +24,21 @@ import 'application/auth/login_form/login_form_bloc.dart';
 import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'application/bloc/create_feed_bloc.dart';
 import 'application/change_community_avatar/change_community_avatar_bloc.dart';
+import 'application/chat/chat/chat_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/subreddit/subreddit_bloc.dart';
+import 'bottom_nav_page.dart';
 import 'domain/auth/i_auth_service.dart';
-import 'domain/auth/user_remote_checker.dart';
-import 'domain/subreddit/subreddit_info.dart';
 import 'domain/i_image_service.dart';
+import 'domain/i_snackbar_service.dart';
+import 'domain/i_socket_manager.dart';
 import 'domain/post/post_entry.dart';
 import 'domain/subreddit/i_subreddit_service.dart';
-import 'home_nav_page.dart';
+import 'domain/subreddit/subreddit_info.dart';
+import 'infastructure/auth/i_user_remote_checker.dart';
+import 'infastructure/chat/chat_messages_service.dart';
 import 'infastructure/core/image_service.dart';
 import 'injection.dart';
-import 'bottom_nav_page.dart';
 
 abstract class Routes {
   static const homeNavPage = '/homeNavPage';
@@ -135,13 +134,19 @@ abstract class AppRouter {
         );
       case Routes.singlePostPage:
         final arguments = settings.arguments as Map<String, dynamic>;
-        final bloc = arguments['homeTabBloc'] as FeedBloc;
+        final comesFromFeedPage = arguments['comesFromFeedPage'] as bool;
+        // final bloc = arguments['homeTabBloc'] as FeedBloc?;
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: bloc,
-            // create: (context) => SubjectBloc(),
-            child: PostPage(arguments['post'] as PostEntry),
-          ),
+          builder: (context) =>
+              // comesFromFeedPage
+              // ?
+              //  BlocProvider.value(
+              //     value: bloc!,
+              //     // create: (context) => SubjectBloc(),
+              //     child: PostPage(arguments['post'] as PostEntry),
+              //   )
+              // :
+              PostPage(arguments['post'] as PostEntry),
           settings: settings,
         );
       case Routes.cropImagePage:
@@ -200,6 +205,10 @@ abstract class AppRouter {
           fullscreenDialog: true,
           settings: settings,
         );
+      case '/browse-communities':
+        return MaterialPageRoute(builder: (context) => EmptyPage());
+      case '/rpan':
+        return MaterialPageRoute(builder: (context) => EmptyPage());
       case Routes.createFeedOverviewPage:
         return MaterialPageRoute(
           builder: (context) => CreateFeedEntryOverviewPage(

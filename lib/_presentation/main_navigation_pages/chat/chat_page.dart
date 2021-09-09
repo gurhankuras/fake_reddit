@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:intl/intl.dart';
-import 'package:reddit_clone/_presentation/chat/typing_indicator.dart';
+import 'package:reddit_clone/_presentation/main_navigation_pages/chat/typing_indicator.dart';
 
 import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 import 'package:reddit_clone/_presentation/core/constants/ui.dart';

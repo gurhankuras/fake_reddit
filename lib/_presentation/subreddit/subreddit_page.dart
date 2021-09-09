@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:reddit_clone/_presentation/core/button/circle_bordered_icon_button.dart';
-import 'package:reddit_clone/_presentation/post/post_page.dart';
-import 'package:reddit_clone/domain/post/post_entry.dart';
+import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/_presentation/subreddit/tabs/about.dart';
 
 import '../../application/subreddit/subreddit_bloc.dart';
+import '../../domain/post/post_entry.dart';
 import '../../domain/subreddit/subreddit_info.dart';
-import '../../utility/mock_objects.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/search_bar_field.dart';
+import '../core/button/circle_bordered_icon_button.dart';
 import '../core/constants/colors.dart';
 import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
-import '../post_widget_factory.dart';
+import '../main_navigation_pages/browse/custom_feeds_tab_page.dart';
+import '../post/make_post_widget.dart';
+import '../post/post_page.dart';
 
 const _kAnimationEndScrollHeight = 20;
 
@@ -28,7 +29,6 @@ class _SubredditPageState extends State<SubredditPage>
     with SingleTickerProviderStateMixin {
   late final AnimationController animationController;
   late final Animation<double> opacityAnimation;
-  final IPostWidgetFactory postFactory = PostWidgetFactory();
 
   @override
   void initState() {
@@ -56,52 +56,111 @@ class _SubredditPageState extends State<SubredditPage>
 
   @override
   Widget build(BuildContext context) {
+    // return Scaffold(
+    //   body: NotificationListener<ScrollUpdateNotification>(
+    //     onNotification: _onScrolled,
+    //     child: CustomScrollView(
+    //       slivers: [
+    //         _SubredditAppBar(opacityAnimation: opacityAnimation),
+    //         BlocBuilder<SubredditBloc, SubredditState>(
+    //           buildWhen: (previous, current) =>
+    //               previous.subredditInfo != current.subredditInfo ||
+    //               previous.subredditInfoLoading != current.subredditInfoLoading,
+    //           builder: _subredditHeadBuilder,
+    //         ),
+    //         BlocBuilder<SubredditBloc, SubredditState>(
+    //           buildWhen: (previous, current) =>
+    //               previous.posts != current.posts ||
+    //               previous.postsLoading != current.postsLoading,
+    //           builder: _subredditPostsBuilder,
+    //         )
+    //       ],
+    //     ),
+    //   ),
+    // );
     return Scaffold(
-      body: NotificationListener<ScrollUpdateNotification>(
-        onNotification: _onScrolled,
-        child: CustomScrollView(
-          slivers: [
-            _SubredditAppBar(opacityAnimation: opacityAnimation),
-            BlocBuilder<SubredditBloc, SubredditState>(
-              buildWhen: (previous, current) =>
-                  previous.subredditInfo != current.subredditInfo ||
-                  previous.subredditInfoLoading != current.subredditInfoLoading,
-              builder: _subredditHeadBuilder,
-            ),
-            BlocBuilder<SubredditBloc, SubredditState>(
-              buildWhen: (previous, current) =>
-                  previous.posts != current.posts ||
-                  previous.postsLoading != current.postsLoading,
-              builder: _subredditPostsBuilder,
-            )
-          ],
+      body: DefaultTabController(
+        length: 2,
+        child: NestedScrollView(
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              _SubredditAppBar(opacityAnimation: opacityAnimation),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    BlocBuilder<SubredditBloc, SubredditState>(
+                      buildWhen: (previous, current) =>
+                          previous.subredditInfo != current.subredditInfo ||
+                          previous.subredditInfoLoading !=
+                              current.subredditInfoLoading,
+                      builder: _subredditHeadBuilder,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.lightBlack,
+                        border: Border(
+                          bottom: BorderSide(
+                              color: AppColors.lightBlack3, width: 0.8),
+                        ),
+                      ),
+                      child: tabBar(['Posts', 'About']),
+                    ),
+                    // SliverToBoxAdapter(),
+                  ],
+                ),
+              ),
+            ];
+          },
+          body: TabBarView(
+            physics: UIConstants.physics,
+            children: [
+              // CustomScrollView(
+              //   slivers: [
+              //     BlocConsumer<SubredditBloc, SubredditState>(
+              //       listener: (context, state) {},
+              //       buildWhen: (previous, current) =>
+              //           previous.posts != current.posts ||
+              //           previous.postsLoading != current.postsLoading,
+              //       builder: _subredditPostsBuilder,
+              //     )
+              //   ],
+              // ),
+              CustomFeedsTabPage(color: Colors.green),
+              SubredditAboutTabPage()
+            ],
+          ),
         ),
       ),
     );
   }
 
+  TabBar tabBar(List<String> tabBarTexts) {
+    return TabBar(
+      indicatorSize: TabBarIndicatorSize.label,
+      tabs: tabBarTexts.map((text) => Tab(text: text.fillN(4))).toList(),
+    );
+  }
+
   Widget _subredditPostsBuilder(BuildContext context, SubredditState state) {
-    if (state.postsLoading) {
-      return SliverToBoxAdapter(
-        child: Center(child: CircularProgressIndicator()),
-      );
-    }
+    // if (state.postsLoading) {
+    //   return SliverToBoxAdapter(
+    //     child: Center(child: CircularProgressIndicator()),
+    //   );
+    // }
 
     return state.posts.fold(
       () => FailureImage(),
-      (posts) => _SubredditPosts(postFactory: postFactory, posts: posts),
+      (posts) => _SubredditPosts(posts: posts),
     );
   }
 
   Widget _subredditHeadBuilder(BuildContext context, SubredditState state) {
     if (state.subredditInfoLoading) {
-      return SliverToBoxAdapter(
-        child: Center(child: CircularProgressIndicator()),
-      );
+      return Center(child: CircularProgressIndicator());
     }
     return state.subredditInfo.fold(
-      () => SliverToBoxAdapter(child: Text('Bir hata oldu')),
-      (info) => SliverToBoxAdapter(child: SubredditHead(subredditInfo: info)),
+      () => Text('Bir hata oldu'),
+      (info) => SubredditHead(subredditInfo: info),
     );
   }
 }
@@ -111,19 +170,20 @@ class _SubredditPosts extends StatelessWidget {
   const _SubredditPosts({
     Key? key,
     required this.posts,
-    required this.postFactory,
   }) : super(key: key);
-
-  final IPostWidgetFactory postFactory;
 
   @override
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          return postFactory.create(
+          return makePostWidget(
             posts[index],
-            options: PostWidgetFactoryOptions(inSubreddit: true, inPost: false),
+            inSubreddit: true,
+            inPost: false,
+            onTapped: () {
+              print('SUBREDDIT POST CLICKED');
+            },
           );
         },
         childCount: posts.length,

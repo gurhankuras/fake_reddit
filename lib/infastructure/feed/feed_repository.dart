@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/core/server_failures.dart';
 import '../../domain/feed/i_feed_repository.dart';
@@ -10,6 +11,7 @@ import '../../domain/post/post_entry.dart';
 
 const kImpossibleHttpCode = 600;
 
+@Singleton()
 class FeedRepository implements IFeedRepository {
   final Dio dio;
   final INetworkConnectivity network;

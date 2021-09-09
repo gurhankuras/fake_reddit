@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../core/size_config.dart';
-import '../../routes.dart';
+import '../../core/size_config.dart';
+import '../../../routes.dart';
 
-import '../../application/auth/auth_bloc.dart';
+import '../../../application/auth/auth_bloc.dart';
 
 class HomeTabPage extends StatelessWidget {
   const HomeTabPage({Key? key}) : super(key: key);

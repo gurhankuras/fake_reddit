@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/main_navigation_pages/browse/browse_navigator.dart';
+import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_navigator.dart';
+import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
 
-import '_presentation/browse/browse_navigator.dart';
-import '_presentation/chat/chat_nav_page.dart';
+import '_presentation/main_navigation_pages/chat/chat_nav_page.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
 import '_presentation/core/constants/colors.dart';
 import '_presentation/core/constants/env.dart';
@@ -14,12 +16,12 @@ import '_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/scroll_controllers.dart';
 import '_presentation/core/size_config.dart';
-import '_presentation/home/home_vm.dart';
-import '_presentation/inbox/inbox_page.dart';
+import '_presentation/main_navigation_pages/home/home_vm.dart';
+import '_presentation/main_navigation_pages/inbox/inbox_page.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/notification/bloc/notification_bloc.dart';
-import 'home_nav_page.dart';
+import '_presentation/main_navigation_pages/home/home_nav_page.dart';
 import 'infastructure/notification/push_notification_service.dart';
 import 'injection.dart';
 import 'routes.dart';
@@ -185,7 +187,7 @@ class BottomNavPageState extends State<BottomNavPage> {
         // Provider.value(value:
         Provider.value(
           value: scrollControllers,
-          child: const HomeNavPage(),
+          child: const HomeNavigator(),
         ),
         // ),
         BrowseNavigator(),
@@ -196,7 +198,11 @@ class BottomNavPageState extends State<BottomNavPage> {
           ),
         ),
 
-        ChatNavPage(),
+        BlocProvider(
+          create: (context) =>
+              getIt<ChatRoomsBloc>()..add(ChatRoomsEvent.fetchingStarted()),
+          child: ChatNavPage(),
+        ),
         InboxPage()
       ],
     );

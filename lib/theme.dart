@@ -8,13 +8,16 @@ ThemeData theme(BuildContext context) {
       backgroundColor: AppColors.lightBlack,
     ),
     dialogBackgroundColor: AppColors.black,
-    radioTheme:
-        RadioThemeData(fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
-        return Colors.white;
-      }
-      return AppColors.lightGrey;
-    })),
+    radioTheme: RadioThemeData(
+      fillColor: MaterialStateProperty.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.white;
+          }
+          return AppColors.lightGrey;
+        },
+      ),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: false,
       showUnselectedLabels: false,
@@ -38,6 +41,7 @@ ThemeData theme(BuildContext context) {
         // trackBorderColor:
         //     MaterialStateProperty.resolveWith((states) => Colors.white),
         ),
+
     primaryIconTheme: const IconThemeData(color: Colors.white),
     iconTheme: const IconThemeData(
       color: Colors.white,

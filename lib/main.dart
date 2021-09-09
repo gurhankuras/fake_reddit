@@ -7,7 +7,7 @@ import 'package:reddit_clone/domain/auth/token_cache_service.dart';
 import 'package:reddit_clone/domain/i_socket_manager.dart';
 
 import '_presentation/core/reusable/scaled_drawer.dart';
-import '_presentation/home/home_vm.dart';
+import '_presentation/main_navigation_pages/home/home_vm.dart';
 import 'app.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/core/simple_bloc_observer.dart';

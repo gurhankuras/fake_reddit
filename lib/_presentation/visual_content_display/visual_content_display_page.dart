@@ -1,12 +1,10 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
 
-import '../../domain/post/image_post_entry.dart';
 import '../../domain/post/post_entry.dart';
 import '../core/app/extensions/string_fill_extension.dart';
-import '../post/widgets/post_card.dart';
 import '../core/reusable/app_header.dart';
+import '../post/widgets/post_action_bar.dart';
 
 final _actionBarGradient = LinearGradient(
   begin: Alignment.bottomCenter,
@@ -88,9 +86,9 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
             children: [
               ExtendedImageGesturePageView.builder(
                 itemBuilder: (BuildContext context, int index) {
-                  var item = (widget.entries[index] as ImagePostEntry).image;
+                  var item = widget.entries[index].image;
                   Widget image = ExtendedImage.network(
-                    item,
+                    item!,
                     fit: BoxFit.contain,
                     enableSlideOutPage: true,
                     mode: ExtendedImageMode.gesture,

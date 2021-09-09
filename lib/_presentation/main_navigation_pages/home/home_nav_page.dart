@@ -4,21 +4,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/core/constants/assets.dart';
+import 'package:reddit_clone/_presentation/core/constants/ui.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
 import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
 import 'package:reddit_clone/injection.dart';
 
-import '_presentation/core/app/extensions/string_fill_extension.dart';
-import '_presentation/core/app/search_bar_field.dart';
-import '_presentation/core/reusable/scaled_drawer.dart';
-import '_presentation/core/scroll_controllers.dart';
-import '_presentation/home/home_tab_page.dart';
-import '_presentation/home/news.dart';
-import 'application/auth/auth_bloc.dart';
-import 'application/home_tab_page/feed_bloc.dart';
-import 'infastructure/core/cache_service.dart';
-import 'infastructure/feed/fake_feed_service.dart';
-import 'routes.dart';
+import '../../core/app/extensions/string_fill_extension.dart';
+import '../../core/app/search_bar_field.dart';
+import '../../core/reusable/scaled_drawer.dart';
+import '../../core/scroll_controllers.dart';
+import 'home_tab_page.dart';
+import 'news.dart';
+import '../../../application/auth/auth_bloc.dart';
+import '../../../application/home_tab_page/feed_bloc.dart';
+import '../../../infastructure/core/cache_service.dart';
+import '../../../infastructure/feed/fake_feed_service.dart';
+import '../../../routes.dart';
 
 class HomeNavPage extends StatefulWidget {
   // final Function? openDrawer;
@@ -56,6 +57,7 @@ class _HomeNavPageState extends State<HomeNavPage>
       // backgroundColor: Colors.indigo[800],
 
       body: TabBarView(
+        physics: UIConstants.physics,
         controller: tabController,
         children: [
           MultiProvider(
@@ -123,32 +125,6 @@ class _HomeNavPageState extends State<HomeNavPage>
                 ),
               )),
             ),
-            // Stack(
-            //   children: [
-            //     // Transform.scale(
-            //     // scale: 0.6,
-            //     // child:
-            //     Align(
-            //       alignment: Alignment.center,
-            //       child: const CircleAvatar(
-            //         backgroundColor: Colors.transparent,
-            //         backgroundImage: NetworkImage(
-            //           'https://i.redd.it/26s9eejm8vz51.png',
-            //         ),
-            //       ),
-            //     ),
-            //     Align(
-            //       alignment: Aig,
-            //       child: Container(
-            //         decoration: BoxDecoration(
-            //           shape: BoxShape.circle,
-            //           color: Colors.green,
-            //         ),
-            //         width: 10,
-            //       ),
-            //     )
-            //   ],
-            // ),
           ),
           title: SearchBarField(
             hintText: 'Search',

@@ -1,39 +1,32 @@
-import 'dart:math';
-
-import 'package:faker/faker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
-import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
-import 'package:reddit_clone/application/post/post_content/post_content_bloc.dart';
-import 'package:reddit_clone/infastructure/post/post_service.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
-import 'package:reddit_clone/application/post/post_comment/post_comment_bloc.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/injection.dart';
-
+import '../../application/bloc_providers/post_comment_bloc_provider.dart';
+import '../../application/post/post_comment/post_comment_bloc.dart';
+import '../../application/post/post_content/post_content_bloc.dart';
 import '../../domain/comment/comment_data.dart';
 import '../../domain/post/post_entry.dart';
-import '../../infastructure/comment/fake_comment_service.dart';
+import '../../infastructure/core/cache_service.dart';
+import '../../infastructure/post/post_service.dart';
+import '../../injection.dart';
 import '../core/app/extensions/string_fill_extension.dart';
-import 'widgets/post_card.dart';
 import '../core/constants/assets.dart';
 import '../core/constants/colors.dart';
+import '../core/constants/ui.dart';
 import '../core/reusable/app_header.dart';
-import '../post_widget_factory.dart';
 import 'add_comment.dart';
 import 'comment_placeholder.dart';
 import 'comments.dart';
+import 'make_post_widget.dart';
+import 'widgets/post_action_bar.dart';
 
 class PostPage extends StatefulWidget {
-  final IPostWidgetFactory postFactory = PostWidgetFactory();
   final PostEntry post;
-  PostPage(
+  const PostPage(
     this.post, {
     Key? key,
   }) : super(key: key);
@@ -60,17 +53,8 @@ class _PostPageState extends State<PostPage>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PostCommentBloc(
-        postId: widget.post.id,
-        commentService: FakeCommentService(
-          depth: 3,
-          engine: Random(),
-          faker: Faker(),
-        ),
-        cacheService: getIt<CacheService>(),
-        // post: widget.entry,
-      )..add(PostCommentEvent.commentsFetchingStarted()),
+    return PostCommentBlocProvider(
+      postId: widget.post.id,
       child: Scaffold(
         appBar: AppBar(
           title: _FadingTitle(
@@ -83,9 +67,8 @@ class _PostPageState extends State<PostPage>
         body: Column(
           children: [
             Expanded(
-              child: SingleFeedScrollBody(
+              child: _PostPageBody(
                 animationController: controller,
-                postFactory: widget.postFactory,
                 post: widget.post,
               ),
             ),
@@ -109,6 +92,90 @@ class _PostPageState extends State<PostPage>
       ];
 }
 
+class _PostPageBody extends StatelessWidget {
+  static const scrollOffsetThreshold = 50;
+
+  final AnimationController animationController;
+  final PostEntry post;
+  _PostPageBody({
+    Key? key,
+    required this.animationController,
+    required this.post,
+  }) : super(key: key);
+
+  final _commentsScrollKey = GlobalKey();
+
+  bool _onScrollUpdateNotification(ScrollUpdateNotification notification) {
+    animationController.value =
+        notification.metrics.pixels / scrollOffsetThreshold;
+    return true;
+  }
+
+  Future<void> _scrollToComments() async {
+    final context = _commentsScrollKey.currentContext!;
+    Scrollable.ensureVisible(
+      context,
+      duration: Duration(
+        milliseconds: 250,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return NotificationListener<ScrollUpdateNotification>(
+      onNotification: _onScrollUpdateNotification,
+      child: KeyboardDismisser(
+        gestures: [GestureType.onTap, GestureType.onVerticalDragDown],
+        child: Scrollbar(
+          child: CustomScrollView(
+            physics: UIConstants.physics,
+            slivers: [
+              SliverToBoxAdapter(
+                child: makePostWidget(
+                  post,
+                  inSubreddit: false,
+                  inPost: true,
+                  onTapped: () {},
+                ),
+              ),
+              SliverPinnedHeader(
+                child: BlocProvider(
+                  create: (context) => PostContentBloc(
+                    postService: PostService(),
+                    cacheService: getIt<CacheService>(),
+                  )..add(PostContentEvent.metaDataFetchinStarted(post.id)),
+                  child: _InPostActionBar(
+                    post: post,
+                    scrollToComments: _scrollToComments,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                key: _commentsScrollKey,
+                child: CommentFilter(),
+              ),
+              BlocBuilder<PostCommentBloc, PostCommentState>(
+                builder: (context, state) {
+                  return state.map(
+                    initial: (_) =>
+                        CommentPlaceholderList(commentCount: post.commentCount),
+                    loading: (_) =>
+                        CommentPlaceholderList(commentCount: post.commentCount),
+                    fetchingCompleted: (state) =>
+                        CommentsSection(comments: state.comments),
+                    fetchingFailed: (value) => const FailureImage(),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _FadingTitle extends StatelessWidget {
   const _FadingTitle({
     Key? key,
@@ -124,8 +191,7 @@ class _FadingTitle extends StatelessWidget {
     return FadeTransition(
       opacity: animationController,
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(
             height: 30,
@@ -141,90 +207,6 @@ class _FadingTitle extends StatelessWidget {
             fontWeightDelta: 0,
           ),
         ],
-      ),
-    );
-  }
-}
-
-class SingleFeedScrollBody extends StatelessWidget {
-  final IPostWidgetFactory postFactory;
-  final AnimationController animationController;
-  final PostEntry post;
-  SingleFeedScrollBody({
-    Key? key,
-    required this.postFactory,
-    required this.animationController,
-    required this.post,
-  }) : super(key: key);
-
-  final _commentsKey = GlobalKey();
-
-  bool _onScrollUpdateNotification(ScrollUpdateNotification notification) {
-    animationController.value = notification.metrics.pixels / 50;
-    return true;
-  }
-
-  Future<void> _scrollToComments() async {
-    final context = _commentsKey.currentContext!;
-    await Scrollable.ensureVisible(context,
-        duration: Duration(
-          milliseconds: 250,
-        ));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return NotificationListener<ScrollUpdateNotification>(
-      onNotification: _onScrollUpdateNotification,
-      child: KeyboardDismisser(
-        gestures: [GestureType.onTap, GestureType.onVerticalDragDown],
-        child: Scrollbar(
-          child: CustomScrollView(
-            physics: UIConstants.physics,
-            slivers: [
-              SliverToBoxAdapter(
-                child: postFactory.create(
-                  post,
-                  options: PostWidgetFactoryOptions(
-                    inSubreddit: false,
-                    inPost: true,
-                  ),
-                ),
-              ),
-              SliverPinnedHeader(
-                child: BlocProvider(
-                  create: (context) => PostContentBloc(
-                    postService: PostService(),
-                    cacheService: getIt<CacheService>(),
-                    homeTabBloc: context.read<FeedBloc>(),
-                  )..add(PostContentEvent.metaDataFetchinStarted(post.id)),
-                  child: _InPostActionBar(
-                    post: post,
-                    scrollToComments: _scrollToComments,
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                key: _commentsKey,
-                child: GestureDetector(
-                  onTap: () => _scrollToComments(),
-                  child: CommentFilter(),
-                ),
-              ),
-              BlocBuilder<PostCommentBloc, PostCommentState>(
-                builder: (context, state) {
-                  return state.map(
-                    initial: (_) => const CommentPlaceholderList(),
-                    loading: (_) => const CommentPlaceholderList(),
-                    fetchingCompleted: (state) =>
-                        CommentsSection(comments: state.comments),
-                    fetchingFailed: (value) => const FailureImage(),
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -258,12 +240,6 @@ class _InPostActionBar extends StatelessWidget {
               upvotes: post.upvotes,
               onTapComments: scrollToComments,
             ),
-            // failed: (state) => PostActionBar(
-            //   commentCount: commentCount,
-            //   postId: post.id,
-            //   upvotes: ,
-            //   onTapComments: scrollToComments,
-            // ),
           );
         },
       ),
@@ -302,16 +278,25 @@ class CommentFilter extends StatelessWidget {
 }
 
 class CommentPlaceholderList extends StatelessWidget {
+  static const maxCommentPlaceholderCount = 5;
+
   const CommentPlaceholderList({
     Key? key,
+    required this.commentCount,
   }) : super(key: key);
+
+  final int commentCount;
+
+  get commentPlaceholderCount => commentCount <= maxCommentPlaceholderCount
+      ? commentCount
+      : maxCommentPlaceholderCount;
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Column(
           children: List.generate(
-        5,
+        commentPlaceholderCount,
         (index) => const CommentPlaceHolder(),
       )),
     );
@@ -343,14 +328,12 @@ class FailureImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(
-            Assets.redditFailure,
-            width: 50,
-          ),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          Assets.redditFailure,
+          width: 50,
         ),
       ),
     );

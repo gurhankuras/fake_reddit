@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
-class CustomFeeds extends StatelessWidget {
-  const CustomFeeds({
+class CustomFeedsTabPage extends StatelessWidget {
+  final Color color;
+  const CustomFeedsTabPage({
     Key? key,
+    this.color = Colors.red,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      itemCount: 2,
       itemBuilder: (context, index) => Container(
         width: double.infinity,
         height: 100,
-        color: Colors.red,
+        color: color,
         margin: EdgeInsets.symmetric(vertical: 20),
       ),
     );

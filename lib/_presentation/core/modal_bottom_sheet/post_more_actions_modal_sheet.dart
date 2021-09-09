@@ -1,10 +1,12 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app_snackbar.dart';
-import 'package:reddit_clone/_presentation/core/modal_bottom_sheet/app_bottom_modal_sheet.dart';
-import 'package:reddit_clone/domain/post/link_post_entry.dart';
-import 'package:reddit_clone/domain/post/post_entry.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../app_snackbar.dart';
+import 'app_bottom_modal_sheet.dart';
+import '../../../application/snackbar_service.dart';
+import '../../../domain/post/link_post_entry.dart';
+import '../../../domain/post/post_entry.dart';
+import '../../../injection.dart';
+import '../../../utility/app_logger.dart';
 
 Future<void> showPostMoreSheet(BuildContext pageContext, PostEntry post) async {
   print(post.runtimeType);
@@ -24,7 +26,7 @@ Future<void> showPostMoreSheet(BuildContext pageContext, PostEntry post) async {
             icon: Icons.bookmark_outline,
             text: 'Save',
           ),
-          if (post is LinkPostEntry)
+          if (post.type == 2)
             ModelSheetTile(
               onAction: () => log.i('onTap!'),
               icon: Icons.open_in_browser,

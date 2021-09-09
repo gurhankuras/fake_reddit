@@ -1,50 +1,41 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/home/home_tab_page.dart';
-import 'package:reddit_clone/_presentation/post/widgets/post_action_bar.dart';
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/injection.dart';
-
-import '../../../application/voting/post_voting.dart';
 import '../../../domain/post/post_entry.dart';
 import '../../../routes.dart';
-import '../../search_community/post_to_community_suggestion_tile.dart';
 import '../../core/constants/colors.dart';
 import '../../core/modal_bottom_sheet/post_more_actions_modal_sheet.dart';
 import '../../core/size_config.dart';
-import 'vote_arrows.dart';
+import '../../search_community/post_to_community_suggestion_tile.dart';
+import 'post_action_bar.dart';
 
 class PostCard extends StatelessWidget {
   final bool inSubreddit;
   final bool inPost;
   final PostEntry entry;
+  final VoidCallback onPostTapped;
   final Widget contentWidget;
   const PostCard({
     Key? key,
     required this.inSubreddit,
     required this.inPost,
     required this.entry,
+    required this.onPostTapped,
     required this.contentWidget,
   }) : super(key: key);
 
-  void _navigateToSinglePostPage(BuildContext context) {
-    // Future.delayed(Duration(seconds: 1), () {
-    //   setState(() {});
-    // });
-    Navigator.of(context).pushNamed(Routes.singlePostPage,
-        arguments: {'post': entry, 'homeTabBloc': context.read<FeedBloc>()});
-  }
+  // void _navigateToSinglePostPage(BuildContext context) {
+  //   getIt<NavigationService>().navigateTo(Routes.singlePostPage, arguments: {
+  //     'post': entry,
+  //     'homeTabBloc': context.read<FeedBloc>(),
+  //     'comesFromFeedPage': true
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
-    print('PostCard');
     return GestureDetector(
-      onTap: !inPost ? () => _navigateToSinglePostPage(context) : null,
+      onTap: !inPost ? onPostTapped : null,
+      // _navigateToSinglePostPage(context) : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Container(

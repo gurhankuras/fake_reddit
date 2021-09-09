@@ -1,20 +1,14 @@
 import 'package:drop_cap_text/drop_cap_text.dart';
 import 'package:flutter/material.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/utility/launch_url.dart';
-
-import '../../../domain/post/image_post_entry.dart';
-import '../../../domain/post/link_post_entry.dart';
 import '../../../domain/post/post_entry.dart';
-import '../../../domain/post/text_post_entry.dart';
+import '../../../utility/launch_url.dart';
 import '../../../utility/mock_objects.dart';
-import '../../post_widget_factory.dart';
-import '../../visual_content_display/visual_content_display_page.dart';
-import '../../core/authentication_button.dart';
 import '../../core/blurred_image.dart';
+import '../../core/constants/colors.dart';
 import '../../core/reusable/app_header.dart';
 import '../../core/size_config.dart';
+import '../../visual_content_display/visual_content_display_page.dart';
 
 class SideBySideTextAndImageContent extends StatelessWidget {
   final PostEntry entry;
@@ -51,7 +45,7 @@ class SideBySideTextAndImageContent extends StatelessWidget {
 }
 
 class PostTextContent extends StatelessWidget {
-  final TextPostEntry entry;
+  final PostEntry entry;
   final bool inPost;
   const PostTextContent({
     Key? key,
@@ -84,7 +78,7 @@ class PostTextContent extends StatelessWidget {
           SizedBox(height: SizeConfig.screenWidthPercentage(2)),
         if (entry.bodyText != '' && inPost)
           Text(
-            entry.bodyText,
+            entry.bodyText!,
           )
       ],
     );
@@ -93,18 +87,18 @@ class PostTextContent extends StatelessWidget {
 
 class LinkedPostImage extends StatelessWidget {
   const LinkedPostImage({Key? key, required this.entry}) : super(key: key);
-  final LinkPostEntry entry;
+  final PostEntry entry;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => launchURL(entry.url),
+      onTap: () => launchURL(entry.url!),
       child: Stack(
         children: [
           Positioned.fill(
             child: BlurredImage(
               blurred: entry.isNFSW,
-              url: entry.linkImage,
+              url: entry.linkImage!,
             ),
           ),
           // Image.network(mockPostEntry.image),
@@ -129,7 +123,7 @@ class LinkedPostImage extends StatelessWidget {
 }
 
 class ImagePostContent extends StatelessWidget {
-  final ImagePostEntry entry;
+  final PostEntry entry;
   final bool inPost;
   const ImagePostContent({
     Key? key,
@@ -161,7 +155,7 @@ class ImagePostContent extends StatelessWidget {
           },
           child: Image.network(
             // 'https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80'),
-            entry.image,
+            entry.image!,
           ),
         )
       ],

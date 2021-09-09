@@ -1,84 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../routes.dart';
-import '../core/constants/colors.dart';
-import '../core/app/extensions/string_fill_extension.dart';
-import '../core/constants/assets.dart';
-import '../core/reusable/scaled_drawer.dart';
-import '../core/size_config.dart';
-import 'messages_tab_page.dart';
-
-class InboxPage extends StatelessWidget {
-  const InboxPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final tabBarWidget = tabBar;
-
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        appBar: appBar(tabBarWidget, context),
-        // backgroundColor: Colors.indigo[800],
-
-        body: const TabBarView(
-          children: [
-            ActivityTabPage(),
-            MessagesTabPage(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  TabBar get tabBar {
-    return TabBar(
-      indicatorSize: TabBarIndicatorSize.label,
-      labelPadding: const EdgeInsets.symmetric(horizontal: 10),
-      tabs: [
-        Tab(text: 'Activity'.fillN(3)),
-        Tab(text: 'Messages'.fillN(3)),
-      ],
-    );
-  }
-
-  PreferredSize appBar(TabBar tabBar, BuildContext context) {
-    return PreferredSize(
-      preferredSize:
-          Size.fromHeight(kToolbarHeight + tabBar.preferredSize.height),
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-        ),
-        child: AppBar(
-          centerTitle: true,
-          title: Text(
-            'Inbox',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                ?.apply(fontSizeFactor: 1.2),
-          ),
-          bottom: tabBar,
-          leading: GestureDetector(
-            onTap: () => context.read<MyDrawerController>().openDrawer(),
-            child: Transform.scale(
-              scale: 0.6,
-              child: const CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://styles.redditmedia.com/t5_23ty4q/styles/profileIcon_vden2tg74d051.jpg?width=256&height=256&crop=256:256,smart&s=54e523221183c71419c0cadc616a13418f0c92ad',
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+import 'package:reddit_clone/_presentation/core/constants/assets.dart';
+import 'package:reddit_clone/_presentation/core/constants/colors.dart';
+import 'package:reddit_clone/_presentation/core/size_config.dart';
+import 'package:reddit_clone/routes.dart';
 
 class ActivityTabPage extends StatefulWidget {
   const ActivityTabPage({
@@ -93,7 +18,6 @@ class _ActivityTabPageState extends State<ActivityTabPage>
     with SingleTickerProviderStateMixin {
   late final ScrollController _scrollController;
   late final AnimationController _animationController;
-  // late final Animation<double> _opacityAnimation;
 
   @override
   void dispose() {
