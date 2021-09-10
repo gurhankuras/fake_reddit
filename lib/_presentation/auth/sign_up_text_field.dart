@@ -43,6 +43,12 @@ class _SignUpTextFieldState extends State<SignUpTextField> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AppTextInput(
       hintText: widget.name,

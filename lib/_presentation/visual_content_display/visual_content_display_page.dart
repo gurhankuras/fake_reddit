@@ -33,10 +33,11 @@ class VisualContentDisplayPage extends StatefulWidget {
 // TODO REFACTOR
 class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
     with SingleTickerProviderStateMixin {
-  bool showOverlay = true;
-  late int currentIndex;
   late PageController _pageController;
   late AnimationController _animationController;
+
+  bool showOverlay = true;
+  late int currentIndex;
   late Animation<double> _opacityAnimation;
 
   void _pageControllerListener() {
@@ -54,6 +55,14 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
     setUpAnimation();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.removeListener(_pageControllerListener);
+    _pageController.dispose();
+    _animationController.dispose();
+  }
+
   void setUpAnimation() {
     _animationController = AnimationController(vsync: this);
     final curvedAnimation = CurvedAnimation(
@@ -62,14 +71,6 @@ class _VisualContentDisplayPageState extends State<VisualContentDisplayPage>
     );
     _opacityAnimation =
         Tween<double>(begin: 1.0, end: 0).animate(curvedAnimation);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _pageController.removeListener(_pageControllerListener);
-    _pageController.dispose();
-    _animationController.dispose();
   }
 
   @override

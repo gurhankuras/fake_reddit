@@ -23,6 +23,8 @@ abstract class AppColors {
   static const Color orange = Color(0xFFfe851a);
   static final Color pink = Colors.pinkAccent[400]!;
   static const Color blue = Color(0xFF0D6CFC);
+  static const Color darkBlue = Color(0xFF004f91);
+  static const Color darkBlueLight = Color(0xFF026cc4);
 
   static const Color camelot = Color(0xFF7A2E4A);
 

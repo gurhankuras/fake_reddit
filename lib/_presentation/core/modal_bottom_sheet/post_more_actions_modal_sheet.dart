@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../app_snackbar.dart';
 import 'app_bottom_modal_sheet.dart';
 import '../../../application/snackbar_service.dart';
-import '../../../domain/post/link_post_entry.dart';
 import '../../../domain/post/post_entry.dart';
 import '../../../injection.dart';
 import '../../../utility/app_logger.dart';
@@ -26,7 +25,7 @@ Future<void> showPostMoreSheet(BuildContext pageContext, PostEntry post) async {
             icon: Icons.bookmark_outline,
             text: 'Save',
           ),
-          if (post.type == 2)
+          if (post.type == PostType.link)
             ModelSheetTile(
               onAction: () => log.i('onTap!'),
               icon: Icons.open_in_browser,

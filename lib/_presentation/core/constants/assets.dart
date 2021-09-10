@@ -11,4 +11,7 @@ abstract class Assets {
   static const play_button = 'assets/play-button.svg';
   static const alien_success = 'assets/alien-success.png';
   static const alien_failed = 'assets/alien-failed.png';
+  static const example_thropy = 'assets/example_thropy.jpg';
+  static const reddit_logo = 'assets/reddit-logo.png';
+  static const trending_up = 'assets/trending_up.svg';
 }

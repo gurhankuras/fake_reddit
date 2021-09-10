@@ -86,6 +86,7 @@ class ChatMessagesRepository implements IChatMessagesRepository {
       return left(BadResponseData('Corrupt data'));
     } catch (e) {
       print(e);
+      print('deneme');
       return left(Failure('fetchChatRooms failure'));
     }
   }

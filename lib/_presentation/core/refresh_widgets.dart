@@ -14,8 +14,6 @@ class CustomRefresherFooter extends StatelessWidget {
           body = Text("pull up load");
         } else if (mode == LoadStatus.loading) {
           body = SizedBox.shrink();
-          // body = CircularProgressIndicator();
-          // body = Image.asset('assets/spinner2.gif');
         } else if (mode == LoadStatus.failed) {
           body = Text("Load Failed!Click retry!");
         } else if (mode == LoadStatus.canLoading) {

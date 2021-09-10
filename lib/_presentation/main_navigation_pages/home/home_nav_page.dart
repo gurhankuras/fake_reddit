@@ -8,6 +8,7 @@ import 'package:reddit_clone/_presentation/core/constants/ui.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
 import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/app/search_bar_field.dart';

@@ -246,7 +246,6 @@ class _ConfigurableExpansionTileState extends State<ConfigurableExpansionTile>
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     final bool closed = !_isExpanded && _controller.isDismissed;
     return AnimatedBuilder(
       animation: _controller.view,

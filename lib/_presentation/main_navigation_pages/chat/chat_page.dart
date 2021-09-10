@@ -54,6 +54,13 @@ class _ChatPageState extends State<ChatPage> {
     // });
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _messageTextController.dispose();
+    _scrollController.dispose();
+  }
+
   void _onScroll() {
     // if (_isTop) print('TOP');
   }
@@ -69,12 +76,6 @@ class _ChatPageState extends State<ChatPage> {
     } else if (currentScroll < (maxScroll * 0.45)) {
       call = true;
     }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _messageTextController.dispose();
   }
 
   @override

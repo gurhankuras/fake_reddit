@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 import 'package:reddit_clone/application/navigation_service.dart';
 import 'package:reddit_clone/injection.dart';
 
@@ -8,18 +9,8 @@ import '../../routes.dart';
 import '../core/constants/colors.dart';
 import '../core/size_config.dart';
 
-class SplashPage extends StatefulWidget {
+class SplashPage extends StatelessWidget {
   const SplashPage({Key? key}) : super(key: key);
-
-  @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +30,7 @@ class _SplashPageState extends State<SplashPage> {
               const Spacer(),
               SizedBox(
                 width: SizeConfig.screenHeightPercentage(12),
-                child: Image.asset(
-                  'assets/reddit-logo.png',
-                ),
+                child: Image.asset(Assets.reddit_logo),
               ),
               const Spacer(),
             ],

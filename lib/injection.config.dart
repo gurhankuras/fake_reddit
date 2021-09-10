@@ -14,6 +14,7 @@ import 'package:google_sign_in/google_sign_in.dart' as _i6;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i45;
 
+import '_presentation/user/user_panel_controller.dart' as _i46;
 import 'application/auth/auth_bloc.dart' as _i35;
 import 'application/auth/login_form/login_form_bloc.dart' as _i38;
 import 'application/auth/sign_up_form/sign_up_form_bloc.dart' as _i19;
@@ -25,7 +26,7 @@ import 'application/snackbar_service.dart' as _i14;
 import 'application/subreddit/subreddit_bloc.dart' as _i29;
 import 'domain/auth/i_auth_service.dart' as _i36;
 import 'domain/auth/i_google_auth_service.dart' as _i7;
-import 'domain/auth/token_cache_service.dart' as _i47;
+import 'domain/auth/token_cache_service.dart' as _i48;
 import 'domain/auth/user_remote_checker.dart' as _i16;
 import 'domain/feed/i_feed_service.dart' as _i33;
 import 'domain/i_image_service.dart' as _i9;
@@ -36,7 +37,7 @@ import 'domain/i_socket_manager.dart' as _i41;
 import 'domain/i_token_cache_service.dart' as _i31;
 import 'domain/post/i_post_cache_tagger.dart' as _i24;
 import 'domain/subreddit/i_subreddit_service.dart' as _i27;
-import 'infastructure/auth/auth_service.dart' as _i48;
+import 'infastructure/auth/auth_service.dart' as _i49;
 import 'infastructure/auth/google_auth_service.dart' as _i8;
 import 'infastructure/auth/i_user_remote_checker.dart' as _i15;
 import 'infastructure/chat/chat_messages_repository.dart' as _i22;
@@ -48,14 +49,14 @@ import 'infastructure/core/network_connectivity.dart' as _i40;
 import 'infastructure/core/simple_key_generator.dart' as _i12;
 import 'infastructure/core/token_dio_interceptor.dart' as _i30;
 import 'infastructure/feed/fake_feed_service.dart' as _i34;
-import 'infastructure/feed/feed_repository.dart' as _i46;
+import 'infastructure/feed/feed_repository.dart' as _i47;
 import 'infastructure/notification/local_notifications_service.dart' as _i17;
 import 'infastructure/notification/push_notification_service.dart' as _i18;
 import 'infastructure/post/post_cache_tagger.dart' as _i25;
 import 'infastructure/socket_manager.dart' as _i42;
 import 'infastructure/subreddit/subreddit_service.dart' as _i28;
 import 'infastructure/third_party_modules.dart'
-    as _i49; // ignore_for_file: unnecessary_lambdas
+    as _i50; // ignore_for_file: unnecessary_lambdas
 
 // ignore_for_file: lines_longer_than_80_chars
 /// initializes the registration of provided dependencies inside of [GetIt]
@@ -133,28 +134,29 @@ Future<_i1.GetIt> $initGetIt(_i1.GetIt get,
       _i44.NotificationBloc(socketManager: get<_i41.ISocketManager>()));
   await gh.singletonAsync<_i45.SharedPreferences>(() => sharedPrefsModule.prefs,
       preResolve: true);
+  gh.singleton<_i46.UserPanelController>(_i46.UserPanelController());
   gh.singleton<_i26.CacheService>(_i26.CacheService(
       keyGenerator: get<_i11.IKeyGenerator>(),
       prefs: get<_i45.SharedPreferences>()));
-  gh.singleton<_i46.FeedRepository>(_i46.FeedRepository(
+  gh.singleton<_i47.FeedRepository>(_i47.FeedRepository(
       dio: get<_i3.Dio>(), network: get<_i21.INetworkConnectivity>()));
   gh.singleton<_i31.ITokenCacheService>(
-      _i47.TokenCacheService(cacheService: get<_i26.CacheService>()));
-  gh.singleton<_i36.IAuthService>(_i48.AuthService(
+      _i48.TokenCacheService(cacheService: get<_i26.CacheService>()));
+  gh.singleton<_i36.IAuthService>(_i49.AuthService(
       dio: get<_i3.Dio>(),
       tokenService: get<_i31.ITokenCacheService>(),
       googleAuthService: get<_i7.IGoogleAuthService>()));
   return get;
 }
 
-class _$DioModule extends _i49.DioModule {}
+class _$DioModule extends _i50.DioModule {}
 
-class _$FirebaseModule extends _i49.FirebaseModule {}
+class _$FirebaseModule extends _i50.FirebaseModule {}
 
-class _$LocalNotificationsModule extends _i49.LocalNotificationsModule {}
+class _$LocalNotificationsModule extends _i50.LocalNotificationsModule {}
 
-class _$NavigatorKeyModule extends _i49.NavigatorKeyModule {}
+class _$NavigatorKeyModule extends _i50.NavigatorKeyModule {}
 
-class _$GoogleSignInModule extends _i49.GoogleSignInModule {}
+class _$GoogleSignInModule extends _i50.GoogleSignInModule {}
 
-class _$SharedPrefsModule extends _i49.SharedPrefsModule {}
+class _$SharedPrefsModule extends _i50.SharedPrefsModule {}

@@ -29,6 +29,11 @@ class _CropSampleState extends State<CropSample> {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   // Future<void> _loadAllImages() async {
 
   // }

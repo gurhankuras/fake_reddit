@@ -17,6 +17,7 @@ import 'package:reddit_clone/domain/post/post_entry.dart';
 import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
 import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/routes.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../application/auth/auth_bloc.dart';
 
 class HomeNavigator extends StatefulWidget {

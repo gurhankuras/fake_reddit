@@ -2,7 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/wrapped_bottom_nav_page.dart';
 
 import '_presentation/auth/login_page.dart';
 import '_presentation/auth/sign_up_page.dart';
@@ -74,7 +76,7 @@ abstract class AppRouter {
                 create: (context) => HomeControllerManager(),
               ),
             ],
-            child: const BottomNavPage(),
+            child: const WrappedBottomNavPage(),
           ),
           settings: settings,
         );
@@ -176,6 +178,7 @@ abstract class AppRouter {
           ),
           settings: settings,
         );
+
       case Routes.postFeedSearchPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider.value(

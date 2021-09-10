@@ -36,35 +36,6 @@ class PostEntry {
     this.linkImage,
   });
 
-  // void setVisited(bool val) {
-  //   visited = val;
-  // }
-  // PostEntry copyWith({
-  //   String? subreddit,
-  //   User? user,
-  //   bool? isNFSW,
-  //   String? id,
-  //   String? contentText,
-  //   int? type,
-  //   int? upvotes,
-  //   String? date,
-  //   int? commentCount,
-  //   bool? visited,
-  // }) {
-  //   return PostEntry(
-  //     subreddit: subreddit ?? this.subreddit,
-  //     user: user ?? this.user,
-  //     isNFSW: isNFSW ?? this.isNFSW,
-  //     id: id ?? this.id,
-  //     contentText: contentText ?? this.contentText,
-  //     type: type ?? this.type,
-  //     upvotes: upvotes ?? this.upvotes,
-  //     date: date ?? this.date,
-  //     commentCount: commentCount ?? this.commentCount,
-  //     visited: visited ?? this.visited,
-  //   );
-  // }
-
   PostEntry copyWith({
     String? subreddit,
     User? user,

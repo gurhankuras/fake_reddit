@@ -1,6 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 
 import '../../../application/navigation_service.dart';
 import '../../../domain/core/user.dart';
@@ -28,6 +30,12 @@ class _ActivityTabPageLoggedInState extends State<ActivityTabPageLoggedIn> {
   void initState() {
     super.initState();
     _refreshController = RefreshController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _refreshController.dispose();
   }
 
   @override
@@ -111,36 +119,47 @@ class _ActivityTabPageLoggedInState extends State<ActivityTabPageLoggedIn> {
   }
 
   Widget buildLeading() {
-    return Badge(
-      badgeColor: AppColors.black,
-      borderSide: BorderSide(
-        width: 1,
-        color: AppColors.darkGrey,
-      ),
-      badgeContent: Transform.scale(
-        scale: 1.6,
-        child: Icon(
-          Icons.trending_up,
-          color: Colors.blue,
-          size: 8,
-        ),
-      ),
-      position: BadgePosition.bottomEnd(bottom: -5, end: 0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 2,
-            color: AppColors.darkGrey,
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              width: 1,
+              color: AppColors.darkgreyBlack,
+            ),
+            shape: BoxShape.circle,
           ),
-          shape: BoxShape.circle,
+          child: CircleAvatar(
+            radius: 17,
+            backgroundColor: AppColors.black,
+            backgroundImage: NetworkImage(
+                'https://images.unsplash.com/photo-1488554378835-f7acf46e6c98?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'),
+          ),
         ),
-        child: CircleAvatar(
-          radius: 17,
-          backgroundColor: AppColors.black,
-          backgroundImage: NetworkImage(
-              'https://images.unsplash.com/photo-1488554378835-f7acf46e6c98?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'),
+        Positioned(
+          bottom: -5,
+          right: 0,
+          child: Container(
+            padding: EdgeInsets.all(1),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.black,
+              border: Border.all(
+                width: 1,
+                color: AppColors.darkgreyBlack,
+              ),
+            ),
+            child: SvgPicture.asset(
+              Assets.trending_up,
+              color: Colors.blue,
+              // fit: BoxFit.fitWidth,
+            ),
+            width: 15,
+            height: 15,
+          ),
         ),
-      ),
+      ],
     );
   }
 }

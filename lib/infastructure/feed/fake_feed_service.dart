@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:reddit_clone/domain/post/i_post_cache_tagger.dart';
-import 'package:reddit_clone/domain/post/text_post_entry.dart';
 
 import 'package:reddit_clone/infastructure/core/cache_service.dart';
 import 'package:injectable/injectable.dart';
@@ -56,63 +55,3 @@ class FakeFeedService implements IFeedService {
     return Future.value(right(List.empty()));
   }
 }
-
-
-
-/*
-
- yield* event.map(
-      refreshRequested: (e) async* {
-        yield state.copyWith(refreshLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: [
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-            mockPostEntry,
-          ],
-          refreshLoading: false,
-        );
-      },
-      loadMoreRequested: (e) async* {
-        yield state.copyWith(morePostLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: List.of(state.posts)
-            ..addAll([
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-            ]),
-          morePostLoading: false,
-        );
-      },
-      fetchingStarted: (e) async* {
-        yield state.copyWith(fetchingLoading: true);
-        await Future.delayed(Duration(seconds: 2));
-        yield state.copyWith(
-          posts: List.of(state.posts)
-            ..addAll([
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-              mockPostEntry,
-            ]),
-          fetchingLoading: false,
-        );
-      },
-    );
-  }
- */

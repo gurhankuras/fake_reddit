@@ -26,14 +26,23 @@ class SubredditPage extends StatefulWidget {
 }
 
 class _SubredditPageState extends State<SubredditPage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController animationController;
   late final Animation<double> opacityAnimation;
+  late final TabController _tabController;
 
   @override
   void initState() {
     super.initState();
+    _tabController = TabController(length: 2, initialIndex: 1, vsync: this);
     setUpAnimations();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabController.dispose();
+    animationController.dispose();
   }
 
   void setUpAnimations() {
@@ -46,12 +55,6 @@ class _SubredditPageState extends State<SubredditPage>
     animationController.value =
         notification.metrics.pixels / _kAnimationEndScrollHeight;
     return true;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    animationController.dispose();
   }
 
   @override
@@ -79,56 +82,54 @@ class _SubredditPageState extends State<SubredditPage>
     //   ),
     // );
     return Scaffold(
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              _SubredditAppBar(opacityAnimation: opacityAnimation),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    BlocBuilder<SubredditBloc, SubredditState>(
-                      buildWhen: (previous, current) =>
-                          previous.subredditInfo != current.subredditInfo ||
-                          previous.subredditInfoLoading !=
-                              current.subredditInfoLoading,
-                      builder: _subredditHeadBuilder,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.lightBlack,
-                        border: Border(
-                          bottom: BorderSide(
-                              color: AppColors.lightBlack3, width: 0.8),
-                        ),
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return [
+            _SubredditAppBar(opacityAnimation: opacityAnimation),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  BlocBuilder<SubredditBloc, SubredditState>(
+                    buildWhen: (previous, current) =>
+                        previous.subredditInfo != current.subredditInfo ||
+                        previous.subredditInfoLoading !=
+                            current.subredditInfoLoading,
+                    builder: _subredditHeadBuilder,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.lightBlack,
+                      border: Border(
+                        bottom: BorderSide(
+                            color: AppColors.lightBlack3, width: 0.8),
                       ),
-                      child: tabBar(['Posts', 'About']),
                     ),
-                    // SliverToBoxAdapter(),
-                  ],
-                ),
+                    child: tabBar(['Posts', 'About']),
+                  ),
+                  // SliverToBoxAdapter(),
+                ],
               ),
-            ];
-          },
-          body: TabBarView(
-            physics: UIConstants.physics,
-            children: [
-              // CustomScrollView(
-              //   slivers: [
-              //     BlocConsumer<SubredditBloc, SubredditState>(
-              //       listener: (context, state) {},
-              //       buildWhen: (previous, current) =>
-              //           previous.posts != current.posts ||
-              //           previous.postsLoading != current.postsLoading,
-              //       builder: _subredditPostsBuilder,
-              //     )
-              //   ],
-              // ),
-              CustomFeedsTabPage(color: Colors.green),
-              SubredditAboutTabPage()
-            ],
-          ),
+            ),
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          physics: UIConstants.physics,
+          children: [
+            // CustomScrollView(
+            //   slivers: [
+            //     BlocConsumer<SubredditBloc, SubredditState>(
+            //       listener: (context, state) {},
+            //       buildWhen: (previous, current) =>
+            //           previous.posts != current.posts ||
+            //           previous.postsLoading != current.postsLoading,
+            //       builder: _subredditPostsBuilder,
+            //     )
+            //   ],
+            // ),
+            CustomFeedsTabPage(color: Colors.green),
+            SubredditAboutTabPage()
+          ],
         ),
       ),
     );
@@ -136,6 +137,7 @@ class _SubredditPageState extends State<SubredditPage>
 
   TabBar tabBar(List<String> tabBarTexts) {
     return TabBar(
+      controller: _tabController,
       indicatorSize: TabBarIndicatorSize.label,
       tabs: tabBarTexts.map((text) => Tab(text: text.fillN(4))).toList(),
     );

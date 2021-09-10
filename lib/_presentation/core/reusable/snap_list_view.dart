@@ -42,6 +42,12 @@ class _SnapListViewState extends State<SnapListView> {
     controller = ScrollController();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   bool get isIndexInBounds =>
       currentIndex >= 0 && currentIndex <= widget.itemCount - 1;
 

@@ -109,22 +109,21 @@ class _CommunitiesTabPageState extends State<CommunitiesTabPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _refreshController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SmartRefresher(
       enablePullDown: true,
-      // enablePullUp: true,
       header: RefresherHeader(),
-      // footer: CustomRefresherFooter(),
       controller: _refreshController,
       onRefresh: () async {
         await Future.delayed(Duration(seconds: 2));
         _refreshController.refreshCompleted();
       },
-
-      // onRefresh: () =>
-      //     context.read<FeedBloc>().add(FeedEvent.refreshRequested()),
-      // onLoading: () =>
-      //     context.read<FeedBloc>().add(FeedEvent.loadMoreRequested()),
       child: CustomScrollView(
         physics: UIConstants.physics,
         slivers: [

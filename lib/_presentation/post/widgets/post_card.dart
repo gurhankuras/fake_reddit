@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/_presentation/user/user_panel_controller.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../../domain/post/post_entry.dart';
 import '../../../routes.dart';
@@ -182,14 +184,17 @@ class PostTopInfoSubtitle extends StatelessWidget {
         .textTheme
         .caption
         ?.copyWith(color: AppColors.moreLightGrey);
-    return Row(
-      children: [
-        Text('u/${entry.user.nickname}', style: textStyle),
-        Text(' • ', style: textStyle),
-        Text(entry.date, style: textStyle),
-        Text(' • ', style: textStyle),
-        Text('i.redd.it', style: textStyle),
-      ],
+    return GestureDetector(
+      onTap: () => getIt<UserPanelController>().controller?.open(),
+      child: Row(
+        children: [
+          Text('u/${entry.user.nickname}', style: textStyle),
+          Text(' • ', style: textStyle),
+          Text(entry.date, style: textStyle),
+          Text(' • ', style: textStyle),
+          Text('i.redd.it', style: textStyle),
+        ],
+      ),
     );
   }
 }

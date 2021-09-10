@@ -19,13 +19,6 @@ class _ActivityTabPageState extends State<ActivityTabPage>
   late final ScrollController _scrollController;
   late final AnimationController _animationController;
 
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollController.dispose();
-    _animationController.dispose();
-  }
-
   bool isLoading = false;
 
   @override
@@ -35,6 +28,13 @@ class _ActivityTabPageState extends State<ActivityTabPage>
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+    _animationController.dispose();
   }
 
   double max30(double value) {

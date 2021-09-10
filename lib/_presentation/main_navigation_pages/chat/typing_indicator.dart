@@ -30,8 +30,9 @@ class TypingIndicator extends StatefulWidget {
 class _TypingIndicatorState extends State<TypingIndicator>
     with TickerProviderStateMixin {
   late AnimationController _appearanceController;
-  late Animation<double> _indicatorSpaceAnimation;
   late AnimationController _repeatingController;
+
+  late Animation<double> _indicatorSpaceAnimation;
   final List<Interval> _dotIntervals = const [
     Interval(0.25, 0.8),
     Interval(0.35, 0.9),
@@ -61,6 +62,13 @@ class _TypingIndicatorState extends State<TypingIndicator>
   }
 
   @override
+  void dispose() {
+    _appearanceController.dispose();
+    _repeatingController.dispose();
+    super.dispose();
+  }
+
+  @override
   void didUpdateWidget(TypingIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.showIndicator != oldWidget.showIndicator) {
@@ -70,13 +78,6 @@ class _TypingIndicatorState extends State<TypingIndicator>
         _hideIndicator();
       }
     }
-  }
-
-  @override
-  void dispose() {
-    _appearanceController.dispose();
-    _repeatingController.dispose();
-    super.dispose();
   }
 
   void _showIndicator() {
