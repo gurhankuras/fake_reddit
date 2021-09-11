@@ -1,8 +1,3 @@
-import 'dart:io';
-
-import 'package:reddit_clone/domain/auth/auth_failure.dart';
-import 'package:reddit_clone/domain/core/response_error.dart';
-
 class Failure {
   final String message;
   // final int? code;

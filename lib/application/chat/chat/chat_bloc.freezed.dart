@@ -1267,7 +1267,8 @@ class _$ChatStateTearOff {
       required bool otherTyping,
       required bool user,
       required int page,
-      required bool loadMore}) {
+      required bool loadMore,
+      required Option<String> fetchedAt}) {
     return _ChatState(
       messages: messages,
       loading: loading,
@@ -1276,6 +1277,7 @@ class _$ChatStateTearOff {
       user: user,
       page: page,
       loadMore: loadMore,
+      fetchedAt: fetchedAt,
     );
   }
 }
@@ -1292,6 +1294,7 @@ mixin _$ChatState {
   bool get user => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
   bool get loadMore => throw _privateConstructorUsedError;
+  Option<String> get fetchedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ChatStateCopyWith<ChatState> get copyWith =>
@@ -1309,7 +1312,8 @@ abstract class $ChatStateCopyWith<$Res> {
       bool otherTyping,
       bool user,
       int page,
-      bool loadMore});
+      bool loadMore,
+      Option<String> fetchedAt});
 }
 
 /// @nodoc
@@ -1329,6 +1333,7 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
     Object? user = freezed,
     Object? page = freezed,
     Object? loadMore = freezed,
+    Object? fetchedAt = freezed,
   }) {
     return _then(_value.copyWith(
       messages: messages == freezed
@@ -1359,6 +1364,10 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
           ? _value.loadMore
           : loadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      fetchedAt: fetchedAt == freezed
+          ? _value.fetchedAt
+          : fetchedAt // ignore: cast_nullable_to_non_nullable
+              as Option<String>,
     ));
   }
 }
@@ -1376,7 +1385,8 @@ abstract class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
       bool otherTyping,
       bool user,
       int page,
-      bool loadMore});
+      bool loadMore,
+      Option<String> fetchedAt});
 }
 
 /// @nodoc
@@ -1397,6 +1407,7 @@ class __$ChatStateCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
     Object? user = freezed,
     Object? page = freezed,
     Object? loadMore = freezed,
+    Object? fetchedAt = freezed,
   }) {
     return _then(_ChatState(
       messages: messages == freezed
@@ -1427,6 +1438,10 @@ class __$ChatStateCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
           ? _value.loadMore
           : loadMore // ignore: cast_nullable_to_non_nullable
               as bool,
+      fetchedAt: fetchedAt == freezed
+          ? _value.fetchedAt
+          : fetchedAt // ignore: cast_nullable_to_non_nullable
+              as Option<String>,
     ));
   }
 }
@@ -1441,7 +1456,8 @@ class _$_ChatState implements _ChatState {
       required this.otherTyping,
       required this.user,
       required this.page,
-      required this.loadMore});
+      required this.loadMore,
+      required this.fetchedAt});
 
   @override
   final List<ChatMessageDTO> messages;
@@ -1457,10 +1473,12 @@ class _$_ChatState implements _ChatState {
   final int page;
   @override
   final bool loadMore;
+  @override
+  final Option<String> fetchedAt;
 
   @override
   String toString() {
-    return 'ChatState(messages: $messages, loading: $loading, message: $message, otherTyping: $otherTyping, user: $user, page: $page, loadMore: $loadMore)';
+    return 'ChatState(messages: $messages, loading: $loading, message: $message, otherTyping: $otherTyping, user: $user, page: $page, loadMore: $loadMore, fetchedAt: $fetchedAt)';
   }
 
   @override
@@ -1485,7 +1503,10 @@ class _$_ChatState implements _ChatState {
                 const DeepCollectionEquality().equals(other.page, page)) &&
             (identical(other.loadMore, loadMore) ||
                 const DeepCollectionEquality()
-                    .equals(other.loadMore, loadMore)));
+                    .equals(other.loadMore, loadMore)) &&
+            (identical(other.fetchedAt, fetchedAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.fetchedAt, fetchedAt)));
   }
 
   @override
@@ -1497,7 +1518,8 @@ class _$_ChatState implements _ChatState {
       const DeepCollectionEquality().hash(otherTyping) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(page) ^
-      const DeepCollectionEquality().hash(loadMore);
+      const DeepCollectionEquality().hash(loadMore) ^
+      const DeepCollectionEquality().hash(fetchedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -1513,7 +1535,8 @@ abstract class _ChatState implements ChatState {
       required bool otherTyping,
       required bool user,
       required int page,
-      required bool loadMore}) = _$_ChatState;
+      required bool loadMore,
+      required Option<String> fetchedAt}) = _$_ChatState;
 
   @override
   List<ChatMessageDTO> get messages => throw _privateConstructorUsedError;
@@ -1529,6 +1552,8 @@ abstract class _ChatState implements ChatState {
   int get page => throw _privateConstructorUsedError;
   @override
   bool get loadMore => throw _privateConstructorUsedError;
+  @override
+  Option<String> get fetchedAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ChatStateCopyWith<_ChatState> get copyWith =>

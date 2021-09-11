@@ -18,6 +18,39 @@ class ChatMessageDTO {
     this.createdAt,
   });
 
+  Map<String, dynamic> toMap() {
+    return {
+      'message_id': id,
+      'room_id': roomId,
+      'text': text,
+      'created_at': createdAt,
+      'user_id': user.id,
+      'username': user.name,
+      'user_avatar': user.avatar
+    };
+  }
+
+  factory ChatMessageDTO.fromMap(Map<String, dynamic> map) => ChatMessageDTO(
+        roomId: map['room_id'],
+        text: map['text'],
+        user: ChatMessageUserDTO(
+            avatar: map['user_avatar'],
+            id: map['user_id'],
+            name: map['username']),
+        createdAt: map['created_at'],
+        id: map['message_id'],
+      );
+  // return {
+  //   'message_id': id,
+  //   'room_id': roomId,
+  //   'text': text,
+  //   'created_at': createdAt,
+  //   'user_id': user.id,
+  //   'username': user.name,
+  //   'user_avatar': user.avatar
+  // };
+  // }
+
   factory ChatMessageDTO.fromJson(Map<String, dynamic> json) =>
       _$ChatMessageDTOFromJson(json);
   Map<String, dynamic> toJson() => _$ChatMessageDTOToJson(this);
@@ -39,18 +72,3 @@ class ChatMessageUserDTO {
       _$ChatMessageUserDTOFromJson(json);
   Map<String, dynamic> toJson() => _$ChatMessageUserDTOToJson(this);
 }
-
-
-// {
-//         "_id": "6130abe42beeb448f329ef73",
-//         "roomId": "612cc72f65a882665306cc0e",
-//         "user": {
-//             "id": "610d52b15d5e8b1ee8970cc7",
-//             "name": "Emre",
-//             "avatar": "https://i.redd.it/26s9eejm8vz51.png"
-//         },
-//         "text": "aynen cok uzadi",
-//         "createdAt": "2021-09-02T10:48:04.793Z",
-//         "updatedAt": "2021-09-02T10:48:04.793Z",
-//         "__v": 0
-//     }

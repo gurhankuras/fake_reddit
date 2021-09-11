@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reddit_clone/domain/core/constants/socket_event_keys.dart';
 import 'package:reddit_clone/domain/i_socket_manager.dart';
@@ -64,18 +65,20 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       },
       messagesFetchingStarted: (e) async* {
         yield state.copyWith(loading: true);
-        final messages =
+        final data =
             await chatMessagesService.find(limit: _postLimit, page: state.page);
+        print(data);
         await Future.delayed(Duration(milliseconds: 500));
-        yield* messages.fold(
+        yield* data.fold(
           (l) async* {
             log.wtf(l);
             yield state.copyWith(loading: false);
           },
-          (messages) async* {
+          (data) async* {
             yield state.copyWith(
-              messages: messages,
+              messages: data.messages,
               loading: false,
+              fetchedAt: some(data.fetchedAt!),
               page: state.page + 1,
             );
           },
@@ -97,7 +100,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           remoteMsg,
         );
         final msg = ChatMessageDTO.fromJson(remoteMsg);
-        yield state.copyWith(message: '', messages: [...state.messages, msg]);
+        yield state.copyWith(message: '', messages: [msg, ...state.messages]);
       },
       theOtherTyped: (e) async* {
         yield state.copyWith(otherTyping: true);
@@ -121,17 +124,24 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       },
       loadedMoreMessage: (e) async* {
         if (state.loadMore) {
-          final messages = await chatMessagesService.find(
-              limit: _postLimit, page: state.page);
+          final data = await chatMessagesService.find(
+            limit: _postLimit,
+            page: state.page,
+            fetchedAt: extractOption(state.fetchedAt),
+          );
           await Future.delayed(Duration(milliseconds: 500));
-          yield* messages.fold(
+          yield* data.fold(
             (l) async* {
               log.wtf(l);
               yield state;
             },
-            (messages) async* {
+            (data) async* {
+              final messages = data.messages;
               yield state.copyWith(
-                messages: [...messages, ...state.messages],
+                messages: [
+                  ...state.messages,
+                  ...messages,
+                ],
                 page: state.page + 1,
               );
             },
@@ -201,3 +211,10 @@ Map<String, dynamic> makeEmittedMessage(
             : "https://i.redd.it/fc9k38jwfwv51.png",
       },
     };
+
+T extractOption<T>(Option<T> option) {
+  return option.fold(
+    () => throw Exception('Cannot extracted $T. Option is none'),
+    (a) => a,
+  );
+}

@@ -1,18 +1,13 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_lorem/flutter_lorem.dart';
-import 'package:intl/intl.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/chat/typing_indicator.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/core/slivered_circular_progress_indicator.dart';
-import 'package:reddit_clone/_presentation/post/add_comment.dart';
-import 'package:reddit_clone/application/chat/chat/chat_bloc.dart';
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
+import '../../../application/chat/chat/chat_bloc.dart';
+import '../../../infastructure/chat/chat_message_dto.dart';
+import '../../core/constants/colors.dart';
+import '../../core/reusable/app_header.dart';
+import '../../core/size_config.dart';
+import '../../post/add_comment.dart';
+import 'typing_indicator.dart';
 
 class ChatMessage {
   final String text;
@@ -45,13 +40,16 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
     _messageTextController = TextEditingController();
     _scrollController = ScrollController();
-    // _scrollController.addListener(() {
-    //   // print(
-    //   //     '${_scrollController.offset} max: (${_scrollController.position.maxScrollExtent})');
-    // });
-    // _scrollController.addListener(() {
-    //   _isTop();
-    // });
+    _scrollController.addListener(() {
+      final maxExtent = _scrollController.position.maxScrollExtent;
+      final currentOffset = _scrollController.offset;
+
+      // print('$maxExtent $currentOffset');
+      if (maxExtent == currentOffset) {
+        context.read<ChatBloc>().add(ChatEvent.loadedMoreMessage());
+        print('LISTENER');
+      }
+    });
   }
 
   @override
@@ -61,22 +59,18 @@ class _ChatPageState extends State<ChatPage> {
     _scrollController.dispose();
   }
 
-  void _onScroll() {
-    // if (_isTop) print('TOP');
-  }
+  // void _isTop() {
+  //   // if (!_scrollController.hasClients) return false;
+  //   final maxScroll = _scrollController.position.maxScrollExtent;
+  //   final currentScroll = _scrollController.offset;
 
-  void _isTop() {
-    // if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-
-    if (!call) {
-      print(currentScroll < (maxScroll * 0.45));
-      return;
-    } else if (currentScroll < (maxScroll * 0.45)) {
-      call = true;
-    }
-  }
+  //   if (!call) {
+  //     print(currentScroll < (maxScroll * 0.45));
+  //     return;
+  //   } else if (currentScroll < (maxScroll * 0.45)) {
+  //     call = true;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,28 +79,19 @@ class _ChatPageState extends State<ChatPage> {
       body: Column(
         children: [
           Expanded(
-            child: Scrollbar(
-              child: CustomScrollView(
-                controller: _scrollController,
-                scrollBehavior: ScrollBehavior().copyWith(overscroll: false),
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: ChatUserInfo(),
-                  ),
-                  BlocBuilder<ChatBloc, ChatState>(
-                    builder: (context, state) {
-                      return state.loading
-                          ? SliverToBoxAdapter(
-                              child: Text('Loading...'),
-                            )
-                          // SliveredCircularProgressIndicator()
-                          : ChatMessages(messages: state.messages);
-                    },
-                  ),
-                ],
-              ),
+            child: BlocBuilder<ChatBloc, ChatState>(
+              builder: (context, state) {
+                return state.loading
+                    ? Text('Loading...')
+                    // SliveredCircularProgressIndicator()
+                    : ChatMessages(
+                        messages: state.messages,
+                        controller: _scrollController,
+                      );
+              },
             ),
           ),
+
           // ),
           SizedBox(height: 5),
           _buildTypeIndicator(),
@@ -114,17 +99,18 @@ class _ChatPageState extends State<ChatPage> {
             listenWhen: (previous, current) =>
                 previous.messages.length < current.messages.length,
             listener: (context, state) {
-              WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-                _scrollController
-                    .animateTo(
-                  _scrollController.position.maxScrollExtent,
-                  curve: Curves.easeIn,
-                  duration: Duration(milliseconds: 300),
-                )
-                    .then((_) {
-                  // context.read<ChatBloc>().add(ChatEvent.toggleLoadMore(true));
-                });
-              });
+              // WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+              //   _scrollController
+              //       .animateTo(
+              //     0,
+              //     // _scrollController.position.maxScrollExtent,
+              //     curve: Curves.easeIn,
+              //     duration: Duration(milliseconds: 300),
+              //   )
+              //       .then((_) {
+              //     // context.read<ChatBloc>().add(ChatEvent.toggleLoadMore(true));
+              //   });
+              // });
             },
             child: _buildMessageInput(),
           )
@@ -193,7 +179,8 @@ class ChatSendButton extends StatelessWidget {
     // we need this workaround
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       scrollController.animateTo(
-        scrollController.position.maxScrollExtent,
+        // scrollController.position.maxScrollExtent,
+        0,
         curve: Curves.easeIn,
         duration: Duration(milliseconds: 200),
       );
@@ -228,19 +215,50 @@ class ChatSendButton extends StatelessWidget {
 }
 
 class ChatMessages extends StatelessWidget {
+  final ScrollController controller;
   final List<ChatMessageDTO> messages;
   const ChatMessages({
     Key? key,
+    required this.controller,
     required this.messages,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
+    return
+        // SliverPadding(
+        //   padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+        //   sliver: SliverList(
+        //     delegate: SliverChildBuilderDelegate(
+        //       (context, index) {
+        //         // print(index);
+        //         // if (index == 4) {
+        //         // context.read<ChatBloc>().add(ChatEvent.loadedMoreMessage());
+        //         // }
+        //         if (index == 0) {
+        //           return ChatMessageBlock(messages[index], hasHead: true);
+        //         }
+        //         // final hasHead =
+        //         //     messages[index].user.name != messages[index - 1].user.name ||
+        //         //         DateTime.parse(messages[index].createdAt!)
+        //         //                 .difference(
+        //         //                     DateTime.parse(messages[index - 1].createdAt!))
+        //         //                 .inMinutes >
+        //         //             3;
+        //         return ChatMessageBlock(messages[index], hasHead: true);
+        //       },
+        //       childCount: messages.length,
+        //     ),
+        //   ),
+        // );
+
+        Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-      sliver: SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (context, index) {
+      child: Scrollbar(
+        child: ListView.builder(
+          reverse: true,
+          controller: controller,
+          itemBuilder: (context, index) {
             // print(index);
             // if (index == 4) {
             // context.read<ChatBloc>().add(ChatEvent.loadedMoreMessage());
@@ -257,7 +275,7 @@ class ChatMessages extends StatelessWidget {
             //             3;
             return ChatMessageBlock(messages[index], hasHead: true);
           },
-          childCount: messages.length,
+          itemCount: messages.length,
         ),
       ),
     );

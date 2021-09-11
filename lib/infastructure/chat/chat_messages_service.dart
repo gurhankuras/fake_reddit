@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:reddit_clone/domain/core/failure.dart';
 import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
 import 'package:reddit_clone/infastructure/chat/chat_messages_repository.dart';
+import 'package:reddit_clone/infastructure/chat/chat_messages_response.dart';
 import 'package:reddit_clone/infastructure/chat/chat_room.dart';
 
 import '../../domain/core/server_failures.dart';
@@ -16,11 +17,16 @@ class ChatMessagesService implements IChatMessagesService {
   });
 
   @override
-  Future<Either<ServerFailure, List<ChatMessageDTO>>> find({
+  Future<Either<Failure, ChatMessagesResponse>> find({
     int limit = 10,
     int page = 1,
+    String? fetchedAt,
   }) {
-    return chatMessagesRepository.find(limit: limit, page: page);
+    return chatMessagesRepository.find(
+      limit: limit,
+      page: page,
+      fetchedAt: fetchedAt,
+    );
   }
 
   @override
@@ -30,9 +36,10 @@ class ChatMessagesService implements IChatMessagesService {
 }
 
 abstract class IChatMessagesService {
-  Future<Either<ServerFailure, List<ChatMessageDTO>>> find({
+  Future<Either<Failure, ChatMessagesResponse>> find({
     int limit = 10,
     int page = 1,
+    String? fetchedAt,
   });
 
   Future<Either<Failure, List<ChatRoom>>> fetchChatRooms();

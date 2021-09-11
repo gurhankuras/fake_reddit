@@ -2,14 +2,17 @@ part of 'chat_bloc.dart';
 
 @freezed
 class ChatState with _$ChatState {
-  const factory ChatState(
-      {required List<ChatMessageDTO> messages,
-      required bool loading,
-      required String message,
-      required bool otherTyping,
-      required bool user,
-      required int page,
-      required bool loadMore}) = _ChatState;
+  // TODO: add hasReachedMax field
+  const factory ChatState({
+    required List<ChatMessageDTO> messages,
+    required bool loading,
+    required String message,
+    required bool otherTyping,
+    required bool user,
+    required int page,
+    required bool loadMore,
+    required Option<String> fetchedAt,
+  }) = _ChatState;
 
   factory ChatState.initial() => ChatState(
         messages: [],
@@ -18,6 +21,7 @@ class ChatState with _$ChatState {
         otherTyping: false,
         user: false,
         page: 1,
-        loadMore: false,
+        loadMore: true,
+        fetchedAt: none(),
       );
 }

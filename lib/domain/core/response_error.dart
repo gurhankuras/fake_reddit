@@ -24,4 +24,7 @@ class ResponseError {
 
   // factory ResponseError.fromJson(String source) =>
   //     ResponseError.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'ResponseError(message: $message, code: $code)';
 }
