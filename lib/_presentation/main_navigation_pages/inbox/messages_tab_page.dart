@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
 import 'package:reddit_clone/_presentation/core/refresh_widgets.dart';
+import 'package:reddit_clone/domain/inbox/inbox_message.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:reddit_clone/_presentation/core/constants/colors.dart';
@@ -25,6 +26,8 @@ class _MessagesTabPageState extends State<MessagesTabPage> {
         title: 'Welcome to r/nextfuckinglevel!',
         text:
             'Welcome to Next Fucking Level! A community A community A communityA community',
+        hasRead: true,
+        id: '12345',
       );
   @override
   void initState() {
@@ -50,7 +53,6 @@ class _MessagesTabPageState extends State<MessagesTabPage> {
         physics: UIConstants.physics,
         itemBuilder: (context, index) => InboxMessageWidget(
           message: fakeMessage,
-          hasRead: true,
         ),
         itemCount: 10,
       ),
@@ -60,17 +62,16 @@ class _MessagesTabPageState extends State<MessagesTabPage> {
 
 class InboxMessageWidget extends StatelessWidget {
   final InboxMessage message;
-  final bool hasRead;
   const InboxMessageWidget({
     Key? key,
     required this.message,
-    this.hasRead = false,
   }) : super(key: key);
 
   DateTime? get toDate => DateTime.tryParse(message.createdAt);
 
   @override
   Widget build(BuildContext context) {
+    final hasRead = message.hasRead;
     return Container(
       decoration: BoxDecoration(
         border: Border(
@@ -121,17 +122,4 @@ class InboxMessageWidget extends StatelessWidget {
       ),
     );
   }
-}
-
-class InboxMessage {
-  final String subredditName;
-  final String createdAt;
-  final String title;
-  final String text;
-  InboxMessage({
-    required this.subredditName,
-    required this.createdAt,
-    required this.title,
-    required this.text,
-  });
 }
