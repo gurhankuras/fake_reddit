@@ -146,33 +146,92 @@ class BottomNavPageState extends State<BottomNavPage> {
           unselectedIcon: Icon(Icons.add_outlined, size: 36),
         ),
         NavigationItem(
-          index: 3,
-          selectedIcon: Icon(FontAwesomeIcons.solidCommentDots),
-          unselectedIcon:
-              // Icon(FontAwesomeIcons.commentDots)
-              BlocBuilder<NotificationBloc, NotificationState>(
-            builder: (context, state) {
-              return state.info.fold(
-                () => Icon(FontAwesomeIcons.commentDots),
-                (inf) {
-                  return inf.unreadMessagesCount != 0
-                      ? Badge(
-                          badgeContent:
-                              Text(inf.unreadMessagesCount.toString()),
-                          child: Icon(FontAwesomeIcons.commentDots),
-                          position: BadgePosition.topEnd(end: -10, top: -10),
-                        )
-                      : Icon(FontAwesomeIcons.commentDots);
-                },
-              );
-            },
-          ),
-        ),
+            index: 3,
+            selectedIcon: Icon(FontAwesomeIcons.solidCommentDots),
+            unselectedIcon:
+                BlocSelector<NotificationBloc, NotificationState, int>(
+              selector: (state) {
+                return state.unreadMessageCount;
+              },
+              builder: (context, unreadMessageCount) {
+                if (unreadMessageCount == 0) {
+                  return Icon(FontAwesomeIcons.commentDots);
+                } else {
+                  return Badge(
+                    badgeContent: Text(unreadMessageCount.toString()),
+                    child: Icon(FontAwesomeIcons.commentDots),
+                    position: BadgePosition.topEnd(end: -10, top: -10),
+                  );
+                }
+              },
+            )),
         NavigationItem(
-          index: 4,
-          selectedIcon: Icon(FontAwesomeIcons.solidBell),
-          unselectedIcon: Icon(FontAwesomeIcons.bell),
-        ),
+            index: 4,
+            selectedIcon: Icon(FontAwesomeIcons.solidBell),
+            unselectedIcon: BlocBuilder<NotificationBloc, NotificationState>(
+              buildWhen: (previous, current) =>
+                  (previous.inboxUnreadMessageCount +
+                      previous.unreadActivitiesCount) !=
+                  (current.inboxUnreadMessageCount +
+                      current.unreadActivitiesCount),
+              builder: (context, state) {
+                final total_notificaion_count =
+                    state.inboxUnreadMessageCount + state.unreadActivitiesCount;
+                // if (total_notificaion_count == 0) {
+                //   return Icon(FontAwesomeIcons.bell);
+                // } else {
+                // return
+                //  Badge(
+                //   badgeContent: Text(total_notificaion_count > 99
+                //       ? '+99'
+                //       : total_notificaion_count.toString()),
+                //   showBadge: total_notificaion_count != 0,
+                //   child: Icon(FontAwesomeIcons.bell),
+
+                //   // shape: BadgeShape.square,
+                //   // padding: EdgeInsets.zero,
+                //   // padding: ,
+
+                //   toAnimate: false,
+                //   // borderRadius: BorderRadius.circular(50),
+                //   position: BadgePosition.topEnd(end: -10, top: -8),
+                // );
+                // }
+
+                return Stack(
+                  clipBehavior: Clip.none,
+                  children: <Widget>[
+                    Icon(FontAwesomeIcons.bell),
+                    Positioned(
+                      right: -10,
+                      top: -3,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 12,
+                          minHeight: 12,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '10',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
+            )),
       ];
 
   Widget buildPage() {

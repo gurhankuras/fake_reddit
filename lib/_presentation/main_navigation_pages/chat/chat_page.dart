@@ -157,7 +157,9 @@ class _ChatPageState extends State<ChatPage> {
       ),
       actions: [
         GestureDetector(
-            onTap: () => context.read<ChatBloc>().add(ChatEvent.emit()),
+            onTap: () {
+              // TODO
+            },
             child: Icon(Icons.settings_outlined))
       ],
     );

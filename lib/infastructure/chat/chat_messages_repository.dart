@@ -4,6 +4,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 
+import 'package:reddit_clone/infastructure/chat/chat_remote_source.dart';
+
 import '../../domain/chat/i_chat_cache.dart';
 import '../../domain/core/failure.dart';
 import '../../domain/core/response_error.dart';
@@ -28,17 +30,15 @@ abstract class IChatMessagesRepository {
 // TODO move remote logic to its own class (RemoteSource)
 @LazySingleton(as: IChatMessagesRepository)
 class ChatMessagesRepository implements IChatMessagesRepository {
-  final Dio dio;
+  final IChatRemoteSource remote;
   final IChatCache cache;
   final INetworkConnectivity network;
 
   ChatMessagesRepository({
-    required this.dio,
+    required this.remote,
     required this.cache,
     required this.network,
-  }) {
-    dio.interceptors.add(getIt<TokenDioInterceptor>());
-  }
+  });
 
   Future<T> _dataSource<T>(
       {required Future<T> Function() cache,
@@ -61,38 +61,38 @@ class ChatMessagesRepository implements IChatMessagesRepository {
     );
   }
 
-  Future<Either<Failure, ChatMessagesResponse>> _fetchMessagesFromRemoteSource(
-      int limit, int page, String? fetchedAt) async {
-    try {
-      const url =
-          'http://10.0.2.2:4000/api/chat/rooms/612cc72f65a882665306cc0e';
-      final queries =
-          _makeQueries(limit: limit, page: page, fetchedAt: fetchedAt);
-      final response = await dio.get(url, queryParameters: queries);
-      final data = response.data;
-      if (data is Map) {
-        final responseData =
-            ChatMessagesResponse.fromJson(data as Map<String, dynamic>);
-        cache.saveAll(responseData.messages);
-        return right(responseData);
-      }
-      return left(Failure.unexpected('Unexpected error occured!'));
-    } catch (e) {
-      final failure =
-          makeRemoteFailure(e, chatMessagesRemoteFetchingErrorHandler);
-      return left(failure);
-    }
-  }
+  // Future<Either<Failure, ChatMessagesResponse>> _fetchMessagesFromRemoteSource(
+  //     int limit, int page, String? fetchedAt) async {
+  //   try {
+  //     const url =
+  //         'http://10.0.2.2:4000/api/chat/rooms/612cc72f65a882665306cc0e';
+  //     final queries =
+  //         _makeQueries(limit: limit, page: page, fetchedAt: fetchedAt);
+  //     final response = await dio.get(url, queryParameters: queries);
+  //     final data = response.data;
+  //     if (data is Map) {
+  //       final responseData =
+  //           ChatMessagesResponse.fromJson(data as Map<String, dynamic>);
+  //       cache.saveAll(responseData.messages);
+  //       return right(responseData);
+  //     }
+  //     return left(Failure.unexpected('Unexpected error occured!'));
+  //   } catch (e) {
+  //     final failure =
+  //         makeRemoteFailure(e, chatMessagesRemoteFetchingErrorHandler);
+  //     return left(failure);
+  //   }
+  // }
 
-  Map<String, dynamic> _makeQueries(
-      {required int limit, required int page, String? fetchedAt}) {
-    final Map<String, dynamic> queries = {'page': page, 'limit': limit};
+  // Map<String, dynamic> _makeQueries(
+  //     {required int limit, required int page, String? fetchedAt}) {
+  //   final Map<String, dynamic> queries = {'page': page, 'limit': limit};
 
-    if (fetchedAt != null) {
-      queries['fetchedAt'] = fetchedAt;
-    }
-    return queries;
-  }
+  //   if (fetchedAt != null) {
+  //     queries['fetchedAt'] = fetchedAt;
+  //   }
+  //   return queries;
+  // }
 
   Future<Either<Failure, ChatMessagesResponse>> _fetchMessagesFromCache(
     int limit,
@@ -108,27 +108,44 @@ class ChatMessagesRepository implements IChatMessagesRepository {
   }
 
   @override
-  Future<Either<Failure, List<ChatRoom>>> fetchChatRooms() async {
-    const url = 'http://10.0.2.2:4000/api/chat';
-    try {
-      final response = await dio.get(url);
-      final data = response.data;
-      print(data);
-      if (data is List) {
-        print(data);
+  Future<Either<Failure, List<ChatRoom>>> fetchChatRooms() {
+    return remote.fetchChatRooms();
+  }
+  // @override
+  // Future<Either<Failure, List<ChatRoom>>> fetchChatRooms() async {
+  //   const url = 'http://10.0.2.2:4000/api/chat';
+  //   try {
+  //     final response = await dio.get(url);
+  //     final data = response.data;
+  //     print(data);
+  //     if (data is List) {
+  //       print(data);
 
-        return right(data
-            .map((chatRoomJson) => ChatRoom.fromJson(chatRoomJson))
-            .toList());
-        // return right([]);
-      }
-      print(response.data);
-      return left(BadResponseData('Corrupt data'));
-    } catch (e) {
-      print(e);
-      print('deneme');
-      return left(Failure('fetchChatRooms failure'));
-    }
+  //       return right(data
+  //           .map((chatRoomJson) => ChatRoom.fromJson(chatRoomJson))
+  //           .toList());
+  //       // return right([]);
+  //     }
+  //     print(response.data);
+  //     return left(BadResponseData('Corrupt data'));
+  //   } catch (e) {
+  //     print(e);
+  //     print('deneme');
+  //     return left(Failure('fetchChatRooms failure'));
+  //   }
+  // }
+
+  Future<Either<Failure, ChatMessagesResponse>> _fetchMessagesFromRemoteSource(
+    int limit,
+    int page,
+    String? fetchedAt,
+  ) async {
+    final responseOr = await remote.fetchMessages(limit, page, fetchedAt);
+    responseOr.fold(
+      (failure) => null,
+      (response) => cache.saveMessages(response.messages),
+    );
+    return responseOr;
   }
 }
 

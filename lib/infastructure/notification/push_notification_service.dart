@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/utility/app_logger.dart';
 
 import '../../application/navigation_service.dart';
 import '../../injection.dart';
@@ -18,7 +19,9 @@ class PushNotificationService {
   PushNotificationService(
     this.firebaseMessaging,
     this.localNotifications,
-  );
+  ) {
+    log.i('PushNotificationService created');
+  }
 
   Future<void> initiliase() async {
     if (Platform.isIOS) {
@@ -51,6 +54,7 @@ class PushNotificationService {
 }
 
 void handleMessage(RemoteMessage message) {
+  print(message);
   // final route = message.data['route'];
   // if (route != null) {
   //   getIt<NavigationService>().navigateTo(route);

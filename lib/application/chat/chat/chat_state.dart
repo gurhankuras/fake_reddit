@@ -10,7 +10,6 @@ class ChatState with _$ChatState {
     required bool otherTyping,
     required bool user,
     required int page,
-    required bool loadMore,
     required Option<String> fetchedAt,
   }) = _ChatState;
 
@@ -21,7 +20,6 @@ class ChatState with _$ChatState {
         otherTyping: false,
         user: false,
         page: 1,
-        loadMore: true,
         fetchedAt: none(),
       );
 }

@@ -21,6 +21,22 @@ class ChatRoom {
   factory ChatRoom.fromJson(Map<String, dynamic> json) =>
       _$ChatRoomFromJson(json);
   Map<String, dynamic> toJson() => _$ChatRoomToJson(this);
+
+  ChatRoom copyWith({
+    String? id,
+    DateTime? createdAt,
+    LastMessage? lastMessage,
+    ChatUser? user,
+    String? avatar,
+  }) {
+    return ChatRoom(
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
+      lastMessage: lastMessage ?? this.lastMessage,
+      user: user ?? this.user,
+      avatar: avatar ?? this.avatar,
+    );
+  }
 }
 
 @JsonSerializable()
@@ -38,11 +54,25 @@ class ChatUser {
   factory ChatUser.fromJson(Map<String, dynamic> json) =>
       _$ChatUserFromJson(json);
   Map<String, dynamic> toJson() => _$ChatUserToJson(this);
+
+  
+
+  ChatUser copyWith({
+    String? id,
+    DateTime? joinedAt,
+    int? unreadMessageCount,
+  }) {
+    return ChatUser(
+      id: id ?? this.id,
+      joinedAt: joinedAt ?? this.joinedAt,
+      unreadMessageCount: unreadMessageCount ?? this.unreadMessageCount,
+    );
+  }
 }
 
 @JsonSerializable()
 class LastMessage {
-  final DateTime createdAt;
+  final String createdAt;
   @JsonKey(name: 'sender_name')
   final String senderName;
   final String text;

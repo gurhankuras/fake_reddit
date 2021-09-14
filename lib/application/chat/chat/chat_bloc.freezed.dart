@@ -16,46 +16,40 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ChatEventTearOff {
   const _$ChatEventTearOff();
 
-  _Emit emit() {
-    return const _Emit();
+  MessagesFetchingStarted messagesFetchingStarted() {
+    return const MessagesFetchingStarted();
   }
 
-  _MessagesFetchingStarted messagesFetchingStarted() {
-    return const _MessagesFetchingStarted();
+  LoadedMoreMessage loadedMoreMessage() {
+    return const LoadedMoreMessage();
   }
 
-  _LoadedMoreMessage loadedMoreMessage() {
-    return const _LoadedMoreMessage();
+  MessageSent messageSent() {
+    return const MessageSent();
   }
 
-  _ToggleLoadMore toggleLoadMore(bool value) {
-    return _ToggleLoadMore(
-      value,
-    );
-  }
-
-  _MessageSent messageSent() {
-    return const _MessageSent();
-  }
-
-  _MessageChanged messageChanged(String message) {
-    return _MessageChanged(
+  MessageChanged messageChanged(String message) {
+    return MessageChanged(
       message,
     );
   }
 
-  _TheOtherTyped theOtherTyped() {
-    return const _TheOtherTyped();
+  TheOtherTyped theOtherTyped() {
+    return const TheOtherTyped();
   }
 
-  _TheOtherSentMessage theOtherSentMessage(ChatMessageDTO message) {
-    return _TheOtherSentMessage(
+  TheOtherSentMessage theOtherSentMessage(ChatMessageDTO message) {
+    return TheOtherSentMessage(
       message,
     );
   }
 
-  _TypingSetFalse typingSetFalse() {
-    return const _TypingSetFalse();
+  SignaledTyping signaledTyping() {
+    return const SignaledTyping();
+  }
+
+  TypingSetFalse typingSetFalse() {
+    return const TypingSetFalse();
   }
 }
 
@@ -66,56 +60,52 @@ const $ChatEvent = _$ChatEventTearOff();
 mixin _$ChatEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -137,141 +127,28 @@ class _$ChatEventCopyWithImpl<$Res> implements $ChatEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$EmitCopyWith<$Res> {
-  factory _$EmitCopyWith(_Emit value, $Res Function(_Emit) then) =
-      __$EmitCopyWithImpl<$Res>;
+abstract class $MessagesFetchingStartedCopyWith<$Res> {
+  factory $MessagesFetchingStartedCopyWith(MessagesFetchingStarted value,
+          $Res Function(MessagesFetchingStarted) then) =
+      _$MessagesFetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$EmitCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$EmitCopyWith<$Res> {
-  __$EmitCopyWithImpl(_Emit _value, $Res Function(_Emit) _then)
-      : super(_value, (v) => _then(v as _Emit));
-
-  @override
-  _Emit get _value => super._value as _Emit;
-}
-
-/// @nodoc
-
-class _$_Emit implements _Emit {
-  const _$_Emit();
-
-  @override
-  String toString() {
-    return 'ChatEvent.emit()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Emit);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() emit,
-    required TResult Function() messagesFetchingStarted,
-    required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
-    required TResult Function() messageSent,
-    required TResult Function(String message) messageChanged,
-    required TResult Function() theOtherTyped,
-    required TResult Function(ChatMessageDTO message) theOtherSentMessage,
-    required TResult Function() typingSetFalse,
-  }) {
-    return emit();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
-    TResult Function()? messagesFetchingStarted,
-    TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
-    TResult Function()? messageSent,
-    TResult Function(String message)? messageChanged,
-    TResult Function()? theOtherTyped,
-    TResult Function(ChatMessageDTO message)? theOtherSentMessage,
-    TResult Function()? typingSetFalse,
-    required TResult orElse(),
-  }) {
-    if (emit != null) {
-      return emit();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
-        messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
-  }) {
-    return emit(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
-    required TResult orElse(),
-  }) {
-    if (emit != null) {
-      return emit(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Emit implements ChatEvent {
-  const factory _Emit() = _$_Emit;
-}
-
-/// @nodoc
-abstract class _$MessagesFetchingStartedCopyWith<$Res> {
-  factory _$MessagesFetchingStartedCopyWith(_MessagesFetchingStarted value,
-          $Res Function(_MessagesFetchingStarted) then) =
-      __$MessagesFetchingStartedCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$MessagesFetchingStartedCopyWithImpl<$Res>
+class _$MessagesFetchingStartedCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res>
-    implements _$MessagesFetchingStartedCopyWith<$Res> {
-  __$MessagesFetchingStartedCopyWithImpl(_MessagesFetchingStarted _value,
-      $Res Function(_MessagesFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _MessagesFetchingStarted));
+    implements $MessagesFetchingStartedCopyWith<$Res> {
+  _$MessagesFetchingStartedCopyWithImpl(MessagesFetchingStarted _value,
+      $Res Function(MessagesFetchingStarted) _then)
+      : super(_value, (v) => _then(v as MessagesFetchingStarted));
 
   @override
-  _MessagesFetchingStarted get _value =>
-      super._value as _MessagesFetchingStarted;
+  MessagesFetchingStarted get _value => super._value as MessagesFetchingStarted;
 }
 
 /// @nodoc
 
-class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
-  const _$_MessagesFetchingStarted();
+class _$MessagesFetchingStarted implements MessagesFetchingStarted {
+  const _$MessagesFetchingStarted();
 
   @override
   String toString() {
@@ -280,7 +157,7 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _MessagesFetchingStarted);
+    return identical(this, other) || (other is MessagesFetchingStarted);
   }
 
   @override
@@ -289,14 +166,13 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return messagesFetchingStarted();
@@ -305,14 +181,13 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -325,16 +200,15 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return messagesFetchingStarted(this);
   }
@@ -342,15 +216,14 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (messagesFetchingStarted != null) {
@@ -360,33 +233,33 @@ class _$_MessagesFetchingStarted implements _MessagesFetchingStarted {
   }
 }
 
-abstract class _MessagesFetchingStarted implements ChatEvent {
-  const factory _MessagesFetchingStarted() = _$_MessagesFetchingStarted;
+abstract class MessagesFetchingStarted implements ChatEvent {
+  const factory MessagesFetchingStarted() = _$MessagesFetchingStarted;
 }
 
 /// @nodoc
-abstract class _$LoadedMoreMessageCopyWith<$Res> {
-  factory _$LoadedMoreMessageCopyWith(
-          _LoadedMoreMessage value, $Res Function(_LoadedMoreMessage) then) =
-      __$LoadedMoreMessageCopyWithImpl<$Res>;
+abstract class $LoadedMoreMessageCopyWith<$Res> {
+  factory $LoadedMoreMessageCopyWith(
+          LoadedMoreMessage value, $Res Function(LoadedMoreMessage) then) =
+      _$LoadedMoreMessageCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadedMoreMessageCopyWithImpl<$Res>
+class _$LoadedMoreMessageCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res>
-    implements _$LoadedMoreMessageCopyWith<$Res> {
-  __$LoadedMoreMessageCopyWithImpl(
-      _LoadedMoreMessage _value, $Res Function(_LoadedMoreMessage) _then)
-      : super(_value, (v) => _then(v as _LoadedMoreMessage));
+    implements $LoadedMoreMessageCopyWith<$Res> {
+  _$LoadedMoreMessageCopyWithImpl(
+      LoadedMoreMessage _value, $Res Function(LoadedMoreMessage) _then)
+      : super(_value, (v) => _then(v as LoadedMoreMessage));
 
   @override
-  _LoadedMoreMessage get _value => super._value as _LoadedMoreMessage;
+  LoadedMoreMessage get _value => super._value as LoadedMoreMessage;
 }
 
 /// @nodoc
 
-class _$_LoadedMoreMessage implements _LoadedMoreMessage {
-  const _$_LoadedMoreMessage();
+class _$LoadedMoreMessage implements LoadedMoreMessage {
+  const _$LoadedMoreMessage();
 
   @override
   String toString() {
@@ -395,7 +268,7 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadedMoreMessage);
+    return identical(this, other) || (other is LoadedMoreMessage);
   }
 
   @override
@@ -404,14 +277,13 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return loadedMoreMessage();
@@ -420,14 +292,13 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -440,16 +311,15 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return loadedMoreMessage(this);
   }
@@ -457,15 +327,14 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (loadedMoreMessage != null) {
@@ -475,176 +344,32 @@ class _$_LoadedMoreMessage implements _LoadedMoreMessage {
   }
 }
 
-abstract class _LoadedMoreMessage implements ChatEvent {
-  const factory _LoadedMoreMessage() = _$_LoadedMoreMessage;
+abstract class LoadedMoreMessage implements ChatEvent {
+  const factory LoadedMoreMessage() = _$LoadedMoreMessage;
 }
 
 /// @nodoc
-abstract class _$ToggleLoadMoreCopyWith<$Res> {
-  factory _$ToggleLoadMoreCopyWith(
-          _ToggleLoadMore value, $Res Function(_ToggleLoadMore) then) =
-      __$ToggleLoadMoreCopyWithImpl<$Res>;
-  $Res call({bool value});
+abstract class $MessageSentCopyWith<$Res> {
+  factory $MessageSentCopyWith(
+          MessageSent value, $Res Function(MessageSent) then) =
+      _$MessageSentCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$ToggleLoadMoreCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$ToggleLoadMoreCopyWith<$Res> {
-  __$ToggleLoadMoreCopyWithImpl(
-      _ToggleLoadMore _value, $Res Function(_ToggleLoadMore) _then)
-      : super(_value, (v) => _then(v as _ToggleLoadMore));
+class _$MessageSentCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
+    implements $MessageSentCopyWith<$Res> {
+  _$MessageSentCopyWithImpl(
+      MessageSent _value, $Res Function(MessageSent) _then)
+      : super(_value, (v) => _then(v as MessageSent));
 
   @override
-  _ToggleLoadMore get _value => super._value as _ToggleLoadMore;
-
-  @override
-  $Res call({
-    Object? value = freezed,
-  }) {
-    return _then(_ToggleLoadMore(
-      value == freezed
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+  MessageSent get _value => super._value as MessageSent;
 }
 
 /// @nodoc
 
-class _$_ToggleLoadMore implements _ToggleLoadMore {
-  const _$_ToggleLoadMore(this.value);
-
-  @override
-  final bool value;
-
-  @override
-  String toString() {
-    return 'ChatEvent.toggleLoadMore(value: $value)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ToggleLoadMore &&
-            (identical(other.value, value) ||
-                const DeepCollectionEquality().equals(other.value, value)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(value);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ToggleLoadMoreCopyWith<_ToggleLoadMore> get copyWith =>
-      __$ToggleLoadMoreCopyWithImpl<_ToggleLoadMore>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() emit,
-    required TResult Function() messagesFetchingStarted,
-    required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
-    required TResult Function() messageSent,
-    required TResult Function(String message) messageChanged,
-    required TResult Function() theOtherTyped,
-    required TResult Function(ChatMessageDTO message) theOtherSentMessage,
-    required TResult Function() typingSetFalse,
-  }) {
-    return toggleLoadMore(value);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
-    TResult Function()? messagesFetchingStarted,
-    TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
-    TResult Function()? messageSent,
-    TResult Function(String message)? messageChanged,
-    TResult Function()? theOtherTyped,
-    TResult Function(ChatMessageDTO message)? theOtherSentMessage,
-    TResult Function()? typingSetFalse,
-    required TResult orElse(),
-  }) {
-    if (toggleLoadMore != null) {
-      return toggleLoadMore(value);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
-        messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
-  }) {
-    return toggleLoadMore(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
-    required TResult orElse(),
-  }) {
-    if (toggleLoadMore != null) {
-      return toggleLoadMore(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ToggleLoadMore implements ChatEvent {
-  const factory _ToggleLoadMore(bool value) = _$_ToggleLoadMore;
-
-  bool get value => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$ToggleLoadMoreCopyWith<_ToggleLoadMore> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$MessageSentCopyWith<$Res> {
-  factory _$MessageSentCopyWith(
-          _MessageSent value, $Res Function(_MessageSent) then) =
-      __$MessageSentCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$MessageSentCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$MessageSentCopyWith<$Res> {
-  __$MessageSentCopyWithImpl(
-      _MessageSent _value, $Res Function(_MessageSent) _then)
-      : super(_value, (v) => _then(v as _MessageSent));
-
-  @override
-  _MessageSent get _value => super._value as _MessageSent;
-}
-
-/// @nodoc
-
-class _$_MessageSent implements _MessageSent {
-  const _$_MessageSent();
+class _$MessageSent implements MessageSent {
+  const _$MessageSent();
 
   @override
   String toString() {
@@ -653,7 +378,7 @@ class _$_MessageSent implements _MessageSent {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _MessageSent);
+    return identical(this, other) || (other is MessageSent);
   }
 
   @override
@@ -662,14 +387,13 @@ class _$_MessageSent implements _MessageSent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return messageSent();
@@ -678,14 +402,13 @@ class _$_MessageSent implements _MessageSent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -698,16 +421,15 @@ class _$_MessageSent implements _MessageSent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return messageSent(this);
   }
@@ -715,15 +437,14 @@ class _$_MessageSent implements _MessageSent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (messageSent != null) {
@@ -733,33 +454,33 @@ class _$_MessageSent implements _MessageSent {
   }
 }
 
-abstract class _MessageSent implements ChatEvent {
-  const factory _MessageSent() = _$_MessageSent;
+abstract class MessageSent implements ChatEvent {
+  const factory MessageSent() = _$MessageSent;
 }
 
 /// @nodoc
-abstract class _$MessageChangedCopyWith<$Res> {
-  factory _$MessageChangedCopyWith(
-          _MessageChanged value, $Res Function(_MessageChanged) then) =
-      __$MessageChangedCopyWithImpl<$Res>;
+abstract class $MessageChangedCopyWith<$Res> {
+  factory $MessageChangedCopyWith(
+          MessageChanged value, $Res Function(MessageChanged) then) =
+      _$MessageChangedCopyWithImpl<$Res>;
   $Res call({String message});
 }
 
 /// @nodoc
-class __$MessageChangedCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$MessageChangedCopyWith<$Res> {
-  __$MessageChangedCopyWithImpl(
-      _MessageChanged _value, $Res Function(_MessageChanged) _then)
-      : super(_value, (v) => _then(v as _MessageChanged));
+class _$MessageChangedCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
+    implements $MessageChangedCopyWith<$Res> {
+  _$MessageChangedCopyWithImpl(
+      MessageChanged _value, $Res Function(MessageChanged) _then)
+      : super(_value, (v) => _then(v as MessageChanged));
 
   @override
-  _MessageChanged get _value => super._value as _MessageChanged;
+  MessageChanged get _value => super._value as MessageChanged;
 
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_MessageChanged(
+    return _then(MessageChanged(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -770,8 +491,8 @@ class __$MessageChangedCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MessageChanged implements _MessageChanged {
-  const _$_MessageChanged(this.message);
+class _$MessageChanged implements MessageChanged {
+  const _$MessageChanged(this.message);
 
   @override
   final String message;
@@ -784,7 +505,7 @@ class _$_MessageChanged implements _MessageChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MessageChanged &&
+        (other is MessageChanged &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality().equals(other.message, message)));
   }
@@ -795,20 +516,19 @@ class _$_MessageChanged implements _MessageChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$MessageChangedCopyWith<_MessageChanged> get copyWith =>
-      __$MessageChangedCopyWithImpl<_MessageChanged>(this, _$identity);
+  $MessageChangedCopyWith<MessageChanged> get copyWith =>
+      _$MessageChangedCopyWithImpl<MessageChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return messageChanged(message);
@@ -817,14 +537,13 @@ class _$_MessageChanged implements _MessageChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -837,16 +556,15 @@ class _$_MessageChanged implements _MessageChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return messageChanged(this);
   }
@@ -854,15 +572,14 @@ class _$_MessageChanged implements _MessageChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (messageChanged != null) {
@@ -872,37 +589,37 @@ class _$_MessageChanged implements _MessageChanged {
   }
 }
 
-abstract class _MessageChanged implements ChatEvent {
-  const factory _MessageChanged(String message) = _$_MessageChanged;
+abstract class MessageChanged implements ChatEvent {
+  const factory MessageChanged(String message) = _$MessageChanged;
 
   String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$MessageChangedCopyWith<_MessageChanged> get copyWith =>
+  $MessageChangedCopyWith<MessageChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$TheOtherTypedCopyWith<$Res> {
-  factory _$TheOtherTypedCopyWith(
-          _TheOtherTyped value, $Res Function(_TheOtherTyped) then) =
-      __$TheOtherTypedCopyWithImpl<$Res>;
+abstract class $TheOtherTypedCopyWith<$Res> {
+  factory $TheOtherTypedCopyWith(
+          TheOtherTyped value, $Res Function(TheOtherTyped) then) =
+      _$TheOtherTypedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$TheOtherTypedCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$TheOtherTypedCopyWith<$Res> {
-  __$TheOtherTypedCopyWithImpl(
-      _TheOtherTyped _value, $Res Function(_TheOtherTyped) _then)
-      : super(_value, (v) => _then(v as _TheOtherTyped));
+class _$TheOtherTypedCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
+    implements $TheOtherTypedCopyWith<$Res> {
+  _$TheOtherTypedCopyWithImpl(
+      TheOtherTyped _value, $Res Function(TheOtherTyped) _then)
+      : super(_value, (v) => _then(v as TheOtherTyped));
 
   @override
-  _TheOtherTyped get _value => super._value as _TheOtherTyped;
+  TheOtherTyped get _value => super._value as TheOtherTyped;
 }
 
 /// @nodoc
 
-class _$_TheOtherTyped implements _TheOtherTyped {
-  const _$_TheOtherTyped();
+class _$TheOtherTyped implements TheOtherTyped {
+  const _$TheOtherTyped();
 
   @override
   String toString() {
@@ -911,7 +628,7 @@ class _$_TheOtherTyped implements _TheOtherTyped {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _TheOtherTyped);
+    return identical(this, other) || (other is TheOtherTyped);
   }
 
   @override
@@ -920,14 +637,13 @@ class _$_TheOtherTyped implements _TheOtherTyped {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return theOtherTyped();
@@ -936,14 +652,13 @@ class _$_TheOtherTyped implements _TheOtherTyped {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -956,16 +671,15 @@ class _$_TheOtherTyped implements _TheOtherTyped {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return theOtherTyped(this);
   }
@@ -973,15 +687,14 @@ class _$_TheOtherTyped implements _TheOtherTyped {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (theOtherTyped != null) {
@@ -991,34 +704,34 @@ class _$_TheOtherTyped implements _TheOtherTyped {
   }
 }
 
-abstract class _TheOtherTyped implements ChatEvent {
-  const factory _TheOtherTyped() = _$_TheOtherTyped;
+abstract class TheOtherTyped implements ChatEvent {
+  const factory TheOtherTyped() = _$TheOtherTyped;
 }
 
 /// @nodoc
-abstract class _$TheOtherSentMessageCopyWith<$Res> {
-  factory _$TheOtherSentMessageCopyWith(_TheOtherSentMessage value,
-          $Res Function(_TheOtherSentMessage) then) =
-      __$TheOtherSentMessageCopyWithImpl<$Res>;
+abstract class $TheOtherSentMessageCopyWith<$Res> {
+  factory $TheOtherSentMessageCopyWith(
+          TheOtherSentMessage value, $Res Function(TheOtherSentMessage) then) =
+      _$TheOtherSentMessageCopyWithImpl<$Res>;
   $Res call({ChatMessageDTO message});
 }
 
 /// @nodoc
-class __$TheOtherSentMessageCopyWithImpl<$Res>
+class _$TheOtherSentMessageCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res>
-    implements _$TheOtherSentMessageCopyWith<$Res> {
-  __$TheOtherSentMessageCopyWithImpl(
-      _TheOtherSentMessage _value, $Res Function(_TheOtherSentMessage) _then)
-      : super(_value, (v) => _then(v as _TheOtherSentMessage));
+    implements $TheOtherSentMessageCopyWith<$Res> {
+  _$TheOtherSentMessageCopyWithImpl(
+      TheOtherSentMessage _value, $Res Function(TheOtherSentMessage) _then)
+      : super(_value, (v) => _then(v as TheOtherSentMessage));
 
   @override
-  _TheOtherSentMessage get _value => super._value as _TheOtherSentMessage;
+  TheOtherSentMessage get _value => super._value as TheOtherSentMessage;
 
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_TheOtherSentMessage(
+    return _then(TheOtherSentMessage(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -1029,8 +742,8 @@ class __$TheOtherSentMessageCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TheOtherSentMessage implements _TheOtherSentMessage {
-  const _$_TheOtherSentMessage(this.message);
+class _$TheOtherSentMessage implements TheOtherSentMessage {
+  const _$TheOtherSentMessage(this.message);
 
   @override
   final ChatMessageDTO message;
@@ -1043,7 +756,7 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _TheOtherSentMessage &&
+        (other is TheOtherSentMessage &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality().equals(other.message, message)));
   }
@@ -1054,21 +767,19 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
 
   @JsonKey(ignore: true)
   @override
-  _$TheOtherSentMessageCopyWith<_TheOtherSentMessage> get copyWith =>
-      __$TheOtherSentMessageCopyWithImpl<_TheOtherSentMessage>(
-          this, _$identity);
+  $TheOtherSentMessageCopyWith<TheOtherSentMessage> get copyWith =>
+      _$TheOtherSentMessageCopyWithImpl<TheOtherSentMessage>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return theOtherSentMessage(message);
@@ -1077,14 +788,13 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -1097,16 +807,15 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return theOtherSentMessage(this);
   }
@@ -1114,15 +823,14 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (theOtherSentMessage != null) {
@@ -1132,47 +840,47 @@ class _$_TheOtherSentMessage implements _TheOtherSentMessage {
   }
 }
 
-abstract class _TheOtherSentMessage implements ChatEvent {
-  const factory _TheOtherSentMessage(ChatMessageDTO message) =
-      _$_TheOtherSentMessage;
+abstract class TheOtherSentMessage implements ChatEvent {
+  const factory TheOtherSentMessage(ChatMessageDTO message) =
+      _$TheOtherSentMessage;
 
   ChatMessageDTO get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$TheOtherSentMessageCopyWith<_TheOtherSentMessage> get copyWith =>
+  $TheOtherSentMessageCopyWith<TheOtherSentMessage> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$TypingSetFalseCopyWith<$Res> {
-  factory _$TypingSetFalseCopyWith(
-          _TypingSetFalse value, $Res Function(_TypingSetFalse) then) =
-      __$TypingSetFalseCopyWithImpl<$Res>;
+abstract class $SignaledTypingCopyWith<$Res> {
+  factory $SignaledTypingCopyWith(
+          SignaledTyping value, $Res Function(SignaledTyping) then) =
+      _$SignaledTypingCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$TypingSetFalseCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
-    implements _$TypingSetFalseCopyWith<$Res> {
-  __$TypingSetFalseCopyWithImpl(
-      _TypingSetFalse _value, $Res Function(_TypingSetFalse) _then)
-      : super(_value, (v) => _then(v as _TypingSetFalse));
+class _$SignaledTypingCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
+    implements $SignaledTypingCopyWith<$Res> {
+  _$SignaledTypingCopyWithImpl(
+      SignaledTyping _value, $Res Function(SignaledTyping) _then)
+      : super(_value, (v) => _then(v as SignaledTyping));
 
   @override
-  _TypingSetFalse get _value => super._value as _TypingSetFalse;
+  SignaledTyping get _value => super._value as SignaledTyping;
 }
 
 /// @nodoc
 
-class _$_TypingSetFalse implements _TypingSetFalse {
-  const _$_TypingSetFalse();
+class _$SignaledTyping implements SignaledTyping {
+  const _$SignaledTyping();
 
   @override
   String toString() {
-    return 'ChatEvent.typingSetFalse()';
+    return 'ChatEvent.signaledTyping()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _TypingSetFalse);
+    return identical(this, other) || (other is SignaledTyping);
   }
 
   @override
@@ -1181,14 +889,123 @@ class _$_TypingSetFalse implements _TypingSetFalse {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() emit,
     required TResult Function() messagesFetchingStarted,
     required TResult Function() loadedMoreMessage,
-    required TResult Function(bool value) toggleLoadMore,
     required TResult Function() messageSent,
     required TResult Function(String message) messageChanged,
     required TResult Function() theOtherTyped,
     required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
+    required TResult Function() typingSetFalse,
+  }) {
+    return signaledTyping();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? messagesFetchingStarted,
+    TResult Function()? loadedMoreMessage,
+    TResult Function()? messageSent,
+    TResult Function(String message)? messageChanged,
+    TResult Function()? theOtherTyped,
+    TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
+    TResult Function()? typingSetFalse,
+    required TResult orElse(),
+  }) {
+    if (signaledTyping != null) {
+      return signaledTyping();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MessagesFetchingStarted value)
+        messagesFetchingStarted,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
+  }) {
+    return signaledTyping(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
+    required TResult orElse(),
+  }) {
+    if (signaledTyping != null) {
+      return signaledTyping(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SignaledTyping implements ChatEvent {
+  const factory SignaledTyping() = _$SignaledTyping;
+}
+
+/// @nodoc
+abstract class $TypingSetFalseCopyWith<$Res> {
+  factory $TypingSetFalseCopyWith(
+          TypingSetFalse value, $Res Function(TypingSetFalse) then) =
+      _$TypingSetFalseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$TypingSetFalseCopyWithImpl<$Res> extends _$ChatEventCopyWithImpl<$Res>
+    implements $TypingSetFalseCopyWith<$Res> {
+  _$TypingSetFalseCopyWithImpl(
+      TypingSetFalse _value, $Res Function(TypingSetFalse) _then)
+      : super(_value, (v) => _then(v as TypingSetFalse));
+
+  @override
+  TypingSetFalse get _value => super._value as TypingSetFalse;
+}
+
+/// @nodoc
+
+class _$TypingSetFalse implements TypingSetFalse {
+  const _$TypingSetFalse();
+
+  @override
+  String toString() {
+    return 'ChatEvent.typingSetFalse()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is TypingSetFalse);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() messagesFetchingStarted,
+    required TResult Function() loadedMoreMessage,
+    required TResult Function() messageSent,
+    required TResult Function(String message) messageChanged,
+    required TResult Function() theOtherTyped,
+    required TResult Function(ChatMessageDTO message) theOtherSentMessage,
+    required TResult Function() signaledTyping,
     required TResult Function() typingSetFalse,
   }) {
     return typingSetFalse();
@@ -1197,14 +1014,13 @@ class _$_TypingSetFalse implements _TypingSetFalse {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? emit,
     TResult Function()? messagesFetchingStarted,
     TResult Function()? loadedMoreMessage,
-    TResult Function(bool value)? toggleLoadMore,
     TResult Function()? messageSent,
     TResult Function(String message)? messageChanged,
     TResult Function()? theOtherTyped,
     TResult Function(ChatMessageDTO message)? theOtherSentMessage,
+    TResult Function()? signaledTyping,
     TResult Function()? typingSetFalse,
     required TResult orElse(),
   }) {
@@ -1217,16 +1033,15 @@ class _$_TypingSetFalse implements _TypingSetFalse {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Emit value) emit,
-    required TResult Function(_MessagesFetchingStarted value)
+    required TResult Function(MessagesFetchingStarted value)
         messagesFetchingStarted,
-    required TResult Function(_LoadedMoreMessage value) loadedMoreMessage,
-    required TResult Function(_ToggleLoadMore value) toggleLoadMore,
-    required TResult Function(_MessageSent value) messageSent,
-    required TResult Function(_MessageChanged value) messageChanged,
-    required TResult Function(_TheOtherTyped value) theOtherTyped,
-    required TResult Function(_TheOtherSentMessage value) theOtherSentMessage,
-    required TResult Function(_TypingSetFalse value) typingSetFalse,
+    required TResult Function(LoadedMoreMessage value) loadedMoreMessage,
+    required TResult Function(MessageSent value) messageSent,
+    required TResult Function(MessageChanged value) messageChanged,
+    required TResult Function(TheOtherTyped value) theOtherTyped,
+    required TResult Function(TheOtherSentMessage value) theOtherSentMessage,
+    required TResult Function(SignaledTyping value) signaledTyping,
+    required TResult Function(TypingSetFalse value) typingSetFalse,
   }) {
     return typingSetFalse(this);
   }
@@ -1234,15 +1049,14 @@ class _$_TypingSetFalse implements _TypingSetFalse {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Emit value)? emit,
-    TResult Function(_MessagesFetchingStarted value)? messagesFetchingStarted,
-    TResult Function(_LoadedMoreMessage value)? loadedMoreMessage,
-    TResult Function(_ToggleLoadMore value)? toggleLoadMore,
-    TResult Function(_MessageSent value)? messageSent,
-    TResult Function(_MessageChanged value)? messageChanged,
-    TResult Function(_TheOtherTyped value)? theOtherTyped,
-    TResult Function(_TheOtherSentMessage value)? theOtherSentMessage,
-    TResult Function(_TypingSetFalse value)? typingSetFalse,
+    TResult Function(MessagesFetchingStarted value)? messagesFetchingStarted,
+    TResult Function(LoadedMoreMessage value)? loadedMoreMessage,
+    TResult Function(MessageSent value)? messageSent,
+    TResult Function(MessageChanged value)? messageChanged,
+    TResult Function(TheOtherTyped value)? theOtherTyped,
+    TResult Function(TheOtherSentMessage value)? theOtherSentMessage,
+    TResult Function(SignaledTyping value)? signaledTyping,
+    TResult Function(TypingSetFalse value)? typingSetFalse,
     required TResult orElse(),
   }) {
     if (typingSetFalse != null) {
@@ -1252,8 +1066,8 @@ class _$_TypingSetFalse implements _TypingSetFalse {
   }
 }
 
-abstract class _TypingSetFalse implements ChatEvent {
-  const factory _TypingSetFalse() = _$_TypingSetFalse;
+abstract class TypingSetFalse implements ChatEvent {
+  const factory TypingSetFalse() = _$TypingSetFalse;
 }
 
 /// @nodoc
@@ -1267,7 +1081,6 @@ class _$ChatStateTearOff {
       required bool otherTyping,
       required bool user,
       required int page,
-      required bool loadMore,
       required Option<String> fetchedAt}) {
     return _ChatState(
       messages: messages,
@@ -1276,7 +1089,6 @@ class _$ChatStateTearOff {
       otherTyping: otherTyping,
       user: user,
       page: page,
-      loadMore: loadMore,
       fetchedAt: fetchedAt,
     );
   }
@@ -1293,7 +1105,6 @@ mixin _$ChatState {
   bool get otherTyping => throw _privateConstructorUsedError;
   bool get user => throw _privateConstructorUsedError;
   int get page => throw _privateConstructorUsedError;
-  bool get loadMore => throw _privateConstructorUsedError;
   Option<String> get fetchedAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1312,7 +1123,6 @@ abstract class $ChatStateCopyWith<$Res> {
       bool otherTyping,
       bool user,
       int page,
-      bool loadMore,
       Option<String> fetchedAt});
 }
 
@@ -1332,7 +1142,6 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
     Object? otherTyping = freezed,
     Object? user = freezed,
     Object? page = freezed,
-    Object? loadMore = freezed,
     Object? fetchedAt = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1360,10 +1169,6 @@ class _$ChatStateCopyWithImpl<$Res> implements $ChatStateCopyWith<$Res> {
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      loadMore: loadMore == freezed
-          ? _value.loadMore
-          : loadMore // ignore: cast_nullable_to_non_nullable
-              as bool,
       fetchedAt: fetchedAt == freezed
           ? _value.fetchedAt
           : fetchedAt // ignore: cast_nullable_to_non_nullable
@@ -1385,7 +1190,6 @@ abstract class _$ChatStateCopyWith<$Res> implements $ChatStateCopyWith<$Res> {
       bool otherTyping,
       bool user,
       int page,
-      bool loadMore,
       Option<String> fetchedAt});
 }
 
@@ -1406,7 +1210,6 @@ class __$ChatStateCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
     Object? otherTyping = freezed,
     Object? user = freezed,
     Object? page = freezed,
-    Object? loadMore = freezed,
     Object? fetchedAt = freezed,
   }) {
     return _then(_ChatState(
@@ -1434,10 +1237,6 @@ class __$ChatStateCopyWithImpl<$Res> extends _$ChatStateCopyWithImpl<$Res>
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
               as int,
-      loadMore: loadMore == freezed
-          ? _value.loadMore
-          : loadMore // ignore: cast_nullable_to_non_nullable
-              as bool,
       fetchedAt: fetchedAt == freezed
           ? _value.fetchedAt
           : fetchedAt // ignore: cast_nullable_to_non_nullable
@@ -1456,7 +1255,6 @@ class _$_ChatState implements _ChatState {
       required this.otherTyping,
       required this.user,
       required this.page,
-      required this.loadMore,
       required this.fetchedAt});
 
   @override
@@ -1472,13 +1270,11 @@ class _$_ChatState implements _ChatState {
   @override
   final int page;
   @override
-  final bool loadMore;
-  @override
   final Option<String> fetchedAt;
 
   @override
   String toString() {
-    return 'ChatState(messages: $messages, loading: $loading, message: $message, otherTyping: $otherTyping, user: $user, page: $page, loadMore: $loadMore, fetchedAt: $fetchedAt)';
+    return 'ChatState(messages: $messages, loading: $loading, message: $message, otherTyping: $otherTyping, user: $user, page: $page, fetchedAt: $fetchedAt)';
   }
 
   @override
@@ -1501,9 +1297,6 @@ class _$_ChatState implements _ChatState {
                 const DeepCollectionEquality().equals(other.user, user)) &&
             (identical(other.page, page) ||
                 const DeepCollectionEquality().equals(other.page, page)) &&
-            (identical(other.loadMore, loadMore) ||
-                const DeepCollectionEquality()
-                    .equals(other.loadMore, loadMore)) &&
             (identical(other.fetchedAt, fetchedAt) ||
                 const DeepCollectionEquality()
                     .equals(other.fetchedAt, fetchedAt)));
@@ -1518,7 +1311,6 @@ class _$_ChatState implements _ChatState {
       const DeepCollectionEquality().hash(otherTyping) ^
       const DeepCollectionEquality().hash(user) ^
       const DeepCollectionEquality().hash(page) ^
-      const DeepCollectionEquality().hash(loadMore) ^
       const DeepCollectionEquality().hash(fetchedAt);
 
   @JsonKey(ignore: true)
@@ -1535,7 +1327,6 @@ abstract class _ChatState implements ChatState {
       required bool otherTyping,
       required bool user,
       required int page,
-      required bool loadMore,
       required Option<String> fetchedAt}) = _$_ChatState;
 
   @override
@@ -1550,8 +1341,6 @@ abstract class _ChatState implements ChatState {
   bool get user => throw _privateConstructorUsedError;
   @override
   int get page => throw _privateConstructorUsedError;
-  @override
-  bool get loadMore => throw _privateConstructorUsedError;
   @override
   Option<String> get fetchedAt => throw _privateConstructorUsedError;
   @override

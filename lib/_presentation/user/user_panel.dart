@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:reddit_clone/_presentation/core/constants/format.dart';
 import 'package:reddit_clone/_presentation/core/mock_rounded_text_input.dart';
 import 'package:reddit_clone/application/navigation_service.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/route_params.dart';
 import 'package:reddit_clone/routes.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -168,7 +170,10 @@ class UserPanel extends StatelessWidget {
 
   Widget _buildSendMessage() {
     return GestureDetector(
-      onTap: () => getIt<NavigationService>().navigateTo(Routes.chatPage),
+      onTap: () => getIt<NavigationService>().navigateTo(
+        Routes.chatPage,
+        arguments: ChatPageParams(roomId: '612cc72f65a882665306cc0e'),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
@@ -265,7 +270,7 @@ class KarmaAwardInfoRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AppHeaderText(
-            NumberFormat("###,###,###", "en_US").format(first.value),
+            Format.decimalNumber().format(first.value),
             fontSizeFactor: 0.75,
             fontWeightDelta: 0,
           ),

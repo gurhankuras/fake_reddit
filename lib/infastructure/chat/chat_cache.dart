@@ -27,16 +27,18 @@ class ChatCache implements IChatCache {
   }
 
   @override
-  void saveAll(List<ChatMessageDTO> messages) async {
+  void saveMessages(List<ChatMessageDTO> messages) async {
     log.i('CHAT CACHE - saveAll');
     final db = await database;
+    final batch = db.batch();
     messages.forEach((msg) {
-      db.insert(
+      batch.insert(
         'chatMessages',
         msg.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     });
+    batch.commit(noResult: true);
   }
 
   @override

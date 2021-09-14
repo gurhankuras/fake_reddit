@@ -36,14 +36,14 @@ Map<String, dynamic> _$ChatUserToJson(ChatUser instance) => <String, dynamic>{
     };
 
 LastMessage _$LastMessageFromJson(Map<String, dynamic> json) => LastMessage(
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] as String,
       senderName: json['sender_name'] as String,
       text: json['text'] as String,
     );
 
 Map<String, dynamic> _$LastMessageToJson(LastMessage instance) =>
     <String, dynamic>{
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': instance.createdAt,
       'sender_name': instance.senderName,
       'text': instance.text,
     };

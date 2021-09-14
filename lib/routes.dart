@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/route_params.dart';
 import 'package:reddit_clone/wrapped_bottom_nav_page.dart';
 
 import '_presentation/auth/login_page.dart';
@@ -168,9 +169,11 @@ abstract class AppRouter {
         );
 
       case Routes.chatPage:
+        final params = settings.arguments as ChatPageParams;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
             create: (context) => ChatBloc(
+              roomId: params.roomId,
               chatMessagesService: getIt<IChatMessagesService>(),
               socketManager: getIt<ISocketManager>(),
             )..add(ChatEvent.messagesFetchingStarted()),

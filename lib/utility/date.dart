@@ -1,7 +1,8 @@
 import 'package:intl/intl.dart';
+import 'package:reddit_clone/_presentation/core/constants/format.dart';
 
 String formatDateByHourMinute(DateTime date) {
-  return DateFormat('h:mm a').format(date);
+  return Format.hours().format(date);
 }
 
 String generateDateText(DateTime date) {
@@ -15,5 +16,5 @@ String generateDateText(DateTime date) {
   } else if (newDate.compareTo(yesterday) == 0) {
     return 'Yesterday';
   }
-  return DateFormat.MMMMd().format(date);
+  return Format.dayMonth().format(date);
 }

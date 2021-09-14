@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reddit_clone/domain/core/constants/socket_event_keys.dart';
@@ -37,17 +38,32 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   ) async* {
     yield* event.map(
       notificationInfoFetchingStarted: (e) async* {
-        await Future.delayed(Duration(seconds: 10));
+        final res = await Dio().get('http://10.0.2.2:4000/api/notifications');
+        final info = NotificationInfo.fromJson(res.data);
+
+        await Future.delayed(Duration(seconds: 3));
+        print(info);
         yield state.copyWith(
-          info: some(
-            NotificationInfo(
-              unreadMessagesCount: 4,
-              // chatRoomIds: {'123456789': 3, '1234567890': 1},
-            ),
-          ),
+          unreadMessageCount: info.unreadMessagesCount,
+          inboxUnreadMessageCount: info.inboxUnreadMessagesCount,
+          unreadActivitiesCount: info.unreadActivitiesCount,
         );
       },
+      activityRead: (e) async* {
+        yield state.copyWith(
+          unreadActivitiesCount: state.unreadActivitiesCount - 1,
+        );
+      },
+      inboxMessageRead: (e) async* {
+        yield state.copyWith(
+          inboxUnreadMessageCount: state.inboxUnreadMessageCount - 1,
+        );
+      },
+
       messageRead: (e) async* {
+        yield state.copyWith(
+          unreadMessageCount: state.unreadMessageCount - 1,
+        );
         // yield* state.info.fold(
         //   () async* {
         //     yield state;
@@ -70,22 +86,24 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
         //   },
         // );
       },
-      newMessageReceived: (e) async* {
-        yield state.copyWith(info: some(e.info));
-        // yield state.copyWith(
-        //   info: state.info.fold(
-        //     () => state.info,
-        //     (a) {
-        //       final newIds =
-        //           a.chatRoomIds.map((key, value) => MapEntry(key, value));
-        //       newIds.update(e.id, (value) => value + 1, ifAbsent: () => 1);
-        //       return some(a.copyWith(
-        //           unreadMessagesCount: a.unreadMessagesCount + 1,
-        //           chatRoomIds: newIds));
-        //     },
-        //   ),
-        // );
-      },
+      // newMessageReceived: (e) async* {
+      //   yield state.copyWith(
+      //     inboxUnreadMessageCount: state.inboxUnreadMessageCount + 1,
+      //   );
+      //   // yield state.copyWith(
+      //   //   info: state.info.fold(
+      //   //     () => state.info,
+      //   //     (a) {
+      //   //       final newIds =
+      //   //           a.chatRoomIds.map((key, value) => MapEntry(key, value));
+      //   //       newIds.update(e.id, (value) => value + 1, ifAbsent: () => 1);
+      //   //       return some(a.copyWith(
+      //   //           unreadMessagesCount: a.unreadMessagesCount + 1,
+      //   //           chatRoomIds: newIds));
+      //   //     },
+      //   //   ),
+      //   // );
+      // },
     );
   }
 }

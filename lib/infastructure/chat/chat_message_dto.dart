@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'chat_message_dto.g.dart';
 
 @JsonSerializable()
@@ -15,7 +16,7 @@ class ChatMessageDTO {
     required this.roomId,
     required this.user,
     required this.text,
-    this.createdAt,
+    required this.createdAt,
   });
 
   Map<String, dynamic> toMap() {
@@ -49,6 +50,22 @@ class ChatMessageDTO {
   //   'username': user.name,
   //   'user_avatar': user.avatar
   // };
+
+  ChatMessageDTO copyWith({
+    String? id,
+    String? roomId,
+    ChatMessageUserDTO? user,
+    String? text,
+    String? createdAt,
+  }) {
+    return ChatMessageDTO(
+      id: id ?? this.id,
+      roomId: roomId ?? this.roomId,
+      user: user ?? this.user,
+      text: text ?? this.text,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
   // }
 
   factory ChatMessageDTO.fromJson(Map<String, dynamic> json) =>

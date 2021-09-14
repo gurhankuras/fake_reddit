@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
 import 'package:reddit_clone/infastructure/chat/chat_room.dart';
+import 'package:reddit_clone/route_params.dart';
 import 'package:reddit_clone/utility/date.dart';
 
 import '../../../application/notification/bloc/notification_bloc.dart';
@@ -16,9 +17,15 @@ import '../../core/reusable/app_header.dart';
 
 const _kChatListTextColor = AppColors.lightGrey;
 
-class ChatNavPage extends StatelessWidget {
+class ChatNavPage extends StatefulWidget {
   const ChatNavPage({Key? key}) : super(key: key);
 
+  @override
+  _ChatNavPageState createState() => _ChatNavPageState();
+}
+
+class _ChatNavPageState extends State<ChatNavPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,13 +66,14 @@ class ChatNavPage extends StatelessWidget {
                 final item = ChatItem(room: state.chatRooms[index - 1]);
 
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(Routes.chatPage),
+                  onTap: () => Navigator.of(context).pushNamed(Routes.chatPage,
+                      arguments: ChatPageParams(roomId: item.room.id)),
                   child: ListTile(
                     leading: item.buildAvatar(context),
                     title: item.buildTitle(context),
                     subtitle: item.buildSubtitle(
                       context,
-                      d: 0,
+                      d: item.room.user.unreadMessageCount,
                     ),
                   ),
                 );
@@ -78,6 +86,9 @@ class ChatNavPage extends StatelessWidget {
         // },
         );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 /// A ListItem that contains data to display a heading.
@@ -99,7 +110,7 @@ class ChatItem {
           ),
           Spacer(),
           AppHeaderText(
-            generateDateText(room.lastMessage.createdAt),
+            generateDateText(DateTime.parse(room.lastMessage.createdAt)),
             fontSizeFactor: 0.65,
             fontWeightDelta: 0,
             color: _kChatListTextColor,

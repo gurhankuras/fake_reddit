@@ -19,6 +19,12 @@ class _$ChatRoomsEventTearOff {
   _FetchingStarted fetchingStarted() {
     return const _FetchingStarted();
   }
+
+  _NewMessageReceived newMessageReceived(ChatMessageDTO message) {
+    return _NewMessageReceived(
+      message,
+    );
+  }
 }
 
 /// @nodoc
@@ -29,22 +35,26 @@ mixin _$ChatRoomsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchingStarted,
+    required TResult Function(ChatMessageDTO message) newMessageReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchingStarted,
+    TResult Function(ChatMessageDTO message)? newMessageReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchingStarted value) fetchingStarted,
+    required TResult Function(_NewMessageReceived value) newMessageReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchingStarted value)? fetchingStarted,
+    TResult Function(_NewMessageReceived value)? newMessageReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -108,6 +118,7 @@ class _$_FetchingStarted implements _FetchingStarted {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() fetchingStarted,
+    required TResult Function(ChatMessageDTO message) newMessageReceived,
   }) {
     return fetchingStarted();
   }
@@ -116,6 +127,7 @@ class _$_FetchingStarted implements _FetchingStarted {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? fetchingStarted,
+    TResult Function(ChatMessageDTO message)? newMessageReceived,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -128,6 +140,7 @@ class _$_FetchingStarted implements _FetchingStarted {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_FetchingStarted value) fetchingStarted,
+    required TResult Function(_NewMessageReceived value) newMessageReceived,
   }) {
     return fetchingStarted(this);
   }
@@ -136,6 +149,7 @@ class _$_FetchingStarted implements _FetchingStarted {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_FetchingStarted value)? fetchingStarted,
+    TResult Function(_NewMessageReceived value)? newMessageReceived,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -147,6 +161,123 @@ class _$_FetchingStarted implements _FetchingStarted {
 
 abstract class _FetchingStarted implements ChatRoomsEvent {
   const factory _FetchingStarted() = _$_FetchingStarted;
+}
+
+/// @nodoc
+abstract class _$NewMessageReceivedCopyWith<$Res> {
+  factory _$NewMessageReceivedCopyWith(
+          _NewMessageReceived value, $Res Function(_NewMessageReceived) then) =
+      __$NewMessageReceivedCopyWithImpl<$Res>;
+  $Res call({ChatMessageDTO message});
+}
+
+/// @nodoc
+class __$NewMessageReceivedCopyWithImpl<$Res>
+    extends _$ChatRoomsEventCopyWithImpl<$Res>
+    implements _$NewMessageReceivedCopyWith<$Res> {
+  __$NewMessageReceivedCopyWithImpl(
+      _NewMessageReceived _value, $Res Function(_NewMessageReceived) _then)
+      : super(_value, (v) => _then(v as _NewMessageReceived));
+
+  @override
+  _NewMessageReceived get _value => super._value as _NewMessageReceived;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+  }) {
+    return _then(_NewMessageReceived(
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as ChatMessageDTO,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_NewMessageReceived implements _NewMessageReceived {
+  const _$_NewMessageReceived(this.message);
+
+  @override
+  final ChatMessageDTO message;
+
+  @override
+  String toString() {
+    return 'ChatRoomsEvent.newMessageReceived(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _NewMessageReceived &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+
+  @JsonKey(ignore: true)
+  @override
+  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
+      __$NewMessageReceivedCopyWithImpl<_NewMessageReceived>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchingStarted,
+    required TResult Function(ChatMessageDTO message) newMessageReceived,
+  }) {
+    return newMessageReceived(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchingStarted,
+    TResult Function(ChatMessageDTO message)? newMessageReceived,
+    required TResult orElse(),
+  }) {
+    if (newMessageReceived != null) {
+      return newMessageReceived(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_FetchingStarted value) fetchingStarted,
+    required TResult Function(_NewMessageReceived value) newMessageReceived,
+  }) {
+    return newMessageReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_FetchingStarted value)? fetchingStarted,
+    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    required TResult orElse(),
+  }) {
+    if (newMessageReceived != null) {
+      return newMessageReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NewMessageReceived implements ChatRoomsEvent {
+  const factory _NewMessageReceived(ChatMessageDTO message) =
+      _$_NewMessageReceived;
+
+  ChatMessageDTO get message => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

@@ -26,9 +26,15 @@ class _$NotificationEventTearOff {
     );
   }
 
-  _NewMessageReceived newMessageReceived(NotificationInfo info) {
-    return _NewMessageReceived(
-      info,
+  _ActivityRead activityRead(String id) {
+    return _ActivityRead(
+      id,
+    );
+  }
+
+  _InboxMessageRead inboxMessageRead(String id) {
+    return _InboxMessageRead(
+      id,
     );
   }
 }
@@ -42,14 +48,16 @@ mixin _$NotificationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() notificationInfoFetchingStarted,
     required TResult Function(String id) messageRead,
-    required TResult Function(NotificationInfo info) newMessageReceived,
+    required TResult Function(String id) activityRead,
+    required TResult Function(String id) inboxMessageRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notificationInfoFetchingStarted,
     TResult Function(String id)? messageRead,
-    TResult Function(NotificationInfo info)? newMessageReceived,
+    TResult Function(String id)? activityRead,
+    TResult Function(String id)? inboxMessageRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -58,7 +66,8 @@ mixin _$NotificationEvent {
     required TResult Function(_NotificationInfoFetchingStarted value)
         notificationInfoFetchingStarted,
     required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(_ActivityRead value) activityRead,
+    required TResult Function(_InboxMessageRead value) inboxMessageRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -66,7 +75,8 @@ mixin _$NotificationEvent {
     TResult Function(_NotificationInfoFetchingStarted value)?
         notificationInfoFetchingStarted,
     TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(_ActivityRead value)? activityRead,
+    TResult Function(_InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,7 +146,8 @@ class _$_NotificationInfoFetchingStarted
   TResult when<TResult extends Object?>({
     required TResult Function() notificationInfoFetchingStarted,
     required TResult Function(String id) messageRead,
-    required TResult Function(NotificationInfo info) newMessageReceived,
+    required TResult Function(String id) activityRead,
+    required TResult Function(String id) inboxMessageRead,
   }) {
     return notificationInfoFetchingStarted();
   }
@@ -146,7 +157,8 @@ class _$_NotificationInfoFetchingStarted
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notificationInfoFetchingStarted,
     TResult Function(String id)? messageRead,
-    TResult Function(NotificationInfo info)? newMessageReceived,
+    TResult Function(String id)? activityRead,
+    TResult Function(String id)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (notificationInfoFetchingStarted != null) {
@@ -161,7 +173,8 @@ class _$_NotificationInfoFetchingStarted
     required TResult Function(_NotificationInfoFetchingStarted value)
         notificationInfoFetchingStarted,
     required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(_ActivityRead value) activityRead,
+    required TResult Function(_InboxMessageRead value) inboxMessageRead,
   }) {
     return notificationInfoFetchingStarted(this);
   }
@@ -172,7 +185,8 @@ class _$_NotificationInfoFetchingStarted
     TResult Function(_NotificationInfoFetchingStarted value)?
         notificationInfoFetchingStarted,
     TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(_ActivityRead value)? activityRead,
+    TResult Function(_InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (notificationInfoFetchingStarted != null) {
@@ -254,7 +268,8 @@ class _$_MessageRead implements _MessageRead {
   TResult when<TResult extends Object?>({
     required TResult Function() notificationInfoFetchingStarted,
     required TResult Function(String id) messageRead,
-    required TResult Function(NotificationInfo info) newMessageReceived,
+    required TResult Function(String id) activityRead,
+    required TResult Function(String id) inboxMessageRead,
   }) {
     return messageRead(id);
   }
@@ -264,7 +279,8 @@ class _$_MessageRead implements _MessageRead {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notificationInfoFetchingStarted,
     TResult Function(String id)? messageRead,
-    TResult Function(NotificationInfo info)? newMessageReceived,
+    TResult Function(String id)? activityRead,
+    TResult Function(String id)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (messageRead != null) {
@@ -279,7 +295,8 @@ class _$_MessageRead implements _MessageRead {
     required TResult Function(_NotificationInfoFetchingStarted value)
         notificationInfoFetchingStarted,
     required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(_ActivityRead value) activityRead,
+    required TResult Function(_InboxMessageRead value) inboxMessageRead,
   }) {
     return messageRead(this);
   }
@@ -290,7 +307,8 @@ class _$_MessageRead implements _MessageRead {
     TResult Function(_NotificationInfoFetchingStarted value)?
         notificationInfoFetchingStarted,
     TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(_ActivityRead value)? activityRead,
+    TResult Function(_InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (messageRead != null) {
@@ -310,75 +328,76 @@ abstract class _MessageRead implements NotificationEvent {
 }
 
 /// @nodoc
-abstract class _$NewMessageReceivedCopyWith<$Res> {
-  factory _$NewMessageReceivedCopyWith(
-          _NewMessageReceived value, $Res Function(_NewMessageReceived) then) =
-      __$NewMessageReceivedCopyWithImpl<$Res>;
-  $Res call({NotificationInfo info});
+abstract class _$ActivityReadCopyWith<$Res> {
+  factory _$ActivityReadCopyWith(
+          _ActivityRead value, $Res Function(_ActivityRead) then) =
+      __$ActivityReadCopyWithImpl<$Res>;
+  $Res call({String id});
 }
 
 /// @nodoc
-class __$NewMessageReceivedCopyWithImpl<$Res>
+class __$ActivityReadCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$NewMessageReceivedCopyWith<$Res> {
-  __$NewMessageReceivedCopyWithImpl(
-      _NewMessageReceived _value, $Res Function(_NewMessageReceived) _then)
-      : super(_value, (v) => _then(v as _NewMessageReceived));
+    implements _$ActivityReadCopyWith<$Res> {
+  __$ActivityReadCopyWithImpl(
+      _ActivityRead _value, $Res Function(_ActivityRead) _then)
+      : super(_value, (v) => _then(v as _ActivityRead));
 
   @override
-  _NewMessageReceived get _value => super._value as _NewMessageReceived;
+  _ActivityRead get _value => super._value as _ActivityRead;
 
   @override
   $Res call({
-    Object? info = freezed,
+    Object? id = freezed,
   }) {
-    return _then(_NewMessageReceived(
-      info == freezed
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as NotificationInfo,
+    return _then(_ActivityRead(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_NewMessageReceived implements _NewMessageReceived {
-  const _$_NewMessageReceived(this.info);
+class _$_ActivityRead implements _ActivityRead {
+  const _$_ActivityRead(this.id);
 
   @override
-  final NotificationInfo info;
+  final String id;
 
   @override
   String toString() {
-    return 'NotificationEvent.newMessageReceived(info: $info)';
+    return 'NotificationEvent.activityRead(id: $id)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NewMessageReceived &&
-            (identical(other.info, info) ||
-                const DeepCollectionEquality().equals(other.info, info)));
+        (other is _ActivityRead &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(info);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
 
   @JsonKey(ignore: true)
   @override
-  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
-      __$NewMessageReceivedCopyWithImpl<_NewMessageReceived>(this, _$identity);
+  _$ActivityReadCopyWith<_ActivityRead> get copyWith =>
+      __$ActivityReadCopyWithImpl<_ActivityRead>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() notificationInfoFetchingStarted,
     required TResult Function(String id) messageRead,
-    required TResult Function(NotificationInfo info) newMessageReceived,
+    required TResult Function(String id) activityRead,
+    required TResult Function(String id) inboxMessageRead,
   }) {
-    return newMessageReceived(info);
+    return activityRead(id);
   }
 
   @override
@@ -386,11 +405,12 @@ class _$_NewMessageReceived implements _NewMessageReceived {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? notificationInfoFetchingStarted,
     TResult Function(String id)? messageRead,
-    TResult Function(NotificationInfo info)? newMessageReceived,
+    TResult Function(String id)? activityRead,
+    TResult Function(String id)? inboxMessageRead,
     required TResult orElse(),
   }) {
-    if (newMessageReceived != null) {
-      return newMessageReceived(info);
+    if (activityRead != null) {
+      return activityRead(id);
     }
     return orElse();
   }
@@ -401,9 +421,10 @@ class _$_NewMessageReceived implements _NewMessageReceived {
     required TResult Function(_NotificationInfoFetchingStarted value)
         notificationInfoFetchingStarted,
     required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(_ActivityRead value) activityRead,
+    required TResult Function(_InboxMessageRead value) inboxMessageRead,
   }) {
-    return newMessageReceived(this);
+    return activityRead(this);
   }
 
   @override
@@ -412,23 +433,149 @@ class _$_NewMessageReceived implements _NewMessageReceived {
     TResult Function(_NotificationInfoFetchingStarted value)?
         notificationInfoFetchingStarted,
     TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(_ActivityRead value)? activityRead,
+    TResult Function(_InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
-    if (newMessageReceived != null) {
-      return newMessageReceived(this);
+    if (activityRead != null) {
+      return activityRead(this);
     }
     return orElse();
   }
 }
 
-abstract class _NewMessageReceived implements NotificationEvent {
-  const factory _NewMessageReceived(NotificationInfo info) =
-      _$_NewMessageReceived;
+abstract class _ActivityRead implements NotificationEvent {
+  const factory _ActivityRead(String id) = _$_ActivityRead;
 
-  NotificationInfo get info => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
+  _$ActivityReadCopyWith<_ActivityRead> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$InboxMessageReadCopyWith<$Res> {
+  factory _$InboxMessageReadCopyWith(
+          _InboxMessageRead value, $Res Function(_InboxMessageRead) then) =
+      __$InboxMessageReadCopyWithImpl<$Res>;
+  $Res call({String id});
+}
+
+/// @nodoc
+class __$InboxMessageReadCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res>
+    implements _$InboxMessageReadCopyWith<$Res> {
+  __$InboxMessageReadCopyWithImpl(
+      _InboxMessageRead _value, $Res Function(_InboxMessageRead) _then)
+      : super(_value, (v) => _then(v as _InboxMessageRead));
+
+  @override
+  _InboxMessageRead get _value => super._value as _InboxMessageRead;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+  }) {
+    return _then(_InboxMessageRead(
+      id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_InboxMessageRead implements _InboxMessageRead {
+  const _$_InboxMessageRead(this.id);
+
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'NotificationEvent.inboxMessageRead(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _InboxMessageRead &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+
+  @JsonKey(ignore: true)
+  @override
+  _$InboxMessageReadCopyWith<_InboxMessageRead> get copyWith =>
+      __$InboxMessageReadCopyWithImpl<_InboxMessageRead>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(String id) messageRead,
+    required TResult Function(String id) activityRead,
+    required TResult Function(String id) inboxMessageRead,
+  }) {
+    return inboxMessageRead(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(String id)? messageRead,
+    TResult Function(String id)? activityRead,
+    TResult Function(String id)? inboxMessageRead,
+    required TResult orElse(),
+  }) {
+    if (inboxMessageRead != null) {
+      return inboxMessageRead(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NotificationInfoFetchingStarted value)
+        notificationInfoFetchingStarted,
+    required TResult Function(_MessageRead value) messageRead,
+    required TResult Function(_ActivityRead value) activityRead,
+    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+  }) {
+    return inboxMessageRead(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NotificationInfoFetchingStarted value)?
+        notificationInfoFetchingStarted,
+    TResult Function(_MessageRead value)? messageRead,
+    TResult Function(_ActivityRead value)? activityRead,
+    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    required TResult orElse(),
+  }) {
+    if (inboxMessageRead != null) {
+      return inboxMessageRead(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _InboxMessageRead implements NotificationEvent {
+  const factory _InboxMessageRead(String id) = _$_InboxMessageRead;
+
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$InboxMessageReadCopyWith<_InboxMessageRead> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -436,9 +583,14 @@ abstract class _NewMessageReceived implements NotificationEvent {
 class _$NotificationStateTearOff {
   const _$NotificationStateTearOff();
 
-  _NotificationState call({required Option<NotificationInfo> info}) {
+  _NotificationState call(
+      {required int unreadMessageCount,
+      required int inboxUnreadMessageCount,
+      required int unreadActivitiesCount}) {
     return _NotificationState(
-      info: info,
+      unreadMessageCount: unreadMessageCount,
+      inboxUnreadMessageCount: inboxUnreadMessageCount,
+      unreadActivitiesCount: unreadActivitiesCount,
     );
   }
 }
@@ -448,7 +600,9 @@ const $NotificationState = _$NotificationStateTearOff();
 
 /// @nodoc
 mixin _$NotificationState {
-  Option<NotificationInfo> get info => throw _privateConstructorUsedError;
+  int get unreadMessageCount => throw _privateConstructorUsedError;
+  int get inboxUnreadMessageCount => throw _privateConstructorUsedError;
+  int get unreadActivitiesCount => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $NotificationStateCopyWith<NotificationState> get copyWith =>
@@ -460,7 +614,10 @@ abstract class $NotificationStateCopyWith<$Res> {
   factory $NotificationStateCopyWith(
           NotificationState value, $Res Function(NotificationState) then) =
       _$NotificationStateCopyWithImpl<$Res>;
-  $Res call({Option<NotificationInfo> info});
+  $Res call(
+      {int unreadMessageCount,
+      int inboxUnreadMessageCount,
+      int unreadActivitiesCount});
 }
 
 /// @nodoc
@@ -474,13 +631,23 @@ class _$NotificationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? info = freezed,
+    Object? unreadMessageCount = freezed,
+    Object? inboxUnreadMessageCount = freezed,
+    Object? unreadActivitiesCount = freezed,
   }) {
     return _then(_value.copyWith(
-      info: info == freezed
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as Option<NotificationInfo>,
+      unreadMessageCount: unreadMessageCount == freezed
+          ? _value.unreadMessageCount
+          : unreadMessageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      inboxUnreadMessageCount: inboxUnreadMessageCount == freezed
+          ? _value.inboxUnreadMessageCount
+          : inboxUnreadMessageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      unreadActivitiesCount: unreadActivitiesCount == freezed
+          ? _value.unreadActivitiesCount
+          : unreadActivitiesCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -492,7 +659,10 @@ abstract class _$NotificationStateCopyWith<$Res>
           _NotificationState value, $Res Function(_NotificationState) then) =
       __$NotificationStateCopyWithImpl<$Res>;
   @override
-  $Res call({Option<NotificationInfo> info});
+  $Res call(
+      {int unreadMessageCount,
+      int inboxUnreadMessageCount,
+      int unreadActivitiesCount});
 }
 
 /// @nodoc
@@ -508,13 +678,23 @@ class __$NotificationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? info = freezed,
+    Object? unreadMessageCount = freezed,
+    Object? inboxUnreadMessageCount = freezed,
+    Object? unreadActivitiesCount = freezed,
   }) {
     return _then(_NotificationState(
-      info: info == freezed
-          ? _value.info
-          : info // ignore: cast_nullable_to_non_nullable
-              as Option<NotificationInfo>,
+      unreadMessageCount: unreadMessageCount == freezed
+          ? _value.unreadMessageCount
+          : unreadMessageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      inboxUnreadMessageCount: inboxUnreadMessageCount == freezed
+          ? _value.inboxUnreadMessageCount
+          : inboxUnreadMessageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      unreadActivitiesCount: unreadActivitiesCount == freezed
+          ? _value.unreadActivitiesCount
+          : unreadActivitiesCount // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -522,27 +702,45 @@ class __$NotificationStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_NotificationState implements _NotificationState {
-  const _$_NotificationState({required this.info});
+  const _$_NotificationState(
+      {required this.unreadMessageCount,
+      required this.inboxUnreadMessageCount,
+      required this.unreadActivitiesCount});
 
   @override
-  final Option<NotificationInfo> info;
+  final int unreadMessageCount;
+  @override
+  final int inboxUnreadMessageCount;
+  @override
+  final int unreadActivitiesCount;
 
   @override
   String toString() {
-    return 'NotificationState(info: $info)';
+    return 'NotificationState(unreadMessageCount: $unreadMessageCount, inboxUnreadMessageCount: $inboxUnreadMessageCount, unreadActivitiesCount: $unreadActivitiesCount)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _NotificationState &&
-            (identical(other.info, info) ||
-                const DeepCollectionEquality().equals(other.info, info)));
+            (identical(other.unreadMessageCount, unreadMessageCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.unreadMessageCount, unreadMessageCount)) &&
+            (identical(
+                    other.inboxUnreadMessageCount, inboxUnreadMessageCount) ||
+                const DeepCollectionEquality().equals(
+                    other.inboxUnreadMessageCount, inboxUnreadMessageCount)) &&
+            (identical(other.unreadActivitiesCount, unreadActivitiesCount) ||
+                const DeepCollectionEquality().equals(
+                    other.unreadActivitiesCount, unreadActivitiesCount)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(info);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(unreadMessageCount) ^
+      const DeepCollectionEquality().hash(inboxUnreadMessageCount) ^
+      const DeepCollectionEquality().hash(unreadActivitiesCount);
 
   @JsonKey(ignore: true)
   @override
@@ -551,11 +749,17 @@ class _$_NotificationState implements _NotificationState {
 }
 
 abstract class _NotificationState implements NotificationState {
-  const factory _NotificationState({required Option<NotificationInfo> info}) =
-      _$_NotificationState;
+  const factory _NotificationState(
+      {required int unreadMessageCount,
+      required int inboxUnreadMessageCount,
+      required int unreadActivitiesCount}) = _$_NotificationState;
 
   @override
-  Option<NotificationInfo> get info => throw _privateConstructorUsedError;
+  int get unreadMessageCount => throw _privateConstructorUsedError;
+  @override
+  int get inboxUnreadMessageCount => throw _privateConstructorUsedError;
+  @override
+  int get unreadActivitiesCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NotificationStateCopyWith<_NotificationState> get copyWith =>

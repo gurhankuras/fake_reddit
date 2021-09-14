@@ -8,10 +8,14 @@ part of 'notification_info.dart';
 
 NotificationInfo _$NotificationInfoFromJson(Map<String, dynamic> json) =>
     NotificationInfo(
-      unreadMessagesCount: json['unreadMessagesCount'] as int,
+      unreadMessagesCount: json['unread_messages_count'] as int,
+      unreadActivitiesCount: json['unread_activities_count'] as int,
+      inboxUnreadMessagesCount: json['inbox_unread_messages_count'] as int,
     );
 
 Map<String, dynamic> _$NotificationInfoToJson(NotificationInfo instance) =>
     <String, dynamic>{
-      'unreadMessagesCount': instance.unreadMessagesCount,
+      'unread_messages_count': instance.unreadMessagesCount,
+      'unread_activities_count': instance.unreadActivitiesCount,
+      'inbox_unread_messages_count': instance.inboxUnreadMessagesCount,
     };
