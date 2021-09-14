@@ -8,7 +8,8 @@ part of 'activity.dart';
 
 Activity _$ActivityFromJson(Map<String, dynamic> json) => Activity(
       id: json['_id'] as String,
-      type: json['type'] as String,
+      activityType: json['activityType'] as String,
+      title: json['title'] as String,
       text: json['text'] as String,
       subreddit: SubredditShortInfo.fromJson(
           json['subreddit'] as Map<String, dynamic>),
@@ -18,7 +19,8 @@ Activity _$ActivityFromJson(Map<String, dynamic> json) => Activity(
 
 Map<String, dynamic> _$ActivityToJson(Activity instance) => <String, dynamic>{
       '_id': instance.id,
-      'type': instance.type,
+      'activityType': instance.activityType,
+      'title': instance.title,
       'text': instance.text,
       'subreddit': instance.subreddit,
       'createdAt': instance.createdAt,

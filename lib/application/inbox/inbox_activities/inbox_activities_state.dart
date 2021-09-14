@@ -1,10 +1,16 @@
 part of 'inbox_activities_bloc.dart';
 
-abstract class InboxActivitiesState extends Equatable {
-  const InboxActivitiesState();
-  
-  @override
-  List<Object> get props => [];
-}
+@freezed
+class InboxActivitiesState with _$InboxActivitiesState {
+  const factory InboxActivitiesState({
+    required List<Activity> activities,
+    required bool loading,
+    required bool failed,
+  }) = _InboxActivitiesState;
 
-class InboxActivitiesInitial extends InboxActivitiesState {}
+  factory InboxActivitiesState.initial() => InboxActivitiesState(
+        activities: [],
+        loading: false,
+        failed: false,
+      );
+}

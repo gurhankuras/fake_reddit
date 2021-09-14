@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/application/inbox/inbox_activities/inbox_activities_bloc.dart';
 import 'package:reddit_clone/application/inbox/inbox_messages/inbox_messages_bloc.dart';
 import 'package:reddit_clone/application/notification/bloc/notification_bloc.dart';
 import 'package:reddit_clone/domain/i_network_connectivity.dart';
@@ -33,7 +34,15 @@ class _InboxPageState extends State<InboxPage>
         appBar: appBar(tabBar, context),
         body: TabBarView(
           children: [
-            ActivityTabPageLoggedIn(),
+            BlocProvider(
+              create: (context) => InboxActivitiesBloc(
+                InboxRepository(
+                  inboxRemoteSource: InboxRemoteSource(getIt<Dio>()),
+                  connectivity: getIt<INetworkConnectivity>(),
+                ),
+              )..add(InboxActivitiesEvent.fetchingStarted()),
+              child: ActivityTabPageLoggedIn(),
+            ),
             BlocProvider(
               create: (context) => InboxMessagesBloc(
                 InboxRepository(

@@ -1,14 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
+import 'package:reddit_clone/application/inbox/inbox_activities/inbox_activities_bloc.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
-import '../../../application/navigation_service.dart';
-import '../../../domain/core/user.dart';
-import '../../../domain/post/post_entry.dart';
-import '../../../injection.dart';
-import '../../../routes.dart';
+import 'package:reddit_clone/_presentation/core/constants/assets.dart';
+import 'package:reddit_clone/domain/inbox/activity.dart';
+
 import '../../core/constants/colors.dart';
 import '../../core/constants/ui.dart';
 import '../../core/refresh_widgets.dart';
@@ -40,81 +40,112 @@ class _ActivityTabPageLoggedInState extends State<ActivityTabPageLoggedIn> {
 
   @override
   Widget build(BuildContext context) {
-    return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
-      header: RefresherHeader(),
-      footer: CustomRefresherFooter(),
-      physics: UIConstants.physics,
-      controller: _refreshController,
-      onRefresh: () async {
-        await Future.delayed(Duration(seconds: 2));
-        _refreshController.refreshCompleted();
-      },
-      // onLoading: (){
-
-      // },
-      child: ListView.builder(
-        physics: UIConstants.physics,
-        itemBuilder: (context, index) {
-          return CustomAppTile(
-            alignment: CrossAxisAlignment.start,
-            leadingWidthDiff: 12,
-            leading: buildLeading(),
-            onTap: () => getIt<NavigationService>()
-                .navigateTo(Routes.singlePostPage, arguments: {
-              'post': PostEntry(
-                commentCount: 3,
-                bodyText: '',
-                contentText: 'HAHAHAH',
-                date: '2d',
-                id: 'ssss',
-                isNFSW: false,
-                subreddit: 'r/berserk',
-                type: PostType.text,
-                upvotes: 10,
-                user: User(
-                    image:
-                        'https://images.unsplash.com/photo-1554570731-63bcddda4dcd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=282&q=80',
-                    nickname: 'gurhan'),
-              ),
-              'comesFromFeedPage': false,
-            }),
-            title: Row(
-              children: [
-                AppHeaderText(
-                  'Trending on r/TowerOfGod',
-                  fontSizeFactor: 0.7,
-                ),
-                AppHeaderText(
-                  ' • 3d',
-                  fontSizeFactor: 0.6,
-                  color: AppColors.moreLightGrey,
-                  fontWeightDelta: -1,
-                ),
-              ],
+    return BlocBuilder<InboxActivitiesBloc, InboxActivitiesState>(
+      builder: (context, state) {
+        if (state.loading || state.failed) {
+          return SingleChildScrollView(
+            physics: UIConstants.physics,
+            child: Center(
+              child: state.loading
+                  ? CircularProgressIndicator()
+                  : state.failed
+                      ? Center(
+                          child: Text('Failed'),
+                        )
+                      : SizedBox.shrink(),
             ),
-            subtitle: AppHeaderText(
-              'Baam2s keep saying he wants to get stronger as fast as possible. Why does baam not use the power of Blue Evil asdasdasd as dasdasd',
-              fontSizeFactor: 0.6,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              fontWeightDelta: -1,
-              color: AppColors.iron,
-            ),
-            trailing: GestureDetector(
-              onTap: () {},
-              child: Icon(
-                Icons.more_horiz,
-                color: AppColors.iron,
-                size: 18,
-              ),
-            ),
-            tileColor: AppColors.lightBlack,
           );
-        },
-        itemCount: 3,
+        }
+
+        final activities = state.activities;
+        return SmartRefresher(
+          enablePullDown: true,
+          header: RefresherHeader(),
+          physics: UIConstants.physics,
+          controller: _refreshController,
+          onRefresh: () async {
+            await Future.delayed(Duration(seconds: 2));
+            print('refresh');
+            _refreshController.refreshCompleted();
+          },
+          child: ListView.builder(
+            physics: UIConstants.physics,
+            itemBuilder: (context, index) {
+              final activity = activities[index];
+              return ActivityNotificationTile(
+                key: ValueKey(activity.id),
+                activity: activity,
+              );
+            },
+            itemCount: activities.length,
+          ),
+        );
+      },
+    );
+    // );
+  }
+}
+
+class ActivityNotificationTile extends StatelessWidget {
+  final Activity activity;
+  const ActivityNotificationTile({
+    Key? key,
+    required this.activity,
+  }) : super(key: key);
+
+  String get toFormattedDateText {
+    final date = DateTime.tryParse(activity.createdAt);
+    return date != null ? ' • ${timeago.format(date, locale: 'en_short')}' : '';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomAppTile(
+      alignment: CrossAxisAlignment.start,
+      leadingWidthDiff: 12,
+      leading: buildLeading(),
+      onTap: () {
+        context
+            .read<InboxActivitiesBloc>()
+            .add(InboxActivitiesEvent.activityViewed(activity.id));
+      },
+      // getIt<NavigationService>()
+      //     .navigateTo(Routes.singlePostPage, arguments: {
+
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: AppHeaderText(
+              activity.title,
+              fontSizeFactor: 0.7,
+            ),
+          ),
+          AppHeaderText(
+            toFormattedDateText,
+            fontSizeFactor: 0.6,
+            color: AppColors.moreLightGrey,
+            fontWeightDelta: -1,
+          ),
+        ],
       ),
+      subtitle: AppHeaderText(
+        activity.text,
+        fontSizeFactor: 0.6,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        fontWeightDelta: -1,
+        color: AppColors.iron,
+      ),
+      trailing: GestureDetector(
+        onTap: () {},
+        child: Icon(
+          Icons.more_horiz,
+          color: AppColors.iron,
+          size: 18,
+        ),
+      ),
+      tileColor: AppColors.lightBlack,
     );
   }
 
@@ -133,8 +164,7 @@ class _ActivityTabPageLoggedInState extends State<ActivityTabPageLoggedIn> {
           child: CircleAvatar(
             radius: 17,
             backgroundColor: AppColors.black,
-            backgroundImage: NetworkImage(
-                'https://images.unsplash.com/photo-1488554378835-f7acf46e6c98?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1051&q=80'),
+            backgroundImage: NetworkImage(activity.subreddit.avatar),
           ),
         ),
         Positioned(
