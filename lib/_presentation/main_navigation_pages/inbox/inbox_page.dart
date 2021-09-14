@@ -1,8 +1,14 @@
 import 'package:badges/badges.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/application/inbox/inbox_messages/inbox_messages_bloc.dart';
 import 'package:reddit_clone/application/notification/bloc/notification_bloc.dart';
+import 'package:reddit_clone/domain/i_network_connectivity.dart';
+import 'package:reddit_clone/infastructure/inbox/inbox_remote_source.dart';
+import 'package:reddit_clone/infastructure/inbox/inbox_repository.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/reusable/scaled_drawer.dart';
@@ -20,23 +26,29 @@ class _InboxPageState extends State<InboxPage>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
+    print('BUILD ETTI');
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: appBar(tabBar, context),
         body: TabBarView(
-          children: tabPages,
+          children: [
+            ActivityTabPageLoggedIn(),
+            BlocProvider(
+              create: (context) => InboxMessagesBloc(
+                InboxRepository(
+                  inboxRemoteSource: InboxRemoteSource(getIt<Dio>()),
+                  connectivity: getIt<INetworkConnectivity>(),
+                ),
+              )..add(InboxMessagesEvent.fetchingStarted()),
+              child: MessagesTabPage(),
+            ),
+          ],
           physics: UIConstants.physics,
         ),
       ),
     );
   }
-
-  List<Widget> get tabPages => [
-        // ActivityTabPage(),
-        ActivityTabPageLoggedIn(),
-        MessagesTabPage(),
-      ];
 
   TabBar get tabBar {
     return TabBar(

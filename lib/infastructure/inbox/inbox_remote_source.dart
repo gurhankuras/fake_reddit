@@ -74,6 +74,7 @@ class InboxRemoteSource {
     try {
       final response =
           await dio.get('http://10.0.2.2:4000/api/me/inbox/messages');
+      print(response.data);
       final data = response.data;
       if (data is List) {
         final messages = data.map((m) => InboxMessage.fromJson(m)).toList();

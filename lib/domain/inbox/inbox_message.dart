@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'inbox_message.g.dart';
+part 'inbox_message.g.dart';
 
 @JsonSerializable()
 class InboxMessage {

@@ -1,14 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'activity.g.dart';
+
+part 'activity.g.dart';
 
 @JsonSerializable()
 class Activity {
+  @JsonKey(name: '_id')
+  final String id;
   final String type;
   final String text;
   final SubredditShortInfo subreddit;
   final String createdAt;
   final String postId;
   const Activity({
+    required this.id,
     required this.type,
     required this.text,
     required this.subreddit,
