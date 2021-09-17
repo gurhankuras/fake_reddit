@@ -49,7 +49,7 @@ class PushNotificationService {
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-    FirebaseMessaging.onBackgroundMessage(handleMessageAsync);
+    // FirebaseMessaging.onBackgroundMessage(handleMessageAsync);
   }
 }
 

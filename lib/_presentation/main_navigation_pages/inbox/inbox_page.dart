@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_nav_page.dart';
 import 'package:reddit_clone/application/inbox/inbox_activities/inbox_activities_bloc.dart';
 import 'package:reddit_clone/application/inbox/inbox_messages/inbox_messages_bloc.dart';
 import 'package:reddit_clone/application/notification/bloc/notification_bloc.dart';
@@ -10,6 +11,7 @@ import 'package:reddit_clone/domain/i_network_connectivity.dart';
 import 'package:reddit_clone/infastructure/inbox/inbox_remote_source.dart';
 import 'package:reddit_clone/infastructure/inbox/inbox_repository.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/reusable/scaled_drawer.dart';
@@ -26,6 +28,12 @@ class InboxPage extends StatefulWidget {
 class _InboxPageState extends State<InboxPage>
     with AutomaticKeepAliveClientMixin {
   @override
+  void initState() {
+    logInit(InboxPage);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     print('BUILD ETTI');
     return DefaultTabController(
@@ -35,6 +43,7 @@ class _InboxPageState extends State<InboxPage>
         body: TabBarView(
           children: [
             BlocProvider(
+              // TODO: register to get_it
               create: (context) => InboxActivitiesBloc(
                 InboxRepository(
                   inboxRemoteSource: InboxRemoteSource(getIt<Dio>()),
@@ -141,17 +150,7 @@ class _InboxPageState extends State<InboxPage>
               ),
             )
           ],
-          leading: GestureDetector(
-            onTap: () => context.read<MyDrawerController>().openDrawer(),
-            child: Transform.scale(
-              scale: 0.6,
-              child: const CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://styles.redditmedia.com/t5_23ty4q/styles/profileIcon_vden2tg74d051.jpg?width=256&height=256&crop=256:256,smart&s=54e523221183c71419c0cadc616a13418f0c92ad',
-                ),
-              ),
-            ),
-          ),
+          leading: AppbarAvatar(),
         ),
       ),
     );
@@ -159,4 +158,7 @@ class _InboxPageState extends State<InboxPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  // @override
+  // bool get wantKeepAlive => true;
 }

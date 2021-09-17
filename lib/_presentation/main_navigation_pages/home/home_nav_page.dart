@@ -8,6 +8,7 @@ import 'package:reddit_clone/_presentation/core/constants/ui.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
 import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/utility/app_logger.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '../../core/app/extensions/string_fill_extension.dart';
@@ -38,14 +39,22 @@ class _HomeNavPageState extends State<HomeNavPage>
   late final TabController tabController;
   @override
   void initState() {
+    log.wtf('HomeNavPage init');
     super.initState();
     tabController = TabController(length: 3, vsync: this);
-    context.read<HomeControllerManager>().tabController = tabController;
+    // context.read<HomeControllerManager>().tabController = tabController;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    tabController.dispose();
+    log.wtf('HomeNavPage disposed');
   }
 
   @override
   Widget build(BuildContext context) {
-    final scrollControllers = context.read<HomeControllerManager>();
+    // final scrollControllers = context.read<HomeControllerManager>();
     final tabBarWidget = tabBar;
 
     return Scaffold(
@@ -68,14 +77,15 @@ class _HomeNavPageState extends State<HomeNavPage>
                   feedService: getIt<IFeedService>(),
                 )..add(FeedEvent.fetchingStarted()),
               ),
-              Provider.value(value: scrollControllers)
+              // Provider.value(value: scrollControllers)
             ],
             child: News(),
           ),
-          Provider.value(
-            value: scrollControllers,
-            child: HomeTabPage(),
-          ),
+          // Provider.value(
+          // value: scrollControllers,
+          // child:
+          HomeTabPage(),
+          // ),
           Center(
               child: CircularProgressIndicator(
             // backgroundColor: Colors.orange,
@@ -110,23 +120,7 @@ class _HomeNavPageState extends State<HomeNavPage>
         ),
         child: AppBar(
           bottom: tabBar,
-          leading: GestureDetector(
-            onTap: () => context.read<MyDrawerController>().openDrawer(),
-            child: Transform.scale(
-              scale: 0.8,
-              child: FittedBox(
-                  child: Badge(
-                badgeColor: Colors.green,
-                position: BadgePosition.bottomEnd(bottom: 2, end: 4),
-                child: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(
-                    'https://i.redd.it/26s9eejm8vz51.png',
-                  ),
-                ),
-              )),
-            ),
-          ),
+          leading: AppbarAvatar(),
           title: SearchBarField(
             hintText: 'Search',
             absorbing: true,
@@ -162,6 +156,46 @@ class _HomeNavPageState extends State<HomeNavPage>
           ],
         ),
       ),
+    );
+  }
+}
+
+class AppbarAvatar extends StatelessWidget {
+  const AppbarAvatar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () => context.read<MyDrawerController>().openDrawer(),
+          child: Transform.scale(
+            scale: 0.8,
+            child: FittedBox(
+              child: Badge(
+                badgeColor: Colors.green,
+                showBadge: state.maybeMap(
+                  orElse: () => false,
+                  authenticated: (s) => true,
+                ),
+                position: BadgePosition.bottomEnd(bottom: 2, end: 4),
+                child: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: NetworkImage(
+                    state.maybeMap(
+                        authenticated: (state) =>
+                            'https://i.redd.it/26s9eejm8vz51.png',
+                        orElse: () =>
+                            'https://styles.redditmedia.com/t5_23ty4q/styles/profileIcon_vden2tg74d051.jpg?width=256&height=256&crop=256:256,smart&s=54e523221183c71419c0cadc616a13418f0c92ad'),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

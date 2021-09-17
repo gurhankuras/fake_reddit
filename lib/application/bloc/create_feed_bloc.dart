@@ -4,32 +4,36 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart' hide id;
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../_presentation/feed_form/create_feed_entry_page.dart';
 import '../../domain/feed_edit_failure.dart';
 import '../../domain/i_image_service.dart';
 import '../../domain/image_data.dart';
 import '../../utility/app_logger.dart';
-import '../main_page_bloc/main_page_bloc.dart';
+import 'package:injectable/injectable.dart';
 
 part 'create_feed_bloc.freezed.dart';
 part 'create_feed_event.dart';
 part 'create_feed_state.dart';
 
+@injectable
 class CreateFeedBloc extends Bloc<CreateFeedEvent, CreateFeedState> {
   final IImageService imageService;
-  final MainPageBloc mainPageBloc;
+  // final MainPageBloc mainPageBloc;
   // late final StreamSubscription sub;
   CreateFeedBloc({
     required this.imageService,
-    required this.mainPageBloc,
+    // required this.mainPageBloc,
   }) : super(CreateFeedState.textFeedEntry(
           title: '',
           bodyText: '',
           feedType: FeedType.text,
           autofocus: false,
           error: left(const FeedEditFailure.empty(message: 'Empty')),
-        ));
+        )) {
+    logInit(CreateFeedBloc);
+  }
 
   @override
   Stream<CreateFeedState> mapEventToState(
@@ -199,7 +203,7 @@ class CreateFeedBloc extends Bloc<CreateFeedEvent, CreateFeedState> {
         },
       );
     }, feedPosted: (e) async* {
-      mainPageBloc.add(const MainPageEvent.snackbarShowed());
+      // mainPageBloc.add(const MainPageEvent.snackbarShowed());
       yield state;
     });
   }

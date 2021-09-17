@@ -10,17 +10,18 @@ import 'package:reddit_clone/theme.dart';
 import '_presentation/core/constants/colors.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/splash/splash_page.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
 import 'routes.dart';
+import 'utility/app_logger.dart';
 
 // ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.black,
-      statusBarIconBrightness: Brightness.light,
-    ));
+    // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    //   statusBarColor: AppColors.black,
+    //   statusBarIconBrightness: Brightness.light,
+    // ));
+    log.wtf('MYAPP BUILD');
 
     return MaterialApp(
       // initialRoute: Routes.splashPage,
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
       home: MultiProvider(
         providers: [
           Provider(create: (context) => MyDrawerController()),
-          BlocProvider(create: (context) => MainPageBloc(context: context)),
         ],
         child: const SplashPage(),
       ),

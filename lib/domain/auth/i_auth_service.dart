@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:reddit_clone/domain/auth/model/user.dart';
 import 'package:reddit_clone/domain/core/failure.dart';
 
 import 'auth_failure.dart';
@@ -14,6 +15,6 @@ abstract class IAuthService {
   Future<Either<Failure, Unit>> loginWithGoogle();
   Future<Either<Failure, Unit>> signUpWithGoogle();
 
-  Future<Either<Failure, Unit>> checkIfUserHasTokens();
+  Future<Either<Failure, User>> getCurrentUser();
   Future<void> logOut();
 }

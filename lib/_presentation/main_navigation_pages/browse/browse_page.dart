@@ -15,38 +15,6 @@ class BrowsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //   body: DefaultTabController(
-    //     length: 2,
-    //     child: NestedScrollView(
-    //       headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-    //         return [
-    //           sliverAppbar(),
-    //           SliverList(
-    //             delegate: SliverChildListDelegate([
-    //               Container(
-    //                 decoration: BoxDecoration(
-    //                   color: AppColors.lightBlack,
-    //                   border: Border(
-    //                     bottom: BorderSide(
-    //                         color: AppColors.lightBlack3, width: 0.8),
-    //                   ),
-    //                 ),
-    //                 child: tabBar(),
-    //               ),
-    //             ]),
-    //           ),
-    //         ];
-    //       },
-    //       body: TabBarView(
-    //         children: [
-    //           CommunitiesTabPage(navigationHandler: navigationHandler),
-    //           CustomFeedsTabPage(),
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
     return CustomScrollViewWithTabBar(
       navigationHandler: navigationHandler,
       tabBarView: TabBarView(

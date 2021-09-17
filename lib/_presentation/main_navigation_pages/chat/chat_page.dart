@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../../application/chat/chat/chat_bloc.dart';
 import '../../../infastructure/chat/chat_message_dto.dart';
@@ -37,6 +38,8 @@ class _ChatPageState extends State<ChatPage> {
   bool call = false;
   @override
   void initState() {
+    logInit(ChatPage);
+
     super.initState();
     _messageTextController = TextEditingController();
     _scrollController = ScrollController();

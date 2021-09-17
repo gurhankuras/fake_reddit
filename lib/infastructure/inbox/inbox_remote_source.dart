@@ -10,7 +10,9 @@ import 'package:reddit_clone/domain/inbox/inbox_message.dart';
 import 'package:reddit_clone/infastructure/core/dio_error_handler.dart';
 import 'package:reddit_clone/infastructure/core/token_dio_interceptor.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton()
 class InboxRemoteSource {
   final Dio dio;
 

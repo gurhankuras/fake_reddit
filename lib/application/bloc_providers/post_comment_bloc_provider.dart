@@ -21,16 +21,8 @@ class PostCommentBlocProvider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PostCommentBloc(
-        postId: postId,
-        commentService: FakeCommentService(
-          depth: 3,
-          engine: Random(),
-          faker: Faker(),
-        ),
-        cacheService: getIt<CacheService>(),
-        // post: widget.entry,
-      )..add(PostCommentEvent.commentsFetchingStarted()),
+      create: (context) => getIt<PostCommentBloc>(param1: postId)
+        ..add(PostCommentEvent.commentsFetchingStarted()),
       child: child,
     );
   }

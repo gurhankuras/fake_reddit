@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:dartz/dartz.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../domain/comment/comment_data.dart';
 import '../../domain/comment/i_comment_service.dart';
@@ -16,25 +17,25 @@ class Range {
   get diff => end - begin;
 }
 
+@LazySingleton(as: ICommentService)
 class FakeCommentService implements ICommentService {
-  final int depth;
-  final Range spreadRange;
-  final Random engine;
-  final Range commentParagraphRange;
-  final Range commentWordRange;
-  final Range topLevelCommentCountRange;
+  late final int depth;
+  late final Range spreadRange;
+  late final Random engine;
+  late final Range commentParagraphRange;
+  late final Range commentWordRange;
+  late final Range topLevelCommentCountRange;
+  late final Faker faker;
 
-  final Faker faker;
-
-  FakeCommentService({
-    required this.depth,
-    this.spreadRange = const Range(0, 5),
-    required this.engine,
-    this.commentParagraphRange = const Range(1, 3),
-    this.commentWordRange = const Range(5, 100),
-    this.topLevelCommentCountRange = const Range(1, 5),
-    required this.faker,
-  });
+  FakeCommentService() {
+    depth = 3;
+    spreadRange = const Range(0, 5);
+    commentParagraphRange = const Range(1, 3);
+    commentWordRange = const Range(5, 100);
+    topLevelCommentCountRange = const Range(1, 5);
+    engine = Random();
+    faker = Faker();
+  }
 
   @override
   Future<Either<ValueFailure<String>, List<CommentData>>> fetchPostComments(

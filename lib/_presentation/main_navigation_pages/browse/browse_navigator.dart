@@ -14,8 +14,7 @@ class BrowseNavigator extends StatefulWidget {
   _BrowseNavigatorState createState() => _BrowseNavigatorState();
 }
 
-class _BrowseNavigatorState extends State<BrowseNavigator>
-    with AutomaticKeepAliveClientMixin {
+class _BrowseNavigatorState extends State<BrowseNavigator> {
   final navigatorKey = GlobalKey<NavigatorState>();
 
   void _navigateTo(String route) {
@@ -24,7 +23,7 @@ class _BrowseNavigatorState extends State<BrowseNavigator>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    // super.build(context);
     return Navigator(
       key: navigatorKey,
       onGenerateRoute: (settings) {
@@ -55,6 +54,6 @@ class _BrowseNavigatorState extends State<BrowseNavigator>
     );
   }
 
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 }

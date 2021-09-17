@@ -16,7 +16,6 @@ class LinkFeedEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final bloc = Provider.of<CreateFeedBloc>(context, listen: false);
     return Column(
       children: [
         FeedTitleField(

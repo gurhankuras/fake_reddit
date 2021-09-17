@@ -8,6 +8,7 @@ import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
 import 'package:reddit_clone/infastructure/chat/chat_room.dart';
 import 'package:reddit_clone/route_params.dart';
 import 'package:reddit_clone/utility/date.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../../application/notification/bloc/notification_bloc.dart';
 import '../../../routes.dart';
@@ -26,6 +27,12 @@ class ChatNavPage extends StatefulWidget {
 
 class _ChatNavPageState extends State<ChatNavPage>
     with AutomaticKeepAliveClientMixin {
+  @override
+  void initState() {
+    super.initState();
+    logInit(ChatNavPage);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,6 +96,9 @@ class _ChatNavPageState extends State<ChatNavPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  // @override
+  // bool get wantKeepAlive => true;
 }
 
 /// A ListItem that contains data to display a heading.

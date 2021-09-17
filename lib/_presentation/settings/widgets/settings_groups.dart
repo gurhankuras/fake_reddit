@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit_clone/utility/launch_url.dart';
 
-import '../../../application/settings/app_settings.dart';
+// import '../../../application/settings/app_settings.dart';
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/authentication_button.dart';
 import 'settings_group.dart';
@@ -90,27 +90,27 @@ class ViewOptionsSettingsGroup extends StatelessWidget {
           leadingIcon: Icons.text_fields,
           onTap: () => print('tapped'),
         ),
-        Consumer<AppSettings>(
-          builder: (context, settings, child) => SettingsSwitchTile(
-            // cacheKey: SettingsKeys.reduceAwardAnimations,
+        // Consumer<AppSettings>(
+        //   builder: (context, settings, child) => SettingsSwitchTile(
+        //     // cacheKey: SettingsKeys.reduceAwardAnimations,
 
-            text: 'Reduce award animations',
-            leadingIcon: Icons.remove_red_eye_outlined,
-            onChanged: (bool value) {
-              settings.toggleReduceAwardAnimations();
-            },
-            value: settings.reduceAwardAnimations,
-            // propertySelector: (settings) => settings.swipeToCollapseComments,
-            // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
-          ),
-          // child: SettingsSwitchTile(
-          //   // cacheKey: SettingsKeys.reduceAwardAnimations,
-          //   text: 'Reduce award animations',
-          //   leadingIcon: Icons.remove_red_eye_outlined, onChanged: (bool value) {  }, value: null,
-          //   // propertySelector: (settings) => settings.swipeToCollapseComments,
-          //   // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
-          // ),
-        ),
+        //     text: 'Reduce award animations',
+        //     leadingIcon: Icons.remove_red_eye_outlined,
+        //     onChanged: (bool value) {
+        //       settings.toggleReduceAwardAnimations();
+        //     },
+        //     value: settings.reduceAwardAnimations,
+        //     // propertySelector: (settings) => settings.swipeToCollapseComments,
+        //     // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
+        //   ),
+        // child: SettingsSwitchTile(
+        //   // cacheKey: SettingsKeys.reduceAwardAnimations,
+        //   text: 'Reduce award animations',
+        //   leadingIcon: Icons.remove_red_eye_outlined, onChanged: (bool value) {  }, value: null,
+        //   // propertySelector: (settings) => settings.swipeToCollapseComments,
+        //   // setterFunction: (settings) => settings.toggleReduceAwardAnimations, onChanged: (bool value) {  }, value: null,
+        // ),
+        // ),
       ],
     );
   }

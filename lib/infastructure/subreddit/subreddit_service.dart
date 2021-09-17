@@ -33,19 +33,19 @@ class SubredditService implements ISubredditService {
     required this.dio,
     required this.tagger,
   }) {
-    kDebugMode
-        ? dio.interceptors.add(PrettyDioLogger(
-            error: true,
-            logPrint: log.i,
-            maxWidth: 200,
-            request: true,
-            requestBody: true,
-            requestHeader: true,
-            responseBody: true,
-            responseHeader: true,
-            compact: false,
-          ))
-        : null;
+    // kDebugMode
+    //     ? dio.interceptors.add(PrettyDioLogger(
+    //         error: true,
+    //         logPrint: log.i,
+    //         maxWidth: 200,
+    //         request: true,
+    //         requestBody: true,
+    //         requestHeader: true,
+    //         responseBody: true,
+    //         responseHeader: true,
+    //         compact: false,
+    //       ))
+    //     : null;
     dio.interceptors.add(getIt<ConnectivityDioChecker>());
     dio.interceptors.add(
         TokenDioInterceptor(tokenCacheService: getIt<ITokenCacheService>()));

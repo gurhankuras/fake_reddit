@@ -244,19 +244,19 @@ abstract class _Downvoted implements VoteEvent {
 class _$VoteStateTearOff {
   const _$VoteStateTearOff();
 
-  _UnvotedState unvoted(int upvotes) {
+  _UnvotedState unvoted(int? upvotes) {
     return _UnvotedState(
       upvotes,
     );
   }
 
-  _DownvotedState downvoted(int upvotes) {
+  _DownvotedState downvoted(int? upvotes) {
     return _DownvotedState(
       upvotes,
     );
   }
 
-  _UpvotedState upvoted(int upvotes) {
+  _UpvotedState upvoted(int? upvotes) {
     return _UpvotedState(
       upvotes,
     );
@@ -268,20 +268,20 @@ const $VoteState = _$VoteStateTearOff();
 
 /// @nodoc
 mixin _$VoteState {
-  int get upvotes => throw _privateConstructorUsedError;
+  int? get upvotes => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int upvotes) unvoted,
-    required TResult Function(int upvotes) downvoted,
-    required TResult Function(int upvotes) upvoted,
+    required TResult Function(int? upvotes) unvoted,
+    required TResult Function(int? upvotes) downvoted,
+    required TResult Function(int? upvotes) upvoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int upvotes)? unvoted,
-    TResult Function(int upvotes)? downvoted,
-    TResult Function(int upvotes)? upvoted,
+    TResult Function(int? upvotes)? unvoted,
+    TResult Function(int? upvotes)? downvoted,
+    TResult Function(int? upvotes)? upvoted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -310,7 +310,7 @@ mixin _$VoteState {
 abstract class $VoteStateCopyWith<$Res> {
   factory $VoteStateCopyWith(VoteState value, $Res Function(VoteState) then) =
       _$VoteStateCopyWithImpl<$Res>;
-  $Res call({int upvotes});
+  $Res call({int? upvotes});
 }
 
 /// @nodoc
@@ -329,7 +329,7 @@ class _$VoteStateCopyWithImpl<$Res> implements $VoteStateCopyWith<$Res> {
       upvotes: upvotes == freezed
           ? _value.upvotes
           : upvotes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -341,7 +341,7 @@ abstract class _$UnvotedStateCopyWith<$Res>
           _UnvotedState value, $Res Function(_UnvotedState) then) =
       __$UnvotedStateCopyWithImpl<$Res>;
   @override
-  $Res call({int upvotes});
+  $Res call({int? upvotes});
 }
 
 /// @nodoc
@@ -362,7 +362,7 @@ class __$UnvotedStateCopyWithImpl<$Res> extends _$VoteStateCopyWithImpl<$Res>
       upvotes == freezed
           ? _value.upvotes
           : upvotes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -373,7 +373,7 @@ class _$_UnvotedState implements _UnvotedState {
   const _$_UnvotedState(this.upvotes);
 
   @override
-  final int upvotes;
+  final int? upvotes;
 
   @override
   String toString() {
@@ -400,9 +400,9 @@ class _$_UnvotedState implements _UnvotedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int upvotes) unvoted,
-    required TResult Function(int upvotes) downvoted,
-    required TResult Function(int upvotes) upvoted,
+    required TResult Function(int? upvotes) unvoted,
+    required TResult Function(int? upvotes) downvoted,
+    required TResult Function(int? upvotes) upvoted,
   }) {
     return unvoted(upvotes);
   }
@@ -410,9 +410,9 @@ class _$_UnvotedState implements _UnvotedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int upvotes)? unvoted,
-    TResult Function(int upvotes)? downvoted,
-    TResult Function(int upvotes)? upvoted,
+    TResult Function(int? upvotes)? unvoted,
+    TResult Function(int? upvotes)? downvoted,
+    TResult Function(int? upvotes)? upvoted,
     required TResult orElse(),
   }) {
     if (unvoted != null) {
@@ -447,10 +447,10 @@ class _$_UnvotedState implements _UnvotedState {
 }
 
 abstract class _UnvotedState implements VoteState {
-  const factory _UnvotedState(int upvotes) = _$_UnvotedState;
+  const factory _UnvotedState(int? upvotes) = _$_UnvotedState;
 
   @override
-  int get upvotes => throw _privateConstructorUsedError;
+  int? get upvotes => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UnvotedStateCopyWith<_UnvotedState> get copyWith =>
@@ -464,7 +464,7 @@ abstract class _$DownvotedStateCopyWith<$Res>
           _DownvotedState value, $Res Function(_DownvotedState) then) =
       __$DownvotedStateCopyWithImpl<$Res>;
   @override
-  $Res call({int upvotes});
+  $Res call({int? upvotes});
 }
 
 /// @nodoc
@@ -485,7 +485,7 @@ class __$DownvotedStateCopyWithImpl<$Res> extends _$VoteStateCopyWithImpl<$Res>
       upvotes == freezed
           ? _value.upvotes
           : upvotes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -496,7 +496,7 @@ class _$_DownvotedState implements _DownvotedState {
   const _$_DownvotedState(this.upvotes);
 
   @override
-  final int upvotes;
+  final int? upvotes;
 
   @override
   String toString() {
@@ -523,9 +523,9 @@ class _$_DownvotedState implements _DownvotedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int upvotes) unvoted,
-    required TResult Function(int upvotes) downvoted,
-    required TResult Function(int upvotes) upvoted,
+    required TResult Function(int? upvotes) unvoted,
+    required TResult Function(int? upvotes) downvoted,
+    required TResult Function(int? upvotes) upvoted,
   }) {
     return downvoted(upvotes);
   }
@@ -533,9 +533,9 @@ class _$_DownvotedState implements _DownvotedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int upvotes)? unvoted,
-    TResult Function(int upvotes)? downvoted,
-    TResult Function(int upvotes)? upvoted,
+    TResult Function(int? upvotes)? unvoted,
+    TResult Function(int? upvotes)? downvoted,
+    TResult Function(int? upvotes)? upvoted,
     required TResult orElse(),
   }) {
     if (downvoted != null) {
@@ -570,10 +570,10 @@ class _$_DownvotedState implements _DownvotedState {
 }
 
 abstract class _DownvotedState implements VoteState {
-  const factory _DownvotedState(int upvotes) = _$_DownvotedState;
+  const factory _DownvotedState(int? upvotes) = _$_DownvotedState;
 
   @override
-  int get upvotes => throw _privateConstructorUsedError;
+  int? get upvotes => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$DownvotedStateCopyWith<_DownvotedState> get copyWith =>
@@ -587,7 +587,7 @@ abstract class _$UpvotedStateCopyWith<$Res>
           _UpvotedState value, $Res Function(_UpvotedState) then) =
       __$UpvotedStateCopyWithImpl<$Res>;
   @override
-  $Res call({int upvotes});
+  $Res call({int? upvotes});
 }
 
 /// @nodoc
@@ -608,7 +608,7 @@ class __$UpvotedStateCopyWithImpl<$Res> extends _$VoteStateCopyWithImpl<$Res>
       upvotes == freezed
           ? _value.upvotes
           : upvotes // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
     ));
   }
 }
@@ -619,7 +619,7 @@ class _$_UpvotedState implements _UpvotedState {
   const _$_UpvotedState(this.upvotes);
 
   @override
-  final int upvotes;
+  final int? upvotes;
 
   @override
   String toString() {
@@ -646,9 +646,9 @@ class _$_UpvotedState implements _UpvotedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int upvotes) unvoted,
-    required TResult Function(int upvotes) downvoted,
-    required TResult Function(int upvotes) upvoted,
+    required TResult Function(int? upvotes) unvoted,
+    required TResult Function(int? upvotes) downvoted,
+    required TResult Function(int? upvotes) upvoted,
   }) {
     return upvoted(upvotes);
   }
@@ -656,9 +656,9 @@ class _$_UpvotedState implements _UpvotedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int upvotes)? unvoted,
-    TResult Function(int upvotes)? downvoted,
-    TResult Function(int upvotes)? upvoted,
+    TResult Function(int? upvotes)? unvoted,
+    TResult Function(int? upvotes)? downvoted,
+    TResult Function(int? upvotes)? upvoted,
     required TResult orElse(),
   }) {
     if (upvoted != null) {
@@ -693,10 +693,10 @@ class _$_UpvotedState implements _UpvotedState {
 }
 
 abstract class _UpvotedState implements VoteState {
-  const factory _UpvotedState(int upvotes) = _$_UpvotedState;
+  const factory _UpvotedState(int? upvotes) = _$_UpvotedState;
 
   @override
-  int get upvotes => throw _privateConstructorUsedError;
+  int? get upvotes => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UpvotedStateCopyWith<_UpvotedState> get copyWith =>

@@ -11,7 +11,7 @@ import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/auth/model/credentials.dart';
 import '../../../domain/auth/model/login_credentials.dart';
 import '../../../domain/core/value_failure.dart';
-import '../../../infastructure/auth/i_user_remote_checker.dart';
+import '../../../domain/auth/i_user_remote_checker.dart';
 import '../../../utility/app_logger.dart';
 import '../auth_bloc.dart';
 
@@ -153,7 +153,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
                 yield state;
               },
               (r) async* {
-                authBloc.add(const AuthEvent.gotUserSignedIn());
+                authBloc.add(const AuthEvent.authCheckRequested());
                 yield state;
               },
             );
@@ -176,7 +176,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
                 yield state;
               },
               (r) async* {
-                authBloc.add(const AuthEvent.gotUserSignedIn());
+                authBloc.add(const AuthEvent.authCheckRequested());
                 yield state;
               },
             );

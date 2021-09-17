@@ -3,14 +3,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 import 'package:reddit_clone/application/navigation_service.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../routes.dart';
 import '../core/constants/colors.dart';
 import '../core/size_config.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  _SplashPageState createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    logInit(SplashPage);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

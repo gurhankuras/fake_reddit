@@ -6,28 +6,31 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
 import 'package:reddit_clone/domain/post/post_entry.dart';
 import 'package:reddit_clone/infastructure/core/cache_service.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../../domain/comment/comment_data.dart';
 import '../../../domain/comment/i_comment_service.dart';
 import '../../../domain/core/value_failure.dart';
 import '../../../utility/app_logger.dart';
+import 'package:injectable/injectable.dart';
 
 part 'post_comment_bloc.freezed.dart';
 part 'post_comment_event.dart';
 part 'post_comment_state.dart';
 
+@injectable
 class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
   final ICommentService commentService;
   final CacheService cacheService;
-  final String postId;
+  final String? postId;
   // final FeedBloc homeTabBloc;
   // final PostEntry post;
   PostCommentBloc({
     required this.commentService,
     required this.cacheService,
-    required this.postId,
+    @factoryParam this.postId,
   }) : super(const PostCommentState.initial()) {
-    log.i('PostCommentBloc created!');
+    logInit(PostCommentBloc);
   }
 
   @override

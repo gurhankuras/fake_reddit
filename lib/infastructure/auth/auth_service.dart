@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:reddit_clone/domain/auth/model/user.dart';
 import 'package:reddit_clone/domain/core/constants/endpoints.dart';
 import 'package:reddit_clone/domain/core/failure.dart';
 import 'package:reddit_clone/domain/core/response_error.dart';
@@ -37,19 +38,19 @@ class AuthService implements IAuthService {
     required this.tokenService,
     required this.googleAuthService,
   }) {
-    kDebugMode
-        ? dio.interceptors.add(PrettyDioLogger(
-            error: true,
-            logPrint: log.i,
-            maxWidth: 200,
-            request: true,
-            requestBody: true,
-            requestHeader: true,
-            responseBody: true,
-            responseHeader: true,
-            compact: false,
-          ))
-        : null;
+    // kDebugMode
+    //     ? dio.interceptors.add(PrettyDioLogger(
+    //         error: true,
+    //         logPrint: log.i,
+    //         maxWidth: 200,
+    //         request: true,
+    //         requestBody: true,
+    //         requestHeader: true,
+    //         responseBody: true,
+    //         responseHeader: true,
+    //         compact: false,
+    //       ))
+    //     : null;
     dio.interceptors.add(getIt<ConnectivityDioChecker>());
     dio.interceptors.add(getIt<TokenDioInterceptor>());
   }
@@ -90,10 +91,16 @@ class AuthService implements IAuthService {
   }
 
   @override
-  Future<Either<Failure, Unit>> checkIfUserHasTokens() async {
+  Future<Either<Failure, User>> getCurrentUser() async {
     try {
       final response = await dio.get(Endpoints.protected);
-      return right(unit);
+      final data = response.data;
+      final user = User.fromJson(data);
+      return right(user);
+    } on TypeError catch (_) {
+      print(_);
+      print(_.stackTrace);
+      return left(BadResponseData('corrupt data'));
     } catch (error) {
       final failure = makeRemoteFailure(error, makeProtectedFailure);
       return left(failure);

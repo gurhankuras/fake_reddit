@@ -25,8 +25,7 @@ class FeedBody extends StatefulWidget {
   _FeedBodyState createState() => _FeedBodyState();
 }
 
-class _FeedBodyState extends State<FeedBody>
-    with AutomaticKeepAliveClientMixin {
+class _FeedBodyState extends State<FeedBody> {
   late final RefreshController _refreshController;
   late final ScrollController _scrollController;
 
@@ -51,7 +50,7 @@ class _FeedBodyState extends State<FeedBody>
   @override
   Widget build(BuildContext context) {
     // print(context.read<FeedBloc>());
-    super.build(context);
+    // super.build(context);
     return MultiBlocListener(
       listeners: [
         loadListener(),
@@ -108,8 +107,8 @@ class _FeedBodyState extends State<FeedBody>
     );
   }
 
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 }
 
 class _FeedBodyPosts extends StatelessWidget {

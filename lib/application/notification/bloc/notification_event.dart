@@ -5,8 +5,8 @@ class NotificationEvent with _$NotificationEvent {
   // const factory NotificationEvent.notificationReceived(RemoteMessage message, String notificatioType) =
   //     _NotificationReceived;
 
-  const factory NotificationEvent.notificationInfoFetchingStarted() =
-      _NotificationInfoFetchingStarted;
+  const factory NotificationEvent.badgesChanged(BadgeIndicators notifications) =
+      _BadgesChanged;
 
   const factory NotificationEvent.messageRead(String id) = _MessageRead;
   const factory NotificationEvent.activityRead(String id) = _ActivityRead;

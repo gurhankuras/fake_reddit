@@ -16,8 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NotificationEventTearOff {
   const _$NotificationEventTearOff();
 
-  _NotificationInfoFetchingStarted notificationInfoFetchingStarted() {
-    return const _NotificationInfoFetchingStarted();
+  _BadgesChanged badgesChanged(BadgeIndicators notifications) {
+    return _BadgesChanged(
+      notifications,
+    );
   }
 
   _MessageRead messageRead(String id) {
@@ -46,7 +48,7 @@ const $NotificationEvent = _$NotificationEventTearOff();
 mixin _$NotificationEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(BadgeIndicators notifications) badgesChanged,
     required TResult Function(String id) messageRead,
     required TResult Function(String id) activityRead,
     required TResult Function(String id) inboxMessageRead,
@@ -54,7 +56,7 @@ mixin _$NotificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(BadgeIndicators notifications)? badgesChanged,
     TResult Function(String id)? messageRead,
     TResult Function(String id)? activityRead,
     TResult Function(String id)? inboxMessageRead,
@@ -63,8 +65,7 @@ mixin _$NotificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInfoFetchingStarted value)
-        notificationInfoFetchingStarted,
+    required TResult Function(_BadgesChanged value) badgesChanged,
     required TResult Function(_MessageRead value) messageRead,
     required TResult Function(_ActivityRead value) activityRead,
     required TResult Function(_InboxMessageRead value) inboxMessageRead,
@@ -72,8 +73,7 @@ mixin _$NotificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInfoFetchingStarted value)?
-        notificationInfoFetchingStarted,
+    TResult Function(_BadgesChanged value)? badgesChanged,
     TResult Function(_MessageRead value)? messageRead,
     TResult Function(_ActivityRead value)? activityRead,
     TResult Function(_InboxMessageRead value)? inboxMessageRead,
@@ -100,69 +100,90 @@ class _$NotificationEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$NotificationInfoFetchingStartedCopyWith<$Res> {
-  factory _$NotificationInfoFetchingStartedCopyWith(
-          _NotificationInfoFetchingStarted value,
-          $Res Function(_NotificationInfoFetchingStarted) then) =
-      __$NotificationInfoFetchingStartedCopyWithImpl<$Res>;
+abstract class _$BadgesChangedCopyWith<$Res> {
+  factory _$BadgesChangedCopyWith(
+          _BadgesChanged value, $Res Function(_BadgesChanged) then) =
+      __$BadgesChangedCopyWithImpl<$Res>;
+  $Res call({BadgeIndicators notifications});
 }
 
 /// @nodoc
-class __$NotificationInfoFetchingStartedCopyWithImpl<$Res>
+class __$BadgesChangedCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$NotificationInfoFetchingStartedCopyWith<$Res> {
-  __$NotificationInfoFetchingStartedCopyWithImpl(
-      _NotificationInfoFetchingStarted _value,
-      $Res Function(_NotificationInfoFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _NotificationInfoFetchingStarted));
+    implements _$BadgesChangedCopyWith<$Res> {
+  __$BadgesChangedCopyWithImpl(
+      _BadgesChanged _value, $Res Function(_BadgesChanged) _then)
+      : super(_value, (v) => _then(v as _BadgesChanged));
 
   @override
-  _NotificationInfoFetchingStarted get _value =>
-      super._value as _NotificationInfoFetchingStarted;
+  _BadgesChanged get _value => super._value as _BadgesChanged;
+
+  @override
+  $Res call({
+    Object? notifications = freezed,
+  }) {
+    return _then(_BadgesChanged(
+      notifications == freezed
+          ? _value.notifications
+          : notifications // ignore: cast_nullable_to_non_nullable
+              as BadgeIndicators,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_NotificationInfoFetchingStarted
-    implements _NotificationInfoFetchingStarted {
-  const _$_NotificationInfoFetchingStarted();
+class _$_BadgesChanged implements _BadgesChanged {
+  const _$_BadgesChanged(this.notifications);
+
+  @override
+  final BadgeIndicators notifications;
 
   @override
   String toString() {
-    return 'NotificationEvent.notificationInfoFetchingStarted()';
+    return 'NotificationEvent.badgesChanged(notifications: $notifications)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NotificationInfoFetchingStarted);
+        (other is _BadgesChanged &&
+            (identical(other.notifications, notifications) ||
+                const DeepCollectionEquality()
+                    .equals(other.notifications, notifications)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(notifications);
+
+  @JsonKey(ignore: true)
+  @override
+  _$BadgesChangedCopyWith<_BadgesChanged> get copyWith =>
+      __$BadgesChangedCopyWithImpl<_BadgesChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(BadgeIndicators notifications) badgesChanged,
     required TResult Function(String id) messageRead,
     required TResult Function(String id) activityRead,
     required TResult Function(String id) inboxMessageRead,
   }) {
-    return notificationInfoFetchingStarted();
+    return badgesChanged(notifications);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(BadgeIndicators notifications)? badgesChanged,
     TResult Function(String id)? messageRead,
     TResult Function(String id)? activityRead,
     TResult Function(String id)? inboxMessageRead,
     required TResult orElse(),
   }) {
-    if (notificationInfoFetchingStarted != null) {
-      return notificationInfoFetchingStarted();
+    if (badgesChanged != null) {
+      return badgesChanged(notifications);
     }
     return orElse();
   }
@@ -170,35 +191,38 @@ class _$_NotificationInfoFetchingStarted
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInfoFetchingStarted value)
-        notificationInfoFetchingStarted,
+    required TResult Function(_BadgesChanged value) badgesChanged,
     required TResult Function(_MessageRead value) messageRead,
     required TResult Function(_ActivityRead value) activityRead,
     required TResult Function(_InboxMessageRead value) inboxMessageRead,
   }) {
-    return notificationInfoFetchingStarted(this);
+    return badgesChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInfoFetchingStarted value)?
-        notificationInfoFetchingStarted,
+    TResult Function(_BadgesChanged value)? badgesChanged,
     TResult Function(_MessageRead value)? messageRead,
     TResult Function(_ActivityRead value)? activityRead,
     TResult Function(_InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
-    if (notificationInfoFetchingStarted != null) {
-      return notificationInfoFetchingStarted(this);
+    if (badgesChanged != null) {
+      return badgesChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class _NotificationInfoFetchingStarted implements NotificationEvent {
-  const factory _NotificationInfoFetchingStarted() =
-      _$_NotificationInfoFetchingStarted;
+abstract class _BadgesChanged implements NotificationEvent {
+  const factory _BadgesChanged(BadgeIndicators notifications) =
+      _$_BadgesChanged;
+
+  BadgeIndicators get notifications => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$BadgesChangedCopyWith<_BadgesChanged> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -266,7 +290,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(BadgeIndicators notifications) badgesChanged,
     required TResult Function(String id) messageRead,
     required TResult Function(String id) activityRead,
     required TResult Function(String id) inboxMessageRead,
@@ -277,7 +301,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(BadgeIndicators notifications)? badgesChanged,
     TResult Function(String id)? messageRead,
     TResult Function(String id)? activityRead,
     TResult Function(String id)? inboxMessageRead,
@@ -292,8 +316,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInfoFetchingStarted value)
-        notificationInfoFetchingStarted,
+    required TResult Function(_BadgesChanged value) badgesChanged,
     required TResult Function(_MessageRead value) messageRead,
     required TResult Function(_ActivityRead value) activityRead,
     required TResult Function(_InboxMessageRead value) inboxMessageRead,
@@ -304,8 +327,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInfoFetchingStarted value)?
-        notificationInfoFetchingStarted,
+    TResult Function(_BadgesChanged value)? badgesChanged,
     TResult Function(_MessageRead value)? messageRead,
     TResult Function(_ActivityRead value)? activityRead,
     TResult Function(_InboxMessageRead value)? inboxMessageRead,
@@ -392,7 +414,7 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(BadgeIndicators notifications) badgesChanged,
     required TResult Function(String id) messageRead,
     required TResult Function(String id) activityRead,
     required TResult Function(String id) inboxMessageRead,
@@ -403,7 +425,7 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(BadgeIndicators notifications)? badgesChanged,
     TResult Function(String id)? messageRead,
     TResult Function(String id)? activityRead,
     TResult Function(String id)? inboxMessageRead,
@@ -418,8 +440,7 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInfoFetchingStarted value)
-        notificationInfoFetchingStarted,
+    required TResult Function(_BadgesChanged value) badgesChanged,
     required TResult Function(_MessageRead value) messageRead,
     required TResult Function(_ActivityRead value) activityRead,
     required TResult Function(_InboxMessageRead value) inboxMessageRead,
@@ -430,8 +451,7 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInfoFetchingStarted value)?
-        notificationInfoFetchingStarted,
+    TResult Function(_BadgesChanged value)? badgesChanged,
     TResult Function(_MessageRead value)? messageRead,
     TResult Function(_ActivityRead value)? activityRead,
     TResult Function(_InboxMessageRead value)? inboxMessageRead,
@@ -518,7 +538,7 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notificationInfoFetchingStarted,
+    required TResult Function(BadgeIndicators notifications) badgesChanged,
     required TResult Function(String id) messageRead,
     required TResult Function(String id) activityRead,
     required TResult Function(String id) inboxMessageRead,
@@ -529,7 +549,7 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notificationInfoFetchingStarted,
+    TResult Function(BadgeIndicators notifications)? badgesChanged,
     TResult Function(String id)? messageRead,
     TResult Function(String id)? activityRead,
     TResult Function(String id)? inboxMessageRead,
@@ -544,8 +564,7 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotificationInfoFetchingStarted value)
-        notificationInfoFetchingStarted,
+    required TResult Function(_BadgesChanged value) badgesChanged,
     required TResult Function(_MessageRead value) messageRead,
     required TResult Function(_ActivityRead value) activityRead,
     required TResult Function(_InboxMessageRead value) inboxMessageRead,
@@ -556,8 +575,7 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotificationInfoFetchingStarted value)?
-        notificationInfoFetchingStarted,
+    TResult Function(_BadgesChanged value)? badgesChanged,
     TResult Function(_MessageRead value)? messageRead,
     TResult Function(_ActivityRead value)? activityRead,
     TResult Function(_InboxMessageRead value)? inboxMessageRead,

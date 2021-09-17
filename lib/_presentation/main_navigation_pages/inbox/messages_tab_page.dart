@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:reddit_clone/_presentation/main_navigation_pages/browse/empty_page.dart';
 import 'package:reddit_clone/_presentation/main_navigation_pages/inbox/epage.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
@@ -22,8 +23,7 @@ class MessagesTabPage extends StatefulWidget {
   _MessagesTabPageState createState() => _MessagesTabPageState();
 }
 
-class _MessagesTabPageState extends State<MessagesTabPage>
-    with AutomaticKeepAliveClientMixin {
+class _MessagesTabPageState extends State<MessagesTabPage> {
   late final RefreshController _refreshController;
   InboxMessage get fakeMessage => InboxMessage(
         createdAt: '2021-09-09T10:56:22.097',
@@ -36,6 +36,8 @@ class _MessagesTabPageState extends State<MessagesTabPage>
       );
   @override
   void initState() {
+    logInit(MessagesTabPage);
+
     _refreshController = RefreshController();
     super.initState();
   }
@@ -78,8 +80,8 @@ class _MessagesTabPageState extends State<MessagesTabPage>
     );
   }
 
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 }
 
 class InboxMessageWidget extends StatelessWidget {
@@ -121,7 +123,11 @@ class InboxMessageWidget extends StatelessWidget {
         tileColor: AppColors.lightBlack,
         title: Row(
           // mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.baseline,
+
+          textBaseline: TextBaseline.ideographic,
+
           children: [
             AppHeaderText(
               message.subredditName.toSubreddit,

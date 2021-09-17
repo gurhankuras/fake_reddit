@@ -4,6 +4,7 @@ import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 import 'package:reddit_clone/_presentation/core/size_config.dart';
 import 'package:reddit_clone/routes.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 class ActivityTabPage extends StatefulWidget {
   const ActivityTabPage({
@@ -23,6 +24,8 @@ class _ActivityTabPageState extends State<ActivityTabPage>
 
   @override
   void initState() {
+    logInit(ActivityTabPage);
+
     _scrollController = ScrollController();
     _animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 300));

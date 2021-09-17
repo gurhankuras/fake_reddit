@@ -13,6 +13,8 @@ import 'package:reddit_clone/_presentation/core/size_config.dart';
 import 'package:reddit_clone/_presentation/settings/settings_panel.dart';
 import 'package:reddit_clone/application/navigation_service.dart';
 import 'package:reddit_clone/injection.dart';
+import 'package:reddit_clone/utility/log_dispose.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import 'widgets/visited_community.dart';
 
@@ -104,12 +106,15 @@ class _CommunitiesTabPageState extends State<CommunitiesTabPage> {
 
   @override
   void initState() {
+    logInit(CommunitiesTabPage);
     super.initState();
     _refreshController = RefreshController();
   }
 
   @override
   void dispose() {
+    logDispose(CommunitiesTabPage);
+
     super.dispose();
     _refreshController.dispose();
   }

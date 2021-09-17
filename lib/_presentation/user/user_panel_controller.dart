@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 @Singleton()
 class UserPanelController {
   PanelController? controller;
-  setController(PanelController panelController) {
+  setController(PanelController? panelController) {
     controller = panelController;
   }
 }

@@ -24,6 +24,11 @@ class SocketManager implements ISocketManager {
   }
 
   @override
+  void off(String event, [dynamic Function(dynamic)? handler]) {
+    socket.off(event, handler);
+  }
+
+  @override
   void emit(String event, data) {
     if (socket.connected) {
       socket.emit(event, data);
@@ -38,6 +43,11 @@ class SocketManager implements ISocketManager {
   @override
   void onConnect(dynamic Function(dynamic data) handler) {
     socket.onConnect(handler);
+  }
+
+  @override
+  void dispose() {
+    socket.dispose();
   }
 
   @override

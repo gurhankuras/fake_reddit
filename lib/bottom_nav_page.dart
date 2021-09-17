@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/main_navigation_pages/browse/browse_navigator.dart';
 import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_navigator.dart';
 import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
+import 'package:reddit_clone/utility/log_dispose.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 import '_presentation/main_navigation_pages/chat/chat_nav_page.dart';
@@ -20,7 +22,6 @@ import '_presentation/core/size_config.dart';
 import '_presentation/main_navigation_pages/home/home_vm.dart';
 import '_presentation/main_navigation_pages/inbox/inbox_page.dart';
 import 'application/auth/auth_bloc.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/notification/bloc/notification_bloc.dart';
 import '_presentation/main_navigation_pages/home/home_nav_page.dart';
 import 'infastructure/notification/push_notification_service.dart';
@@ -43,6 +44,7 @@ class BottomNavPageState extends State<BottomNavPage> {
 
   @override
   void initState() {
+    logInit(BottomNavPage);
     _pageController = PageController();
     drawerController = context.read<MyDrawerController>();
 
@@ -55,6 +57,7 @@ class BottomNavPageState extends State<BottomNavPage> {
 
   @override
   void dispose() {
+    logDispose(BottomNavPage);
     _pageController.dispose();
 
     super.dispose();
@@ -62,6 +65,7 @@ class BottomNavPageState extends State<BottomNavPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('BOTOM_NAV_PAGE BUILDS');
     SizeConfig().init(context);
 
     return BlocListener<AuthBloc, AuthState>(
@@ -88,6 +92,7 @@ class BottomNavPageState extends State<BottomNavPage> {
   }
 
   void popWhenUnauthenticated(BuildContext context, AuthState state) {
+    print('popWhenUn... listener');
     state.maybeMap(
       orElse: () => null,
       unauthenticated: (value) => Navigator.of(context).pushNamedAndRemoveUntil(
@@ -125,8 +130,10 @@ class BottomNavPageState extends State<BottomNavPage> {
   }
 
   void navigateToSearchPage() {
-    Navigator.of(context).pushNamed(Routes.postFeedSearchPage,
-        arguments: context.read<MainPageBloc>());
+    Navigator.of(context).pushNamed(
+      Routes.postFeedSearchPage,
+      // arguments: context.read<MainPageBloc>(),
+    );
   }
 
   List<NavigationItem> get navigationItems => <NavigationItem>[
@@ -169,69 +176,69 @@ class BottomNavPageState extends State<BottomNavPage> {
             index: 4,
             selectedIcon: Icon(FontAwesomeIcons.solidBell),
             unselectedIcon: BlocBuilder<NotificationBloc, NotificationState>(
-              buildWhen: (previous, current) =>
-                  (previous.inboxUnreadMessageCount +
-                      previous.unreadActivitiesCount) !=
-                  (current.inboxUnreadMessageCount +
-                      current.unreadActivitiesCount),
-              builder: (context, state) {
-                final total_notificaion_count =
-                    state.inboxUnreadMessageCount + state.unreadActivitiesCount;
-                // if (total_notificaion_count == 0) {
-                //   return Icon(FontAwesomeIcons.bell);
-                // } else {
-                // return
-                //  Badge(
-                //   badgeContent: Text(total_notificaion_count > 99
-                //       ? '+99'
-                //       : total_notificaion_count.toString()),
-                //   showBadge: total_notificaion_count != 0,
-                //   child: Icon(FontAwesomeIcons.bell),
+                buildWhen: (previous, current) =>
+                    (previous.inboxUnreadMessageCount +
+                        previous.unreadActivitiesCount) !=
+                    (current.inboxUnreadMessageCount +
+                        current.unreadActivitiesCount),
+                builder: (context, state) {
+                  final total_notificaion_count =
+                      state.inboxUnreadMessageCount +
+                          state.unreadActivitiesCount;
+                  // if (total_notificaion_count == 0) {
+                  //   return Icon(FontAwesomeIcons.bell);
+                  // } else {
+                  return Badge(
+                    badgeContent: Text(total_notificaion_count > 99
+                        ? '+99'
+                        : total_notificaion_count.toString()),
+                    showBadge: total_notificaion_count != 0,
+                    child: Icon(FontAwesomeIcons.bell),
 
-                //   // shape: BadgeShape.square,
-                //   // padding: EdgeInsets.zero,
-                //   // padding: ,
+                    // shape: BadgeShape.square,
+                    // padding: EdgeInsets.zero,
+                    // padding: ,
 
-                //   toAnimate: false,
-                //   // borderRadius: BorderRadius.circular(50),
-                //   position: BadgePosition.topEnd(end: -10, top: -8),
+                    toAnimate: false,
+                    // borderRadius: BorderRadius.circular(50),
+                    position: BadgePosition.topEnd(end: -10, top: -8),
+                  );
+                }
+
+                // return Stack(
+                //   clipBehavior: Clip.none,
+                //   children: <Widget>[
+                //     Icon(FontAwesomeIcons.bell),
+                //     Positioned(
+                //       right: -10,
+                //       top: -3,
+                //       child: Container(
+                //         padding: EdgeInsets.all(2),
+                //         decoration: BoxDecoration(
+                //           color: Colors.red,
+                //           borderRadius: BorderRadius.circular(50),
+                //         ),
+                //         constraints: BoxConstraints(
+                //           minWidth: 12,
+                //           minHeight: 12,
+                //         ),
+                //         child: Center(
+                //           child: Text(
+                //             '10',
+                //             style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 10,
+                //               fontWeight: FontWeight.w700,
+                //             ),
+                //             textAlign: TextAlign.center,
+                //           ),
+                //         ),
+                //       ),
+                //     )
+                //   ],
                 // );
-                // }
-
-                return Stack(
-                  clipBehavior: Clip.none,
-                  children: <Widget>[
-                    Icon(FontAwesomeIcons.bell),
-                    Positioned(
-                      right: -10,
-                      top: -3,
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        constraints: BoxConstraints(
-                          minWidth: 12,
-                          minHeight: 12,
-                        ),
-                        child: Center(
-                          child: Text(
-                            '10',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                );
-              },
-            )),
+                // },
+                )),
       ];
 
   Widget buildPage() {
@@ -244,10 +251,11 @@ class BottomNavPageState extends State<BottomNavPage> {
 
   List<Widget> get tabPages => <Widget>[
         // Provider.value(value:
-        Provider.value(
-          value: context.read<HomeControllerManager>(),
-          child: const HomeNavigator(),
-        ),
+        // Provider.value(
+        // value: context.read<HomeControllerManager>(),
+        // child: const
+        HomeNavigator(),
+        // ),
         // ),
         BrowseNavigator(),
         const Center(

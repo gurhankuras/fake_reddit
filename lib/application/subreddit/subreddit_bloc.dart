@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../domain/subreddit/subreddit_info.dart';
 import '../../domain/core/value_failure.dart';
@@ -23,7 +24,9 @@ class SubredditBloc extends Bloc<SubredditEvent, SubredditState> {
   final ISubredditService subredditService;
   SubredditBloc({
     required this.subredditService,
-  }) : super(SubredditState.initial());
+  }) : super(SubredditState.initial()) {
+    logInit(SubredditBloc);
+  }
 
   @override
   Stream<SubredditState> mapEventToState(

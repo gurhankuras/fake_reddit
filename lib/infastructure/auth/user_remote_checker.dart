@@ -3,9 +3,9 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reddit_clone/domain/core/constants/endpoints.dart';
 
-import '../../infastructure/auth/i_user_remote_checker.dart';
+import '../../domain/auth/i_user_remote_checker.dart';
 import '../../injection.dart';
-import '../core/value_failure.dart';
+import '../../domain/core/value_failure.dart';
 
 // UserRemoteChecker
 @LazySingleton(as: IUserRemoteChecker)

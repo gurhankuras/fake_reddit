@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'package:reddit_clone/_presentation/main_navigation_pages/chat/chat_page.dart';
@@ -11,46 +12,52 @@ import 'package:reddit_clone/domain/i_socket_manager.dart';
 import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
 import 'package:reddit_clone/infastructure/chat/chat_messages_service.dart';
 import 'package:reddit_clone/utility/app_logger.dart';
+import 'package:injectable/injectable.dart';
 
 part 'chat_bloc.freezed.dart';
 part 'chat_event.dart';
 part 'chat_state.dart';
 
+@injectable
 class ChatBloc extends Bloc<ChatEvent, ChatState> {
   static const _postLimit = 20;
 
-  final String roomId;
+  final String? roomId;
   final ISocketManager socketManager;
   final IChatMessagesService chatMessagesService;
   Timer? timer;
 
   ChatBloc({
-    required this.roomId,
+    @factoryParam this.roomId,
     required this.socketManager,
     required this.chatMessagesService,
   }) : super(ChatState.initial()) {
-    log.i('ChatBloc created');
+    logInit(ChatBloc);
     _prepareSocket();
   }
 
   void _prepareSocket() {
     socketManager.onConnect((_) => print('connect'));
     socketManager.onDisconnect((data) => print('disconnected'));
-    socketManager.on(
-        SocketEventKeys.typing, (data) => add(ChatEvent.theOtherTyped()));
-    socketManager.on(
-        SocketEventKeys.message_sent,
-        (message) => add(ChatEvent.theOtherSentMessage(
-              ChatMessageDTO.fromJson(message),
-            )));
+    socketManager.on(SocketEventKeys.typing, _typingListener);
+    socketManager.on(SocketEventKeys.message_sent, _messageSentListener);
     socketManager.emit(SocketEventKeys.join_room, {
       'userId': '61333e7c3e51246558fc1e11',
       'roomId': roomId,
     });
   }
 
+  dynamic _typingListener(dynamic data) => add(ChatEvent.theOtherTyped());
+  dynamic _messageSentListener(message) => add(
+        ChatEvent.theOtherSentMessage(
+          ChatMessageDTO.fromJson(message),
+        ),
+      );
   @override
   Future<void> close() {
+    socketManager.off(SocketEventKeys.typing, _typingListener);
+    socketManager.off(SocketEventKeys.message_sent, _messageSentListener);
+
     return super.close();
   }
 

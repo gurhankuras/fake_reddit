@@ -7,6 +7,7 @@ import 'package:reddit_clone/_presentation/main_navigation_pages/chat/chat_page.
 import 'package:reddit_clone/domain/core/constants/socket_event_keys.dart';
 import 'package:reddit_clone/domain/i_socket_manager.dart';
 import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../../domain/i_snackbar_service.dart';
 import '../../../infastructure/chat/chat_messages_service.dart';
@@ -25,7 +26,9 @@ class ChatRoomsBloc extends Bloc<ChatRoomsEvent, ChatRoomsState> {
     required IChatMessagesService chatService,
     required this.socketManager,
   })  : service = chatService,
-        super(ChatRoomsState.initial());
+        super(ChatRoomsState.initial()) {
+    logInit(ChatRoomsBloc);
+  }
 
   @override
   Stream<ChatRoomsState> mapEventToState(

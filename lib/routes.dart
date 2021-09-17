@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit_clone/route_params.dart';
+import 'package:reddit_clone/utility/app_logger.dart';
 import 'package:reddit_clone/wrapped_bottom_nav_page.dart';
 
 import '_presentation/auth/login_page.dart';
@@ -28,7 +28,6 @@ import 'application/auth/sign_up_form/sign_up_form_bloc.dart';
 import 'application/bloc/create_feed_bloc.dart';
 import 'application/change_community_avatar/change_community_avatar_bloc.dart';
 import 'application/chat/chat/chat_bloc.dart';
-import 'application/main_page_bloc/main_page_bloc.dart';
 import 'application/subreddit/subreddit_bloc.dart';
 import 'bottom_nav_page.dart';
 import 'domain/auth/i_auth_service.dart';
@@ -38,7 +37,7 @@ import 'domain/i_socket_manager.dart';
 import 'domain/post/post_entry.dart';
 import 'domain/subreddit/i_subreddit_service.dart';
 import 'domain/subreddit/subreddit_info.dart';
-import 'infastructure/auth/i_user_remote_checker.dart';
+import 'domain/auth/i_user_remote_checker.dart';
 import 'infastructure/chat/chat_messages_service.dart';
 import 'infastructure/core/image_service.dart';
 import 'injection.dart';
@@ -70,9 +69,6 @@ abstract class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MultiProvider(
             providers: [
-              BlocProvider(
-                create: (context) => MainPageBloc(context: context),
-              ),
               Provider(
                 create: (context) => HomeControllerManager(),
               ),
@@ -127,10 +123,8 @@ abstract class AppRouter {
       case Routes.subredditPage:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) =>
-                SubredditBloc(subredditService: getIt<ISubredditService>())
-                  // ..add(SubredditEvent.subredditInfoFetchingStarted())
-                  ..add(SubredditEvent.feedFetchingStarted()),
+            create: (context) => getIt<SubredditBloc>()
+              ..add(SubredditEvent.feedFetchingStarted()),
             child: SubredditPage(),
           ),
           settings: settings,
@@ -172,11 +166,8 @@ abstract class AppRouter {
         final params = settings.arguments as ChatPageParams;
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChatBloc(
-              roomId: params.roomId,
-              chatMessagesService: getIt<IChatMessagesService>(),
-              socketManager: getIt<ISocketManager>(),
-            )..add(ChatEvent.messagesFetchingStarted()),
+            create: (context) => getIt<ChatBloc>(param1: params.roomId)
+              ..add(ChatEvent.messagesFetchingStarted()),
             child: ChatPage(),
           ),
           settings: settings,
@@ -184,10 +175,12 @@ abstract class AppRouter {
 
       case Routes.postFeedSearchPage:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider.value(
-            value: settings.arguments as MainPageBloc,
-            child: const PostFeedSearchPage(),
-          ),
+          builder: (_) =>
+              // BlocProvider.value(
+              // value: settings.arguments as MainPageBloc,
+              // child:
+              const PostFeedSearchPage(),
+          // ),
           settings: settings,
         );
       case Routes.searchPage:
@@ -202,10 +195,7 @@ abstract class AppRouter {
         final args = settings.arguments as CreateFeedPageArguments;
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => CreateFeedBloc(
-              imageService: ImageService(),
-              mainPageBloc: args.bloc,
-            ),
+            create: (context) => getIt<CreateFeedBloc>(),
             child: CreateFeedEntryPage(community: args.community),
           ),
           fullscreenDialog: true,
@@ -224,10 +214,7 @@ abstract class AppRouter {
       case Routes.changeCommunityAvatarPage:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (context) => ChangeCommunityAvatarBloc(
-              communityService: getIt<ISubredditService>(),
-              imageService: getIt<IImageService>(),
-            ),
+            create: (context) => getIt<ChangeCommunityAvatarBloc>(),
             child: const ChangeCommunityAvatarPage(),
           ),
           settings: settings,
@@ -245,11 +232,11 @@ abstract class AppRouter {
 
 class CreateFeedPageArguments {
   final SubredditInfo community;
-  final MainPageBloc bloc;
+  // final MainPageBloc bloc;
 
   CreateFeedPageArguments(
     this.community,
-    this.bloc,
+    // this.bloc,
   );
 }
 

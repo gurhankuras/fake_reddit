@@ -1,3 +1,6 @@
+import 'package:injectable/injectable.dart';
+
+@LazySingleton()
 class PostService {
   Future<Map<String, int>> fetchCommentCountAndUpvotes(String id) async {
     await Future.delayed(Duration(seconds: 2));

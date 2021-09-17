@@ -4,6 +4,8 @@ abstract class ISocketManager {
   void onDisconnect(dynamic Function(dynamic data) handler);
   void on(String event, dynamic Function(dynamic data) handler);
   void emit(String event, dynamic data);
+  void dispose();
+  void off(String event, [dynamic Function(dynamic)? handler]);
 }
 
 

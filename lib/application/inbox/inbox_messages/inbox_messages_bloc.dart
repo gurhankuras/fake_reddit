@@ -2,21 +2,25 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
-import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:reddit_clone/domain/inbox/i_inbox_repository.dart';
 import 'package:reddit_clone/domain/inbox/inbox_message.dart';
+import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 part 'inbox_messages_bloc.freezed.dart';
 part 'inbox_messages_event.dart';
 part 'inbox_messages_state.dart';
 
+@injectable
 class InboxMessagesBloc extends Bloc<InboxMessagesEvent, InboxMessagesState> {
   final IInboxRepository repository;
   InboxMessagesBloc(
     this.repository,
-  ) : super(InboxMessagesState.initial());
+  ) : super(InboxMessagesState.initial()) {
+    logInit(InboxMessagesBloc);
+  }
 
   @override
   Stream<InboxMessagesState> mapEventToState(

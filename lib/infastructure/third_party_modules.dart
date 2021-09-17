@@ -65,24 +65,3 @@ abstract class NavigatorKeyModule {
   @Singleton()
   GlobalKey<NavigatorState> get navigatorKey => GlobalKey<NavigatorState>();
 }
-
-// @module
-// abstract class DatabaseModule {
-//   @LazySingleton()
-//   Future<Database> get database async => openDatabase(
-//         // Set the path to the database. Note: Using the `join` function from the
-//         // `path` package is best practice to ensure the path is correctly
-//         // constructed for each platform.
-//         join(await getDatabasesPath(), 'mydb.db'),
-//         // When the database is first created, create a table to store dogs.
-//         onCreate: (db, version) {
-//           // Run the CREATE TABLE statement on the database.
-//           return db.execute(
-//             'CREATE TABLE chatMessages(message_id TEXT PRIMARY KEY, room_id TEXT, text TEXT, created_at TEXT, user_id TEXT, username TEXT, user_avatar TEXT)',
-//           );
-//         },
-//         // Set the version. This executes the onCreate function and provides a
-//         // path to perform database upgrades and downgrades.
-//         version: 1,
-//       );
-// }

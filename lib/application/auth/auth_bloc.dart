@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/domain/auth/model/user.dart';
 
 import '../../domain/auth/i_auth_service.dart';
 import '../../utility/app_logger.dart';
@@ -27,30 +28,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         authService.logOut();
         yield const AuthState.unauthenticated();
       },
-      gotUserSignedIn: (e) async* {
-        // print('gotUserSignIn');
-
-        // TODO
-        final successOrFailure = await authService.checkIfUserHasTokens();
-        yield* successOrFailure.fold(
-          (l) async* {
-            // print(l);
-            yield const AuthState.unauthenticated();
-          },
-          (r) async* {
-            yield const AuthState.authenticated();
-          },
-        );
-      },
       authCheckRequested: (e) async* {
-        // print('authCheckRequested');
-        final failureOrSuccess = await authService.checkIfUserHasTokens();
-        yield* failureOrSuccess.fold(
+        final userOr = await authService.getCurrentUser();
+        yield* userOr.fold(
           (f) async* {
+            print(f);
             yield AuthState.unauthenticated();
           },
-          (_) async* {
-            yield AuthState.authenticated();
+          (user) async* {
+            yield AuthState.authenticated(user);
           },
         );
       },

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../domain/feed/i_feed_service.dart';
 import '../../domain/post/post_entry.dart';
@@ -17,7 +18,9 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
   IFeedService feedService;
   FeedBloc({
     required this.feedService,
-  }) : super(FeedState.initial());
+  }) : super(FeedState.initial()) {
+    logInit(FeedBloc);
+  }
 
   @override
   Stream<FeedState> mapEventToState(

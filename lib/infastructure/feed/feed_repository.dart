@@ -11,7 +11,7 @@ import '../../domain/post/post_entry.dart';
 
 const kImpossibleHttpCode = 600;
 
-@Singleton()
+@Singleton(as: IFeedRepository)
 class FeedRepository implements IFeedRepository {
   final Dio dio;
   final INetworkConnectivity network;

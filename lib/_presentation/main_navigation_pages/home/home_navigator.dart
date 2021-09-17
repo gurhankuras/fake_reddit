@@ -17,6 +17,7 @@ import 'package:reddit_clone/domain/post/post_entry.dart';
 import 'package:reddit_clone/domain/subreddit/i_subreddit_service.dart';
 import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/routes.dart';
+import 'package:reddit_clone/utility/app_logger.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import '../../../application/auth/auth_bloc.dart';
 
@@ -28,7 +29,8 @@ class HomeNavigator extends StatefulWidget {
 }
 
 class _HomeNavigatorState extends State<HomeNavigator>
-    with AutomaticKeepAliveClientMixin {
+// with AutomaticKeepAliveClientMixin
+{
   final navigatorKey = GlobalKey<NavigatorState>();
 
   void _navigateTo(String route) {
@@ -36,9 +38,21 @@ class _HomeNavigatorState extends State<HomeNavigator>
   }
 
   @override
+  void initState() {
+    super.initState();
+    log.wtf('HomeNavigator init');
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    log.wtf('HomeNavPage disposed');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final homeControllerManager = context.read<HomeControllerManager>();
-    super.build(context);
+    // final homeControllerManager = context.read<HomeControllerManager>();
+    // super.build(context);
     return Navigator(
       key: navigatorKey,
       onGenerateRoute: (settings) {
@@ -77,10 +91,11 @@ class _HomeNavigatorState extends State<HomeNavigator>
           default:
             return MaterialPageRoute(
               builder: (context) {
-                return Provider.value(
-                  value: homeControllerManager,
-                  child: HomeNavPage(),
-                );
+                // return Provider.value(
+                // value: homeControllerManager,
+                // child:
+                return HomeNavPage();
+                // );
               },
             );
         }
@@ -88,6 +103,6 @@ class _HomeNavigatorState extends State<HomeNavigator>
     );
   }
 
-  @override
-  bool get wantKeepAlive => true;
+  // @override
+  // bool get wantKeepAlive => true;
 }
