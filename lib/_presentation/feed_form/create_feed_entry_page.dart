@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../application/bloc/create_feed_bloc.dart';
 import '../../domain/subreddit/subreddit_info.dart';
@@ -13,11 +15,19 @@ import 'feed_editor.dart';
 import 'feed_types_sections.dart';
 import 'minimized_feed_types_bar.dart';
 
-class CreateFeedEntryPage extends StatelessWidget {
+class CreateFeedEntryPage extends StatelessWidget implements AutoRouteWrapper {
   final SubredditInfo community;
 
   const CreateFeedEntryPage({Key? key, required this.community})
       : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<CreateFeedBloc>(),
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -221,24 +231,6 @@ Future<bool?> Function() showF(BuildContext context) {
       );
 }
 
-// Future<int?> Function() showDays(BuildContext context) {
-//   return () async => showModalBottomSheet<int?>(
-//         context: context,
-//         enableDrag: false,
-//         builder: (BuildContext context) {
-//           return StatefulBuilder(
-//             builder: (context, setState) {
-//               return AppModalBottomSheet(
-//                 tiles: [
-//                   DaysRadioList(modalSetState: setState),
-//                 ],
-//               );
-//             },
-//           );
-//         },
-//       );
-// }
-
 Future<int?> Function(Days) showDays(BuildContext context) {
   return (Days blocCurrentDay) async => showModalBottomSheet<int?>(
         context: context,
@@ -305,64 +297,3 @@ class DaysRadioList extends StatelessWidget {
 }
 
 enum Days { one, two, three, four, five, six, seven }
-
-// class DaysRadioList extends StatefulWidget {
-//   final void Function(void Function()) modalSetState;
-//   const DaysRadioList({
-//     Key? key,
-//     required this.modalSetState,
-//   }) : super(key: key);
-
-//   @override
-//   _DaysRadioListState createState() => _DaysRadioListState();
-// }
-
-// class _DaysRadioListState extends State<DaysRadioList> {
-//   // @override
-//   // void didUpdateWidget(covariant DaysRadioList oldWidget) {
-//   //   print('didUpdateWidget');
-//   //   super.didUpdateWidget(oldWidget);
-//   // }
-
-//   // @override
-//   // void didChangeDependencies() {
-//   //   print('didUpdateWidget');
-
-//   //   super.didChangeDependencies();
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     Days currentDay = Days.three;
-//     Color color = Colors.white;
-
-//     return Column(
-//       children: Days.values.reversed
-//           .map(
-//             (day) => RadioListTile<Days>(
-//               // activeColor: Colors.white,
-//               dense: true,
-//               activeColor: color,
-//               title: Text('${day.index + 1} day'),
-//               value: day,
-//               groupValue: currentDay,
-//               onChanged: (Days? value) {
-//                 setState(() {
-//                   currentDay = value!;
-//                   color = Colors.pink;
-//                 });
-//                 widget.modalSetState(() {
-//                   currentDay = value!;
-//                   color = Colors.pink;
-//                 });
-//                 // Navigator.of(context).pop(value!.index);
-//                 // setState(() {
-//                 //   _character = value;
-//                 // });
-//               },
-//             ),
-//           )
-//           .toList(),
-//     );
-//   }
-// }

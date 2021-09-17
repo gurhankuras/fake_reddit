@@ -7,6 +7,7 @@ import 'package:reddit_clone/_presentation/main_navigation_pages/browse/empty_pa
 import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_nav_page.dart';
 import 'package:reddit_clone/_presentation/post/post_page.dart';
 import 'package:reddit_clone/_presentation/subreddit/subreddit_page.dart';
+import 'package:reddit_clone/app_router.dart';
 import 'package:reddit_clone/application/auth/login_form/login_form_bloc.dart';
 import 'package:reddit_clone/application/bloc_providers/subreddit_bloc_provider.dart';
 import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
@@ -81,7 +82,9 @@ class _HomeNavigatorState extends State<HomeNavigator>
                   authService: getIt<IAuthService>(),
                   snackService: getIt<ISnackbarService>(),
                 ),
-                child: LoginPage(animation: animation),
+                child: LoginPage(
+                    // animation: animation
+                    ),
               ),
               fullscreenDialog: true,
               transitionsBuilder: searchPageTransitionBuilder,

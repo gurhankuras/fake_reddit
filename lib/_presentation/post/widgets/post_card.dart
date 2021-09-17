@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:reddit_clone/_presentation/user/user_panel_controller.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/injection.dart';
 
 import '../../../domain/post/post_entry.dart';
@@ -118,8 +120,11 @@ class PostTopInfoTile extends StatelessWidget {
         children: [
           if (!inSubreddit)
             GestureDetector(
-              onTap: () =>
-                  Navigator.of(context).pushNamed(Routes.subredditPage),
+              onTap: () {
+                final router =
+                    context.innerRouterOf<StackRouter>(HomeRouter.name);
+                router?.push(SubredditRoute());
+              },
               child:
                   CircleAvatar(backgroundImage: NetworkImage(entry.user.image)),
             ),
@@ -185,7 +190,10 @@ class PostTopInfoSubtitle extends StatelessWidget {
         .caption
         ?.copyWith(color: AppColors.moreLightGrey);
     return GestureDetector(
-      onTap: () => getIt<UserPanelController>().controller?.open(),
+      onTap: () {
+        print(getIt<UserPanelController>().controller);
+        getIt<UserPanelController>().controller?.open();
+      },
       child: Row(
         children: [
           Text('u/${entry.user.nickname}', style: textStyle),

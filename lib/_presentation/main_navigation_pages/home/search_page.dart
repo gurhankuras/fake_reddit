@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import '../../core/constants/colors.dart';
 import '../../core/app/search_bar_field.dart';
@@ -17,8 +18,8 @@ class SearchPage extends StatelessWidget {
         actions: [
           Center(
             child: GestureDetector(
-              onLongPressEnd: (_) => Navigator.of(context).pop(),
-              onTap: () => Navigator.of(context).pop(),
+              onLongPressEnd: (_) => AutoRouter.of(context).pop(),
+              onTap: () => AutoRouter.of(context).pop(),
               child: Text(
                 'Cancel',
                 style: Theme.of(context)

@@ -40,7 +40,8 @@ class ChatRoomsBloc extends Bloc<ChatRoomsEvent, ChatRoomsState> {
 
       yield* chatRooms.fold(
         (l) async* {
-          getIt<ISnackbarService>().error(l.message);
+          print(l);
+          // getIt<ISnackbarService>().error(l.message);
           yield state.copyWith(loading: false);
         },
         (rooms) async* {

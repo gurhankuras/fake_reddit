@@ -1,5 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/app_router.gr.dart';
+import 'package:reddit_clone/domain/auth/i_auth_service.dart';
+import 'package:reddit_clone/domain/auth/i_user_remote_checker.dart';
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../application/auth/sign_up_form/sign_up_form_bloc.dart';
@@ -9,11 +15,11 @@ import 'password_text_input.dart';
 import 'sign_up_email_text_input.dart';
 import 'sign_up_username_text_input.dart';
 
-class SignUpPage extends StatelessWidget {
-  final Animation<double> animation;
+class SignUpPage extends StatelessWidget implements AutoRouteWrapper {
+  // final Animation<double> animation;
   const SignUpPage({
     Key? key,
-    required this.animation,
+    // required this.animation,
   }) : super(key: key);
 
   @override
@@ -35,8 +41,7 @@ class SignUpPage extends StatelessWidget {
             .add(const SignUpFormEvent.googleSignUpPressed()),
         bottomSheet: continueButton(),
         actionText: 'LOG IN',
-        onActionTap: () =>
-            Navigator.of(context).pushReplacementNamed(Routes.loginPage),
+        onActionTap: () => AutoRouter.of(context).popAndPush(LoginRoute()),
         headerText: 'Create an account',
         textFields: [
           const SignUpEmailTextField(),
@@ -58,7 +63,7 @@ class SignUpPage extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return PersistentContinueButton(
-          animation: animation,
+          // animation: animation,
           isLoading: state.isSubmitting,
           active: state.failure.isNone(),
           onTap: () => context
@@ -66,6 +71,20 @@ class SignUpPage extends StatelessWidget {
               .add(const SignUpFormEvent.signInPressed()),
         );
       },
+    );
+  }
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SignUpFormBloc(
+        snackbarService: getIt<ISnackbarService>(),
+        authBloc: context.read<AuthBloc>(),
+        checker: getIt<IUserRemoteChecker>(),
+        formatValidator: SignUpFormatValidator(),
+        authService: getIt<IAuthService>(),
+      ),
+      child: this,
     );
   }
 }

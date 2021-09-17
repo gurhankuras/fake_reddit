@@ -1,28 +1,38 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+import 'package:reddit_clone/_presentation/main_navigation_pages/chat/chat_page.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 
-import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
-import 'package:reddit_clone/infastructure/chat/chat_room.dart';
-import 'package:reddit_clone/route_params.dart';
-import 'package:reddit_clone/utility/date.dart';
-import 'package:reddit_clone/utility/log_init.dart';
-
-import '../../../application/notification/bloc/notification_bloc.dart';
+import '../../../application/chat/chat_rooms/chat_rooms_bloc.dart';
+import '../../../infastructure/chat/chat_room.dart';
+import '../../../injection.dart';
+import '../../../route_params.dart';
 import '../../../routes.dart';
+import '../../../utility/date.dart';
+import '../../../utility/log_init.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/ui.dart';
 import '../../core/reusable/app_header.dart';
 
 const _kChatListTextColor = AppColors.lightGrey;
 
-class ChatNavPage extends StatefulWidget {
+class ChatNavPage extends StatefulWidget implements AutoRouteWrapper {
   const ChatNavPage({Key? key}) : super(key: key);
 
   @override
   _ChatNavPageState createState() => _ChatNavPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider<ChatRoomsBloc>(
+      create: (context) =>
+          getIt<ChatRoomsBloc>()..add(ChatRoomsEvent.fetchingStarted()),
+      child: this,
+    );
+  }
 }
 
 class _ChatNavPageState extends State<ChatNavPage>
@@ -49,11 +59,7 @@ class _ChatNavPageState extends State<ChatNavPage>
             )
           ],
         ),
-        body:
-            // BlocBuilder<NotificationBloc, NotificationState>(
-            // builder: (context, state) {
-            // return
-            BlocBuilder<ChatRoomsBloc, ChatRoomsState>(
+        body: BlocBuilder<ChatRoomsBloc, ChatRoomsState>(
           builder: (context, state) {
             return ListView.builder(
               physics: UIConstants.physics,
@@ -73,8 +79,9 @@ class _ChatNavPageState extends State<ChatNavPage>
                 final item = ChatItem(room: state.chatRooms[index - 1]);
 
                 return GestureDetector(
-                  onTap: () => Navigator.of(context).pushNamed(Routes.chatPage,
-                      arguments: ChatPageParams(roomId: item.room.id)),
+                  onTap: () => AutoRouter.of(context).push(
+                    ChatRoute(roomId: item.room.id),
+                  ),
                   child: ListTile(
                     leading: item.buildAvatar(context),
                     title: item.buildTitle(context),

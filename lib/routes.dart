@@ -62,173 +62,173 @@ abstract class Routes {
   static const cropImagePage = '/cropImagePage';
 }
 
-abstract class AppRouter {
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case Routes.bottomNavPage:
-        return MaterialPageRoute(
-          builder: (_) => MultiProvider(
-            providers: [
-              Provider(
-                create: (context) => HomeControllerManager(),
-              ),
-            ],
-            child: const WrappedBottomNavPage(),
-          ),
-          settings: settings,
-        );
+// abstract class AppRouter {
+//   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+//     switch (settings.name) {
+//       case Routes.bottomNavPage:
+//         return MaterialPageRoute(
+//           builder: (_) => MultiProvider(
+//             providers: [
+//               Provider(
+//                 create: (context) => HomeControllerManager(),
+//               ),
+//             ],
+//             child: const WrappedBottomNavPage(),
+//           ),
+//           settings: settings,
+//         );
 
-      case Routes.signupPage:
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-            create: (context) => SignUpFormBloc(
-              snackbarService: getIt<ISnackbarService>(),
-              authBloc: context.read<AuthBloc>(),
-              checker: getIt<IUserRemoteChecker>(),
-              formatValidator: SignUpFormatValidator(),
-              authService: getIt<IAuthService>(),
-            ),
-            child: SignUpPage(animation: animation),
-          ),
-          fullscreenDialog: true,
-          transitionsBuilder: searchPageTransitionBuilder,
-          transitionDuration: const Duration(milliseconds: 300),
-          reverseTransitionDuration: const Duration(milliseconds: 300),
-        );
-      case Routes.loginPage:
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-            create: (context) => LoginFormBloc(
-              authBloc: context.read<AuthBloc>(),
-              authService: getIt<IAuthService>(),
-              snackService: getIt<ISnackbarService>(),
-            ),
-            child: LoginPage(animation: animation),
-          ),
-          fullscreenDialog: true,
-          transitionsBuilder: searchPageTransitionBuilder,
-          transitionDuration: const Duration(milliseconds: 300),
-          reverseTransitionDuration: const Duration(milliseconds: 300),
-        );
-      // return MaterialPageRoute(
-      //   builder: (_) => const AuthPage(),
-      //   settings: settings,
-      //   fullscreenDialog: true,
-      // );
-      case Routes.splashPage:
-        return MaterialPageRoute(
-          builder: (context) => const SplashPage(),
-          settings: settings,
-        );
-      case Routes.subredditPage:
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<SubredditBloc>()
-              ..add(SubredditEvent.feedFetchingStarted()),
-            child: SubredditPage(),
-          ),
-          settings: settings,
-        );
-      case Routes.singlePostPage:
-        final arguments = settings.arguments as Map<String, dynamic>;
-        final comesFromFeedPage = arguments['comesFromFeedPage'] as bool;
-        // final bloc = arguments['homeTabBloc'] as FeedBloc?;
-        return MaterialPageRoute(
-          builder: (context) =>
-              // comesFromFeedPage
-              // ?
-              //  BlocProvider.value(
-              //     value: bloc!,
-              //     // create: (context) => SubjectBloc(),
-              //     child: PostPage(arguments['post'] as PostEntry),
-              //   )
-              // :
-              PostPage(arguments['post'] as PostEntry),
-          settings: settings,
-        );
-      case Routes.cropImagePage:
-        return MaterialPageRoute<Uint8List>(
-          builder: (context) => BlocProvider.value(
-            value: context.read<ChangeCommunityAvatarBloc>(),
-            child: CropSample(
-              fileAsBytes: settings.arguments as Uint8List,
-            ),
-          ),
-          settings: settings,
-        );
-      case Routes.homeNavPage:
-        return MaterialPageRoute(
-          builder: (_) => const HomeNavPage(),
-          settings: settings,
-        );
+//       case Routes.signupPage:
+//         return PageRouteBuilder(
+//           pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+//             create: (context) => SignUpFormBloc(
+//               snackbarService: getIt<ISnackbarService>(),
+//               authBloc: context.read<AuthBloc>(),
+//               checker: getIt<IUserRemoteChecker>(),
+//               formatValidator: SignUpFormatValidator(),
+//               authService: getIt<IAuthService>(),
+//             ),
+//             child: SignUpPage(animation: animation),
+//           ),
+//           fullscreenDialog: true,
+//           transitionsBuilder: searchPageTransitionBuilder,
+//           transitionDuration: const Duration(milliseconds: 300),
+//           reverseTransitionDuration: const Duration(milliseconds: 300),
+//         );
+//       case Routes.loginPage:
+//         return PageRouteBuilder(
+//           pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+//             create: (context) => LoginFormBloc(
+//               authBloc: context.read<AuthBloc>(),
+//               authService: getIt<IAuthService>(),
+//               snackService: getIt<ISnackbarService>(),
+//             ),
+//             child: LoginPage(animation: animation),
+//           ),
+//           fullscreenDialog: true,
+//           transitionsBuilder: searchPageTransitionBuilder,
+//           transitionDuration: const Duration(milliseconds: 300),
+//           reverseTransitionDuration: const Duration(milliseconds: 300),
+//         );
+//       // return MaterialPageRoute(
+//       //   builder: (_) => const AuthPage(),
+//       //   settings: settings,
+//       //   fullscreenDialog: true,
+//       // );
+//       case Routes.splashPage:
+//         return MaterialPageRoute(
+//           builder: (context) => const SplashPage(),
+//           settings: settings,
+//         );
+//       case Routes.subredditPage:
+//         return MaterialPageRoute(
+//           builder: (context) => BlocProvider(
+//             create: (context) => getIt<SubredditBloc>()
+//               ..add(SubredditEvent.feedFetchingStarted()),
+//             child: SubredditPage(),
+//           ),
+//           settings: settings,
+//         );
+//       case Routes.singlePostPage:
+//         final arguments = settings.arguments as Map<String, dynamic>;
+//         final comesFromFeedPage = arguments['comesFromFeedPage'] as bool;
+//         // final bloc = arguments['homeTabBloc'] as FeedBloc?;
+//         return MaterialPageRoute(
+//           builder: (context) =>
+//               // comesFromFeedPage
+//               // ?
+//               //  BlocProvider.value(
+//               //     value: bloc!,
+//               //     // create: (context) => SubjectBloc(),
+//               //     child: PostPage(arguments['post'] as PostEntry),
+//               //   )
+//               // :
+//               PostPage(arguments['post'] as PostEntry),
+//           settings: settings,
+//         );
+//       case Routes.cropImagePage:
+//         return MaterialPageRoute<Uint8List>(
+//           builder: (context) => BlocProvider.value(
+//             value: context.read<ChangeCommunityAvatarBloc>(),
+//             child: CropSample(
+//               fileAsBytes: settings.arguments as Uint8List,
+//             ),
+//           ),
+//           settings: settings,
+//         );
+//       case Routes.homeNavPage:
+//         return MaterialPageRoute(
+//           builder: (_) => const HomeNavPage(),
+//           settings: settings,
+//         );
 
-      case Routes.chatPage:
-        final params = settings.arguments as ChatPageParams;
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ChatBloc>(param1: params.roomId)
-              ..add(ChatEvent.messagesFetchingStarted()),
-            child: ChatPage(),
-          ),
-          settings: settings,
-        );
+//       case Routes.chatPage:
+//         final params = settings.arguments as ChatPageParams;
+//         return MaterialPageRoute(
+//           builder: (_) => BlocProvider(
+//             create: (context) => getIt<ChatBloc>(param1: params.roomId)
+//               ..add(ChatEvent.messagesFetchingStarted()),
+//             child: ChatPage(),
+//           ),
+//           settings: settings,
+//         );
 
-      case Routes.postFeedSearchPage:
-        return MaterialPageRoute(
-          builder: (_) =>
-              // BlocProvider.value(
-              // value: settings.arguments as MainPageBloc,
-              // child:
-              const PostFeedSearchPage(),
-          // ),
-          settings: settings,
-        );
-      case Routes.searchPage:
-        return PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              const SearchPage(),
-          transitionsBuilder: searchPageTransitionBuilder,
-          transitionDuration: const Duration(milliseconds: 150),
-          reverseTransitionDuration: const Duration(milliseconds: 150),
-        );
-      case Routes.createFeedPage:
-        final args = settings.arguments as CreateFeedPageArguments;
-        return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (context) => getIt<CreateFeedBloc>(),
-            child: CreateFeedEntryPage(community: args.community),
-          ),
-          fullscreenDialog: true,
-          settings: settings,
-        );
-      case '/browse-communities':
-        return MaterialPageRoute(builder: (context) => EmptyPage());
-      case '/rpan':
-        return MaterialPageRoute(builder: (context) => EmptyPage());
-      case Routes.createFeedOverviewPage:
-        return MaterialPageRoute(
-          builder: (context) => CreateFeedEntryOverviewPage(
-              community: settings.arguments as SubredditInfo),
-          settings: settings,
-        );
-      case Routes.changeCommunityAvatarPage:
-        return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (context) => getIt<ChangeCommunityAvatarBloc>(),
-            child: const ChangeCommunityAvatarPage(),
-          ),
-          settings: settings,
-        );
-      default:
-        return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(child: Text('No route defined for ${settings.name}')),
-          ),
-          settings: settings,
-        );
-    }
-  }
-}
+//       case Routes.postFeedSearchPage:
+//         return MaterialPageRoute(
+//           builder: (_) =>
+//               // BlocProvider.value(
+//               // value: settings.arguments as MainPageBloc,
+//               // child:
+//               const PostFeedSearchPage(),
+//           // ),
+//           settings: settings,
+//         );
+//       case Routes.searchPage:
+//         return PageRouteBuilder(
+//           pageBuilder: (context, animation, secondaryAnimation) =>
+//               const SearchPage(),
+//           transitionsBuilder: searchPageTransitionBuilder,
+//           transitionDuration: const Duration(milliseconds: 150),
+//           reverseTransitionDuration: const Duration(milliseconds: 150),
+//         );
+//       case Routes.createFeedPage:
+//         final args = settings.arguments as CreateFeedPageArguments;
+//         return MaterialPageRoute(
+//           builder: (context) => BlocProvider(
+//             create: (context) => getIt<CreateFeedBloc>(),
+//             child: CreateFeedEntryPage(community: args.community),
+//           ),
+//           fullscreenDialog: true,
+//           settings: settings,
+//         );
+//       case '/browse-communities':
+//         return MaterialPageRoute(builder: (context) => EmptyPage());
+//       case '/rpan':
+//         return MaterialPageRoute(builder: (context) => EmptyPage());
+//       case Routes.createFeedOverviewPage:
+//         return MaterialPageRoute(
+//           builder: (context) => CreateFeedEntryOverviewPage(
+//               community: settings.arguments as SubredditInfo),
+//           settings: settings,
+//         );
+//       case Routes.changeCommunityAvatarPage:
+//         return MaterialPageRoute(
+//           builder: (_) => BlocProvider(
+//             create: (context) => getIt<ChangeCommunityAvatarBloc>(),
+//             child: const ChangeCommunityAvatarPage(),
+//           ),
+//           settings: settings,
+//         );
+//       default:
+//         return MaterialPageRoute(
+//           builder: (_) => Scaffold(
+//             body: Center(child: Text('No route defined for ${settings.name}')),
+//           ),
+//           settings: settings,
+//         );
+//     }
+//   }
+// }
 
 class CreateFeedPageArguments {
   final SubredditInfo community;
@@ -240,21 +240,21 @@ class CreateFeedPageArguments {
   );
 }
 
-Widget searchPageTransitionBuilder(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-    Widget child) {
-  var begin = 0.0;
-  var end = 1.0;
-  var tween = Tween(begin: begin, end: end);
-  var opacityAnimation = animation.drive(tween);
+// Widget searchPageTransitionBuilder(
+//     BuildContext context,
+//     Animation<double> animation,
+//     Animation<double> secondaryAnimation,
+//     Widget child) {
+//   var begin = 0.0;
+//   var end = 1.0;
+//   var tween = Tween(begin: begin, end: end);
+//   var opacityAnimation = animation.drive(tween);
 
-  return FadeTransition(
-    opacity: opacityAnimation,
-    child: child,
-  );
-}
+//   return FadeTransition(
+//     opacity: opacityAnimation,
+//     child: child,
+//   );
+// }
 
 Widget loginSignUpTransitionBuider(
     BuildContext context,

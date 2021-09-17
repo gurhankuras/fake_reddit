@@ -113,11 +113,13 @@ class InboxMessageWidget extends StatelessWidget {
                 .read<InboxMessagesBloc>()
                 .add(InboxMessagesEvent.messageRead(message.id));
           }
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) {
-              return EPage();
-            },
-          ));
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return EPage();
+              },
+            ),
+          );
         },
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         tileColor: AppColors.lightBlack,

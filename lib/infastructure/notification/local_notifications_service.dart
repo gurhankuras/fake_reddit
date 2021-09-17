@@ -1,6 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:reddit_clone/application/navigation_service.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/utility/app_logger.dart';
 import 'package:injectable/injectable.dart';
@@ -10,7 +10,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton()
 class LocalNotificationsService {
   final FlutterLocalNotificationsPlugin localNotifications;
-  final NavigationService navigationService = getIt<NavigationService>();
+  final router = getIt<AppRouter>();
   LocalNotificationsService({required this.localNotifications});
 
   Future<void> initialize() async {
@@ -19,7 +19,7 @@ class LocalNotificationsService {
         onSelectNotification: (route) async {
       if (route != null) {
         log.i(route);
-        navigationService.navigateTo(route);
+        router.pushNamed(route);
       }
       log.i(route);
     });

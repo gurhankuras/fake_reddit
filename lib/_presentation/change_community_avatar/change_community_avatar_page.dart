@@ -1,10 +1,12 @@
 import 'dart:typed_data';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/injection.dart';
 import '../core/app_snackbar.dart';
 import '../core/reusable/app_header.dart';
 import '../../application/change_community_avatar/change_community_avatar_bloc.dart';
@@ -15,8 +17,17 @@ import '../core/reusable/snap_list_view.dart';
 import '../core/size_config.dart';
 import 'crop_image_page.dart';
 
-class ChangeCommunityAvatarPage extends StatelessWidget {
+class ChangeCommunityAvatarPage extends StatelessWidget
+    implements AutoRouteWrapper {
   const ChangeCommunityAvatarPage({Key? key}) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<ChangeCommunityAvatarBloc>(),
+      child: this,
+    );
+  }
 
   Future<bool> _showLeaveWithoutSavingDialog(BuildContext context) async {
     final exit = await showDialog<bool>(
@@ -52,7 +63,7 @@ class ChangeCommunityAvatarPage extends StatelessWidget {
                       'CANCEL',
                       style: TextStyle(color: AppColors.iron),
                     ),
-                    onPressed: () => Navigator.of(context).pop(false),
+                    onPressed: () => AutoRouter.of(context).pop(false),
                   ),
                 ),
                 SizedBox(
@@ -98,7 +109,7 @@ class ChangeCommunityAvatarPage extends StatelessWidget {
             () => null,
             (success) {
               if (success) {
-                Navigator.of(context).pop();
+                AutoRouter.of(context).pop();
               } else {
                 showSnack(
                   message:

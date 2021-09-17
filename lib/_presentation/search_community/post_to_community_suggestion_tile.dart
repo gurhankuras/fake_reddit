@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 
 import '../../domain/subreddit/subreddit_info.dart';
 import '../../routes.dart';
@@ -19,14 +21,16 @@ class PostToCommunitySuggestionTile extends StatelessWidget {
           fontSize: 13,
         );
     return ListTile(
-      onTap: () => Navigator.of(context).pushNamed(
-        Routes.createFeedPage,
-        arguments: CreateFeedPageArguments(
-          community,
+      onTap: () =>
+          // Navigator.of(context).pushNamed(
+          //   Routes.createFeedPage,
+          //   arguments: CreateFeedPageArguments(
+          //     community,
 
-          //  context.read<MainPageBloc>(),
-        ),
-      ),
+          //     //  context.read<MainPageBloc>(),
+          //   ),
+          AutoRouter.of(context)
+              .push(CreateFeedEntryRoute(community: community)),
       leading: CircleAvatar(
         backgroundImage: NetworkImage(community.avatar),
       ),

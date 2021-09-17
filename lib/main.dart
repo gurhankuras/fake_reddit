@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/domain/auth/token_cache_service.dart';
 import 'package:reddit_clone/domain/i_socket_manager.dart';
 import 'package:reddit_clone/infastructure/notification/local_notifications_service.dart';
@@ -26,6 +27,7 @@ import 'injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  getIt.registerSingleton<AppRouter>(AppRouter());
 
   await Firebase.initializeApp();
   await dotenv.load(fileName: ".env");

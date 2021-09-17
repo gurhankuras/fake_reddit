@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -123,6 +124,7 @@ class _InboxPageState extends State<InboxPage>
   }
 
   PreferredSize appBar(TabBar tabBar, BuildContext context) {
+    // RouteData.of(context).
     return PreferredSize(
       preferredSize:
           Size.fromHeight(kToolbarHeight + tabBar.preferredSize.height),

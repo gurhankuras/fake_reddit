@@ -1,5 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/app_router.gr.dart';
+import 'package:reddit_clone/domain/auth/i_auth_service.dart';
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../application/auth/login_form/login_form_bloc.dart';
@@ -8,12 +13,24 @@ import '../core/reusable/app_text_input.dart';
 import 'auth_page.dart';
 import 'password_text_input.dart';
 
-class LoginPage extends StatelessWidget {
-  final Animation<double> animation;
+class LoginPage extends StatelessWidget implements AutoRouteWrapper {
+  // final Animation<double> animation;
   const LoginPage({
     Key? key,
-    required this.animation,
+    // required this.animation,
   }) : super(key: key);
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => LoginFormBloc(
+        authBloc: context.read<AuthBloc>(),
+        authService: getIt<IAuthService>(),
+        snackService: getIt<ISnackbarService>(),
+      ),
+      child: this,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +39,7 @@ class LoginPage extends StatelessWidget {
           previous is Unauthenticated && current is Authenticated,
       listener: (context, state) {
         state.maybeMap(
-          authenticated: (_) => Navigator.of(context).pop(),
+          authenticated: (_) => AutoRouter.of(context).pop(),
           orElse: () => null,
         );
       },
@@ -34,8 +51,7 @@ class LoginPage extends StatelessWidget {
             .add(const LoginFormEvent.googleLoginPressed()),
         bottomSheet: continueButton(),
         actionText: 'SIGN UP',
-        onActionTap: () =>
-            Navigator.of(context).pushReplacementNamed(Routes.signupPage),
+        onActionTap: () => AutoRouter.of(context).popAndPush(SignUpRoute()),
         headerText: 'Log in',
         textFields: [
           AppTextInput(
@@ -66,7 +82,7 @@ class LoginPage extends StatelessWidget {
           previous.isSubmitting != current.isSubmitting,
       builder: (context, state) {
         return PersistentContinueButton(
-          animation: animation,
+          // animation: animation,
           isLoading: state.isSubmitting,
           active: state.failure.isNone(),
           onTap: () => context

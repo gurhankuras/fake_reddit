@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-class EmptyPage extends StatelessWidget {
-  const EmptyPage({Key? key}) : super(key: key);
+class MyEmptyPage extends StatelessWidget {
+  const MyEmptyPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
+      body: Container(),
     );
   }
 }

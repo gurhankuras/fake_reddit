@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/application/navigation_service.dart';
 import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/utility/log_init.dart';
 
@@ -30,9 +30,12 @@ class _SplashPageState extends State<SplashPage> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         state.maybeMap(
-            initial: (state) {},
-            orElse: () => getIt<NavigationService>()
-                .replaceAndNavigateTo(Routes.bottomNavPage));
+          initial: (state) {},
+          orElse: () => context.router.replaceNamed('/'),
+        );
+        // getIt<NavigationService>()
+        //     .replaceAndNavigateTo(Routes.bottomNavPage)
+        // );
       },
       child: Container(
         color: AppColors.splashBackground,

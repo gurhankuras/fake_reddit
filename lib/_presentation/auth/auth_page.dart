@@ -145,14 +145,14 @@ class AuthPageBody extends StatelessWidget {
 }
 
 class PersistentContinueButton extends StatelessWidget {
-  final Animation<double> animation;
+  // final Animation<double> animation;
   final bool active;
   final bool isLoading;
   final VoidCallback onTap;
   // final Widget text;
   const PersistentContinueButton({
     Key? key,
-    required this.animation,
+    // required this.animation,
     required this.active,
     required this.isLoading,
     required this.onTap,
@@ -160,30 +160,32 @@ class PersistentContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      builder: (BuildContext context, Widget? child) => SlideTransition(
-          position: animation.drive(
-            Tween(begin: const Offset(0, 1), end: Offset.zero),
-          ),
-          child: child),
-      animation: animation,
-      child: SizedBox(
-        width: double.infinity,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 100),
-          child: Padding(
-            padding: const EdgeInsets.only(
-                right: 20.0, left: 20.0, bottom: 10.0, top: 20.0),
-            child: AppButton(
-              active: active,
-              isLoading: isLoading,
-              padding: const EdgeInsets.symmetric(vertical: 12.0),
-              text: 'Continue',
-              onTap: onTap,
-            ),
+    return
+        // AnimatedBuilder(
+        //   builder: (BuildContext context, Widget? child) => SlideTransition(
+        //       position: animation.drive(
+        //         Tween(begin: const Offset(0, 1), end: Offset.zero),
+        //       ),
+        //       child: child),
+        // animation: animation,
+        // child:
+        SizedBox(
+      width: double.infinity,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 100),
+        child: Padding(
+          padding: const EdgeInsets.only(
+              right: 20.0, left: 20.0, bottom: 10.0, top: 20.0),
+          child: AppButton(
+            active: active,
+            isLoading: isLoading,
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
+            text: 'Continue',
+            onTap: onTap,
           ),
         ),
       ),
+      // ),
     );
   }
 }

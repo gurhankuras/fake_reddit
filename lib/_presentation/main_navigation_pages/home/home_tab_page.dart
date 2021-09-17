@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 
 import '../../core/size_config.dart';
 import '../../../routes.dart';
@@ -55,8 +57,7 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () =>
-                      Navigator.of(context).pushNamed(Routes.signupPage),
+                  onPressed: () => AutoRouter.of(context).push(SignUpRoute()),
                   child: Text('SIGN UP'),
                   style: ElevatedButton.styleFrom(
                     shape: StadiumBorder(),
@@ -64,8 +65,7 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () =>
-                    Navigator.of(context).pushNamed(Routes.loginPage),
+                onPressed: () => AutoRouter.of(context).pushNamed('login'),
                 child: Text('LOG IN'),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,

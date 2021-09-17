@@ -1,21 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/core/refresh_widgets.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/reusable/custom_app_tile.dart';
-import 'package:reddit_clone/_presentation/core/reusable/filled_circle_icon.dart';
-import 'package:reddit_clone/_presentation/core/reusable/sliver_divider.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/_presentation/settings/settings_panel.dart';
-import 'package:reddit_clone/application/navigation_service.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/log_dispose.dart';
-import 'package:reddit_clone/utility/log_init.dart';
-
+import '../../../utility/log_dispose.dart';
+import '../../../utility/log_init.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/ui.dart';
+import '../../core/refresh_widgets.dart';
+import '../../core/reusable/app_header.dart';
+import '../../core/reusable/custom_app_tile.dart';
+import '../../core/reusable/filled_circle_icon.dart';
+import '../../core/reusable/sliver_divider.dart';
+import '../../core/size_config.dart';
+import '../../settings/settings_panel.dart';
 import 'widgets/visited_community.dart';
 
 class BrowsingInfo {
@@ -46,13 +44,13 @@ final a = [
     iconData: FontAwesomeIcons.moon,
     title: 'Popular',
     subtitle: 'The hottest posts on the internet',
-    route: '/popular',
+    route: '/browse/popular',
   ),
   BrowsingInfo(
     iconData: Icons.arrow_upward,
     title: 'All',
     subtitle: 'Even more top posts on Reddit',
-    route: '/all',
+    route: '/browse/all',
   ),
   BrowsingInfo(
       iconData: Icons.trending_up,
@@ -90,11 +88,11 @@ const moderations = [
 ];
 
 class CommunitiesTabPage extends StatefulWidget {
-  final void Function(String route) navigationHandler;
+  // final void Function(String route) navigationHandler;
 
   const CommunitiesTabPage({
     Key? key,
-    required this.navigationHandler,
+    // required this.navigationHandler,
   }) : super(key: key);
 
   @override
@@ -139,9 +137,11 @@ class _CommunitiesTabPageState extends State<CommunitiesTabPage> {
               (context, index) {
                 final item = a[index];
                 return BrowseFeedsTile(
-                  onTap: () => item.parentNavigator
-                      ? widget.navigationHandler(item.route)
-                      : getIt<NavigationService>().navigateTo(item.route),
+                  onTap: () => AutoRouter.of(context).pushNamed(item.route),
+                  // item.parentNavigator
+                  //     ? widget.navigationHandler(item.route)
+                  //     :
+                  // getIt<NavigationService>().navigateTo(item.route),
                   iconData: item.iconData,
                   title: item.title,
                   subtitle: item.subtitle,

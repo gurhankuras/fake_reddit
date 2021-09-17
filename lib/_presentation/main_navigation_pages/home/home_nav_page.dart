@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/domain/feed/i_feed_service.dart';
 import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
 import 'package:reddit_clone/injection.dart';
@@ -124,7 +126,7 @@ class _HomeNavPageState extends State<HomeNavPage>
           title: SearchBarField(
             hintText: 'Search',
             absorbing: true,
-            onTap: () => Navigator.of(context).pushNamed(Routes.searchPage),
+            onTap: () => AutoRouter.of(context).push(SearchRoute()),
           ),
           actions: [
             Center(
@@ -135,9 +137,7 @@ class _HomeNavPageState extends State<HomeNavPage>
                   child: SvgPicture.asset(Assets.play_button),
                 ),
                 onTap: () {
-                  // TODO: navigate to another page
-                  Navigator.of(context)
-                      .pushNamed(Routes.changeCommunityAvatarPage);
+                  AutoRouter.of(context).push(ChangeCommunityAvatarRoute());
                 },
               ),
             ),

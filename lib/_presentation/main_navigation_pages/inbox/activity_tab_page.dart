@@ -1,8 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 import 'package:reddit_clone/_presentation/core/size_config.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/routes.dart';
 import 'package:reddit_clone/utility/log_init.dart';
 
@@ -111,8 +113,10 @@ class _ActivityTabPageState extends State<ActivityTabPage>
                         child: Row(
                           children: [
                             OutlinedButton(
-                              onPressed: () => Navigator.of(context)
-                                  .pushNamed(Routes.loginPage),
+                              onPressed: () =>
+                                  // Navigator.of(context)
+                                  //     .pushNamed(Routes.loginPage),
+                                  AutoRouter.of(context).push(LoginRoute()),
                               child: Text(
                                 'LOG IN',
                                 style: Theme.of(context)
@@ -134,8 +138,11 @@ class _ActivityTabPageState extends State<ActivityTabPage>
                             ),
                             SizedBox(width: SizeConfig.defaultSize),
                             ElevatedButton(
-                              onPressed: () => Navigator.of(context)
-                                  .pushNamed(Routes.signupPage),
+                              onPressed: () =>
+                                  AutoRouter.of(context).push(LoginRoute()),
+
+                              //  Navigator.of(context)
+                              //     .pushNamed(Routes.signupPage),
                               child: Text(
                                 'SIGN UP',
                                 style: Theme.of(context)

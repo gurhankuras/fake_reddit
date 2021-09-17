@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 
 import '../../../application/home_tab_page/feed_bloc.dart';
 import '../../../domain/post/post_entry.dart';
-import '../application/navigation_service.dart';
 import '../injection.dart';
 import '../routes.dart';
 import 'feed_scroll_view.dart';
@@ -135,13 +135,12 @@ class _FeedBodyPosts extends StatelessWidget {
               onTapped: () {
                 print('FEEDPAGE POST CLICKED');
 
-                getIt<NavigationService>().navigateTo(
-                  Routes.singlePostPage,
-                  arguments: {
-                    'post': posts[index],
-                    'comesFromFeedPage': true,
-                  },
-                );
+                getIt<AppRouter>().push(PostRoute(post: posts[index]));
+                // Routes.singlePostPage,
+                // arguments: {
+                //   'post': posts[index],
+                //   'comesFromFeedPage': true,
+                // },
               },
             ),
           );

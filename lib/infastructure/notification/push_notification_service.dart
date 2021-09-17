@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/utility/app_logger.dart';
 
-import '../../application/navigation_service.dart';
 import '../../injection.dart';
 import 'local_notifications_service.dart';
 
@@ -13,7 +13,7 @@ import 'local_notifications_service.dart';
 @LazySingleton()
 class PushNotificationService {
   final FirebaseMessaging firebaseMessaging;
-  final NavigationService navigationService = getIt<NavigationService>();
+  final router = getIt<AppRouter>();
   final LocalNotificationsService localNotifications;
 
   PushNotificationService(
@@ -66,6 +66,6 @@ void handleMessage(RemoteMessage message) {
 Future<void> handleMessageAsync(RemoteMessage message) async {
   final route = message.data['route'];
   if (route != null) {
-    getIt<NavigationService>().navigateTo(route);
+    getIt<AppRouter>().pushNamed(route);
   }
 }

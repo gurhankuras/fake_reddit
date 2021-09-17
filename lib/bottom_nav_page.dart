@@ -1,32 +1,30 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/browse/browse_navigator.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_navigator.dart';
-import 'package:reddit_clone/application/chat/chat_rooms/chat_rooms_bloc.dart';
-import 'package:reddit_clone/utility/log_dispose.dart';
-import 'package:reddit_clone/utility/log_init.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import '_presentation/main_navigation_pages/chat/chat_nav_page.dart';
 import '_presentation/core/app/drawer/app_drawer.dart';
 import '_presentation/core/constants/colors.dart';
-import '_presentation/core/constants/env.dart';
 import '_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/scroll_controllers.dart';
 import '_presentation/core/size_config.dart';
+import '_presentation/main_navigation_pages/chat/chat_nav_page.dart';
+import '_presentation/main_navigation_pages/home/home_nav_page.dart';
+import '_presentation/main_navigation_pages/home/home_navigator.dart';
 import '_presentation/main_navigation_pages/home/home_vm.dart';
 import '_presentation/main_navigation_pages/inbox/inbox_page.dart';
+import 'app_router.gr.dart';
 import 'application/auth/auth_bloc.dart';
+import 'application/chat/chat_rooms/chat_rooms_bloc.dart';
 import 'application/notification/bloc/notification_bloc.dart';
-import '_presentation/main_navigation_pages/home/home_nav_page.dart';
 import 'infastructure/notification/push_notification_service.dart';
 import 'injection.dart';
 import 'routes.dart';
+import 'utility/log_dispose.dart';
+import 'utility/log_init.dart';
 
 class BottomNavPage extends StatefulWidget {
   const BottomNavPage({
@@ -69,37 +67,87 @@ class BottomNavPageState extends State<BottomNavPage> {
     SizeConfig().init(context);
 
     return BlocListener<AuthBloc, AuthState>(
-      listener: popWhenUnauthenticated,
-      child: ScaledDrawer(
-        curve: Curves.easeInOut,
-        controller: drawerController,
-        drawer: AppDrawer(page: widget),
-        drawerColor: AppColors.black,
-        drawerWidth: MediaQuery.of(context).size.width * 0.7,
-        page: Scaffold(
-          backgroundColor: AppColors.lightBlack,
-          bottomNavigationBar: Consumer<HomeVM>(
-            builder: (context, value, child) => BottomNavigationBar(
-              items: mapNavigationItems(),
-              currentIndex: value.currentPage,
-              onTap: (index) => navigateByIndex(index, value),
+      listener: (context, state) {},
+      child: AutoTabsRouter(
+        routes: const [
+          HomeRouter(),
+          BrowseRouter(),
+          MyEmptyRoute(),
+          InboxRoute(),
+          ChatNavRoute(),
+        ],
+        builder: (context, child, animation) {
+          final tabsRouter = AutoTabsRouter.of(context);
+
+          return ScaledDrawer(
+            curve: Curves.easeInOut,
+            controller: drawerController,
+            drawer: AppDrawer(page: widget),
+            drawerColor: AppColors.black,
+            drawerWidth: MediaQuery.of(context).size.width * 0.7,
+            page: Scaffold(
+              backgroundColor: AppColors.lightBlack,
+              body: child,
+              // FadeTransition(
+              //   opacity: animation,
+              //   child: child,
+              // ),
+              bottomNavigationBar: BottomNavigationBar(
+                currentIndex: tabsRouter.activeIndex,
+                onTap: (index) {
+                  if (index == 2) {
+                    context.read<AuthBloc>().state.maybeMap(
+                          authenticated: (_) => navigateToSearchPage(),
+                          orElse: () => showSignUpSheet(context),
+                        );
+                  } else {
+                    tabsRouter.setActiveIndex(index);
+                  }
+                },
+                items: mapNavigationItems(),
+              ),
             ),
-          ),
-          body: buildPage(),
-        ),
+          );
+        },
       ),
     );
+
+    // return BlocListener<AuthBloc, AuthState>(
+    //   listener: popWhenUnauthenticated,
+    //   child: ScaledDrawer(
+    //     curve: Curves.easeInOut,
+    //     controller: drawerController,
+    //     drawer: AppDrawer(page: widget),
+    //     drawerColor: AppColors.black,
+    //     drawerWidth: MediaQuery.of(context).size.width * 0.7,
+    //     page: Scaffold(
+    //       backgroundColor: AppColors.lightBlack,
+    //       bottomNavigationBar: Consumer<HomeVM>(
+    //         builder: (context, value, child) => BottomNavigationBar(
+    //           items: mapNavigationItems(),
+    //           currentIndex: value.currentPage,
+    //           onTap: (index) => navigateByIndex(index, value),
+    //         ),
+    //       ),
+    //       body: buildPage(),
+    //     ),
+    //   ),
+    // );
   }
 
   void popWhenUnauthenticated(BuildContext context, AuthState state) {
     print('popWhenUn... listener');
     state.maybeMap(
-      orElse: () => null,
-      unauthenticated: (value) => Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.bottomNavPage,
-        (route) => false,
-      ),
-    );
+        orElse: () => null,
+        unauthenticated: (value) =>
+            // AutoRouter.of(context).pushNamedAndRemoveUntil(
+            //   Routes.bottomNavPage,
+            //   (route) => false,
+            // ),
+            AutoRouter.of(context).pushAndPopUntil(
+              WrappedBottomNavRoute(),
+              predicate: (r) => false,
+            ));
   }
 
   List<BottomNavigationBarItem> mapNavigationItems() {
@@ -130,10 +178,7 @@ class BottomNavPageState extends State<BottomNavPage> {
   }
 
   void navigateToSearchPage() {
-    Navigator.of(context).pushNamed(
-      Routes.postFeedSearchPage,
-      // arguments: context.read<MainPageBloc>(),
-    );
+    AutoRouter.of(context).push(PostFeedSearchRoute());
   }
 
   List<NavigationItem> get navigationItems => <NavigationItem>[
@@ -241,35 +286,35 @@ class BottomNavPageState extends State<BottomNavPage> {
                 )),
       ];
 
-  Widget buildPage() {
-    return PageView(
-      controller: _pageController,
-      physics: const NeverScrollableScrollPhysics(),
-      children: tabPages,
-    );
-  }
+  // Widget buildPage() {
+  //   return PageView(
+  //     controller: _pageController,
+  //     physics: const NeverScrollableScrollPhysics(),
+  //     children: tabPages,
+  //   );
+  // }
 
-  List<Widget> get tabPages => <Widget>[
-        // Provider.value(value:
-        // Provider.value(
-        // value: context.read<HomeControllerManager>(),
-        // child: const
-        HomeNavigator(),
-        // ),
-        // ),
-        BrowseNavigator(),
-        const Center(
-          child: Text(
-            'Index 3: Settings',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+//   List<Widget> get tabPages => <Widget>[
+//         // Provider.value(value:
+//         // Provider.value(
+//         // value: context.read<HomeControllerManager>(),
+//         // child: const
+//         HomeNavigator(),
+//         // ),
+//         // ),
+//         // BrowseNavigator(),
+//         const Center(
+//           child: Text(
+//             'Index 3: Settings',
+//             style: TextStyle(color: Colors.white),
+//           ),
+//         ),
 
-        BlocProvider(
-          create: (context) =>
-              getIt<ChatRoomsBloc>()..add(ChatRoomsEvent.fetchingStarted()),
-          child: ChatNavPage(),
-        ),
-        InboxPage()
-      ];
+//         BlocProvider(
+//           create: (context) =>
+//               getIt<ChatRoomsBloc>()..add(ChatRoomsEvent.fetchingStarted()),
+//           child: ChatNavPage(),
+//         ),
+//         InboxPage()
+//       ];
 }

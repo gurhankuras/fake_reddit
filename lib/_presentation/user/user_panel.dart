@@ -1,10 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:reddit_clone/_presentation/core/constants/format.dart';
 import 'package:reddit_clone/_presentation/core/mock_rounded_text_input.dart';
-import 'package:reddit_clone/application/navigation_service.dart';
+import 'package:reddit_clone/app_router.gr.dart';
 import 'package:reddit_clone/injection.dart';
 import 'package:reddit_clone/route_params.dart';
 import 'package:reddit_clone/routes.dart';
@@ -27,7 +28,7 @@ class UserPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(Routes.subredditPage),
+      onTap: () => AutoRouter.of(context).push(SubredditRoute()),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.0),
@@ -170,10 +171,13 @@ class UserPanel extends StatelessWidget {
 
   Widget _buildSendMessage() {
     return GestureDetector(
-      onTap: () => getIt<NavigationService>().navigateTo(
-        Routes.chatPage,
-        arguments: ChatPageParams(roomId: '612cc72f65a882665306cc0e'),
-      ),
+      onTap: () =>
+          // getIt<NavigationService>().navigateTo(
+          //   Routes.chatPage,
+          //   arguments: ChatPageParams(roomId: '612cc72f65a882665306cc0e'),
+          // ),
+          getIt<AppRouter>()
+              .push(ChatRoute(roomId: '612cc72f65a882665306cc0e')),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(

@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/custom_scroll_view_with_tabbar.dart';
 
+import '../../core/app/extensions/string_fill_extension.dart';
+import '../../custom_scroll_view_with_tabbar.dart';
 import 'communities_tab_page.dart';
 import 'custom_feeds_tab_page.dart';
 
 class BrowsePage extends StatelessWidget {
-  final void Function(String route) navigationHandler;
+  // final void Function(String route) navigationHandler;
   const BrowsePage({
     Key? key,
-    required this.navigationHandler,
+    // required this.navigationHandler,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollViewWithTabBar(
-      navigationHandler: navigationHandler,
+      // navigationHandler: navigationHandler,
       tabBarView: TabBarView(
         children: [
-          CommunitiesTabPage(navigationHandler: navigationHandler),
+          CommunitiesTabPage(
+              // navigationHandler: navigationHandler
+              ),
           CustomFeedsTabPage(),
         ],
       ),

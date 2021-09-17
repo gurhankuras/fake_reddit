@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../../application/chat/chat/chat_bloc.dart';
 import '../../../infastructure/chat/chat_message_dto.dart';
+import '../../../utility/log_init.dart';
 import '../../core/constants/colors.dart';
 import '../../core/reusable/app_header.dart';
 import '../../core/size_config.dart';
@@ -24,11 +26,22 @@ class ChatMessage {
   });
 }
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({Key? key}) : super(key: key);
+class ChatPage extends StatefulWidget implements AutoRouteWrapper {
+  final String roomId;
+  const ChatPage({Key? key, required this.roomId}) : super(key: key);
 
   @override
   _ChatPageState createState() => _ChatPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+        create: (context) => getIt<ChatBloc>(param1: roomId)
+          ..add(
+            ChatEvent.messagesFetchingStarted(),
+          ),
+        child: this);
+  }
 }
 
 class _ChatPageState extends State<ChatPage> {
