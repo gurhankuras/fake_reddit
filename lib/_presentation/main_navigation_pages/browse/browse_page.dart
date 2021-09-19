@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../custom_scroll_view_with_tabbar.dart';

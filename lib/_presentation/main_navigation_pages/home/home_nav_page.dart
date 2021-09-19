@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit_clone/_presentation/core/constants/colors.dart';
 
 import '../../../application/auth/auth_bloc.dart';
 import '../../../application/feed/feed_bloc.dart';

@@ -18,6 +18,15 @@ ThemeData theme(BuildContext context) {
         },
       ),
     ),
+    tabBarTheme: TabBarTheme(
+      indicator: BoxDecoration(
+          border: Border(
+        bottom: BorderSide(
+          color: AppColors.blue,
+          width: 2,
+        ),
+      )),
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       showSelectedLabels: false,
       showUnselectedLabels: false,

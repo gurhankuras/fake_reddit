@@ -1,5 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
+import 'package:reddit_clone/utility/log_dispose.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 class LoadingIndicator extends StatefulWidget {
   final double arcLength;
@@ -20,9 +22,9 @@ class LoadingIndicator extends StatefulWidget {
     required this.width,
     required this.height,
     this.maxArcLength = math.pi / 3,
-    this.centeredCircleRadius = 10,
-    this.arcDotRadius = 5,
-    this.arcWidth = 4,
+    this.centeredCircleRadius = 5,
+    this.arcDotRadius = 4,
+    this.arcWidth = 2,
   }) : super(key: key);
 
   @override
@@ -36,6 +38,7 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
 
   @override
   void initState() {
+    logInit(LoadingIndicator);
     super.initState();
     _controller = AnimationController(vsync: this, duration: widget.period);
     _animation = Tween(begin: -math.pi, end: math.pi).animate(_controller);
@@ -53,9 +56,10 @@ class _LoadingIndicatorState extends State<LoadingIndicator>
 
   @override
   void dispose() {
-    super.dispose();
+    logDispose(LoadingIndicator);
     _controller.removeStatusListener(_animationStatusListener);
     _controller.dispose();
+    super.dispose();
   }
 
   @override
