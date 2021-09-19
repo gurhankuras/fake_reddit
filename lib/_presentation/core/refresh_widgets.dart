@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
 
 class CustomRefresherFooter extends StatelessWidget {
   const CustomRefresherFooter({Key? key}) : super(key: key);

@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+import '../../../utility/log_init.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:reddit_clone/_presentation/main_navigation_pages/chat/chat_page.dart';
-import 'package:reddit_clone/domain/core/constants/socket_event_keys.dart';
-import 'package:reddit_clone/domain/i_socket_manager.dart';
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
-import 'package:reddit_clone/infastructure/chat/chat_messages_service.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../_presentation/main_navigation_pages/chat/chat_page.dart';
+import '../../../domain/core/constants/socket_event_keys.dart';
+import '../../../domain/i_socket_manager.dart';
+import '../../../infastructure/chat/chat_message_dto.dart';
+import '../../../infastructure/chat/chat_messages_service.dart';
+import '../../../utility/app_logger.dart';
 import 'package:injectable/injectable.dart';
 
 part 'chat_bloc.freezed.dart';

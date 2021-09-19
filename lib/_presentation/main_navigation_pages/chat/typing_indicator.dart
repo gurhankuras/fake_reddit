@@ -1,11 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:shimmer/shimmer.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
+import '../../core/constants/colors.dart';
+import '../../core/reusable/app_header.dart';
+import '../../core/size_config.dart';
 
 const _kBarHeight = 15.0;
 

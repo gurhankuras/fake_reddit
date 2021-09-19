@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
+import 'colors.dart';
 
 abstract class UIConstants {
   static const physics =

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:keyboard_dismisser/keyboard_dismisser.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-import '../../application/bloc_providers/post_comment_bloc_provider.dart';
 import '../../application/post/post_comment/post_comment_bloc.dart';
 import '../../application/post/post_content/post_content_bloc.dart';
 import '../../domain/comment/comment_data.dart';
@@ -24,7 +24,7 @@ import 'comments.dart';
 import 'make_post_widget.dart';
 import 'widgets/post_action_bar.dart';
 
-class PostPage extends StatefulWidget {
+class PostPage extends StatefulWidget implements AutoRouteWrapper {
   final PostEntry post;
   const PostPage(
     this.post, {
@@ -33,6 +33,15 @@ class PostPage extends StatefulWidget {
 
   @override
   _PostPageState createState() => _PostPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<PostCommentBloc>(param1: post.id)
+        ..add(PostCommentEvent.commentsFetchingStarted()),
+      child: this,
+    );
+  }
 }
 
 class _PostPageState extends State<PostPage>
@@ -53,28 +62,25 @@ class _PostPageState extends State<PostPage>
 
   @override
   Widget build(BuildContext context) {
-    return PostCommentBlocProvider(
-      postId: widget.post.id,
-      child: Scaffold(
-        appBar: AppBar(
-          title: _FadingTitle(
-            animationController: controller,
-            post: widget.post,
-          ),
-          centerTitle: true,
-          actions: actions,
+    return Scaffold(
+      appBar: AppBar(
+        title: _FadingTitle(
+          animationController: controller,
+          post: widget.post,
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: _PostPageBody(
-                animationController: controller,
-                post: widget.post,
-              ),
+        centerTitle: true,
+        actions: actions,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: _PostPageBody(
+              animationController: controller,
+              post: widget.post,
             ),
-            AddComment(hintText: 'Add a comment')
-          ],
-        ),
+          ),
+          AddComment(hintText: 'Add a comment')
+        ],
       ),
     );
   }

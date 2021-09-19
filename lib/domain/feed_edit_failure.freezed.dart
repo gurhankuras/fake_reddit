@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$FeedEditFailureTearOff {
-  const _$FeedEditFailureTearOff();
+class _$PostEditFailureTearOff {
+  const _$PostEditFailureTearOff();
 
   _ExceedingLength exceedingLength(
       {required String message, required int maxLength}) {
@@ -32,10 +32,10 @@ class _$FeedEditFailureTearOff {
 }
 
 /// @nodoc
-const $FeedEditFailure = _$FeedEditFailureTearOff();
+const $PostEditFailure = _$PostEditFailureTearOff();
 
 /// @nodoc
-mixin _$FeedEditFailure {
+mixin _$PostEditFailure {
   String get message => throw _privateConstructorUsedError;
 
   @optionalTypeArgs
@@ -66,26 +66,26 @@ mixin _$FeedEditFailure {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $FeedEditFailureCopyWith<FeedEditFailure> get copyWith =>
+  $PostEditFailureCopyWith<PostEditFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $FeedEditFailureCopyWith<$Res> {
-  factory $FeedEditFailureCopyWith(
-          FeedEditFailure value, $Res Function(FeedEditFailure) then) =
-      _$FeedEditFailureCopyWithImpl<$Res>;
+abstract class $PostEditFailureCopyWith<$Res> {
+  factory $PostEditFailureCopyWith(
+          PostEditFailure value, $Res Function(PostEditFailure) then) =
+      _$PostEditFailureCopyWithImpl<$Res>;
   $Res call({String message});
 }
 
 /// @nodoc
-class _$FeedEditFailureCopyWithImpl<$Res>
-    implements $FeedEditFailureCopyWith<$Res> {
-  _$FeedEditFailureCopyWithImpl(this._value, this._then);
+class _$PostEditFailureCopyWithImpl<$Res>
+    implements $PostEditFailureCopyWith<$Res> {
+  _$PostEditFailureCopyWithImpl(this._value, this._then);
 
-  final FeedEditFailure _value;
+  final PostEditFailure _value;
   // ignore: unused_field
-  final $Res Function(FeedEditFailure) _then;
+  final $Res Function(PostEditFailure) _then;
 
   @override
   $Res call({
@@ -102,7 +102,7 @@ class _$FeedEditFailureCopyWithImpl<$Res>
 
 /// @nodoc
 abstract class _$ExceedingLengthCopyWith<$Res>
-    implements $FeedEditFailureCopyWith<$Res> {
+    implements $PostEditFailureCopyWith<$Res> {
   factory _$ExceedingLengthCopyWith(
           _ExceedingLength value, $Res Function(_ExceedingLength) then) =
       __$ExceedingLengthCopyWithImpl<$Res>;
@@ -112,7 +112,7 @@ abstract class _$ExceedingLengthCopyWith<$Res>
 
 /// @nodoc
 class __$ExceedingLengthCopyWithImpl<$Res>
-    extends _$FeedEditFailureCopyWithImpl<$Res>
+    extends _$PostEditFailureCopyWithImpl<$Res>
     implements _$ExceedingLengthCopyWith<$Res> {
   __$ExceedingLengthCopyWithImpl(
       _ExceedingLength _value, $Res Function(_ExceedingLength) _then)
@@ -151,7 +151,7 @@ class _$_ExceedingLength implements _ExceedingLength {
 
   @override
   String toString() {
-    return 'FeedEditFailure.exceedingLength(message: $message, maxLength: $maxLength)';
+    return 'PostEditFailure.exceedingLength(message: $message, maxLength: $maxLength)';
   }
 
   @override
@@ -222,7 +222,7 @@ class _$_ExceedingLength implements _ExceedingLength {
   }
 }
 
-abstract class _ExceedingLength implements FeedEditFailure {
+abstract class _ExceedingLength implements PostEditFailure {
   const factory _ExceedingLength(
       {required String message, required int maxLength}) = _$_ExceedingLength;
 
@@ -236,7 +236,7 @@ abstract class _ExceedingLength implements FeedEditFailure {
 }
 
 /// @nodoc
-abstract class _$EmptyCopyWith<$Res> implements $FeedEditFailureCopyWith<$Res> {
+abstract class _$EmptyCopyWith<$Res> implements $PostEditFailureCopyWith<$Res> {
   factory _$EmptyCopyWith(_Empty value, $Res Function(_Empty) then) =
       __$EmptyCopyWithImpl<$Res>;
   @override
@@ -244,7 +244,7 @@ abstract class _$EmptyCopyWith<$Res> implements $FeedEditFailureCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$EmptyCopyWithImpl<$Res> extends _$FeedEditFailureCopyWithImpl<$Res>
+class __$EmptyCopyWithImpl<$Res> extends _$PostEditFailureCopyWithImpl<$Res>
     implements _$EmptyCopyWith<$Res> {
   __$EmptyCopyWithImpl(_Empty _value, $Res Function(_Empty) _then)
       : super(_value, (v) => _then(v as _Empty));
@@ -275,7 +275,7 @@ class _$_Empty implements _Empty {
 
   @override
   String toString() {
-    return 'FeedEditFailure.empty(message: $message)';
+    return 'PostEditFailure.empty(message: $message)';
   }
 
   @override
@@ -340,7 +340,7 @@ class _$_Empty implements _Empty {
   }
 }
 
-abstract class _Empty implements FeedEditFailure {
+abstract class _Empty implements PostEditFailure {
   const factory _Empty({required String message}) = _$_Empty;
 
   @override

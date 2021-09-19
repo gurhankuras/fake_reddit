@@ -1,6 +1,5 @@
+import '../../application/post/create_post/create_post_bloc.dart';
 import '../core/user.dart';
-
-enum PostType { image, text, link }
 
 class PostEntry {
   final String subreddit;

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:reddit_clone/domain/i_snackbar_service.dart';
+import '../../../domain/i_snackbar_service.dart';
 
 import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/auth/model/login_credentials.dart';

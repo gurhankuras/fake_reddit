@@ -1,9 +1,10 @@
 import 'package:flutter_lorem/flutter_lorem.dart';
-import 'package:reddit_clone/domain/subreddit/subreddit_rule.dart';
 
+import '../application/post/create_post/create_post_bloc.dart';
 import '../domain/core/user.dart';
 import '../domain/image_data.dart';
 import '../domain/post/post_entry.dart';
+import '../domain/subreddit/subreddit_rule.dart';
 
 List<PostEntry> mockMixedPosts = [
   PostEntry(

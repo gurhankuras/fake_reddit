@@ -1,11 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reddit_clone/utility/launch_url.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import 'constants/colors.dart';
+import '../../utility/launch_url.dart';
 import 'constants/assets.dart';
+import 'constants/colors.dart';
 import 'size_config.dart';
 
 enum AuthMethods {

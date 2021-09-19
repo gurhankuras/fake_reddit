@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/core/constants/endpoints.dart';
+import '../../domain/core/constants/endpoints.dart';
 
 import '../../domain/auth/i_user_remote_checker.dart';
 import '../../injection.dart';

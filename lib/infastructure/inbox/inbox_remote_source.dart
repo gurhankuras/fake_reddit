@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/inbox/messages_tab_page.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
-import 'package:reddit_clone/domain/core/value_failure.dart';
-import 'package:reddit_clone/domain/inbox/activity.dart';
-import 'package:reddit_clone/domain/inbox/inbox_message.dart';
-import 'package:reddit_clone/infastructure/core/dio_error_handler.dart';
-import 'package:reddit_clone/infastructure/core/token_dio_interceptor.dart';
-import 'package:reddit_clone/injection.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/core/failure.dart';
+import '../../domain/inbox/activity.dart';
+import '../../domain/inbox/inbox_message.dart';
+import '../../injection.dart';
+import '../core/dio_error_handler.dart';
+import '../core/token_dio_interceptor.dart';
 
 @LazySingleton()
 class InboxRemoteSource {

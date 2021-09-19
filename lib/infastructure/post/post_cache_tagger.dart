@@ -1,7 +1,8 @@
-import 'package:reddit_clone/domain/post/i_post_cache_tagger.dart';
-import 'package:reddit_clone/domain/post/post_entry.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/post/i_post_cache_tagger.dart';
+import '../../domain/post/post_entry.dart';
+import '../core/cache_service.dart';
 
 @LazySingleton(as: IPostCacheTagger)
 class PostCacheTagger implements IPostCacheTagger {

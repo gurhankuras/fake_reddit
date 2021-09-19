@@ -1,9 +1,8 @@
-import 'package:path/path.dart';
-import 'package:reddit_clone/domain/chat/i_chat_cache.dart';
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/chat/i_chat_cache.dart';
+import '../../utility/app_logger.dart';
+import 'chat_message_dto.dart';
 
 @LazySingleton(as: IChatCache)
 class ChatCache implements IChatCache {

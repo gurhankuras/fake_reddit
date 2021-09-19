@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '../../../size_config.dart';
 
 import '../../../reusable/scaled_drawer.dart';
 import '../../../button/app_button.dart';

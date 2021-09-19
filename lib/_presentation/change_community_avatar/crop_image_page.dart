@@ -143,7 +143,7 @@ class _CropSampleState extends State<CropSample> {
                           ],
                         ),
                         const SizedBox(height: 16),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
@@ -165,29 +165,6 @@ class _CropSampleState extends State<CropSample> {
               ],
             ),
             replacement: const CircularProgressIndicator(),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Expanded _buildSumbnail(Uint8List data) {
-    return Expanded(
-      child: InkWell(
-        onTap: () {
-          _croppedData = null;
-        },
-        child: Container(
-          height: 100,
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 8,
-              color: Colors.blue,
-            ),
-          ),
-          child: Image.memory(
-            data,
-            fit: BoxFit.cover,
           ),
         ),
       ),

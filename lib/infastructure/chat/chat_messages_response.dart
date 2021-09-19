@@ -1,4 +1,4 @@
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
+import 'chat_message_dto.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 part 'chat_messages_response.g.dart';

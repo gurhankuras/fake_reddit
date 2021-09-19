@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
-import 'package:reddit_clone/domain/core/response_error.dart';
+import '../../domain/core/failure.dart';
+import '../../domain/core/response_error.dart';
 
 typedef ResponseErrorHandler = Failure Function(
     int statusCode, ResponseError error);

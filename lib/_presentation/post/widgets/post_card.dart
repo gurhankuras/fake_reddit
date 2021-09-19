@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/user/user_panel_controller.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/injection.dart';
 
 import '../../../domain/post/post_entry.dart';
-import '../../../routes.dart';
+import '../../../injection.dart';
+import '../../../routes/app_router.gr.dart';
 import '../../core/constants/colors.dart';
 import '../../core/modal_bottom_sheet/post_more_actions_modal_sheet.dart';
 import '../../core/size_config.dart';
-import '../../search_community/post_to_community_suggestion_tile.dart';
+import '../../search_community/subreddit_suggestion_tile.dart';
+import '../../user/user_panel_controller.dart';
 import 'post_action_bar.dart';
 
 class PostCard extends StatelessWidget {
@@ -121,9 +120,8 @@ class PostTopInfoTile extends StatelessWidget {
           if (!inSubreddit)
             GestureDetector(
               onTap: () {
-                final router =
-                    context.innerRouterOf<StackRouter>(HomeRouter.name);
-                router?.push(SubredditRoute());
+                print(AutoRouter.of(context));
+                AutoRouter.of(context).navigate(SubredditRoute());
               },
               child:
                   CircleAvatar(backgroundImage: NetworkImage(entry.user.image)),

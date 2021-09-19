@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/authentication_button.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '../authentication_button.dart';
+import '../size_config.dart';
 
 void showSignUpSheet(BuildContext context) {
   showModalBottomSheet<void>(

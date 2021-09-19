@@ -1,10 +1,8 @@
-import 'package:reddit_clone/domain/core/failure.dart';
-
-import '../../domain/i_network_connectivity.dart';
-
-import '../../../domain/auth/auth_failure.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/core/failure.dart';
+import '../../domain/i_network_connectivity.dart';
 
 @injectable
 class ConnectivityDioChecker extends Interceptor {

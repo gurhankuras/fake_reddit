@@ -2,19 +2,16 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
-import 'package:reddit_clone/_presentation/core/constants/format.dart';
-import 'package:reddit_clone/_presentation/core/mock_rounded_text_input.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/route_params.dart';
-import 'package:reddit_clone/routes.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '../../injection.dart';
+import '../../routes/app_router.gr.dart';
+import '../core/constants/assets.dart';
+import '../core/constants/colors.dart';
+import '../core/constants/format.dart';
+import '../core/mock_rounded_text_input.dart';
+import '../core/reusable/app_header.dart';
+import 'user_panel_controller.dart';
 
 class UserPanel extends StatelessWidget {
   final PanelController panelController;
@@ -28,7 +25,7 @@ class UserPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AutoRouter.of(context).push(SubredditRoute()),
+      onTap: () => _navigateToUser(context),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(30.0),
@@ -82,6 +79,15 @@ class UserPanel extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _navigateToUser(BuildContext context) {
+    getIt<UserPanelController>().controller?.close();
+    Future.delayed(Duration(milliseconds: 300), () {
+      context.router.navigate(WrappedBottomNavRoute(children: [
+        HomeRouter(children: [SubredditRoute()])
+      ]));
+    });
   }
 
   Row _buildRecentThropiesText() {

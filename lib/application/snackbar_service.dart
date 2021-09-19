@@ -1,16 +1,17 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/domain/i_snackbar_service.dart';
-import 'package:reddit_clone/injection.dart';
+import '../_presentation/core/constants/assets.dart';
+import '../_presentation/core/constants/colors.dart';
+import '../routes/app_router.gr.dart';
+import '../domain/i_snackbar_service.dart';
+import '../injection.dart';
 
 import 'package:injectable/injectable.dart';
 
 @LazySingleton(as: ISnackbarService)
 class SnackbarService implements ISnackbarService {
-  final navigatorKey = getIt<GlobalKey<NavigatorState>>();
+  final router = getIt<AppRouter>();
 
   @override
   void show(
@@ -42,7 +43,7 @@ class SnackbarService implements ISnackbarService {
       reverseAnimationCurve: Curves.easeInOut,
       duration: duration ?? const Duration(seconds: 3),
       leftBarIndicatorColor: indicatorColor ?? Colors.blue[900],
-    ).show(navigatorKey.currentContext!);
+    ).show(router.navigatorKey.currentContext!);
   }
 
   @override

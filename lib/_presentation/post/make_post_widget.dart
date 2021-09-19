@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../application/post/create_post/create_post_bloc.dart';
 import '../../domain/post/post_entry.dart';
 import '../core/blurred_image.dart';
 import 'widgets/post_card.dart';
@@ -42,9 +43,7 @@ Widget makePostWidget(
       );
       break;
     default:
-      postWidget = Container(
-        child: Text('Else'),
-      );
+      postWidget = Text('Else');
   }
 
   return PostCard(

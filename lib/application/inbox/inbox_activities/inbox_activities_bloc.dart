@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:reddit_clone/domain/inbox/activity.dart';
-import 'package:reddit_clone/domain/inbox/i_inbox_repository.dart';
+import '../../../domain/inbox/activity.dart';
+import '../../../domain/inbox/i_inbox_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+import '../../../utility/log_init.dart';
 
 part 'inbox_activities_event.dart';
 part 'inbox_activities_state.dart';

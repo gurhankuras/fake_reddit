@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../injection.dart';
+import '../../../utility/app_logger.dart';
 import '../../core/scroll_controllers.dart';
-import '../../feed_page.dart';
+import '../../feed/feed_page.dart';
 
 class News extends StatefulWidget {
   const News({Key? key}) : super(key: key);
@@ -15,25 +14,24 @@ class News extends StatefulWidget {
 }
 
 class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
-  // late final RefreshController _refreshController;
-  // late final ScrollController _scrollController;
+  late final RefreshController _refreshController;
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
     log.wtf('News init');
-    // final scrollManager = context.read<HomeControllerManager>();
-    // _scrollController =
-    // scrollManager.getScrollController(HomeScrollersEnum.news);
-    // _refreshController =
-    // scrollManager.getRefreshController(HomeScrollersEnum.news);
-    // _refreshController = RefreshController();
+    final scrollManager = getIt<HomeControllerManager>();
+    _scrollController =
+        scrollManager.getScrollController(HomeScrollersEnum.news);
+    _refreshController =
+        scrollManager.getRefreshController(HomeScrollersEnum.news);
     super.initState();
   }
 
   @override
   void dispose() {
-    // _scrollController.dispose();
-    // _refreshController.dispose();
+    _scrollController.dispose();
+    _refreshController.dispose();
     log.wtf('News disposed');
 
     super.dispose();
@@ -41,13 +39,11 @@ class _NewsState extends State<News> with AutomaticKeepAliveClientMixin {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // Container();
-        // FeedBody(
-        //   refreshController: _refreshController,
-        //   scrollController: _scrollController,
-        // );
-        FeedBody();
+    super.build(context);
+    return FeedBody(
+      refreshController: _refreshController,
+      scrollController: _scrollController,
+    );
   }
 
   @override

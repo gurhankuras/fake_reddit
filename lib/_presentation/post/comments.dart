@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
+import '../core/constants/ui.dart';
 
 import '../../domain/comment/comment_data.dart';
 import '../core/constants/colors.dart';

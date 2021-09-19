@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/browse/empty_page.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/inbox/epage.dart';
-import 'package:reddit_clone/utility/log_init.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import 'package:reddit_clone/_presentation/core/app/extensions/string_fill_extension.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/core/refresh_widgets.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/reusable/custom_app_tile.dart';
-import 'package:reddit_clone/application/inbox/inbox_messages/inbox_messages_bloc.dart';
-import 'package:reddit_clone/domain/inbox/inbox_message.dart';
+import '../../../application/inbox/inbox_messages/inbox_messages_bloc.dart';
+import '../../../domain/inbox/inbox_message.dart';
+import '../../../utility/log_init.dart';
+import '../../core/app/extensions/string_fill_extension.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/ui.dart';
+import '../../core/refresh_widgets.dart';
+import '../../core/reusable/app_header.dart';
+import '../../core/reusable/custom_app_tile.dart';
+import 'epage.dart';
 
 class MessagesTabPage extends StatefulWidget {
   const MessagesTabPage({Key? key}) : super(key: key);

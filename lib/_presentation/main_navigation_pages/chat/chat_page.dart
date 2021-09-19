@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/injection.dart';
+import '../../../injection.dart';
 
 import '../../../application/chat/chat/chat_bloc.dart';
 import '../../../infastructure/chat/chat_message_dto.dart';

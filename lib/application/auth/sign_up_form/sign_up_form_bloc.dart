@@ -5,13 +5,12 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:reddit_clone/domain/i_snackbar_service.dart';
-
 import '../../../domain/auth/i_auth_service.dart';
+import '../../../domain/auth/i_user_remote_checker.dart';
 import '../../../domain/auth/model/credentials.dart';
 import '../../../domain/auth/model/login_credentials.dart';
 import '../../../domain/core/value_failure.dart';
-import '../../../domain/auth/i_user_remote_checker.dart';
+import '../../../domain/i_snackbar_service.dart';
 import '../../../utility/app_logger.dart';
 import '../auth_bloc.dart';
 

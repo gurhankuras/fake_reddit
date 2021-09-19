@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../routes/app_router.gr.dart';
+import '../../utility/app_logger.dart';
 
 import '../../injection.dart';
 import 'local_notifications_service.dart';

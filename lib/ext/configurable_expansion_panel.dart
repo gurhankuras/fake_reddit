@@ -40,8 +40,7 @@ class ConfigurableExpansionTile extends StatefulWidget {
       this.borderAnimationTween,
       this.animatedWidgetTurnTween,
       this.animatedWidgetTween})
-      : assert(initiallyExpanded != null),
-        super(key: key);
+      : super(key: key);
 
   /// Called when the tile expands or collapses.
   ///

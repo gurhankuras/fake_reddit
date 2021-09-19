@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:injectable/injectable.dart';
 
 import '../../domain/core/server_failures.dart';
 import '../../domain/feed/i_feed_repository.dart';

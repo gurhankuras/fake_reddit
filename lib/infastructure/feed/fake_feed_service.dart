@@ -1,11 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/post/i_post_cache_tagger.dart';
-
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../domain/core/server_failures.dart';
 import '../../domain/feed/i_feed_service.dart';
+import '../../domain/post/i_post_cache_tagger.dart';
 import '../../domain/post/post_entry.dart';
 import '../../utility/mock_objects.dart';
 

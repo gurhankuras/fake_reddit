@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/post/widgets/vote_arrows.dart';
-import 'package:reddit_clone/application/voting/bloc/vote_bloc.dart';
-import 'package:reddit_clone/application/voting/post_voting.dart';
+
+import '../../../application/voting/bloc/vote_bloc.dart';
+import '../../core/constants/colors.dart';
+import 'vote_arrows.dart';
 
 class PostActionBar extends StatelessWidget {
   // final PostEntry entry;

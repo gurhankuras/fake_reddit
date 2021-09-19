@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import 'constants/colors.dart';
+import 'reusable/app_header.dart';
+import 'size_config.dart';
 
 class MockRoundedTextInput extends StatelessWidget {
   final double? width;

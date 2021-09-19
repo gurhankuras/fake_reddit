@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../../core/constants/colors.dart';
+import '../../../core/size_config.dart';
+import '../../../../utility/app_logger.dart';
 
 const _kCardBorderColor = AppColors.darkgreyBlack;
 

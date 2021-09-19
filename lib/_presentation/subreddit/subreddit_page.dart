@@ -1,28 +1,39 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/subreddit/tabs/about.dart';
 
 import '../../application/subreddit/subreddit_bloc.dart';
 import '../../domain/post/post_entry.dart';
 import '../../domain/subreddit/subreddit_info.dart';
+import '../../injection.dart';
 import '../core/app/extensions/string_fill_extension.dart';
 import '../core/app/search_bar_field.dart';
 import '../core/button/circle_bordered_icon_button.dart';
 import '../core/constants/colors.dart';
+import '../core/constants/ui.dart';
 import '../core/reusable/app_header.dart';
 import '../core/size_config.dart';
 import '../main_navigation_pages/browse/custom_feeds_tab_page.dart';
 import '../post/make_post_widget.dart';
 import '../post/post_page.dart';
+import 'tabs/about.dart';
 
 const _kAnimationEndScrollHeight = 20;
 
-class SubredditPage extends StatefulWidget {
+class SubredditPage extends StatefulWidget implements AutoRouteWrapper {
   const SubredditPage({Key? key}) : super(key: key);
 
   @override
   _SubredditPageState createState() => _SubredditPageState();
+
+  @override
+  Widget wrappedRoute(BuildContext context) {
+    return BlocProvider(
+      create: (context) =>
+          getIt<SubredditBloc>()..add(SubredditEvent.feedFetchingStarted()),
+      child: this,
+    );
+  }
 }
 
 class _SubredditPageState extends State<SubredditPage>
@@ -205,6 +216,15 @@ class _SubredditAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      leading:
+          // BackButton(
+          //   color: Colors.white,
+          //   onPressed: () {
+          //     // print(AutoRouter.of(context));
+          //     AutoRouter.of(context).pop();
+          //   },
+          // ),
+          AutoBackButton(),
       floating: false,
       pinned: true,
       title: BlocBuilder<SubredditBloc, SubredditState>(

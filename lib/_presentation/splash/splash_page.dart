@@ -1,12 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/log_init.dart';
 
+import '../../routes/app_router.gr.dart';
 import '../../application/auth/auth_bloc.dart';
-import '../../routes.dart';
+import '../../utility/log_init.dart';
+import '../core/constants/assets.dart';
 import '../core/constants/colors.dart';
 import '../core/size_config.dart';
 
@@ -31,7 +30,10 @@ class _SplashPageState extends State<SplashPage> {
       listener: (context, state) {
         state.maybeMap(
           initial: (state) {},
-          orElse: () => context.router.replaceNamed('/'),
+          orElse: () {
+            print(AutoRouter.of(context));
+            context.router.replace(BottomNavRouter());
+          },
         );
         // getIt<NavigationService>()
         //     .replaceAndNavigateTo(Routes.bottomNavPage)

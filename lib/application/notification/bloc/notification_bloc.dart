@@ -1,20 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/auth/model/user.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
-import 'package:reddit_clone/utility/log_init.dart';
-import 'package:socket_io_client/socket_io_client.dart' as io;
-import 'package:socket_io_client/socket_io_client.dart';
 
-import 'package:reddit_clone/domain/core/constants/socket_event_keys.dart';
-import 'package:reddit_clone/domain/i_socket_manager.dart';
-import '../../auth/auth_bloc.dart';
+import '../../../domain/auth/model/user.dart';
+import '../../../domain/core/constants/socket_event_keys.dart';
+import '../../../domain/i_socket_manager.dart';
 import '../../../domain/notification/notification_info.dart';
+import '../../../utility/app_logger.dart';
+import '../../../utility/log_init.dart';
+import '../../auth/auth_bloc.dart';
 
 part 'notification_bloc.freezed.dart';
 part 'notification_event.dart';

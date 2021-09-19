@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
 
-import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_google_auth_service.dart';
+import '../../domain/core/failure.dart';
 
 @LazySingleton(as: IGoogleAuthService)
 class GoogleAuthService implements IGoogleAuthService {

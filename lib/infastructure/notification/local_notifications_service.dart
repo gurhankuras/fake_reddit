@@ -1,8 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
+import '../../routes/app_router.gr.dart';
+import '../../injection.dart';
+import '../../utility/app_logger.dart';
 import 'package:injectable/injectable.dart';
 
 // part 'push_notification_service.dart';

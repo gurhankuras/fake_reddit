@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class ResponseError {
   final String message;
   final int? code;

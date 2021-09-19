@@ -4,26 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/domain/feed/i_feed_service.dart';
-import 'package:reddit_clone/infastructure/post/post_cache_tagger.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/app_logger.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
+import '../../../application/auth/auth_bloc.dart';
+import '../../../application/feed/feed_bloc.dart';
+import '../../../domain/feed/i_feed_service.dart';
+import '../../../injection.dart';
+import '../../../routes/app_router.gr.dart';
+import '../../../utility/app_logger.dart';
 import '../../core/app/extensions/string_fill_extension.dart';
 import '../../core/app/search_bar_field.dart';
+import '../../core/constants/assets.dart';
+import '../../core/constants/ui.dart';
 import '../../core/reusable/scaled_drawer.dart';
 import '../../core/scroll_controllers.dart';
 import 'home_tab_page.dart';
 import 'news.dart';
-import '../../../application/auth/auth_bloc.dart';
-import '../../../application/home_tab_page/feed_bloc.dart';
-import '../../../infastructure/core/cache_service.dart';
-import '../../../infastructure/feed/fake_feed_service.dart';
-import '../../../routes.dart';
 
 class HomeNavPage extends StatefulWidget {
   // final Function? openDrawer;
@@ -44,7 +39,7 @@ class _HomeNavPageState extends State<HomeNavPage>
     log.wtf('HomeNavPage init');
     super.initState();
     tabController = TabController(length: 3, vsync: this);
-    // context.read<HomeControllerManager>().tabController = tabController;
+    getIt<HomeControllerManager>().tabController = tabController;
   }
 
   @override
@@ -56,18 +51,10 @@ class _HomeNavPageState extends State<HomeNavPage>
 
   @override
   Widget build(BuildContext context) {
-    // final scrollControllers = context.read<HomeControllerManager>();
     final tabBarWidget = tabBar;
 
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     showSnack(message: 'hahahahaha', context: context);
-      //   },
-      // ),
       appBar: appBar(tabBarWidget, context),
-      // backgroundColor: Colors.indigo[800],
-
       body: TabBarView(
         physics: UIConstants.physics,
         controller: tabController,

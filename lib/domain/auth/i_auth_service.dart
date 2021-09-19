@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:reddit_clone/domain/auth/model/user.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
 
-import 'auth_failure.dart';
+import '../core/failure.dart';
 import 'model/credentials.dart';
 import 'model/login_credentials.dart';
+import 'model/user.dart';
 
 abstract class IAuthService {
   Future<Either<Failure, Unit>> loginWithEmail({

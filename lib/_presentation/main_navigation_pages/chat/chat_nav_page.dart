@@ -3,14 +3,11 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/chat/chat_page.dart';
-import 'package:reddit_clone/app_router.gr.dart';
 
+import '../../../routes/app_router.gr.dart';
 import '../../../application/chat/chat_rooms/chat_rooms_bloc.dart';
 import '../../../infastructure/chat/chat_room.dart';
 import '../../../injection.dart';
-import '../../../route_params.dart';
-import '../../../routes.dart';
 import '../../../utility/date.dart';
 import '../../../utility/log_init.dart';
 import '../../core/constants/colors.dart';

@@ -1,21 +1,19 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:badges/badges.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/home/home_nav_page.dart';
-import 'package:reddit_clone/application/inbox/inbox_activities/inbox_activities_bloc.dart';
-import 'package:reddit_clone/application/inbox/inbox_messages/inbox_messages_bloc.dart';
-import 'package:reddit_clone/application/notification/bloc/notification_bloc.dart';
-import 'package:reddit_clone/domain/i_network_connectivity.dart';
-import 'package:reddit_clone/infastructure/inbox/inbox_remote_source.dart';
-import 'package:reddit_clone/infastructure/inbox/inbox_repository.dart';
-import 'package:reddit_clone/injection.dart';
-import 'package:reddit_clone/utility/log_init.dart';
 
+import '../../../application/inbox/inbox_activities/inbox_activities_bloc.dart';
+import '../../../application/inbox/inbox_messages/inbox_messages_bloc.dart';
+import '../../../application/notification/bloc/notification_bloc.dart';
+import '../../../domain/i_network_connectivity.dart';
+import '../../../infastructure/inbox/inbox_remote_source.dart';
+import '../../../infastructure/inbox/inbox_repository.dart';
+import '../../../injection.dart';
+import '../../../utility/log_init.dart';
 import '../../core/app/extensions/string_fill_extension.dart';
-import '../../core/reusable/scaled_drawer.dart';
+import '../../core/constants/ui.dart';
+import '../home/home_nav_page.dart';
 import 'activity_tab_page_logged_in.dart';
 import 'messages_tab_page.dart';
 

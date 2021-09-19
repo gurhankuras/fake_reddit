@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+import '../../../utility/log_init.dart';
 
 part 'vote_bloc.freezed.dart';
 part 'vote_event.dart';

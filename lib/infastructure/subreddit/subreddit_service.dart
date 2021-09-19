@@ -3,24 +3,19 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:reddit_clone/domain/post/i_post_cache_tagger.dart';
-
-import 'package:reddit_clone/infastructure/feed/fake_feed_service.dart';
 
 import '../../domain/core/value_failure.dart';
 import '../../domain/i_token_cache_service.dart';
+import '../../domain/post/i_post_cache_tagger.dart';
 import '../../domain/post/post_entry.dart';
 import '../../domain/subreddit/i_subreddit_service.dart';
 import '../../domain/subreddit/subreddit_info.dart';
 import '../../injection.dart';
-import '../../utility/app_logger.dart';
 import '../../utility/mock_objects.dart';
 import '../core/connectivity_dio_checker.dart';
 import '../core/token_dio_interceptor.dart';

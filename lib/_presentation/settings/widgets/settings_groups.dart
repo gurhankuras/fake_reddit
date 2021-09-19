@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:reddit_clone/utility/launch_url.dart';
 
+import '../../../utility/launch_url.dart';
 // import '../../../application/settings/app_settings.dart';
 import '../../core/app/extensions/string_fill_extension.dart';
-import '../../core/authentication_button.dart';
 import 'settings_group.dart';
 import 'settings_tile.dart';
 

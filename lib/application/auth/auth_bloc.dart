@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reddit_clone/domain/auth/model/user.dart';
+import '../../domain/auth/model/user.dart';
 
 import '../../domain/auth/i_auth_service.dart';
 import '../../utility/app_logger.dart';

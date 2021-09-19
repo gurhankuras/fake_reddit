@@ -1,15 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/domain/auth/i_auth_service.dart';
-import 'package:reddit_clone/domain/auth/i_user_remote_checker.dart';
-import 'package:reddit_clone/domain/i_snackbar_service.dart';
-import 'package:reddit_clone/injection.dart';
 
 import '../../application/auth/auth_bloc.dart';
 import '../../application/auth/sign_up_form/sign_up_form_bloc.dart';
-import '../../routes.dart';
+import '../../domain/auth/i_auth_service.dart';
+import '../../domain/auth/i_user_remote_checker.dart';
+import '../../domain/i_snackbar_service.dart';
+import '../../injection.dart';
+import '../../routes/app_router.gr.dart';
 import 'auth_page.dart';
 import 'password_text_input.dart';
 import 'sign_up_email_text_input.dart';

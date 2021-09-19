@@ -1,4 +1,4 @@
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
+import '../../infastructure/chat/chat_message_dto.dart';
 
 abstract class IChatCache {
   void saveMessages(List<ChatMessageDTO> messages);

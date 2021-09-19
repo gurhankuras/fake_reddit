@@ -1,11 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/_presentation/feed_page.dart';
-import 'package:reddit_clone/_presentation/main_navigation_pages/browse/all_feed_page.dart';
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
-import 'package:reddit_clone/injection.dart';
+
+import '../../../application/feed/feed_bloc.dart';
+import '../../../injection.dart';
+import '../../core/reusable/app_header.dart';
+import '../../feed/feed_page.dart';
 
 class PopularFeedPage extends StatelessWidget implements AutoRouteWrapper {
   const PopularFeedPage({Key? key}) : super(key: key);
@@ -29,10 +29,7 @@ class PopularFeedPage extends StatelessWidget implements AutoRouteWrapper {
 
 AppBar plainCenterAppbar(String title, BuildContext context) {
   return AppBar(
-    leading: BackButton(
-      color: Colors.white,
-      onPressed: () => AutoRouter.of(context).pop(),
-    ),
+    leading: const AutoBackButton(),
     centerTitle: true,
     title: AppHeaderText(
       title,

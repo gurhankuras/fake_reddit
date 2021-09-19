@@ -1,13 +1,12 @@
 import 'package:dartz/dartz.dart';
-
-import 'package:reddit_clone/_presentation/main_navigation_pages/inbox/messages_tab_page.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
-import 'package:reddit_clone/domain/i_network_connectivity.dart';
-import 'package:reddit_clone/domain/inbox/activity.dart';
-import 'package:reddit_clone/domain/inbox/i_inbox_repository.dart';
-import 'package:reddit_clone/domain/inbox/inbox_message.dart';
-import 'package:reddit_clone/infastructure/inbox/inbox_remote_source.dart';
 import 'package:injectable/injectable.dart';
+
+import '../../domain/core/failure.dart';
+import '../../domain/i_network_connectivity.dart';
+import '../../domain/inbox/activity.dart';
+import '../../domain/inbox/i_inbox_repository.dart';
+import '../../domain/inbox/inbox_message.dart';
+import 'inbox_remote_source.dart';
 
 @LazySingleton(as: IInboxRepository)
 class InboxRepository implements IInboxRepository {

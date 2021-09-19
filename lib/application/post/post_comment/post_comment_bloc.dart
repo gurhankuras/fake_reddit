@@ -2,17 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:reddit_clone/application/home_tab_page/feed_bloc.dart';
-import 'package:reddit_clone/domain/post/post_entry.dart';
-import 'package:reddit_clone/infastructure/core/cache_service.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+import 'package:injectable/injectable.dart';
 
 import '../../../domain/comment/comment_data.dart';
 import '../../../domain/comment/i_comment_service.dart';
 import '../../../domain/core/value_failure.dart';
-import '../../../utility/app_logger.dart';
-import 'package:injectable/injectable.dart';
+import '../../../infastructure/core/cache_service.dart';
+import '../../../utility/log_init.dart';
 
 part 'post_comment_bloc.freezed.dart';
 part 'post_comment_event.dart';

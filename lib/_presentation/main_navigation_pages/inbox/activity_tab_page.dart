@@ -1,12 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
-import 'package:reddit_clone/app_router.gr.dart';
-import 'package:reddit_clone/routes.dart';
-import 'package:reddit_clone/utility/log_init.dart';
+
+import '../../../routes/app_router.gr.dart';
+import '../../../utility/log_init.dart';
+import '../../core/constants/assets.dart';
+import '../../core/constants/colors.dart';
+import '../../core/size_config.dart';
 
 class ActivityTabPage extends StatefulWidget {
   const ActivityTabPage({

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+@LazySingleton()
 class HomeControllerManager {
   List<ScrollController?> scrollControllers = List.generate(3, (index) => null);
   List<RefreshController?> refreshControllers =
@@ -30,7 +32,9 @@ class HomeControllerManager {
 
     if (scrollController.hasClients) {
       if (scrollController.offset == 0.0) {
-        requestRefresh(refreshController);
+        requestRefresh(
+          refreshController,
+        );
       } else {
         scrollToStart(scrollController);
       }
@@ -38,14 +42,11 @@ class HomeControllerManager {
   }
 
   void requestRefresh(RefreshController refreshController) =>
-      refreshController.requestRefresh();
+      refreshController.requestRefresh(
+          duration: Duration(milliseconds: 250), curve: Curves.easeInOut);
 
   void scrollToStart(ScrollController controller) => controller.animateTo(0,
       duration: Duration(milliseconds: 200), curve: Curves.easeIn);
 }
-
-// initNews() {
-//   newsScrollController = ScrollController();
-// }
 
 enum HomeScrollersEnum { news, home, popular }

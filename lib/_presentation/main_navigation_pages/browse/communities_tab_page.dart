@@ -44,13 +44,13 @@ final a = [
     iconData: FontAwesomeIcons.moon,
     title: 'Popular',
     subtitle: 'The hottest posts on the internet',
-    route: '/browse/popular',
+    route: '/main/browse/popular',
   ),
   BrowsingInfo(
     iconData: Icons.arrow_upward,
     title: 'All',
     subtitle: 'Even more top posts on Reddit',
-    route: '/browse/all',
+    route: '/main/browse/all',
   ),
   BrowsingInfo(
       iconData: Icons.trending_up,
@@ -137,11 +137,7 @@ class _CommunitiesTabPageState extends State<CommunitiesTabPage> {
               (context, index) {
                 final item = a[index];
                 return BrowseFeedsTile(
-                  onTap: () => AutoRouter.of(context).pushNamed(item.route),
-                  // item.parentNavigator
-                  //     ? widget.navigationHandler(item.route)
-                  //     :
-                  // getIt<NavigationService>().navigateTo(item.route),
+                  onTap: () => AutoRouter.of(context).navigateNamed(item.route),
                   iconData: item.iconData,
                   title: item.title,
                   subtitle: item.subtitle,

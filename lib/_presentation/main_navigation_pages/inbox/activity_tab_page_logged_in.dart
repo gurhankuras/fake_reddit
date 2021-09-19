@@ -1,14 +1,12 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:reddit_clone/application/inbox/inbox_activities/inbox_activities_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-import 'package:reddit_clone/_presentation/core/constants/assets.dart';
-import 'package:reddit_clone/domain/inbox/activity.dart';
-
+import '../../../application/inbox/inbox_activities/inbox_activities_bloc.dart';
+import '../../../domain/inbox/activity.dart';
+import '../../core/constants/assets.dart';
 import '../../core/constants/colors.dart';
 import '../../core/constants/ui.dart';
 import '../../core/refresh_widgets.dart';

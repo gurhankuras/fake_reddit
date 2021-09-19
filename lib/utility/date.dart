@@ -1,5 +1,4 @@
-import 'package:intl/intl.dart';
-import 'package:reddit_clone/_presentation/core/constants/format.dart';
+import '../_presentation/core/constants/format.dart';
 
 String formatDateByHourMinute(DateTime date) {
   return Format.hours().format(date);

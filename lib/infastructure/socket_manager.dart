@@ -1,4 +1,4 @@
-import 'package:reddit_clone/domain/i_socket_manager.dart';
+import '../domain/i_socket_manager.dart';
 
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:socket_io_client/socket_io_client.dart';

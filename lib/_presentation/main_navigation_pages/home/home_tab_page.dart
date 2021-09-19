@@ -1,12 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:reddit_clone/app_router.gr.dart';
 
-import '../../core/size_config.dart';
-import '../../../routes.dart';
-
+import '../../../routes/app_router.gr.dart';
 import '../../../application/auth/auth_bloc.dart';
+import '../../core/size_config.dart';
 
 class HomeTabPage extends StatelessWidget {
   const HomeTabPage({Key? key}) : super(key: key);

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/constants/ui.dart';
-import 'package:reddit_clone/_presentation/core/reusable/app_header.dart';
-import 'package:reddit_clone/domain/subreddit/subreddit_rule.dart';
-import 'package:reddit_clone/ext/configurable_expansion_panel.dart';
-import 'package:reddit_clone/utility/mock_objects.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/ui.dart';
+import '../../core/reusable/app_header.dart';
+import '../../../domain/subreddit/subreddit_rule.dart';
+import '../../../ext/configurable_expansion_panel.dart';
+import '../../../utility/mock_objects.dart';
 
 class SubredditAboutTabPage extends StatelessWidget {
   const SubredditAboutTabPage({Key? key}) : super(key: key);

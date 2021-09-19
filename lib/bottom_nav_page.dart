@@ -11,45 +11,46 @@ import '_presentation/core/modal_bottom_sheet/sign_in_modal_bottom_sheet.dart';
 import '_presentation/core/reusable/scaled_drawer.dart';
 import '_presentation/core/scroll_controllers.dart';
 import '_presentation/core/size_config.dart';
-import '_presentation/main_navigation_pages/chat/chat_nav_page.dart';
 import '_presentation/main_navigation_pages/home/home_nav_page.dart';
-import '_presentation/main_navigation_pages/home/home_navigator.dart';
-import '_presentation/main_navigation_pages/home/home_vm.dart';
-import '_presentation/main_navigation_pages/inbox/inbox_page.dart';
-import 'app_router.gr.dart';
 import 'application/auth/auth_bloc.dart';
-import 'application/chat/chat_rooms/chat_rooms_bloc.dart';
 import 'application/notification/bloc/notification_bloc.dart';
 import 'infastructure/notification/push_notification_service.dart';
 import 'injection.dart';
-import 'routes.dart';
+import 'routes/app_router.gr.dart';
 import 'utility/log_dispose.dart';
 import 'utility/log_init.dart';
 
-class BottomNavPage extends StatefulWidget {
+class BottomNavPage extends StatefulWidget
+// implements AutoRouteWrapper
+{
   const BottomNavPage({
     Key? key,
   }) : super(key: key);
 
   @override
   BottomNavPageState createState() => BottomNavPageState();
+
+  // @override
+  // Widget wrappedRoute(BuildContext context) {
+  //   return Provider(
+  //     create: (context) => HomeControllerManager(),
+  //     child: this,
+  //   );
+  // }
 }
 
 class BottomNavPageState extends State<BottomNavPage> {
   late final PageController _pageController;
   late final MyDrawerController drawerController;
-  int index = 0;
 
   @override
   void initState() {
     logInit(BottomNavPage);
     _pageController = PageController();
     drawerController = context.read<MyDrawerController>();
-
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
       await getIt<PushNotificationService>().initiliase();
     });
-
     super.initState();
   }
 
@@ -57,7 +58,6 @@ class BottomNavPageState extends State<BottomNavPage> {
   void dispose() {
     logDispose(BottomNavPage);
     _pageController.dispose();
-
     super.dispose();
   }
 
@@ -88,69 +88,59 @@ class BottomNavPageState extends State<BottomNavPage> {
             page: Scaffold(
               backgroundColor: AppColors.lightBlack,
               body: child,
-              // FadeTransition(
-              //   opacity: animation,
-              //   child: child,
-              // ),
               bottomNavigationBar: BottomNavigationBar(
                 currentIndex: tabsRouter.activeIndex,
                 onTap: (index) {
-                  if (index == 2) {
-                    context.read<AuthBloc>().state.maybeMap(
-                          authenticated: (_) => navigateToSearchPage(),
-                          orElse: () => showSignUpSheet(context),
-                        );
-                  } else {
-                    tabsRouter.setActiveIndex(index);
-                  }
+                  processTabChange(tabsRouter, index);
+
+                  // if (index == 2) {
+                  //   context.read<AuthBloc>().state.maybeMap(
+                  //         authenticated: (_) => navigateToSearchPage(),
+                  //         orElse: () => showSignUpSheet(context),
+                  //       );
+                  // } else {
+                  //   tabsRouter.setActiveIndex(index);
+                  // }
                 },
-                items: mapNavigationItems(),
+                items: mapNavigationItems(tabsRouter.activeIndex),
               ),
             ),
           );
         },
       ),
     );
+  }
 
-    // return BlocListener<AuthBloc, AuthState>(
-    //   listener: popWhenUnauthenticated,
-    //   child: ScaledDrawer(
-    //     curve: Curves.easeInOut,
-    //     controller: drawerController,
-    //     drawer: AppDrawer(page: widget),
-    //     drawerColor: AppColors.black,
-    //     drawerWidth: MediaQuery.of(context).size.width * 0.7,
-    //     page: Scaffold(
-    //       backgroundColor: AppColors.lightBlack,
-    //       bottomNavigationBar: Consumer<HomeVM>(
-    //         builder: (context, value, child) => BottomNavigationBar(
-    //           items: mapNavigationItems(),
-    //           currentIndex: value.currentPage,
-    //           onTap: (index) => navigateByIndex(index, value),
-    //         ),
-    //       ),
-    //       body: buildPage(),
-    //     ),
-    //   ),
-    // );
+  void processTabChange(TabsRouter tabsRouter, int newIndex) {
+    if (newIndex == 2) {
+      context.read<AuthBloc>().state.maybeMap(
+            authenticated: (_) => navigateToSearchPage(),
+            orElse: () => showSignUpSheet(context),
+          );
+    } else if (tabsRouter.activeIndex == newIndex && newIndex == 0) {
+      final scrollControllers = getIt<HomeControllerManager>();
+      scrollControllers.scrollToStartOrRefresh();
+    } else {
+      tabsRouter.setActiveIndex(newIndex);
+    }
+  }
+
+  void navigateToSearchPage() {
+    AutoRouter.of(context).push(PostFeedSearchRoute());
   }
 
   void popWhenUnauthenticated(BuildContext context, AuthState state) {
     print('popWhenUn... listener');
     state.maybeMap(
-        orElse: () => null,
-        unauthenticated: (value) =>
-            // AutoRouter.of(context).pushNamedAndRemoveUntil(
-            //   Routes.bottomNavPage,
-            //   (route) => false,
-            // ),
-            AutoRouter.of(context).pushAndPopUntil(
-              WrappedBottomNavRoute(),
-              predicate: (r) => false,
-            ));
+      orElse: () => null,
+      unauthenticated: (value) => AutoRouter.of(context).pushAndPopUntil(
+        WrappedBottomNavRoute(),
+        predicate: (r) => false,
+      ),
+    );
   }
 
-  List<BottomNavigationBarItem> mapNavigationItems() {
+  List<BottomNavigationBarItem> mapNavigationItems(int index) {
     return navigationItems
         .map(
           (item) => BottomNavigationBarItem(
@@ -161,25 +151,21 @@ class BottomNavPageState extends State<BottomNavPage> {
         .toList();
   }
 
-  void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
-    if (currentIndex == 2) {
-      context.read<AuthBloc>().state.maybeMap(
-            authenticated: (_) => navigateToSearchPage(),
-            orElse: () => showSignUpSheet(context),
-          );
-      return;
-    } else if (currentIndex != bottomNavigationViewModel.currentPage) {
-      _pageController.jumpToPage(currentIndex);
-      bottomNavigationViewModel.changePage(currentIndex);
-    } else if (bottomNavigationViewModel.currentPage == 0) {
-      final scrollControllers = context.read<HomeControllerManager>();
-      scrollControllers.scrollToStartOrRefresh();
-    }
-  }
-
-  void navigateToSearchPage() {
-    AutoRouter.of(context).push(PostFeedSearchRoute());
-  }
+  // void navigateByIndex(int currentIndex, HomeVM bottomNavigationViewModel) {
+  //   if (currentIndex == 2) {
+  //     context.read<AuthBloc>().state.maybeMap(
+  //           authenticated: (_) => navigateToSearchPage(),
+  //           orElse: () => showSignUpSheet(context),
+  //         );
+  //     return;
+  //   } else if (currentIndex != bottomNavigationViewModel.currentPage) {
+  //     _pageController.jumpToPage(currentIndex);
+  //     bottomNavigationViewModel.changePage(currentIndex);
+  //   } else if (bottomNavigationViewModel.currentPage == 0) {
+  //     final scrollControllers = context.read<HomeControllerManager>();
+  //     scrollControllers.scrollToStartOrRefresh();
+  //   }
+  // }
 
   List<NavigationItem> get navigationItems => <NavigationItem>[
         NavigationItem(
@@ -218,103 +204,31 @@ class BottomNavPageState extends State<BottomNavPage> {
               },
             )),
         NavigationItem(
-            index: 4,
-            selectedIcon: Icon(FontAwesomeIcons.solidBell),
-            unselectedIcon: BlocBuilder<NotificationBloc, NotificationState>(
-                buildWhen: (previous, current) =>
-                    (previous.inboxUnreadMessageCount +
-                        previous.unreadActivitiesCount) !=
-                    (current.inboxUnreadMessageCount +
-                        current.unreadActivitiesCount),
-                builder: (context, state) {
-                  final total_notificaion_count =
-                      state.inboxUnreadMessageCount +
-                          state.unreadActivitiesCount;
-                  // if (total_notificaion_count == 0) {
-                  //   return Icon(FontAwesomeIcons.bell);
-                  // } else {
-                  return Badge(
-                    badgeContent: Text(total_notificaion_count > 99
-                        ? '+99'
-                        : total_notificaion_count.toString()),
-                    showBadge: total_notificaion_count != 0,
-                    child: Icon(FontAwesomeIcons.bell),
-
-                    // shape: BadgeShape.square,
-                    // padding: EdgeInsets.zero,
-                    // padding: ,
-
-                    toAnimate: false,
-                    // borderRadius: BorderRadius.circular(50),
-                    position: BadgePosition.topEnd(end: -10, top: -8),
-                  );
-                }
-
-                // return Stack(
-                //   clipBehavior: Clip.none,
-                //   children: <Widget>[
-                //     Icon(FontAwesomeIcons.bell),
-                //     Positioned(
-                //       right: -10,
-                //       top: -3,
-                //       child: Container(
-                //         padding: EdgeInsets.all(2),
-                //         decoration: BoxDecoration(
-                //           color: Colors.red,
-                //           borderRadius: BorderRadius.circular(50),
-                //         ),
-                //         constraints: BoxConstraints(
-                //           minWidth: 12,
-                //           minHeight: 12,
-                //         ),
-                //         child: Center(
-                //           child: Text(
-                //             '10',
-                //             style: TextStyle(
-                //               color: Colors.white,
-                //               fontSize: 10,
-                //               fontWeight: FontWeight.w700,
-                //             ),
-                //             textAlign: TextAlign.center,
-                //           ),
-                //         ),
-                //       ),
-                //     )
-                //   ],
-                // );
-                // },
-                )),
+          index: 4,
+          selectedIcon: Icon(FontAwesomeIcons.solidBell),
+          unselectedIcon: BlocBuilder<NotificationBloc, NotificationState>(
+            buildWhen: (previous, current) =>
+                (previous.inboxUnreadMessageCount +
+                    previous.unreadActivitiesCount) !=
+                (current.inboxUnreadMessageCount +
+                    current.unreadActivitiesCount),
+            builder: (context, state) {
+              final total_notificaion_count =
+                  state.inboxUnreadMessageCount + state.unreadActivitiesCount;
+              // if (total_notificaion_count == 0) {
+              //   return Icon(FontAwesomeIcons.bell);
+              // } else {
+              return Badge(
+                badgeContent: Text(total_notificaion_count > 99
+                    ? '+99'
+                    : total_notificaion_count.toString()),
+                showBadge: total_notificaion_count != 0,
+                child: Icon(FontAwesomeIcons.bell),
+                toAnimate: false,
+                position: BadgePosition.topEnd(end: -10, top: -8),
+              );
+            },
+          ),
+        ),
       ];
-
-  // Widget buildPage() {
-  //   return PageView(
-  //     controller: _pageController,
-  //     physics: const NeverScrollableScrollPhysics(),
-  //     children: tabPages,
-  //   );
-  // }
-
-//   List<Widget> get tabPages => <Widget>[
-//         // Provider.value(value:
-//         // Provider.value(
-//         // value: context.read<HomeControllerManager>(),
-//         // child: const
-//         HomeNavigator(),
-//         // ),
-//         // ),
-//         // BrowseNavigator(),
-//         const Center(
-//           child: Text(
-//             'Index 3: Settings',
-//             style: TextStyle(color: Colors.white),
-//           ),
-//         ),
-
-//         BlocProvider(
-//           create: (context) =>
-//               getIt<ChatRoomsBloc>()..add(ChatRoomsEvent.fetchingStarted()),
-//           child: ChatNavPage(),
-//         ),
-//         InboxPage()
-//       ];
 }

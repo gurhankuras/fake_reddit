@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit_clone/_presentation/core/constants/colors.dart';
-import 'package:reddit_clone/_presentation/core/size_config.dart';
+import '../constants/colors.dart';
+import '../size_config.dart';
 
 class SliverDivider extends StatelessWidget {
   const SliverDivider({

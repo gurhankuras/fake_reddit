@@ -1,13 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:reddit_clone/domain/core/failure.dart';
-import 'package:reddit_clone/infastructure/chat/chat_message_dto.dart';
-import 'package:reddit_clone/infastructure/chat/chat_messages_repository.dart';
-import 'package:reddit_clone/infastructure/chat/chat_messages_response.dart';
-import 'package:reddit_clone/infastructure/chat/chat_room.dart';
-
-import '../../domain/core/server_failures.dart';
+import '../../domain/core/failure.dart';
+import 'chat_messages_repository.dart';
+import 'chat_messages_response.dart';
+import 'chat_room.dart';
 
 @LazySingleton(as: IChatMessagesService)
 class ChatMessagesService implements IChatMessagesService {

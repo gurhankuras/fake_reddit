@@ -2,24 +2,20 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:reddit_clone/domain/auth/model/user.dart';
-import 'package:reddit_clone/domain/core/constants/endpoints.dart';
-import 'package:reddit_clone/domain/core/failure.dart';
-import 'package:reddit_clone/domain/core/response_error.dart';
-import 'package:reddit_clone/infastructure/core/dio_error_handler.dart';
 
-import '../../domain/auth/auth_failure.dart';
 import '../../domain/auth/i_auth_service.dart';
 import '../../domain/auth/i_google_auth_service.dart';
 import '../../domain/auth/model/credentials.dart';
 import '../../domain/auth/model/login_credentials.dart';
+import '../../domain/auth/model/user.dart';
+import '../../domain/core/constants/endpoints.dart';
+import '../../domain/core/failure.dart';
+import '../../domain/core/response_error.dart';
 import '../../domain/i_token_cache_service.dart';
 import '../../injection.dart';
-import '../../utility/app_logger.dart';
 import '../core/connectivity_dio_checker.dart';
+import '../core/dio_error_handler.dart';
 import '../core/token_dio_interceptor.dart';
 import 'dto/credentials_dto.dart';
 import 'dto/login_credentials_dto.dart';
@@ -64,7 +60,7 @@ class AuthService implements IAuthService {
   }) async {
     final credentialsDto = LoginCredentialsDTO.fromDomain(credentials).toJson();
     try {
-      final response = await dio.post(Endpoints.login, data: credentialsDto);
+      final _ = await dio.post(Endpoints.login, data: credentialsDto);
       return right(unit);
     } catch (error) {
       // handle other errors before makeRemoteFailure
@@ -80,7 +76,7 @@ class AuthService implements IAuthService {
   }) async {
     final credentialsDto = CredentialsDTO.fromDomain(credentials).toJson();
     try {
-      final response = await dio.post(Endpoints.register, data: credentialsDto);
+      final _ = await dio.post(Endpoints.register, data: credentialsDto);
       return right(unit);
     } catch (error) {
       // handle other errors before makeRemoteFailure
