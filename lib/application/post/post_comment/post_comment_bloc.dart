@@ -19,42 +19,34 @@ class PostCommentBloc extends Bloc<PostCommentEvent, PostCommentState> {
   final ICommentService commentService;
   final CacheService cacheService;
   final String? postId;
-  // final FeedBloc homeTabBloc;
-  // final PostEntry post;
   PostCommentBloc({
     required this.commentService,
     required this.cacheService,
     @factoryParam this.postId,
   }) : super(const PostCommentState.initial()) {
     logInit(PostCommentBloc);
+    _registerEventHandlers();
   }
 
-  @override
-  Stream<PostCommentState> mapEventToState(
-    PostCommentEvent event,
-  ) async* {
-    yield* event.map(
-      commentsFetchingStarted: (e) async* {
-        yield const PostCommentState.loading();
-        final commentsOrFailure =
-            await commentService.fetchPostComments('1234');
+  void _registerEventHandlers() {
+    on<CommentsFetchingStarted>(_onCommentsFetchingStarted);
+    on<CommentFilteringChanged>(_onCommentFilteringChanged);
+  }
 
-        yield* commentsOrFailure.fold(
-          (failure) async* {
-            yield PostCommentState.fetchingFailed(failure);
-          },
-          (comments) async* {
-            yield PostCommentState.fetchingCompleted(comments);
-          },
-        );
-      },
-      commentFilteringChanged: (e) async* {},
-      // postVisited: (e) async* {
-      //   cacheService.setString(e.post.id, e.post.id);
-      //   e.post.setVisited(true);
-      //   print('postVisited');
-      //   add(PostCommentEvent.commentsFetchingStarted());
-      // });
+  FutureOr<void> _onCommentsFetchingStarted(
+    CommentsFetchingStarted event,
+    Emitter<PostCommentState> emit,
+  ) async {
+    emit(const PostCommentState.loading());
+    final commentsOrFailure = await commentService.fetchPostComments('1234');
+    commentsOrFailure.fold(
+      (failure) => emit(PostCommentState.fetchingFailed(failure)),
+      (comments) => emit(PostCommentState.fetchingCompleted(comments)),
     );
   }
+
+  FutureOr<void> _onCommentFilteringChanged(
+    CommentFilteringChanged event,
+    Emitter<PostCommentState> emit,
+  ) async {}
 }

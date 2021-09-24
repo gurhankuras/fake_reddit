@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PostCommentEventTearOff {
   const _$PostCommentEventTearOff();
 
-  _CommentsFetchingStarted commentsFetchingStarted() {
-    return const _CommentsFetchingStarted();
+  CommentsFetchingStarted commentsFetchingStarted() {
+    return const CommentsFetchingStarted();
   }
 
-  _CommentFilteringChanged commentFilteringChanged() {
-    return const _CommentFilteringChanged();
+  CommentFilteringChanged commentFilteringChanged() {
+    return const CommentFilteringChanged();
   }
 }
 
@@ -45,16 +45,16 @@ mixin _$PostCommentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CommentsFetchingStarted value)
+    required TResult Function(CommentsFetchingStarted value)
         commentsFetchingStarted,
-    required TResult Function(_CommentFilteringChanged value)
+    required TResult Function(CommentFilteringChanged value)
         commentFilteringChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
-    TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
+    TResult Function(CommentsFetchingStarted value)? commentsFetchingStarted,
+    TResult Function(CommentFilteringChanged value)? commentFilteringChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,29 +78,28 @@ class _$PostCommentEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CommentsFetchingStartedCopyWith<$Res> {
-  factory _$CommentsFetchingStartedCopyWith(_CommentsFetchingStarted value,
-          $Res Function(_CommentsFetchingStarted) then) =
-      __$CommentsFetchingStartedCopyWithImpl<$Res>;
+abstract class $CommentsFetchingStartedCopyWith<$Res> {
+  factory $CommentsFetchingStartedCopyWith(CommentsFetchingStarted value,
+          $Res Function(CommentsFetchingStarted) then) =
+      _$CommentsFetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$CommentsFetchingStartedCopyWithImpl<$Res>
+class _$CommentsFetchingStartedCopyWithImpl<$Res>
     extends _$PostCommentEventCopyWithImpl<$Res>
-    implements _$CommentsFetchingStartedCopyWith<$Res> {
-  __$CommentsFetchingStartedCopyWithImpl(_CommentsFetchingStarted _value,
-      $Res Function(_CommentsFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _CommentsFetchingStarted));
+    implements $CommentsFetchingStartedCopyWith<$Res> {
+  _$CommentsFetchingStartedCopyWithImpl(CommentsFetchingStarted _value,
+      $Res Function(CommentsFetchingStarted) _then)
+      : super(_value, (v) => _then(v as CommentsFetchingStarted));
 
   @override
-  _CommentsFetchingStarted get _value =>
-      super._value as _CommentsFetchingStarted;
+  CommentsFetchingStarted get _value => super._value as CommentsFetchingStarted;
 }
 
 /// @nodoc
 
-class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
-  const _$_CommentsFetchingStarted();
+class _$CommentsFetchingStarted implements CommentsFetchingStarted {
+  const _$CommentsFetchingStarted();
 
   @override
   String toString() {
@@ -109,7 +108,7 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _CommentsFetchingStarted);
+    return identical(this, other) || (other is CommentsFetchingStarted);
   }
 
   @override
@@ -140,9 +139,9 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CommentsFetchingStarted value)
+    required TResult Function(CommentsFetchingStarted value)
         commentsFetchingStarted,
-    required TResult Function(_CommentFilteringChanged value)
+    required TResult Function(CommentFilteringChanged value)
         commentFilteringChanged,
   }) {
     return commentsFetchingStarted(this);
@@ -151,8 +150,8 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
-    TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
+    TResult Function(CommentsFetchingStarted value)? commentsFetchingStarted,
+    TResult Function(CommentFilteringChanged value)? commentFilteringChanged,
     required TResult orElse(),
   }) {
     if (commentsFetchingStarted != null) {
@@ -162,34 +161,33 @@ class _$_CommentsFetchingStarted implements _CommentsFetchingStarted {
   }
 }
 
-abstract class _CommentsFetchingStarted implements PostCommentEvent {
-  const factory _CommentsFetchingStarted() = _$_CommentsFetchingStarted;
+abstract class CommentsFetchingStarted implements PostCommentEvent {
+  const factory CommentsFetchingStarted() = _$CommentsFetchingStarted;
 }
 
 /// @nodoc
-abstract class _$CommentFilteringChangedCopyWith<$Res> {
-  factory _$CommentFilteringChangedCopyWith(_CommentFilteringChanged value,
-          $Res Function(_CommentFilteringChanged) then) =
-      __$CommentFilteringChangedCopyWithImpl<$Res>;
+abstract class $CommentFilteringChangedCopyWith<$Res> {
+  factory $CommentFilteringChangedCopyWith(CommentFilteringChanged value,
+          $Res Function(CommentFilteringChanged) then) =
+      _$CommentFilteringChangedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$CommentFilteringChangedCopyWithImpl<$Res>
+class _$CommentFilteringChangedCopyWithImpl<$Res>
     extends _$PostCommentEventCopyWithImpl<$Res>
-    implements _$CommentFilteringChangedCopyWith<$Res> {
-  __$CommentFilteringChangedCopyWithImpl(_CommentFilteringChanged _value,
-      $Res Function(_CommentFilteringChanged) _then)
-      : super(_value, (v) => _then(v as _CommentFilteringChanged));
+    implements $CommentFilteringChangedCopyWith<$Res> {
+  _$CommentFilteringChangedCopyWithImpl(CommentFilteringChanged _value,
+      $Res Function(CommentFilteringChanged) _then)
+      : super(_value, (v) => _then(v as CommentFilteringChanged));
 
   @override
-  _CommentFilteringChanged get _value =>
-      super._value as _CommentFilteringChanged;
+  CommentFilteringChanged get _value => super._value as CommentFilteringChanged;
 }
 
 /// @nodoc
 
-class _$_CommentFilteringChanged implements _CommentFilteringChanged {
-  const _$_CommentFilteringChanged();
+class _$CommentFilteringChanged implements CommentFilteringChanged {
+  const _$CommentFilteringChanged();
 
   @override
   String toString() {
@@ -198,7 +196,7 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _CommentFilteringChanged);
+    return identical(this, other) || (other is CommentFilteringChanged);
   }
 
   @override
@@ -229,9 +227,9 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CommentsFetchingStarted value)
+    required TResult Function(CommentsFetchingStarted value)
         commentsFetchingStarted,
-    required TResult Function(_CommentFilteringChanged value)
+    required TResult Function(CommentFilteringChanged value)
         commentFilteringChanged,
   }) {
     return commentFilteringChanged(this);
@@ -240,8 +238,8 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CommentsFetchingStarted value)? commentsFetchingStarted,
-    TResult Function(_CommentFilteringChanged value)? commentFilteringChanged,
+    TResult Function(CommentsFetchingStarted value)? commentsFetchingStarted,
+    TResult Function(CommentFilteringChanged value)? commentFilteringChanged,
     required TResult orElse(),
   }) {
     if (commentFilteringChanged != null) {
@@ -251,8 +249,8 @@ class _$_CommentFilteringChanged implements _CommentFilteringChanged {
   }
 }
 
-abstract class _CommentFilteringChanged implements PostCommentEvent {
-  const factory _CommentFilteringChanged() = _$_CommentFilteringChanged;
+abstract class CommentFilteringChanged implements PostCommentEvent {
+  const factory CommentFilteringChanged() = _$CommentFilteringChanged;
 }
 
 /// @nodoc

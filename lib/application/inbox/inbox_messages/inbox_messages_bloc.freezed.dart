@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$InboxMessagesEventTearOff {
   const _$InboxMessagesEventTearOff();
 
-  _FetchingStarted fetchingStarted() {
-    return const _FetchingStarted();
+  FetchingStarted fetchingStarted() {
+    return const FetchingStarted();
   }
 
-  _MessageRead messageRead(String id) {
-    return _MessageRead(
+  MessageRead messageRead(String id) {
+    return MessageRead(
       id,
     );
   }
@@ -47,14 +47,14 @@ mixin _$InboxMessagesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_MessageRead value) messageRead,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(MessageRead value) messageRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_MessageRead value)? messageRead,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(MessageRead value)? messageRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,28 +78,28 @@ class _$InboxMessagesEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchingStartedCopyWith<$Res> {
-  factory _$FetchingStartedCopyWith(
-          _FetchingStarted value, $Res Function(_FetchingStarted) then) =
-      __$FetchingStartedCopyWithImpl<$Res>;
+abstract class $FetchingStartedCopyWith<$Res> {
+  factory $FetchingStartedCopyWith(
+          FetchingStarted value, $Res Function(FetchingStarted) then) =
+      _$FetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$FetchingStartedCopyWithImpl<$Res>
+class _$FetchingStartedCopyWithImpl<$Res>
     extends _$InboxMessagesEventCopyWithImpl<$Res>
-    implements _$FetchingStartedCopyWith<$Res> {
-  __$FetchingStartedCopyWithImpl(
-      _FetchingStarted _value, $Res Function(_FetchingStarted) _then)
-      : super(_value, (v) => _then(v as _FetchingStarted));
+    implements $FetchingStartedCopyWith<$Res> {
+  _$FetchingStartedCopyWithImpl(
+      FetchingStarted _value, $Res Function(FetchingStarted) _then)
+      : super(_value, (v) => _then(v as FetchingStarted));
 
   @override
-  _FetchingStarted get _value => super._value as _FetchingStarted;
+  FetchingStarted get _value => super._value as FetchingStarted;
 }
 
 /// @nodoc
 
-class _$_FetchingStarted implements _FetchingStarted {
-  const _$_FetchingStarted();
+class _$FetchingStarted implements FetchingStarted {
+  const _$FetchingStarted();
 
   @override
   String toString() {
@@ -108,7 +108,7 @@ class _$_FetchingStarted implements _FetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _FetchingStarted);
+    return identical(this, other) || (other is FetchingStarted);
   }
 
   @override
@@ -139,8 +139,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_MessageRead value) messageRead,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(MessageRead value) messageRead,
   }) {
     return fetchingStarted(this);
   }
@@ -148,8 +148,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_MessageRead value)? messageRead,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(MessageRead value)? messageRead,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -159,34 +159,34 @@ class _$_FetchingStarted implements _FetchingStarted {
   }
 }
 
-abstract class _FetchingStarted implements InboxMessagesEvent {
-  const factory _FetchingStarted() = _$_FetchingStarted;
+abstract class FetchingStarted implements InboxMessagesEvent {
+  const factory FetchingStarted() = _$FetchingStarted;
 }
 
 /// @nodoc
-abstract class _$MessageReadCopyWith<$Res> {
-  factory _$MessageReadCopyWith(
-          _MessageRead value, $Res Function(_MessageRead) then) =
-      __$MessageReadCopyWithImpl<$Res>;
+abstract class $MessageReadCopyWith<$Res> {
+  factory $MessageReadCopyWith(
+          MessageRead value, $Res Function(MessageRead) then) =
+      _$MessageReadCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$MessageReadCopyWithImpl<$Res>
+class _$MessageReadCopyWithImpl<$Res>
     extends _$InboxMessagesEventCopyWithImpl<$Res>
-    implements _$MessageReadCopyWith<$Res> {
-  __$MessageReadCopyWithImpl(
-      _MessageRead _value, $Res Function(_MessageRead) _then)
-      : super(_value, (v) => _then(v as _MessageRead));
+    implements $MessageReadCopyWith<$Res> {
+  _$MessageReadCopyWithImpl(
+      MessageRead _value, $Res Function(MessageRead) _then)
+      : super(_value, (v) => _then(v as MessageRead));
 
   @override
-  _MessageRead get _value => super._value as _MessageRead;
+  MessageRead get _value => super._value as MessageRead;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_MessageRead(
+    return _then(MessageRead(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$MessageReadCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MessageRead implements _MessageRead {
-  const _$_MessageRead(this.id);
+class _$MessageRead implements MessageRead {
+  const _$MessageRead(this.id);
 
   @override
   final String id;
@@ -211,7 +211,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MessageRead &&
+        (other is MessageRead &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -222,8 +222,8 @@ class _$_MessageRead implements _MessageRead {
 
   @JsonKey(ignore: true)
   @override
-  _$MessageReadCopyWith<_MessageRead> get copyWith =>
-      __$MessageReadCopyWithImpl<_MessageRead>(this, _$identity);
+  $MessageReadCopyWith<MessageRead> get copyWith =>
+      _$MessageReadCopyWithImpl<MessageRead>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,8 +250,8 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_MessageRead value) messageRead,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(MessageRead value) messageRead,
   }) {
     return messageRead(this);
   }
@@ -259,8 +259,8 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_MessageRead value)? messageRead,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(MessageRead value)? messageRead,
     required TResult orElse(),
   }) {
     if (messageRead != null) {
@@ -270,12 +270,12 @@ class _$_MessageRead implements _MessageRead {
   }
 }
 
-abstract class _MessageRead implements InboxMessagesEvent {
-  const factory _MessageRead(String id) = _$_MessageRead;
+abstract class MessageRead implements InboxMessagesEvent {
+  const factory MessageRead(String id) = _$MessageRead;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$MessageReadCopyWith<_MessageRead> get copyWith =>
+  $MessageReadCopyWith<MessageRead> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

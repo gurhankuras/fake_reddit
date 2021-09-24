@@ -16,34 +16,34 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$SubredditEventTearOff {
   const _$SubredditEventTearOff();
 
-  _CardDisplayChanged cardDisplayChanged(PostDisplayType displayType) {
-    return _CardDisplayChanged(
+  CardDisplayChanged cardDisplayChanged(PostDisplayType displayType) {
+    return CardDisplayChanged(
       displayType,
     );
   }
 
-  _FeedFetchingStarted feedFetchingStarted() {
-    return const _FeedFetchingStarted();
+  FeedFetchingStarted feedFetchingStarted() {
+    return const FeedFetchingStarted();
   }
 
-  _SubredditInfoFetchingStarted subredditInfoFetchingStarted() {
-    return const _SubredditInfoFetchingStarted();
+  SubredditInfoFetchingStarted subredditInfoFetchingStarted() {
+    return const SubredditInfoFetchingStarted();
   }
 
-  _SubredditInfoLoaded subredditInfoLoaded(SubredditInfo info) {
-    return _SubredditInfoLoaded(
+  SubredditInfoLoaded subredditInfoLoaded(SubredditInfo info) {
+    return SubredditInfoLoaded(
       info,
     );
   }
 
-  _PostsLoaded postsLoaded(List<PostEntry> posts) {
-    return _PostsLoaded(
+  PostsLoaded postsLoaded(List<PostEntry> posts) {
+    return PostsLoaded(
       posts,
     );
   }
 
-  _Failed failed(ValueFailure<String> failure) {
-    return _Failed(
+  Failed failed(ValueFailure<String> failure) {
+    return Failed(
       failure,
     );
   }
@@ -77,24 +77,24 @@ mixin _$SubredditEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -118,29 +118,29 @@ class _$SubredditEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$CardDisplayChangedCopyWith<$Res> {
-  factory _$CardDisplayChangedCopyWith(
-          _CardDisplayChanged value, $Res Function(_CardDisplayChanged) then) =
-      __$CardDisplayChangedCopyWithImpl<$Res>;
+abstract class $CardDisplayChangedCopyWith<$Res> {
+  factory $CardDisplayChangedCopyWith(
+          CardDisplayChanged value, $Res Function(CardDisplayChanged) then) =
+      _$CardDisplayChangedCopyWithImpl<$Res>;
   $Res call({PostDisplayType displayType});
 }
 
 /// @nodoc
-class __$CardDisplayChangedCopyWithImpl<$Res>
+class _$CardDisplayChangedCopyWithImpl<$Res>
     extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$CardDisplayChangedCopyWith<$Res> {
-  __$CardDisplayChangedCopyWithImpl(
-      _CardDisplayChanged _value, $Res Function(_CardDisplayChanged) _then)
-      : super(_value, (v) => _then(v as _CardDisplayChanged));
+    implements $CardDisplayChangedCopyWith<$Res> {
+  _$CardDisplayChangedCopyWithImpl(
+      CardDisplayChanged _value, $Res Function(CardDisplayChanged) _then)
+      : super(_value, (v) => _then(v as CardDisplayChanged));
 
   @override
-  _CardDisplayChanged get _value => super._value as _CardDisplayChanged;
+  CardDisplayChanged get _value => super._value as CardDisplayChanged;
 
   @override
   $Res call({
     Object? displayType = freezed,
   }) {
-    return _then(_CardDisplayChanged(
+    return _then(CardDisplayChanged(
       displayType == freezed
           ? _value.displayType
           : displayType // ignore: cast_nullable_to_non_nullable
@@ -151,8 +151,8 @@ class __$CardDisplayChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_CardDisplayChanged implements _CardDisplayChanged {
-  const _$_CardDisplayChanged(this.displayType);
+class _$CardDisplayChanged implements CardDisplayChanged {
+  const _$CardDisplayChanged(this.displayType);
 
   @override
   final PostDisplayType displayType;
@@ -165,7 +165,7 @@ class _$_CardDisplayChanged implements _CardDisplayChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _CardDisplayChanged &&
+        (other is CardDisplayChanged &&
             (identical(other.displayType, displayType) ||
                 const DeepCollectionEquality()
                     .equals(other.displayType, displayType)));
@@ -177,8 +177,8 @@ class _$_CardDisplayChanged implements _CardDisplayChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$CardDisplayChangedCopyWith<_CardDisplayChanged> get copyWith =>
-      __$CardDisplayChangedCopyWithImpl<_CardDisplayChanged>(this, _$identity);
+  $CardDisplayChangedCopyWith<CardDisplayChanged> get copyWith =>
+      _$CardDisplayChangedCopyWithImpl<CardDisplayChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -213,13 +213,13 @@ class _$_CardDisplayChanged implements _CardDisplayChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return cardDisplayChanged(this);
   }
@@ -227,13 +227,13 @@ class _$_CardDisplayChanged implements _CardDisplayChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (cardDisplayChanged != null) {
@@ -243,39 +243,39 @@ class _$_CardDisplayChanged implements _CardDisplayChanged {
   }
 }
 
-abstract class _CardDisplayChanged implements SubredditEvent {
-  const factory _CardDisplayChanged(PostDisplayType displayType) =
-      _$_CardDisplayChanged;
+abstract class CardDisplayChanged implements SubredditEvent {
+  const factory CardDisplayChanged(PostDisplayType displayType) =
+      _$CardDisplayChanged;
 
   PostDisplayType get displayType => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$CardDisplayChangedCopyWith<_CardDisplayChanged> get copyWith =>
+  $CardDisplayChangedCopyWith<CardDisplayChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$FeedFetchingStartedCopyWith<$Res> {
-  factory _$FeedFetchingStartedCopyWith(_FeedFetchingStarted value,
-          $Res Function(_FeedFetchingStarted) then) =
-      __$FeedFetchingStartedCopyWithImpl<$Res>;
+abstract class $FeedFetchingStartedCopyWith<$Res> {
+  factory $FeedFetchingStartedCopyWith(
+          FeedFetchingStarted value, $Res Function(FeedFetchingStarted) then) =
+      _$FeedFetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$FeedFetchingStartedCopyWithImpl<$Res>
+class _$FeedFetchingStartedCopyWithImpl<$Res>
     extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$FeedFetchingStartedCopyWith<$Res> {
-  __$FeedFetchingStartedCopyWithImpl(
-      _FeedFetchingStarted _value, $Res Function(_FeedFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _FeedFetchingStarted));
+    implements $FeedFetchingStartedCopyWith<$Res> {
+  _$FeedFetchingStartedCopyWithImpl(
+      FeedFetchingStarted _value, $Res Function(FeedFetchingStarted) _then)
+      : super(_value, (v) => _then(v as FeedFetchingStarted));
 
   @override
-  _FeedFetchingStarted get _value => super._value as _FeedFetchingStarted;
+  FeedFetchingStarted get _value => super._value as FeedFetchingStarted;
 }
 
 /// @nodoc
 
-class _$_FeedFetchingStarted implements _FeedFetchingStarted {
-  const _$_FeedFetchingStarted();
+class _$FeedFetchingStarted implements FeedFetchingStarted {
+  const _$FeedFetchingStarted();
 
   @override
   String toString() {
@@ -284,7 +284,7 @@ class _$_FeedFetchingStarted implements _FeedFetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _FeedFetchingStarted);
+    return identical(this, other) || (other is FeedFetchingStarted);
   }
 
   @override
@@ -323,13 +323,13 @@ class _$_FeedFetchingStarted implements _FeedFetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return feedFetchingStarted(this);
   }
@@ -337,13 +337,13 @@ class _$_FeedFetchingStarted implements _FeedFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (feedFetchingStarted != null) {
@@ -353,36 +353,36 @@ class _$_FeedFetchingStarted implements _FeedFetchingStarted {
   }
 }
 
-abstract class _FeedFetchingStarted implements SubredditEvent {
-  const factory _FeedFetchingStarted() = _$_FeedFetchingStarted;
+abstract class FeedFetchingStarted implements SubredditEvent {
+  const factory FeedFetchingStarted() = _$FeedFetchingStarted;
 }
 
 /// @nodoc
-abstract class _$SubredditInfoFetchingStartedCopyWith<$Res> {
-  factory _$SubredditInfoFetchingStartedCopyWith(
-          _SubredditInfoFetchingStarted value,
-          $Res Function(_SubredditInfoFetchingStarted) then) =
-      __$SubredditInfoFetchingStartedCopyWithImpl<$Res>;
+abstract class $SubredditInfoFetchingStartedCopyWith<$Res> {
+  factory $SubredditInfoFetchingStartedCopyWith(
+          SubredditInfoFetchingStarted value,
+          $Res Function(SubredditInfoFetchingStarted) then) =
+      _$SubredditInfoFetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SubredditInfoFetchingStartedCopyWithImpl<$Res>
+class _$SubredditInfoFetchingStartedCopyWithImpl<$Res>
     extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$SubredditInfoFetchingStartedCopyWith<$Res> {
-  __$SubredditInfoFetchingStartedCopyWithImpl(
-      _SubredditInfoFetchingStarted _value,
-      $Res Function(_SubredditInfoFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _SubredditInfoFetchingStarted));
+    implements $SubredditInfoFetchingStartedCopyWith<$Res> {
+  _$SubredditInfoFetchingStartedCopyWithImpl(
+      SubredditInfoFetchingStarted _value,
+      $Res Function(SubredditInfoFetchingStarted) _then)
+      : super(_value, (v) => _then(v as SubredditInfoFetchingStarted));
 
   @override
-  _SubredditInfoFetchingStarted get _value =>
-      super._value as _SubredditInfoFetchingStarted;
+  SubredditInfoFetchingStarted get _value =>
+      super._value as SubredditInfoFetchingStarted;
 }
 
 /// @nodoc
 
-class _$_SubredditInfoFetchingStarted implements _SubredditInfoFetchingStarted {
-  const _$_SubredditInfoFetchingStarted();
+class _$SubredditInfoFetchingStarted implements SubredditInfoFetchingStarted {
+  const _$SubredditInfoFetchingStarted();
 
   @override
   String toString() {
@@ -391,7 +391,7 @@ class _$_SubredditInfoFetchingStarted implements _SubredditInfoFetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _SubredditInfoFetchingStarted);
+    return identical(this, other) || (other is SubredditInfoFetchingStarted);
   }
 
   @override
@@ -430,13 +430,13 @@ class _$_SubredditInfoFetchingStarted implements _SubredditInfoFetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return subredditInfoFetchingStarted(this);
   }
@@ -444,13 +444,13 @@ class _$_SubredditInfoFetchingStarted implements _SubredditInfoFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (subredditInfoFetchingStarted != null) {
@@ -460,35 +460,34 @@ class _$_SubredditInfoFetchingStarted implements _SubredditInfoFetchingStarted {
   }
 }
 
-abstract class _SubredditInfoFetchingStarted implements SubredditEvent {
-  const factory _SubredditInfoFetchingStarted() =
-      _$_SubredditInfoFetchingStarted;
+abstract class SubredditInfoFetchingStarted implements SubredditEvent {
+  const factory SubredditInfoFetchingStarted() = _$SubredditInfoFetchingStarted;
 }
 
 /// @nodoc
-abstract class _$SubredditInfoLoadedCopyWith<$Res> {
-  factory _$SubredditInfoLoadedCopyWith(_SubredditInfoLoaded value,
-          $Res Function(_SubredditInfoLoaded) then) =
-      __$SubredditInfoLoadedCopyWithImpl<$Res>;
+abstract class $SubredditInfoLoadedCopyWith<$Res> {
+  factory $SubredditInfoLoadedCopyWith(
+          SubredditInfoLoaded value, $Res Function(SubredditInfoLoaded) then) =
+      _$SubredditInfoLoadedCopyWithImpl<$Res>;
   $Res call({SubredditInfo info});
 }
 
 /// @nodoc
-class __$SubredditInfoLoadedCopyWithImpl<$Res>
+class _$SubredditInfoLoadedCopyWithImpl<$Res>
     extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$SubredditInfoLoadedCopyWith<$Res> {
-  __$SubredditInfoLoadedCopyWithImpl(
-      _SubredditInfoLoaded _value, $Res Function(_SubredditInfoLoaded) _then)
-      : super(_value, (v) => _then(v as _SubredditInfoLoaded));
+    implements $SubredditInfoLoadedCopyWith<$Res> {
+  _$SubredditInfoLoadedCopyWithImpl(
+      SubredditInfoLoaded _value, $Res Function(SubredditInfoLoaded) _then)
+      : super(_value, (v) => _then(v as SubredditInfoLoaded));
 
   @override
-  _SubredditInfoLoaded get _value => super._value as _SubredditInfoLoaded;
+  SubredditInfoLoaded get _value => super._value as SubredditInfoLoaded;
 
   @override
   $Res call({
     Object? info = freezed,
   }) {
-    return _then(_SubredditInfoLoaded(
+    return _then(SubredditInfoLoaded(
       info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
@@ -499,8 +498,8 @@ class __$SubredditInfoLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
-  const _$_SubredditInfoLoaded(this.info);
+class _$SubredditInfoLoaded implements SubredditInfoLoaded {
+  const _$SubredditInfoLoaded(this.info);
 
   @override
   final SubredditInfo info;
@@ -513,7 +512,7 @@ class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _SubredditInfoLoaded &&
+        (other is SubredditInfoLoaded &&
             (identical(other.info, info) ||
                 const DeepCollectionEquality().equals(other.info, info)));
   }
@@ -524,9 +523,8 @@ class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
 
   @JsonKey(ignore: true)
   @override
-  _$SubredditInfoLoadedCopyWith<_SubredditInfoLoaded> get copyWith =>
-      __$SubredditInfoLoadedCopyWithImpl<_SubredditInfoLoaded>(
-          this, _$identity);
+  $SubredditInfoLoadedCopyWith<SubredditInfoLoaded> get copyWith =>
+      _$SubredditInfoLoadedCopyWithImpl<SubredditInfoLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -561,13 +559,13 @@ class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return subredditInfoLoaded(this);
   }
@@ -575,13 +573,13 @@ class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (subredditInfoLoaded != null) {
@@ -591,40 +589,38 @@ class _$_SubredditInfoLoaded implements _SubredditInfoLoaded {
   }
 }
 
-abstract class _SubredditInfoLoaded implements SubredditEvent {
-  const factory _SubredditInfoLoaded(SubredditInfo info) =
-      _$_SubredditInfoLoaded;
+abstract class SubredditInfoLoaded implements SubredditEvent {
+  const factory SubredditInfoLoaded(SubredditInfo info) = _$SubredditInfoLoaded;
 
   SubredditInfo get info => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$SubredditInfoLoadedCopyWith<_SubredditInfoLoaded> get copyWith =>
+  $SubredditInfoLoadedCopyWith<SubredditInfoLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$PostsLoadedCopyWith<$Res> {
-  factory _$PostsLoadedCopyWith(
-          _PostsLoaded value, $Res Function(_PostsLoaded) then) =
-      __$PostsLoadedCopyWithImpl<$Res>;
+abstract class $PostsLoadedCopyWith<$Res> {
+  factory $PostsLoadedCopyWith(
+          PostsLoaded value, $Res Function(PostsLoaded) then) =
+      _$PostsLoadedCopyWithImpl<$Res>;
   $Res call({List<PostEntry> posts});
 }
 
 /// @nodoc
-class __$PostsLoadedCopyWithImpl<$Res>
-    extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$PostsLoadedCopyWith<$Res> {
-  __$PostsLoadedCopyWithImpl(
-      _PostsLoaded _value, $Res Function(_PostsLoaded) _then)
-      : super(_value, (v) => _then(v as _PostsLoaded));
+class _$PostsLoadedCopyWithImpl<$Res> extends _$SubredditEventCopyWithImpl<$Res>
+    implements $PostsLoadedCopyWith<$Res> {
+  _$PostsLoadedCopyWithImpl(
+      PostsLoaded _value, $Res Function(PostsLoaded) _then)
+      : super(_value, (v) => _then(v as PostsLoaded));
 
   @override
-  _PostsLoaded get _value => super._value as _PostsLoaded;
+  PostsLoaded get _value => super._value as PostsLoaded;
 
   @override
   $Res call({
     Object? posts = freezed,
   }) {
-    return _then(_PostsLoaded(
+    return _then(PostsLoaded(
       posts == freezed
           ? _value.posts
           : posts // ignore: cast_nullable_to_non_nullable
@@ -635,8 +631,8 @@ class __$PostsLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostsLoaded implements _PostsLoaded {
-  const _$_PostsLoaded(this.posts);
+class _$PostsLoaded implements PostsLoaded {
+  const _$PostsLoaded(this.posts);
 
   @override
   final List<PostEntry> posts;
@@ -649,7 +645,7 @@ class _$_PostsLoaded implements _PostsLoaded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PostsLoaded &&
+        (other is PostsLoaded &&
             (identical(other.posts, posts) ||
                 const DeepCollectionEquality().equals(other.posts, posts)));
   }
@@ -660,8 +656,8 @@ class _$_PostsLoaded implements _PostsLoaded {
 
   @JsonKey(ignore: true)
   @override
-  _$PostsLoadedCopyWith<_PostsLoaded> get copyWith =>
-      __$PostsLoadedCopyWithImpl<_PostsLoaded>(this, _$identity);
+  $PostsLoadedCopyWith<PostsLoaded> get copyWith =>
+      _$PostsLoadedCopyWithImpl<PostsLoaded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -696,13 +692,13 @@ class _$_PostsLoaded implements _PostsLoaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return postsLoaded(this);
   }
@@ -710,13 +706,13 @@ class _$_PostsLoaded implements _PostsLoaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (postsLoaded != null) {
@@ -726,38 +722,38 @@ class _$_PostsLoaded implements _PostsLoaded {
   }
 }
 
-abstract class _PostsLoaded implements SubredditEvent {
-  const factory _PostsLoaded(List<PostEntry> posts) = _$_PostsLoaded;
+abstract class PostsLoaded implements SubredditEvent {
+  const factory PostsLoaded(List<PostEntry> posts) = _$PostsLoaded;
 
   List<PostEntry> get posts => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PostsLoadedCopyWith<_PostsLoaded> get copyWith =>
+  $PostsLoadedCopyWith<PostsLoaded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$FailedCopyWith<$Res> {
-  factory _$FailedCopyWith(_Failed value, $Res Function(_Failed) then) =
-      __$FailedCopyWithImpl<$Res>;
+abstract class $FailedCopyWith<$Res> {
+  factory $FailedCopyWith(Failed value, $Res Function(Failed) then) =
+      _$FailedCopyWithImpl<$Res>;
   $Res call({ValueFailure<String> failure});
 
   $ValueFailureCopyWith<String, $Res> get failure;
 }
 
 /// @nodoc
-class __$FailedCopyWithImpl<$Res> extends _$SubredditEventCopyWithImpl<$Res>
-    implements _$FailedCopyWith<$Res> {
-  __$FailedCopyWithImpl(_Failed _value, $Res Function(_Failed) _then)
-      : super(_value, (v) => _then(v as _Failed));
+class _$FailedCopyWithImpl<$Res> extends _$SubredditEventCopyWithImpl<$Res>
+    implements $FailedCopyWith<$Res> {
+  _$FailedCopyWithImpl(Failed _value, $Res Function(Failed) _then)
+      : super(_value, (v) => _then(v as Failed));
 
   @override
-  _Failed get _value => super._value as _Failed;
+  Failed get _value => super._value as Failed;
 
   @override
   $Res call({
     Object? failure = freezed,
   }) {
-    return _then(_Failed(
+    return _then(Failed(
       failure == freezed
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
@@ -775,8 +771,8 @@ class __$FailedCopyWithImpl<$Res> extends _$SubredditEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Failed implements _Failed {
-  const _$_Failed(this.failure);
+class _$Failed implements Failed {
+  const _$Failed(this.failure);
 
   @override
   final ValueFailure<String> failure;
@@ -789,7 +785,7 @@ class _$_Failed implements _Failed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Failed &&
+        (other is Failed &&
             (identical(other.failure, failure) ||
                 const DeepCollectionEquality().equals(other.failure, failure)));
   }
@@ -800,8 +796,8 @@ class _$_Failed implements _Failed {
 
   @JsonKey(ignore: true)
   @override
-  _$FailedCopyWith<_Failed> get copyWith =>
-      __$FailedCopyWithImpl<_Failed>(this, _$identity);
+  $FailedCopyWith<Failed> get copyWith =>
+      _$FailedCopyWithImpl<Failed>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -836,13 +832,13 @@ class _$_Failed implements _Failed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_CardDisplayChanged value) cardDisplayChanged,
-    required TResult Function(_FeedFetchingStarted value) feedFetchingStarted,
-    required TResult Function(_SubredditInfoFetchingStarted value)
+    required TResult Function(CardDisplayChanged value) cardDisplayChanged,
+    required TResult Function(FeedFetchingStarted value) feedFetchingStarted,
+    required TResult Function(SubredditInfoFetchingStarted value)
         subredditInfoFetchingStarted,
-    required TResult Function(_SubredditInfoLoaded value) subredditInfoLoaded,
-    required TResult Function(_PostsLoaded value) postsLoaded,
-    required TResult Function(_Failed value) failed,
+    required TResult Function(SubredditInfoLoaded value) subredditInfoLoaded,
+    required TResult Function(PostsLoaded value) postsLoaded,
+    required TResult Function(Failed value) failed,
   }) {
     return failed(this);
   }
@@ -850,13 +846,13 @@ class _$_Failed implements _Failed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_CardDisplayChanged value)? cardDisplayChanged,
-    TResult Function(_FeedFetchingStarted value)? feedFetchingStarted,
-    TResult Function(_SubredditInfoFetchingStarted value)?
+    TResult Function(CardDisplayChanged value)? cardDisplayChanged,
+    TResult Function(FeedFetchingStarted value)? feedFetchingStarted,
+    TResult Function(SubredditInfoFetchingStarted value)?
         subredditInfoFetchingStarted,
-    TResult Function(_SubredditInfoLoaded value)? subredditInfoLoaded,
-    TResult Function(_PostsLoaded value)? postsLoaded,
-    TResult Function(_Failed value)? failed,
+    TResult Function(SubredditInfoLoaded value)? subredditInfoLoaded,
+    TResult Function(PostsLoaded value)? postsLoaded,
+    TResult Function(Failed value)? failed,
     required TResult orElse(),
   }) {
     if (failed != null) {
@@ -866,12 +862,12 @@ class _$_Failed implements _Failed {
   }
 }
 
-abstract class _Failed implements SubredditEvent {
-  const factory _Failed(ValueFailure<String> failure) = _$_Failed;
+abstract class Failed implements SubredditEvent {
+  const factory Failed(ValueFailure<String> failure) = _$Failed;
 
   ValueFailure<String> get failure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$FailedCopyWith<_Failed> get copyWith => throw _privateConstructorUsedError;
+  $FailedCopyWith<Failed> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

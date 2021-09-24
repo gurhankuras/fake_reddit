@@ -16,23 +16,23 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$FeedEventTearOff {
   const _$FeedEventTearOff();
 
-  _RefreshRequested refreshRequested() {
-    return const _RefreshRequested();
+  RefreshRequested refreshRequested() {
+    return const RefreshRequested();
   }
 
-  _LoadMoreRequested loadMoreRequested() {
-    return const _LoadMoreRequested();
+  LoadMoreRequested loadMoreRequested() {
+    return const LoadMoreRequested();
   }
 
-  _FetchingStarted fetchingStarted() {
-    return const _FetchingStarted();
+  FetchingStarted fetchingStarted() {
+    return const FetchingStarted();
   }
 
-  _PostVisited postVisited(
+  PostVisited postVisited(
       {required String postId,
       required int commentCount,
       required int upvotes}) {
-    return _PostVisited(
+    return PostVisited(
       postId: postId,
       commentCount: commentCount,
       upvotes: upvotes,
@@ -65,18 +65,18 @@ mixin _$FeedEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LoadMoreRequested value) loadMoreRequested,
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_PostVisited value) postVisited,
+    required TResult Function(RefreshRequested value) refreshRequested,
+    required TResult Function(LoadMoreRequested value) loadMoreRequested,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(PostVisited value) postVisited,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LoadMoreRequested value)? loadMoreRequested,
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_PostVisited value)? postVisited,
+    TResult Function(RefreshRequested value)? refreshRequested,
+    TResult Function(LoadMoreRequested value)? loadMoreRequested,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(PostVisited value)? postVisited,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,28 +98,27 @@ class _$FeedEventCopyWithImpl<$Res> implements $FeedEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$RefreshRequestedCopyWith<$Res> {
-  factory _$RefreshRequestedCopyWith(
-          _RefreshRequested value, $Res Function(_RefreshRequested) then) =
-      __$RefreshRequestedCopyWithImpl<$Res>;
+abstract class $RefreshRequestedCopyWith<$Res> {
+  factory $RefreshRequestedCopyWith(
+          RefreshRequested value, $Res Function(RefreshRequested) then) =
+      _$RefreshRequestedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$RefreshRequestedCopyWithImpl<$Res>
-    extends _$FeedEventCopyWithImpl<$Res>
-    implements _$RefreshRequestedCopyWith<$Res> {
-  __$RefreshRequestedCopyWithImpl(
-      _RefreshRequested _value, $Res Function(_RefreshRequested) _then)
-      : super(_value, (v) => _then(v as _RefreshRequested));
+class _$RefreshRequestedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
+    implements $RefreshRequestedCopyWith<$Res> {
+  _$RefreshRequestedCopyWithImpl(
+      RefreshRequested _value, $Res Function(RefreshRequested) _then)
+      : super(_value, (v) => _then(v as RefreshRequested));
 
   @override
-  _RefreshRequested get _value => super._value as _RefreshRequested;
+  RefreshRequested get _value => super._value as RefreshRequested;
 }
 
 /// @nodoc
 
-class _$_RefreshRequested implements _RefreshRequested {
-  const _$_RefreshRequested();
+class _$RefreshRequested implements RefreshRequested {
+  const _$RefreshRequested();
 
   @override
   String toString() {
@@ -128,7 +127,7 @@ class _$_RefreshRequested implements _RefreshRequested {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _RefreshRequested);
+    return identical(this, other) || (other is RefreshRequested);
   }
 
   @override
@@ -164,10 +163,10 @@ class _$_RefreshRequested implements _RefreshRequested {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LoadMoreRequested value) loadMoreRequested,
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_PostVisited value) postVisited,
+    required TResult Function(RefreshRequested value) refreshRequested,
+    required TResult Function(LoadMoreRequested value) loadMoreRequested,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(PostVisited value) postVisited,
   }) {
     return refreshRequested(this);
   }
@@ -175,10 +174,10 @@ class _$_RefreshRequested implements _RefreshRequested {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LoadMoreRequested value)? loadMoreRequested,
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_PostVisited value)? postVisited,
+    TResult Function(RefreshRequested value)? refreshRequested,
+    TResult Function(LoadMoreRequested value)? loadMoreRequested,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (refreshRequested != null) {
@@ -188,33 +187,33 @@ class _$_RefreshRequested implements _RefreshRequested {
   }
 }
 
-abstract class _RefreshRequested implements FeedEvent {
-  const factory _RefreshRequested() = _$_RefreshRequested;
+abstract class RefreshRequested implements FeedEvent {
+  const factory RefreshRequested() = _$RefreshRequested;
 }
 
 /// @nodoc
-abstract class _$LoadMoreRequestedCopyWith<$Res> {
-  factory _$LoadMoreRequestedCopyWith(
-          _LoadMoreRequested value, $Res Function(_LoadMoreRequested) then) =
-      __$LoadMoreRequestedCopyWithImpl<$Res>;
+abstract class $LoadMoreRequestedCopyWith<$Res> {
+  factory $LoadMoreRequestedCopyWith(
+          LoadMoreRequested value, $Res Function(LoadMoreRequested) then) =
+      _$LoadMoreRequestedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$LoadMoreRequestedCopyWithImpl<$Res>
+class _$LoadMoreRequestedCopyWithImpl<$Res>
     extends _$FeedEventCopyWithImpl<$Res>
-    implements _$LoadMoreRequestedCopyWith<$Res> {
-  __$LoadMoreRequestedCopyWithImpl(
-      _LoadMoreRequested _value, $Res Function(_LoadMoreRequested) _then)
-      : super(_value, (v) => _then(v as _LoadMoreRequested));
+    implements $LoadMoreRequestedCopyWith<$Res> {
+  _$LoadMoreRequestedCopyWithImpl(
+      LoadMoreRequested _value, $Res Function(LoadMoreRequested) _then)
+      : super(_value, (v) => _then(v as LoadMoreRequested));
 
   @override
-  _LoadMoreRequested get _value => super._value as _LoadMoreRequested;
+  LoadMoreRequested get _value => super._value as LoadMoreRequested;
 }
 
 /// @nodoc
 
-class _$_LoadMoreRequested implements _LoadMoreRequested {
-  const _$_LoadMoreRequested();
+class _$LoadMoreRequested implements LoadMoreRequested {
+  const _$LoadMoreRequested();
 
   @override
   String toString() {
@@ -223,7 +222,7 @@ class _$_LoadMoreRequested implements _LoadMoreRequested {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadMoreRequested);
+    return identical(this, other) || (other is LoadMoreRequested);
   }
 
   @override
@@ -259,10 +258,10 @@ class _$_LoadMoreRequested implements _LoadMoreRequested {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LoadMoreRequested value) loadMoreRequested,
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_PostVisited value) postVisited,
+    required TResult Function(RefreshRequested value) refreshRequested,
+    required TResult Function(LoadMoreRequested value) loadMoreRequested,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(PostVisited value) postVisited,
   }) {
     return loadMoreRequested(this);
   }
@@ -270,10 +269,10 @@ class _$_LoadMoreRequested implements _LoadMoreRequested {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LoadMoreRequested value)? loadMoreRequested,
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_PostVisited value)? postVisited,
+    TResult Function(RefreshRequested value)? refreshRequested,
+    TResult Function(LoadMoreRequested value)? loadMoreRequested,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (loadMoreRequested != null) {
@@ -283,32 +282,32 @@ class _$_LoadMoreRequested implements _LoadMoreRequested {
   }
 }
 
-abstract class _LoadMoreRequested implements FeedEvent {
-  const factory _LoadMoreRequested() = _$_LoadMoreRequested;
+abstract class LoadMoreRequested implements FeedEvent {
+  const factory LoadMoreRequested() = _$LoadMoreRequested;
 }
 
 /// @nodoc
-abstract class _$FetchingStartedCopyWith<$Res> {
-  factory _$FetchingStartedCopyWith(
-          _FetchingStarted value, $Res Function(_FetchingStarted) then) =
-      __$FetchingStartedCopyWithImpl<$Res>;
+abstract class $FetchingStartedCopyWith<$Res> {
+  factory $FetchingStartedCopyWith(
+          FetchingStarted value, $Res Function(FetchingStarted) then) =
+      _$FetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$FetchingStartedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
-    implements _$FetchingStartedCopyWith<$Res> {
-  __$FetchingStartedCopyWithImpl(
-      _FetchingStarted _value, $Res Function(_FetchingStarted) _then)
-      : super(_value, (v) => _then(v as _FetchingStarted));
+class _$FetchingStartedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
+    implements $FetchingStartedCopyWith<$Res> {
+  _$FetchingStartedCopyWithImpl(
+      FetchingStarted _value, $Res Function(FetchingStarted) _then)
+      : super(_value, (v) => _then(v as FetchingStarted));
 
   @override
-  _FetchingStarted get _value => super._value as _FetchingStarted;
+  FetchingStarted get _value => super._value as FetchingStarted;
 }
 
 /// @nodoc
 
-class _$_FetchingStarted implements _FetchingStarted {
-  const _$_FetchingStarted();
+class _$FetchingStarted implements FetchingStarted {
+  const _$FetchingStarted();
 
   @override
   String toString() {
@@ -317,7 +316,7 @@ class _$_FetchingStarted implements _FetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _FetchingStarted);
+    return identical(this, other) || (other is FetchingStarted);
   }
 
   @override
@@ -353,10 +352,10 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LoadMoreRequested value) loadMoreRequested,
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_PostVisited value) postVisited,
+    required TResult Function(RefreshRequested value) refreshRequested,
+    required TResult Function(LoadMoreRequested value) loadMoreRequested,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(PostVisited value) postVisited,
   }) {
     return fetchingStarted(this);
   }
@@ -364,10 +363,10 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LoadMoreRequested value)? loadMoreRequested,
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_PostVisited value)? postVisited,
+    TResult Function(RefreshRequested value)? refreshRequested,
+    TResult Function(LoadMoreRequested value)? loadMoreRequested,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -377,27 +376,27 @@ class _$_FetchingStarted implements _FetchingStarted {
   }
 }
 
-abstract class _FetchingStarted implements FeedEvent {
-  const factory _FetchingStarted() = _$_FetchingStarted;
+abstract class FetchingStarted implements FeedEvent {
+  const factory FetchingStarted() = _$FetchingStarted;
 }
 
 /// @nodoc
-abstract class _$PostVisitedCopyWith<$Res> {
-  factory _$PostVisitedCopyWith(
-          _PostVisited value, $Res Function(_PostVisited) then) =
-      __$PostVisitedCopyWithImpl<$Res>;
+abstract class $PostVisitedCopyWith<$Res> {
+  factory $PostVisitedCopyWith(
+          PostVisited value, $Res Function(PostVisited) then) =
+      _$PostVisitedCopyWithImpl<$Res>;
   $Res call({String postId, int commentCount, int upvotes});
 }
 
 /// @nodoc
-class __$PostVisitedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
-    implements _$PostVisitedCopyWith<$Res> {
-  __$PostVisitedCopyWithImpl(
-      _PostVisited _value, $Res Function(_PostVisited) _then)
-      : super(_value, (v) => _then(v as _PostVisited));
+class _$PostVisitedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
+    implements $PostVisitedCopyWith<$Res> {
+  _$PostVisitedCopyWithImpl(
+      PostVisited _value, $Res Function(PostVisited) _then)
+      : super(_value, (v) => _then(v as PostVisited));
 
   @override
-  _PostVisited get _value => super._value as _PostVisited;
+  PostVisited get _value => super._value as PostVisited;
 
   @override
   $Res call({
@@ -405,7 +404,7 @@ class __$PostVisitedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
     Object? commentCount = freezed,
     Object? upvotes = freezed,
   }) {
-    return _then(_PostVisited(
+    return _then(PostVisited(
       postId: postId == freezed
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -424,8 +423,8 @@ class __$PostVisitedCopyWithImpl<$Res> extends _$FeedEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostVisited implements _PostVisited {
-  const _$_PostVisited(
+class _$PostVisited implements PostVisited {
+  const _$PostVisited(
       {required this.postId,
       required this.commentCount,
       required this.upvotes});
@@ -445,7 +444,7 @@ class _$_PostVisited implements _PostVisited {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PostVisited &&
+        (other is PostVisited &&
             (identical(other.postId, postId) ||
                 const DeepCollectionEquality().equals(other.postId, postId)) &&
             (identical(other.commentCount, commentCount) ||
@@ -464,8 +463,8 @@ class _$_PostVisited implements _PostVisited {
 
   @JsonKey(ignore: true)
   @override
-  _$PostVisitedCopyWith<_PostVisited> get copyWith =>
-      __$PostVisitedCopyWithImpl<_PostVisited>(this, _$identity);
+  $PostVisitedCopyWith<PostVisited> get copyWith =>
+      _$PostVisitedCopyWithImpl<PostVisited>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -497,10 +496,10 @@ class _$_PostVisited implements _PostVisited {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_RefreshRequested value) refreshRequested,
-    required TResult Function(_LoadMoreRequested value) loadMoreRequested,
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_PostVisited value) postVisited,
+    required TResult Function(RefreshRequested value) refreshRequested,
+    required TResult Function(LoadMoreRequested value) loadMoreRequested,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(PostVisited value) postVisited,
   }) {
     return postVisited(this);
   }
@@ -508,10 +507,10 @@ class _$_PostVisited implements _PostVisited {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_RefreshRequested value)? refreshRequested,
-    TResult Function(_LoadMoreRequested value)? loadMoreRequested,
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_PostVisited value)? postVisited,
+    TResult Function(RefreshRequested value)? refreshRequested,
+    TResult Function(LoadMoreRequested value)? loadMoreRequested,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(PostVisited value)? postVisited,
     required TResult orElse(),
   }) {
     if (postVisited != null) {
@@ -521,17 +520,17 @@ class _$_PostVisited implements _PostVisited {
   }
 }
 
-abstract class _PostVisited implements FeedEvent {
-  const factory _PostVisited(
+abstract class PostVisited implements FeedEvent {
+  const factory PostVisited(
       {required String postId,
       required int commentCount,
-      required int upvotes}) = _$_PostVisited;
+      required int upvotes}) = _$PostVisited;
 
   String get postId => throw _privateConstructorUsedError;
   int get commentCount => throw _privateConstructorUsedError;
   int get upvotes => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PostVisitedCopyWith<_PostVisited> get copyWith =>
+  $PostVisitedCopyWith<PostVisited> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -3,15 +3,14 @@ part of 'subreddit_bloc.dart';
 @freezed
 class SubredditEvent with _$SubredditEvent {
   const factory SubredditEvent.cardDisplayChanged(PostDisplayType displayType) =
-      _CardDisplayChanged;
-  const factory SubredditEvent.feedFetchingStarted() = _FeedFetchingStarted;
+      CardDisplayChanged;
+  const factory SubredditEvent.feedFetchingStarted() = FeedFetchingStarted;
   const factory SubredditEvent.subredditInfoFetchingStarted() =
-      _SubredditInfoFetchingStarted;
+      SubredditInfoFetchingStarted;
   const factory SubredditEvent.subredditInfoLoaded(SubredditInfo info) =
-      _SubredditInfoLoaded;
-  const factory SubredditEvent.postsLoaded(List<PostEntry> posts) =
-      _PostsLoaded;
-  const factory SubredditEvent.failed(ValueFailure<String> failure) = _Failed;
+      SubredditInfoLoaded;
+  const factory SubredditEvent.postsLoaded(List<PostEntry> posts) = PostsLoaded;
+  const factory SubredditEvent.failed(ValueFailure<String> failure) = Failed;
 
   // const factory SubredditEvent.feedFetchingStarted() = _FeedFetchingStarted;
 

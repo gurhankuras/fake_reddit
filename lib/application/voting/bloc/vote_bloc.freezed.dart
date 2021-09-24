@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$VoteEventTearOff {
   const _$VoteEventTearOff();
 
-  _Upvoted upvoted() {
-    return const _Upvoted();
+  Upvoted upvoted() {
+    return const Upvoted();
   }
 
-  _Downvoted downvoted() {
-    return const _Downvoted();
+  Downvoted downvoted() {
+    return const Downvoted();
   }
 }
 
@@ -45,14 +45,14 @@ mixin _$VoteEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Upvoted value) upvoted,
-    required TResult Function(_Downvoted value) downvoted,
+    required TResult Function(Upvoted value) upvoted,
+    required TResult Function(Downvoted value) downvoted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Upvoted value)? upvoted,
-    TResult Function(_Downvoted value)? downvoted,
+    TResult Function(Upvoted value)? upvoted,
+    TResult Function(Downvoted value)? downvoted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -74,25 +74,25 @@ class _$VoteEventCopyWithImpl<$Res> implements $VoteEventCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$UpvotedCopyWith<$Res> {
-  factory _$UpvotedCopyWith(_Upvoted value, $Res Function(_Upvoted) then) =
-      __$UpvotedCopyWithImpl<$Res>;
+abstract class $UpvotedCopyWith<$Res> {
+  factory $UpvotedCopyWith(Upvoted value, $Res Function(Upvoted) then) =
+      _$UpvotedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$UpvotedCopyWithImpl<$Res> extends _$VoteEventCopyWithImpl<$Res>
-    implements _$UpvotedCopyWith<$Res> {
-  __$UpvotedCopyWithImpl(_Upvoted _value, $Res Function(_Upvoted) _then)
-      : super(_value, (v) => _then(v as _Upvoted));
+class _$UpvotedCopyWithImpl<$Res> extends _$VoteEventCopyWithImpl<$Res>
+    implements $UpvotedCopyWith<$Res> {
+  _$UpvotedCopyWithImpl(Upvoted _value, $Res Function(Upvoted) _then)
+      : super(_value, (v) => _then(v as Upvoted));
 
   @override
-  _Upvoted get _value => super._value as _Upvoted;
+  Upvoted get _value => super._value as Upvoted;
 }
 
 /// @nodoc
 
-class _$_Upvoted implements _Upvoted {
-  const _$_Upvoted();
+class _$Upvoted implements Upvoted {
+  const _$Upvoted();
 
   @override
   String toString() {
@@ -101,7 +101,7 @@ class _$_Upvoted implements _Upvoted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Upvoted);
+    return identical(this, other) || (other is Upvoted);
   }
 
   @override
@@ -132,8 +132,8 @@ class _$_Upvoted implements _Upvoted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Upvoted value) upvoted,
-    required TResult Function(_Downvoted value) downvoted,
+    required TResult Function(Upvoted value) upvoted,
+    required TResult Function(Downvoted value) downvoted,
   }) {
     return upvoted(this);
   }
@@ -141,8 +141,8 @@ class _$_Upvoted implements _Upvoted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Upvoted value)? upvoted,
-    TResult Function(_Downvoted value)? downvoted,
+    TResult Function(Upvoted value)? upvoted,
+    TResult Function(Downvoted value)? downvoted,
     required TResult orElse(),
   }) {
     if (upvoted != null) {
@@ -152,31 +152,30 @@ class _$_Upvoted implements _Upvoted {
   }
 }
 
-abstract class _Upvoted implements VoteEvent {
-  const factory _Upvoted() = _$_Upvoted;
+abstract class Upvoted implements VoteEvent {
+  const factory Upvoted() = _$Upvoted;
 }
 
 /// @nodoc
-abstract class _$DownvotedCopyWith<$Res> {
-  factory _$DownvotedCopyWith(
-          _Downvoted value, $Res Function(_Downvoted) then) =
-      __$DownvotedCopyWithImpl<$Res>;
+abstract class $DownvotedCopyWith<$Res> {
+  factory $DownvotedCopyWith(Downvoted value, $Res Function(Downvoted) then) =
+      _$DownvotedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$DownvotedCopyWithImpl<$Res> extends _$VoteEventCopyWithImpl<$Res>
-    implements _$DownvotedCopyWith<$Res> {
-  __$DownvotedCopyWithImpl(_Downvoted _value, $Res Function(_Downvoted) _then)
-      : super(_value, (v) => _then(v as _Downvoted));
+class _$DownvotedCopyWithImpl<$Res> extends _$VoteEventCopyWithImpl<$Res>
+    implements $DownvotedCopyWith<$Res> {
+  _$DownvotedCopyWithImpl(Downvoted _value, $Res Function(Downvoted) _then)
+      : super(_value, (v) => _then(v as Downvoted));
 
   @override
-  _Downvoted get _value => super._value as _Downvoted;
+  Downvoted get _value => super._value as Downvoted;
 }
 
 /// @nodoc
 
-class _$_Downvoted implements _Downvoted {
-  const _$_Downvoted();
+class _$Downvoted implements Downvoted {
+  const _$Downvoted();
 
   @override
   String toString() {
@@ -185,7 +184,7 @@ class _$_Downvoted implements _Downvoted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Downvoted);
+    return identical(this, other) || (other is Downvoted);
   }
 
   @override
@@ -216,8 +215,8 @@ class _$_Downvoted implements _Downvoted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Upvoted value) upvoted,
-    required TResult Function(_Downvoted value) downvoted,
+    required TResult Function(Upvoted value) upvoted,
+    required TResult Function(Downvoted value) downvoted,
   }) {
     return downvoted(this);
   }
@@ -225,8 +224,8 @@ class _$_Downvoted implements _Downvoted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Upvoted value)? upvoted,
-    TResult Function(_Downvoted value)? downvoted,
+    TResult Function(Upvoted value)? upvoted,
+    TResult Function(Downvoted value)? downvoted,
     required TResult orElse(),
   }) {
     if (downvoted != null) {
@@ -236,8 +235,8 @@ class _$_Downvoted implements _Downvoted {
   }
 }
 
-abstract class _Downvoted implements VoteEvent {
-  const factory _Downvoted() = _$_Downvoted;
+abstract class Downvoted implements VoteEvent {
+  const factory Downvoted() = _$Downvoted;
 }
 
 /// @nodoc

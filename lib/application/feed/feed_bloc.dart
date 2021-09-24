@@ -20,95 +20,102 @@ class FeedBloc extends Bloc<FeedEvent, FeedState> {
     required this.feedService,
   }) : super(FeedState.initial()) {
     logInit(FeedBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<FeedState> mapEventToState(
-    FeedEvent event,
-  ) async* {
-    yield* event.map(
-      refreshRequested: refreshRequestedHandler,
-      loadMoreRequested: loadMoreRequestedHandler,
-      fetchingStarted: fetchingStartedHandler,
-      postVisited: postVisitedHandler,
-    );
+  void registerEventHandlers() {
+    on<RefreshRequested>(_onRefreshRequested);
+    on<LoadMoreRequested>(_onLoadMoreRequested);
+    on<FetchingStarted>(_onFetchingStarted);
+    on<PostVisited>(_onPostVisited);
   }
 
-  Stream<FeedState> refreshRequestedHandler(_RefreshRequested e) async* {
-    yield state.copyWith(refreshLoading: true);
+  FutureOr<void> _onRefreshRequested(
+    RefreshRequested event,
+    Emitter<FeedState> emit,
+  ) async {
+    emit(state.copyWith(refreshLoading: true));
     final postsOrFailure =
         await feedService.getNewsFeed(page: 1, limit: postLimit);
-    yield* postsOrFailure.fold(
-      (l) async* {
-        yield state.copyWith(refreshLoading: false);
-      },
-      (posts) async* {
-        yield state.copyWith(
+    postsOrFailure.fold(
+      (l) => emit(
+        state.copyWith(refreshLoading: false),
+      ),
+      (posts) => emit(
+        state.copyWith(
           posts: posts,
           refreshLoading: false,
           page: 2,
           hasReachedMax: false,
-        );
-      },
+        ),
+      ),
     );
   }
 
-  Stream<FeedState> loadMoreRequestedHandler(
-    _LoadMoreRequested e,
-  ) async* {
-    yield state.copyWith(morePostLoading: true);
+  FutureOr<void> _onLoadMoreRequested(
+    LoadMoreRequested event,
+    Emitter<FeedState> emit,
+  ) async {
+    emit(state.copyWith(morePostLoading: true));
     final postsOrFailure =
         await feedService.getNewsFeed(page: state.page, limit: postLimit);
 
-    yield* postsOrFailure.fold(
-      (l) async* {
-        yield state.copyWith(morePostLoading: false);
-      },
-      (posts) async* {
-        if (posts.isEmpty) {
-          yield state.copyWith(morePostLoading: false, hasReachedMax: true);
-        } else {
-          yield state.copyWith(
-            posts: List.of(state.posts)..addAll(posts),
-            morePostLoading: false,
-            page: state.page + 1,
-          );
-        }
-      },
+    postsOrFailure.fold(
+      (l) => emit(state.copyWith(morePostLoading: false)),
+      (posts) => posts.isEmpty
+          ? emit(
+              state.copyWith(
+                morePostLoading: false,
+                hasReachedMax: true,
+              ),
+            )
+          : emit(
+              state.copyWith(
+                posts: List.of(state.posts)..addAll(posts),
+                morePostLoading: false,
+                page: state.page + 1,
+              ),
+            ),
     );
   }
 
-  Stream<FeedState> fetchingStartedHandler(_FetchingStarted e) async* {
-    yield state.copyWith(fetchingLoading: true);
+  FutureOr<void> _onFetchingStarted(
+    FetchingStarted event,
+    Emitter<FeedState> emit,
+  ) async {
+    emit(state.copyWith(fetchingLoading: true));
     final postsOrFailure =
         await feedService.getNewsFeed(page: state.page, limit: postLimit);
 
-    yield* postsOrFailure.fold(
-      (l) async* {
-        yield state.copyWith(fetchingLoading: false);
-      },
-      (posts) async* {
-        yield state.copyWith(
-          posts: List.of(state.posts)..addAll(posts),
-          fetchingLoading: false,
-          page: state.page + 1,
-        );
-      },
-    );
+    postsOrFailure.fold(
+        (l) => emit(state.copyWith(
+              fetchingLoading: false,
+            )),
+        (posts) => emit(
+              state.copyWith(
+                posts: List.of(state.posts)..addAll(posts),
+                fetchingLoading: false,
+                page: state.page + 1,
+              ),
+            ));
   }
 
-  Stream<FeedState> postVisitedHandler(_PostVisited e) async* {
-    final posts = state.posts.map((post) {
-      if (post.id == e.postId) {
-        return post.copyWith(
-          commentCount: e.commentCount,
-          upvotes: e.upvotes,
-          visited: true,
-        );
-      }
-      return post;
-    }).toList();
+  FutureOr<void> _onPostVisited(
+    PostVisited event,
+    Emitter<FeedState> emit,
+  ) async {
+    final posts = state.posts
+        .map(
+          (post) => post.id == event.postId
+              ? post.copyWith(
+                  commentCount: event.commentCount,
+                  upvotes: event.upvotes,
+                  visited: true,
+                )
+              : post,
+        )
+        .toList();
 
-    yield state.copyWith(posts: posts);
+    emit(state.copyWith(posts: posts));
   }
 }

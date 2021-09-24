@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$InboxActivitiesEventTearOff {
   const _$InboxActivitiesEventTearOff();
 
-  _FetchingStarted fetchingStarted() {
-    return const _FetchingStarted();
+  FetchingStarted fetchingStarted() {
+    return const FetchingStarted();
   }
 
-  _activityViewed activityViewed(String id) {
-    return _activityViewed(
+  ActivityViewed activityViewed(String id) {
+    return ActivityViewed(
       id,
     );
   }
@@ -47,14 +47,14 @@ mixin _$InboxActivitiesEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_activityViewed value) activityViewed,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(ActivityViewed value) activityViewed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_activityViewed value)? activityViewed,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(ActivityViewed value)? activityViewed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,28 +78,28 @@ class _$InboxActivitiesEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchingStartedCopyWith<$Res> {
-  factory _$FetchingStartedCopyWith(
-          _FetchingStarted value, $Res Function(_FetchingStarted) then) =
-      __$FetchingStartedCopyWithImpl<$Res>;
+abstract class $FetchingStartedCopyWith<$Res> {
+  factory $FetchingStartedCopyWith(
+          FetchingStarted value, $Res Function(FetchingStarted) then) =
+      _$FetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$FetchingStartedCopyWithImpl<$Res>
+class _$FetchingStartedCopyWithImpl<$Res>
     extends _$InboxActivitiesEventCopyWithImpl<$Res>
-    implements _$FetchingStartedCopyWith<$Res> {
-  __$FetchingStartedCopyWithImpl(
-      _FetchingStarted _value, $Res Function(_FetchingStarted) _then)
-      : super(_value, (v) => _then(v as _FetchingStarted));
+    implements $FetchingStartedCopyWith<$Res> {
+  _$FetchingStartedCopyWithImpl(
+      FetchingStarted _value, $Res Function(FetchingStarted) _then)
+      : super(_value, (v) => _then(v as FetchingStarted));
 
   @override
-  _FetchingStarted get _value => super._value as _FetchingStarted;
+  FetchingStarted get _value => super._value as FetchingStarted;
 }
 
 /// @nodoc
 
-class _$_FetchingStarted implements _FetchingStarted {
-  const _$_FetchingStarted();
+class _$FetchingStarted implements FetchingStarted {
+  const _$FetchingStarted();
 
   @override
   String toString() {
@@ -108,7 +108,7 @@ class _$_FetchingStarted implements _FetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _FetchingStarted);
+    return identical(this, other) || (other is FetchingStarted);
   }
 
   @override
@@ -139,8 +139,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_activityViewed value) activityViewed,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(ActivityViewed value) activityViewed,
   }) {
     return fetchingStarted(this);
   }
@@ -148,8 +148,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_activityViewed value)? activityViewed,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(ActivityViewed value)? activityViewed,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -159,34 +159,34 @@ class _$_FetchingStarted implements _FetchingStarted {
   }
 }
 
-abstract class _FetchingStarted implements InboxActivitiesEvent {
-  const factory _FetchingStarted() = _$_FetchingStarted;
+abstract class FetchingStarted implements InboxActivitiesEvent {
+  const factory FetchingStarted() = _$FetchingStarted;
 }
 
 /// @nodoc
-abstract class _$activityViewedCopyWith<$Res> {
-  factory _$activityViewedCopyWith(
-          _activityViewed value, $Res Function(_activityViewed) then) =
-      __$activityViewedCopyWithImpl<$Res>;
+abstract class $ActivityViewedCopyWith<$Res> {
+  factory $ActivityViewedCopyWith(
+          ActivityViewed value, $Res Function(ActivityViewed) then) =
+      _$ActivityViewedCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$activityViewedCopyWithImpl<$Res>
+class _$ActivityViewedCopyWithImpl<$Res>
     extends _$InboxActivitiesEventCopyWithImpl<$Res>
-    implements _$activityViewedCopyWith<$Res> {
-  __$activityViewedCopyWithImpl(
-      _activityViewed _value, $Res Function(_activityViewed) _then)
-      : super(_value, (v) => _then(v as _activityViewed));
+    implements $ActivityViewedCopyWith<$Res> {
+  _$ActivityViewedCopyWithImpl(
+      ActivityViewed _value, $Res Function(ActivityViewed) _then)
+      : super(_value, (v) => _then(v as ActivityViewed));
 
   @override
-  _activityViewed get _value => super._value as _activityViewed;
+  ActivityViewed get _value => super._value as ActivityViewed;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_activityViewed(
+    return _then(ActivityViewed(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$activityViewedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_activityViewed implements _activityViewed {
-  const _$_activityViewed(this.id);
+class _$ActivityViewed implements ActivityViewed {
+  const _$ActivityViewed(this.id);
 
   @override
   final String id;
@@ -211,7 +211,7 @@ class _$_activityViewed implements _activityViewed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _activityViewed &&
+        (other is ActivityViewed &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -222,8 +222,8 @@ class _$_activityViewed implements _activityViewed {
 
   @JsonKey(ignore: true)
   @override
-  _$activityViewedCopyWith<_activityViewed> get copyWith =>
-      __$activityViewedCopyWithImpl<_activityViewed>(this, _$identity);
+  $ActivityViewedCopyWith<ActivityViewed> get copyWith =>
+      _$ActivityViewedCopyWithImpl<ActivityViewed>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,8 +250,8 @@ class _$_activityViewed implements _activityViewed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_activityViewed value) activityViewed,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(ActivityViewed value) activityViewed,
   }) {
     return activityViewed(this);
   }
@@ -259,8 +259,8 @@ class _$_activityViewed implements _activityViewed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_activityViewed value)? activityViewed,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(ActivityViewed value)? activityViewed,
     required TResult orElse(),
   }) {
     if (activityViewed != null) {
@@ -270,12 +270,12 @@ class _$_activityViewed implements _activityViewed {
   }
 }
 
-abstract class _activityViewed implements InboxActivitiesEvent {
-  const factory _activityViewed(String id) = _$_activityViewed;
+abstract class ActivityViewed implements InboxActivitiesEvent {
+  const factory ActivityViewed(String id) = _$ActivityViewed;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$activityViewedCopyWith<_activityViewed> get copyWith =>
+  $ActivityViewedCopyWith<ActivityViewed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

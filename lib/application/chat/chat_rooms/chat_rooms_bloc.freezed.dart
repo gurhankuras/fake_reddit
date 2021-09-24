@@ -16,12 +16,12 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ChatRoomsEventTearOff {
   const _$ChatRoomsEventTearOff();
 
-  _FetchingStarted fetchingStarted() {
-    return const _FetchingStarted();
+  FetchingStarted fetchingStarted() {
+    return const FetchingStarted();
   }
 
-  _NewMessageReceived newMessageReceived(ChatMessageDTO message) {
-    return _NewMessageReceived(
+  NewMessageReceived newMessageReceived(ChatMessageDTO message) {
+    return NewMessageReceived(
       message,
     );
   }
@@ -47,14 +47,14 @@ mixin _$ChatRoomsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(NewMessageReceived value) newMessageReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(NewMessageReceived value)? newMessageReceived,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,28 +78,28 @@ class _$ChatRoomsEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$FetchingStartedCopyWith<$Res> {
-  factory _$FetchingStartedCopyWith(
-          _FetchingStarted value, $Res Function(_FetchingStarted) then) =
-      __$FetchingStartedCopyWithImpl<$Res>;
+abstract class $FetchingStartedCopyWith<$Res> {
+  factory $FetchingStartedCopyWith(
+          FetchingStarted value, $Res Function(FetchingStarted) then) =
+      _$FetchingStartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$FetchingStartedCopyWithImpl<$Res>
+class _$FetchingStartedCopyWithImpl<$Res>
     extends _$ChatRoomsEventCopyWithImpl<$Res>
-    implements _$FetchingStartedCopyWith<$Res> {
-  __$FetchingStartedCopyWithImpl(
-      _FetchingStarted _value, $Res Function(_FetchingStarted) _then)
-      : super(_value, (v) => _then(v as _FetchingStarted));
+    implements $FetchingStartedCopyWith<$Res> {
+  _$FetchingStartedCopyWithImpl(
+      FetchingStarted _value, $Res Function(FetchingStarted) _then)
+      : super(_value, (v) => _then(v as FetchingStarted));
 
   @override
-  _FetchingStarted get _value => super._value as _FetchingStarted;
+  FetchingStarted get _value => super._value as FetchingStarted;
 }
 
 /// @nodoc
 
-class _$_FetchingStarted implements _FetchingStarted {
-  const _$_FetchingStarted();
+class _$FetchingStarted implements FetchingStarted {
+  const _$FetchingStarted();
 
   @override
   String toString() {
@@ -108,7 +108,7 @@ class _$_FetchingStarted implements _FetchingStarted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _FetchingStarted);
+    return identical(this, other) || (other is FetchingStarted);
   }
 
   @override
@@ -139,8 +139,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(NewMessageReceived value) newMessageReceived,
   }) {
     return fetchingStarted(this);
   }
@@ -148,8 +148,8 @@ class _$_FetchingStarted implements _FetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(NewMessageReceived value)? newMessageReceived,
     required TResult orElse(),
   }) {
     if (fetchingStarted != null) {
@@ -159,34 +159,34 @@ class _$_FetchingStarted implements _FetchingStarted {
   }
 }
 
-abstract class _FetchingStarted implements ChatRoomsEvent {
-  const factory _FetchingStarted() = _$_FetchingStarted;
+abstract class FetchingStarted implements ChatRoomsEvent {
+  const factory FetchingStarted() = _$FetchingStarted;
 }
 
 /// @nodoc
-abstract class _$NewMessageReceivedCopyWith<$Res> {
-  factory _$NewMessageReceivedCopyWith(
-          _NewMessageReceived value, $Res Function(_NewMessageReceived) then) =
-      __$NewMessageReceivedCopyWithImpl<$Res>;
+abstract class $NewMessageReceivedCopyWith<$Res> {
+  factory $NewMessageReceivedCopyWith(
+          NewMessageReceived value, $Res Function(NewMessageReceived) then) =
+      _$NewMessageReceivedCopyWithImpl<$Res>;
   $Res call({ChatMessageDTO message});
 }
 
 /// @nodoc
-class __$NewMessageReceivedCopyWithImpl<$Res>
+class _$NewMessageReceivedCopyWithImpl<$Res>
     extends _$ChatRoomsEventCopyWithImpl<$Res>
-    implements _$NewMessageReceivedCopyWith<$Res> {
-  __$NewMessageReceivedCopyWithImpl(
-      _NewMessageReceived _value, $Res Function(_NewMessageReceived) _then)
-      : super(_value, (v) => _then(v as _NewMessageReceived));
+    implements $NewMessageReceivedCopyWith<$Res> {
+  _$NewMessageReceivedCopyWithImpl(
+      NewMessageReceived _value, $Res Function(NewMessageReceived) _then)
+      : super(_value, (v) => _then(v as NewMessageReceived));
 
   @override
-  _NewMessageReceived get _value => super._value as _NewMessageReceived;
+  NewMessageReceived get _value => super._value as NewMessageReceived;
 
   @override
   $Res call({
     Object? message = freezed,
   }) {
-    return _then(_NewMessageReceived(
+    return _then(NewMessageReceived(
       message == freezed
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -197,8 +197,8 @@ class __$NewMessageReceivedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_NewMessageReceived implements _NewMessageReceived {
-  const _$_NewMessageReceived(this.message);
+class _$NewMessageReceived implements NewMessageReceived {
+  const _$NewMessageReceived(this.message);
 
   @override
   final ChatMessageDTO message;
@@ -211,7 +211,7 @@ class _$_NewMessageReceived implements _NewMessageReceived {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _NewMessageReceived &&
+        (other is NewMessageReceived &&
             (identical(other.message, message) ||
                 const DeepCollectionEquality().equals(other.message, message)));
   }
@@ -222,8 +222,8 @@ class _$_NewMessageReceived implements _NewMessageReceived {
 
   @JsonKey(ignore: true)
   @override
-  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
-      __$NewMessageReceivedCopyWithImpl<_NewMessageReceived>(this, _$identity);
+  $NewMessageReceivedCopyWith<NewMessageReceived> get copyWith =>
+      _$NewMessageReceivedCopyWithImpl<NewMessageReceived>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -250,8 +250,8 @@ class _$_NewMessageReceived implements _NewMessageReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_FetchingStarted value) fetchingStarted,
-    required TResult Function(_NewMessageReceived value) newMessageReceived,
+    required TResult Function(FetchingStarted value) fetchingStarted,
+    required TResult Function(NewMessageReceived value) newMessageReceived,
   }) {
     return newMessageReceived(this);
   }
@@ -259,8 +259,8 @@ class _$_NewMessageReceived implements _NewMessageReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_FetchingStarted value)? fetchingStarted,
-    TResult Function(_NewMessageReceived value)? newMessageReceived,
+    TResult Function(FetchingStarted value)? fetchingStarted,
+    TResult Function(NewMessageReceived value)? newMessageReceived,
     required TResult orElse(),
   }) {
     if (newMessageReceived != null) {
@@ -270,13 +270,13 @@ class _$_NewMessageReceived implements _NewMessageReceived {
   }
 }
 
-abstract class _NewMessageReceived implements ChatRoomsEvent {
-  const factory _NewMessageReceived(ChatMessageDTO message) =
-      _$_NewMessageReceived;
+abstract class NewMessageReceived implements ChatRoomsEvent {
+  const factory NewMessageReceived(ChatMessageDTO message) =
+      _$NewMessageReceived;
 
   ChatMessageDTO get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$NewMessageReceivedCopyWith<_NewMessageReceived> get copyWith =>
+  $NewMessageReceivedCopyWith<NewMessageReceived> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -6,28 +6,28 @@ class CreatePostEvent with _$CreatePostEvent {
     required int index,
     required bool autofocus,
     required Future<bool?> Function() showDialog,
-  }) = _PostTypeChanged;
-  const factory CreatePostEvent.titleChanged(String title) = _TitleChanged;
+  }) = PostTypeChanged;
+  const factory CreatePostEvent.titleChanged(String title) = TitleChanged;
   const factory CreatePostEvent.bodyTextChanged(String bodyText) =
-      _BodyTextChanged;
-  const factory CreatePostEvent.urlChanged(String url) = _UrlChanged;
+      BodyTextChanged;
+  const factory CreatePostEvent.urlChanged(String url) = UrlChanged;
   const factory CreatePostEvent.pollEndsPressed({
     required Future<int?> Function(Days) showDays,
     // required int day,
-  }) = _PollEndsPressed;
+  }) = PollEndsPressed;
   const factory CreatePostEvent.pollOptionAdded(String option) =
-      _PollOptionAdded;
+      PollOptionAdded;
   const factory CreatePostEvent.pollOptionEdited(int index, String option) =
-      _PollOptionEdited;
+      PollOptionEdited;
 
   const factory CreatePostEvent.pollOptionDeleted(int index) =
-      _PollOptionDeleted;
-  const factory CreatePostEvent.addImageClicked() = _AddImageClicked;
-  const factory CreatePostEvent.imageDeleted(String id) = _ImageDeleted;
+      PollOptionDeleted;
+  const factory CreatePostEvent.addImageClicked() = AddImageClicked;
+  const factory CreatePostEvent.imageDeleted(String id) = ImageDeleted;
   const factory CreatePostEvent.recoverLastDeletedImage() =
-      _RecoverLastDeletedImage;
+      RecoverLastDeletedImage;
 
-  const factory CreatePostEvent.feedPosted() = _dPostPosted;
+  const factory CreatePostEvent.feedPosted() = PostPosted;
 
   // const factory CreatePostEvent.linkdPostSelected() = _LinkdPostSelected;
   // const factory CreatePostEvent.imagedPostSelected() = _ImagedPostSelected;

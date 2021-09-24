@@ -12,40 +12,28 @@ part 'vote_state.dart';
 @injectable
 class VoteBloc extends Bloc<VoteEvent, VoteState> {
   VoteBloc(@factoryParam int? upvotes) : super(VoteState.unvoted(upvotes)) {
+    registerEventHandlers();
     logInit(VoteBloc);
   }
 
-  @override
-  Stream<VoteState> mapEventToState(
-    VoteEvent event,
-  ) async* {
-    yield* event.map(
-      upvoted: (e) async* {
-        yield* state.map(
-          unvoted: (s) async* {
-            yield VoteState.upvoted(state.upvotes! + 1);
-          },
-          downvoted: (s) async* {
-            yield VoteState.upvoted(state.upvotes! + 2);
-          },
-          upvoted: (s) async* {
-            yield VoteState.unvoted(state.upvotes! - 1);
-          },
-        );
-      },
-      downvoted: (e) async* {
-        yield* state.map(
-          unvoted: (s) async* {
-            yield VoteState.downvoted(state.upvotes! - 1);
-          },
-          downvoted: (s) async* {
-            yield VoteState.unvoted(state.upvotes! + 1);
-          },
-          upvoted: (s) async* {
-            yield VoteState.downvoted(state.upvotes! - 2);
-          },
-        );
-      },
+  void registerEventHandlers() {
+    on<Upvoted>(_onUpvoted);
+    on<Downvoted>(_onDownvoted);
+  }
+
+  FutureOr<void> _onUpvoted(Upvoted event, Emitter<VoteState> emit) {
+    state.map(
+      unvoted: (s) => emit(VoteState.upvoted(s.upvotes! + 1)),
+      downvoted: (s) => emit(VoteState.upvoted(s.upvotes! + 2)),
+      upvoted: (s) => emit(VoteState.unvoted(s.upvotes! - 1)),
+    );
+  }
+
+  FutureOr<void> _onDownvoted(Downvoted event, Emitter<VoteState> emit) {
+    state.map(
+      unvoted: (s) => emit(VoteState.downvoted(s.upvotes! - 1)),
+      downvoted: (s) => emit(VoteState.unvoted(s.upvotes! + 1)),
+      upvoted: (s) => emit(VoteState.downvoted(s.upvotes! - 2)),
     );
   }
 }

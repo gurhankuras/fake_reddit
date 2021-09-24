@@ -16,26 +16,26 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$NotificationEventTearOff {
   const _$NotificationEventTearOff();
 
-  _BadgesChanged badgesChanged(BadgeIndicators notifications) {
-    return _BadgesChanged(
+  BadgesChanged badgesChanged(BadgeIndicators notifications) {
+    return BadgesChanged(
       notifications,
     );
   }
 
-  _MessageRead messageRead(String id) {
-    return _MessageRead(
+  MessageRead messageRead(String id) {
+    return MessageRead(
       id,
     );
   }
 
-  _ActivityRead activityRead(String id) {
-    return _ActivityRead(
+  ActivityRead activityRead(String id) {
+    return ActivityRead(
       id,
     );
   }
 
-  _InboxMessageRead inboxMessageRead(String id) {
-    return _InboxMessageRead(
+  InboxMessageRead inboxMessageRead(String id) {
+    return InboxMessageRead(
       id,
     );
   }
@@ -65,18 +65,18 @@ mixin _$NotificationEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_BadgesChanged value) badgesChanged,
-    required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_ActivityRead value) activityRead,
-    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+    required TResult Function(BadgesChanged value) badgesChanged,
+    required TResult Function(MessageRead value) messageRead,
+    required TResult Function(ActivityRead value) activityRead,
+    required TResult Function(InboxMessageRead value) inboxMessageRead,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_BadgesChanged value)? badgesChanged,
-    TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_ActivityRead value)? activityRead,
-    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    TResult Function(BadgesChanged value)? badgesChanged,
+    TResult Function(MessageRead value)? messageRead,
+    TResult Function(ActivityRead value)? activityRead,
+    TResult Function(InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -100,29 +100,29 @@ class _$NotificationEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BadgesChangedCopyWith<$Res> {
-  factory _$BadgesChangedCopyWith(
-          _BadgesChanged value, $Res Function(_BadgesChanged) then) =
-      __$BadgesChangedCopyWithImpl<$Res>;
+abstract class $BadgesChangedCopyWith<$Res> {
+  factory $BadgesChangedCopyWith(
+          BadgesChanged value, $Res Function(BadgesChanged) then) =
+      _$BadgesChangedCopyWithImpl<$Res>;
   $Res call({BadgeIndicators notifications});
 }
 
 /// @nodoc
-class __$BadgesChangedCopyWithImpl<$Res>
+class _$BadgesChangedCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$BadgesChangedCopyWith<$Res> {
-  __$BadgesChangedCopyWithImpl(
-      _BadgesChanged _value, $Res Function(_BadgesChanged) _then)
-      : super(_value, (v) => _then(v as _BadgesChanged));
+    implements $BadgesChangedCopyWith<$Res> {
+  _$BadgesChangedCopyWithImpl(
+      BadgesChanged _value, $Res Function(BadgesChanged) _then)
+      : super(_value, (v) => _then(v as BadgesChanged));
 
   @override
-  _BadgesChanged get _value => super._value as _BadgesChanged;
+  BadgesChanged get _value => super._value as BadgesChanged;
 
   @override
   $Res call({
     Object? notifications = freezed,
   }) {
-    return _then(_BadgesChanged(
+    return _then(BadgesChanged(
       notifications == freezed
           ? _value.notifications
           : notifications // ignore: cast_nullable_to_non_nullable
@@ -133,8 +133,8 @@ class __$BadgesChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BadgesChanged implements _BadgesChanged {
-  const _$_BadgesChanged(this.notifications);
+class _$BadgesChanged implements BadgesChanged {
+  const _$BadgesChanged(this.notifications);
 
   @override
   final BadgeIndicators notifications;
@@ -147,7 +147,7 @@ class _$_BadgesChanged implements _BadgesChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _BadgesChanged &&
+        (other is BadgesChanged &&
             (identical(other.notifications, notifications) ||
                 const DeepCollectionEquality()
                     .equals(other.notifications, notifications)));
@@ -159,8 +159,8 @@ class _$_BadgesChanged implements _BadgesChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$BadgesChangedCopyWith<_BadgesChanged> get copyWith =>
-      __$BadgesChangedCopyWithImpl<_BadgesChanged>(this, _$identity);
+  $BadgesChangedCopyWith<BadgesChanged> get copyWith =>
+      _$BadgesChangedCopyWithImpl<BadgesChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -191,10 +191,10 @@ class _$_BadgesChanged implements _BadgesChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_BadgesChanged value) badgesChanged,
-    required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_ActivityRead value) activityRead,
-    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+    required TResult Function(BadgesChanged value) badgesChanged,
+    required TResult Function(MessageRead value) messageRead,
+    required TResult Function(ActivityRead value) activityRead,
+    required TResult Function(InboxMessageRead value) inboxMessageRead,
   }) {
     return badgesChanged(this);
   }
@@ -202,10 +202,10 @@ class _$_BadgesChanged implements _BadgesChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_BadgesChanged value)? badgesChanged,
-    TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_ActivityRead value)? activityRead,
-    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    TResult Function(BadgesChanged value)? badgesChanged,
+    TResult Function(MessageRead value)? messageRead,
+    TResult Function(ActivityRead value)? activityRead,
+    TResult Function(InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (badgesChanged != null) {
@@ -215,40 +215,39 @@ class _$_BadgesChanged implements _BadgesChanged {
   }
 }
 
-abstract class _BadgesChanged implements NotificationEvent {
-  const factory _BadgesChanged(BadgeIndicators notifications) =
-      _$_BadgesChanged;
+abstract class BadgesChanged implements NotificationEvent {
+  const factory BadgesChanged(BadgeIndicators notifications) = _$BadgesChanged;
 
   BadgeIndicators get notifications => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$BadgesChangedCopyWith<_BadgesChanged> get copyWith =>
+  $BadgesChangedCopyWith<BadgesChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$MessageReadCopyWith<$Res> {
-  factory _$MessageReadCopyWith(
-          _MessageRead value, $Res Function(_MessageRead) then) =
-      __$MessageReadCopyWithImpl<$Res>;
+abstract class $MessageReadCopyWith<$Res> {
+  factory $MessageReadCopyWith(
+          MessageRead value, $Res Function(MessageRead) then) =
+      _$MessageReadCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$MessageReadCopyWithImpl<$Res>
+class _$MessageReadCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$MessageReadCopyWith<$Res> {
-  __$MessageReadCopyWithImpl(
-      _MessageRead _value, $Res Function(_MessageRead) _then)
-      : super(_value, (v) => _then(v as _MessageRead));
+    implements $MessageReadCopyWith<$Res> {
+  _$MessageReadCopyWithImpl(
+      MessageRead _value, $Res Function(MessageRead) _then)
+      : super(_value, (v) => _then(v as MessageRead));
 
   @override
-  _MessageRead get _value => super._value as _MessageRead;
+  MessageRead get _value => super._value as MessageRead;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_MessageRead(
+    return _then(MessageRead(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -259,8 +258,8 @@ class __$MessageReadCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MessageRead implements _MessageRead {
-  const _$_MessageRead(this.id);
+class _$MessageRead implements MessageRead {
+  const _$MessageRead(this.id);
 
   @override
   final String id;
@@ -273,7 +272,7 @@ class _$_MessageRead implements _MessageRead {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MessageRead &&
+        (other is MessageRead &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -284,8 +283,8 @@ class _$_MessageRead implements _MessageRead {
 
   @JsonKey(ignore: true)
   @override
-  _$MessageReadCopyWith<_MessageRead> get copyWith =>
-      __$MessageReadCopyWithImpl<_MessageRead>(this, _$identity);
+  $MessageReadCopyWith<MessageRead> get copyWith =>
+      _$MessageReadCopyWithImpl<MessageRead>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -316,10 +315,10 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_BadgesChanged value) badgesChanged,
-    required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_ActivityRead value) activityRead,
-    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+    required TResult Function(BadgesChanged value) badgesChanged,
+    required TResult Function(MessageRead value) messageRead,
+    required TResult Function(ActivityRead value) activityRead,
+    required TResult Function(InboxMessageRead value) inboxMessageRead,
   }) {
     return messageRead(this);
   }
@@ -327,10 +326,10 @@ class _$_MessageRead implements _MessageRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_BadgesChanged value)? badgesChanged,
-    TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_ActivityRead value)? activityRead,
-    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    TResult Function(BadgesChanged value)? badgesChanged,
+    TResult Function(MessageRead value)? messageRead,
+    TResult Function(ActivityRead value)? activityRead,
+    TResult Function(InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (messageRead != null) {
@@ -340,39 +339,39 @@ class _$_MessageRead implements _MessageRead {
   }
 }
 
-abstract class _MessageRead implements NotificationEvent {
-  const factory _MessageRead(String id) = _$_MessageRead;
+abstract class MessageRead implements NotificationEvent {
+  const factory MessageRead(String id) = _$MessageRead;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$MessageReadCopyWith<_MessageRead> get copyWith =>
+  $MessageReadCopyWith<MessageRead> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ActivityReadCopyWith<$Res> {
-  factory _$ActivityReadCopyWith(
-          _ActivityRead value, $Res Function(_ActivityRead) then) =
-      __$ActivityReadCopyWithImpl<$Res>;
+abstract class $ActivityReadCopyWith<$Res> {
+  factory $ActivityReadCopyWith(
+          ActivityRead value, $Res Function(ActivityRead) then) =
+      _$ActivityReadCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$ActivityReadCopyWithImpl<$Res>
+class _$ActivityReadCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$ActivityReadCopyWith<$Res> {
-  __$ActivityReadCopyWithImpl(
-      _ActivityRead _value, $Res Function(_ActivityRead) _then)
-      : super(_value, (v) => _then(v as _ActivityRead));
+    implements $ActivityReadCopyWith<$Res> {
+  _$ActivityReadCopyWithImpl(
+      ActivityRead _value, $Res Function(ActivityRead) _then)
+      : super(_value, (v) => _then(v as ActivityRead));
 
   @override
-  _ActivityRead get _value => super._value as _ActivityRead;
+  ActivityRead get _value => super._value as ActivityRead;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_ActivityRead(
+    return _then(ActivityRead(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -383,8 +382,8 @@ class __$ActivityReadCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ActivityRead implements _ActivityRead {
-  const _$_ActivityRead(this.id);
+class _$ActivityRead implements ActivityRead {
+  const _$ActivityRead(this.id);
 
   @override
   final String id;
@@ -397,7 +396,7 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ActivityRead &&
+        (other is ActivityRead &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -408,8 +407,8 @@ class _$_ActivityRead implements _ActivityRead {
 
   @JsonKey(ignore: true)
   @override
-  _$ActivityReadCopyWith<_ActivityRead> get copyWith =>
-      __$ActivityReadCopyWithImpl<_ActivityRead>(this, _$identity);
+  $ActivityReadCopyWith<ActivityRead> get copyWith =>
+      _$ActivityReadCopyWithImpl<ActivityRead>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -440,10 +439,10 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_BadgesChanged value) badgesChanged,
-    required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_ActivityRead value) activityRead,
-    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+    required TResult Function(BadgesChanged value) badgesChanged,
+    required TResult Function(MessageRead value) messageRead,
+    required TResult Function(ActivityRead value) activityRead,
+    required TResult Function(InboxMessageRead value) inboxMessageRead,
   }) {
     return activityRead(this);
   }
@@ -451,10 +450,10 @@ class _$_ActivityRead implements _ActivityRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_BadgesChanged value)? badgesChanged,
-    TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_ActivityRead value)? activityRead,
-    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    TResult Function(BadgesChanged value)? badgesChanged,
+    TResult Function(MessageRead value)? messageRead,
+    TResult Function(ActivityRead value)? activityRead,
+    TResult Function(InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (activityRead != null) {
@@ -464,39 +463,39 @@ class _$_ActivityRead implements _ActivityRead {
   }
 }
 
-abstract class _ActivityRead implements NotificationEvent {
-  const factory _ActivityRead(String id) = _$_ActivityRead;
+abstract class ActivityRead implements NotificationEvent {
+  const factory ActivityRead(String id) = _$ActivityRead;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ActivityReadCopyWith<_ActivityRead> get copyWith =>
+  $ActivityReadCopyWith<ActivityRead> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$InboxMessageReadCopyWith<$Res> {
-  factory _$InboxMessageReadCopyWith(
-          _InboxMessageRead value, $Res Function(_InboxMessageRead) then) =
-      __$InboxMessageReadCopyWithImpl<$Res>;
+abstract class $InboxMessageReadCopyWith<$Res> {
+  factory $InboxMessageReadCopyWith(
+          InboxMessageRead value, $Res Function(InboxMessageRead) then) =
+      _$InboxMessageReadCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$InboxMessageReadCopyWithImpl<$Res>
+class _$InboxMessageReadCopyWithImpl<$Res>
     extends _$NotificationEventCopyWithImpl<$Res>
-    implements _$InboxMessageReadCopyWith<$Res> {
-  __$InboxMessageReadCopyWithImpl(
-      _InboxMessageRead _value, $Res Function(_InboxMessageRead) _then)
-      : super(_value, (v) => _then(v as _InboxMessageRead));
+    implements $InboxMessageReadCopyWith<$Res> {
+  _$InboxMessageReadCopyWithImpl(
+      InboxMessageRead _value, $Res Function(InboxMessageRead) _then)
+      : super(_value, (v) => _then(v as InboxMessageRead));
 
   @override
-  _InboxMessageRead get _value => super._value as _InboxMessageRead;
+  InboxMessageRead get _value => super._value as InboxMessageRead;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_InboxMessageRead(
+    return _then(InboxMessageRead(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -507,8 +506,8 @@ class __$InboxMessageReadCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InboxMessageRead implements _InboxMessageRead {
-  const _$_InboxMessageRead(this.id);
+class _$InboxMessageRead implements InboxMessageRead {
+  const _$InboxMessageRead(this.id);
 
   @override
   final String id;
@@ -521,7 +520,7 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _InboxMessageRead &&
+        (other is InboxMessageRead &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -532,8 +531,8 @@ class _$_InboxMessageRead implements _InboxMessageRead {
 
   @JsonKey(ignore: true)
   @override
-  _$InboxMessageReadCopyWith<_InboxMessageRead> get copyWith =>
-      __$InboxMessageReadCopyWithImpl<_InboxMessageRead>(this, _$identity);
+  $InboxMessageReadCopyWith<InboxMessageRead> get copyWith =>
+      _$InboxMessageReadCopyWithImpl<InboxMessageRead>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -564,10 +563,10 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_BadgesChanged value) badgesChanged,
-    required TResult Function(_MessageRead value) messageRead,
-    required TResult Function(_ActivityRead value) activityRead,
-    required TResult Function(_InboxMessageRead value) inboxMessageRead,
+    required TResult Function(BadgesChanged value) badgesChanged,
+    required TResult Function(MessageRead value) messageRead,
+    required TResult Function(ActivityRead value) activityRead,
+    required TResult Function(InboxMessageRead value) inboxMessageRead,
   }) {
     return inboxMessageRead(this);
   }
@@ -575,10 +574,10 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_BadgesChanged value)? badgesChanged,
-    TResult Function(_MessageRead value)? messageRead,
-    TResult Function(_ActivityRead value)? activityRead,
-    TResult Function(_InboxMessageRead value)? inboxMessageRead,
+    TResult Function(BadgesChanged value)? badgesChanged,
+    TResult Function(MessageRead value)? messageRead,
+    TResult Function(ActivityRead value)? activityRead,
+    TResult Function(InboxMessageRead value)? inboxMessageRead,
     required TResult orElse(),
   }) {
     if (inboxMessageRead != null) {
@@ -588,12 +587,12 @@ class _$_InboxMessageRead implements _InboxMessageRead {
   }
 }
 
-abstract class _InboxMessageRead implements NotificationEvent {
-  const factory _InboxMessageRead(String id) = _$_InboxMessageRead;
+abstract class InboxMessageRead implements NotificationEvent {
+  const factory InboxMessageRead(String id) = _$InboxMessageRead;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$InboxMessageReadCopyWith<_InboxMessageRead> get copyWith =>
+  $InboxMessageReadCopyWith<InboxMessageRead> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

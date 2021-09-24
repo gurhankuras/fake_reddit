@@ -18,47 +18,46 @@ class InboxActivitiesBloc
 
   InboxActivitiesBloc(this.repository) : super(InboxActivitiesState.initial()) {
     logInit(InboxActivitiesBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<InboxActivitiesState> mapEventToState(
-    InboxActivitiesEvent event,
-  ) async* {
-    yield* event.map(
-      fetchingStarted: (e) async* {
-        yield state.copyWith(loading: true);
-        final activitiesOr = await repository.getActivities();
-        // await Future.delayed(Duration(seconds: 5));
-        yield* activitiesOr.fold(
-          (f) async* {
-            print(f);
-            yield state.copyWith(loading: false, failed: true);
-          },
-          (activities) async* {
-            yield state.copyWith(
-              activities: activities,
-              loading: false,
-              failed: false,
-            );
-          },
-        );
-      },
-      activityViewed: (e) async* {
-        final id = e.id;
-        final successOr = await repository.deleteActivity(id);
-        // unitOr
-        yield* successOr.fold(
-          (failure) async* {
-            print(failure);
-            yield state;
-          },
-          (_) async* {
-            final updatedActivities = state.activities
-                .where((activity) => activity.id != id)
-                .toList();
-            yield state.copyWith(activities: updatedActivities);
-          },
-        );
+  void registerEventHandlers() {
+    on<FetchingStarted>(_onFetchingStarted);
+    on<ActivityViewed>(_onActivityViewed);
+  }
+
+  FutureOr<void> _onFetchingStarted(
+    FetchingStarted event,
+    Emitter<InboxActivitiesState> emit,
+  ) async {
+    emit(state.copyWith(loading: true));
+    final activitiesOr = await repository.getActivities();
+
+    activitiesOr.fold(
+      (f) => emit(state.copyWith(loading: false, failed: true)),
+      (activities) => emit(
+        state.copyWith(
+          activities: activities,
+          loading: false,
+          failed: false,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onActivityViewed(
+    ActivityViewed event,
+    Emitter<InboxActivitiesState> emit,
+  ) async {
+    final id = event.id;
+    final successOr = await repository.deleteActivity(id);
+
+    successOr.fold(
+      (failure) => emit(state),
+      (_) {
+        final updatedActivities =
+            state.activities.where((activity) => activity.id != id).toList();
+        emit(state.copyWith(activities: updatedActivities));
       },
     );
   }

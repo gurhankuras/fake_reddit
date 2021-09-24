@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ChangeCommunityAvatarEventTearOff {
   const _$ChangeCommunityAvatarEventTearOff();
 
-  _AvatarColorChanged avatarColorChanged(int index) {
-    return _AvatarColorChanged(
+  AvatarColorChanged avatarColorChanged(int index) {
+    return AvatarColorChanged(
       index,
     );
   }
 
-  _AvatarIconChanged avatarIconChanged(int index) {
-    return _AvatarIconChanged(
+  AvatarIconChanged avatarIconChanged(int index) {
+    return AvatarIconChanged(
       index,
     );
   }
 
-  _ImageCropped imageCropped(Uint8List bytes) {
-    return _ImageCropped(
+  ImageCropped imageCropped(Uint8List bytes) {
+    return ImageCropped(
       bytes,
     );
   }
@@ -40,14 +40,14 @@ class _$ChangeCommunityAvatarEventTearOff {
     );
   }
 
-  _ImageSelected imageSelected(File image) {
-    return _ImageSelected(
+  ImageSelected imageSelected(File image) {
+    return ImageSelected(
       image,
     );
   }
 
-  _Saved saved() {
-    return const _Saved();
+  Saved saved() {
+    return const Saved();
   }
 }
 
@@ -79,24 +79,24 @@ mixin _$ChangeCommunityAvatarEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,29 +120,29 @@ class _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AvatarColorChangedCopyWith<$Res> {
-  factory _$AvatarColorChangedCopyWith(
-          _AvatarColorChanged value, $Res Function(_AvatarColorChanged) then) =
-      __$AvatarColorChangedCopyWithImpl<$Res>;
+abstract class $AvatarColorChangedCopyWith<$Res> {
+  factory $AvatarColorChangedCopyWith(
+          AvatarColorChanged value, $Res Function(AvatarColorChanged) then) =
+      _$AvatarColorChangedCopyWithImpl<$Res>;
   $Res call({int index});
 }
 
 /// @nodoc
-class __$AvatarColorChangedCopyWithImpl<$Res>
+class _$AvatarColorChangedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$AvatarColorChangedCopyWith<$Res> {
-  __$AvatarColorChangedCopyWithImpl(
-      _AvatarColorChanged _value, $Res Function(_AvatarColorChanged) _then)
-      : super(_value, (v) => _then(v as _AvatarColorChanged));
+    implements $AvatarColorChangedCopyWith<$Res> {
+  _$AvatarColorChangedCopyWithImpl(
+      AvatarColorChanged _value, $Res Function(AvatarColorChanged) _then)
+      : super(_value, (v) => _then(v as AvatarColorChanged));
 
   @override
-  _AvatarColorChanged get _value => super._value as _AvatarColorChanged;
+  AvatarColorChanged get _value => super._value as AvatarColorChanged;
 
   @override
   $Res call({
     Object? index = freezed,
   }) {
-    return _then(_AvatarColorChanged(
+    return _then(AvatarColorChanged(
       index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -153,8 +153,8 @@ class __$AvatarColorChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AvatarColorChanged implements _AvatarColorChanged {
-  const _$_AvatarColorChanged(this.index);
+class _$AvatarColorChanged implements AvatarColorChanged {
+  const _$AvatarColorChanged(this.index);
 
   @override
   final int index;
@@ -167,7 +167,7 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AvatarColorChanged &&
+        (other is AvatarColorChanged &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)));
   }
@@ -178,8 +178,8 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$AvatarColorChangedCopyWith<_AvatarColorChanged> get copyWith =>
-      __$AvatarColorChangedCopyWithImpl<_AvatarColorChanged>(this, _$identity);
+  $AvatarColorChangedCopyWith<AvatarColorChanged> get copyWith =>
+      _$AvatarColorChangedCopyWithImpl<AvatarColorChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -214,13 +214,13 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return avatarColorChanged(this);
   }
@@ -228,13 +228,13 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (avatarColorChanged != null) {
@@ -244,39 +244,39 @@ class _$_AvatarColorChanged implements _AvatarColorChanged {
   }
 }
 
-abstract class _AvatarColorChanged implements ChangeCommunityAvatarEvent {
-  const factory _AvatarColorChanged(int index) = _$_AvatarColorChanged;
+abstract class AvatarColorChanged implements ChangeCommunityAvatarEvent {
+  const factory AvatarColorChanged(int index) = _$AvatarColorChanged;
 
   int get index => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$AvatarColorChangedCopyWith<_AvatarColorChanged> get copyWith =>
+  $AvatarColorChangedCopyWith<AvatarColorChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$AvatarIconChangedCopyWith<$Res> {
-  factory _$AvatarIconChangedCopyWith(
-          _AvatarIconChanged value, $Res Function(_AvatarIconChanged) then) =
-      __$AvatarIconChangedCopyWithImpl<$Res>;
+abstract class $AvatarIconChangedCopyWith<$Res> {
+  factory $AvatarIconChangedCopyWith(
+          AvatarIconChanged value, $Res Function(AvatarIconChanged) then) =
+      _$AvatarIconChangedCopyWithImpl<$Res>;
   $Res call({int index});
 }
 
 /// @nodoc
-class __$AvatarIconChangedCopyWithImpl<$Res>
+class _$AvatarIconChangedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$AvatarIconChangedCopyWith<$Res> {
-  __$AvatarIconChangedCopyWithImpl(
-      _AvatarIconChanged _value, $Res Function(_AvatarIconChanged) _then)
-      : super(_value, (v) => _then(v as _AvatarIconChanged));
+    implements $AvatarIconChangedCopyWith<$Res> {
+  _$AvatarIconChangedCopyWithImpl(
+      AvatarIconChanged _value, $Res Function(AvatarIconChanged) _then)
+      : super(_value, (v) => _then(v as AvatarIconChanged));
 
   @override
-  _AvatarIconChanged get _value => super._value as _AvatarIconChanged;
+  AvatarIconChanged get _value => super._value as AvatarIconChanged;
 
   @override
   $Res call({
     Object? index = freezed,
   }) {
-    return _then(_AvatarIconChanged(
+    return _then(AvatarIconChanged(
       index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -287,8 +287,8 @@ class __$AvatarIconChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AvatarIconChanged implements _AvatarIconChanged {
-  const _$_AvatarIconChanged(this.index);
+class _$AvatarIconChanged implements AvatarIconChanged {
+  const _$AvatarIconChanged(this.index);
 
   @override
   final int index;
@@ -301,7 +301,7 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _AvatarIconChanged &&
+        (other is AvatarIconChanged &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)));
   }
@@ -312,8 +312,8 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$AvatarIconChangedCopyWith<_AvatarIconChanged> get copyWith =>
-      __$AvatarIconChangedCopyWithImpl<_AvatarIconChanged>(this, _$identity);
+  $AvatarIconChangedCopyWith<AvatarIconChanged> get copyWith =>
+      _$AvatarIconChangedCopyWithImpl<AvatarIconChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -348,13 +348,13 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return avatarIconChanged(this);
   }
@@ -362,13 +362,13 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (avatarIconChanged != null) {
@@ -378,39 +378,39 @@ class _$_AvatarIconChanged implements _AvatarIconChanged {
   }
 }
 
-abstract class _AvatarIconChanged implements ChangeCommunityAvatarEvent {
-  const factory _AvatarIconChanged(int index) = _$_AvatarIconChanged;
+abstract class AvatarIconChanged implements ChangeCommunityAvatarEvent {
+  const factory AvatarIconChanged(int index) = _$AvatarIconChanged;
 
   int get index => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$AvatarIconChangedCopyWith<_AvatarIconChanged> get copyWith =>
+  $AvatarIconChangedCopyWith<AvatarIconChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$ImageCroppedCopyWith<$Res> {
-  factory _$ImageCroppedCopyWith(
-          _ImageCropped value, $Res Function(_ImageCropped) then) =
-      __$ImageCroppedCopyWithImpl<$Res>;
+abstract class $ImageCroppedCopyWith<$Res> {
+  factory $ImageCroppedCopyWith(
+          ImageCropped value, $Res Function(ImageCropped) then) =
+      _$ImageCroppedCopyWithImpl<$Res>;
   $Res call({Uint8List bytes});
 }
 
 /// @nodoc
-class __$ImageCroppedCopyWithImpl<$Res>
+class _$ImageCroppedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$ImageCroppedCopyWith<$Res> {
-  __$ImageCroppedCopyWithImpl(
-      _ImageCropped _value, $Res Function(_ImageCropped) _then)
-      : super(_value, (v) => _then(v as _ImageCropped));
+    implements $ImageCroppedCopyWith<$Res> {
+  _$ImageCroppedCopyWithImpl(
+      ImageCropped _value, $Res Function(ImageCropped) _then)
+      : super(_value, (v) => _then(v as ImageCropped));
 
   @override
-  _ImageCropped get _value => super._value as _ImageCropped;
+  ImageCropped get _value => super._value as ImageCropped;
 
   @override
   $Res call({
     Object? bytes = freezed,
   }) {
-    return _then(_ImageCropped(
+    return _then(ImageCropped(
       bytes == freezed
           ? _value.bytes
           : bytes // ignore: cast_nullable_to_non_nullable
@@ -421,8 +421,8 @@ class __$ImageCroppedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ImageCropped implements _ImageCropped {
-  const _$_ImageCropped(this.bytes);
+class _$ImageCropped implements ImageCropped {
+  const _$ImageCropped(this.bytes);
 
   @override
   final Uint8List bytes;
@@ -435,7 +435,7 @@ class _$_ImageCropped implements _ImageCropped {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ImageCropped &&
+        (other is ImageCropped &&
             (identical(other.bytes, bytes) ||
                 const DeepCollectionEquality().equals(other.bytes, bytes)));
   }
@@ -446,8 +446,8 @@ class _$_ImageCropped implements _ImageCropped {
 
   @JsonKey(ignore: true)
   @override
-  _$ImageCroppedCopyWith<_ImageCropped> get copyWith =>
-      __$ImageCroppedCopyWithImpl<_ImageCropped>(this, _$identity);
+  $ImageCroppedCopyWith<ImageCropped> get copyWith =>
+      _$ImageCroppedCopyWithImpl<ImageCropped>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -482,13 +482,13 @@ class _$_ImageCropped implements _ImageCropped {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return imageCropped(this);
   }
@@ -496,13 +496,13 @@ class _$_ImageCropped implements _ImageCropped {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (imageCropped != null) {
@@ -512,12 +512,12 @@ class _$_ImageCropped implements _ImageCropped {
   }
 }
 
-abstract class _ImageCropped implements ChangeCommunityAvatarEvent {
-  const factory _ImageCropped(Uint8List bytes) = _$_ImageCropped;
+abstract class ImageCropped implements ChangeCommunityAvatarEvent {
+  const factory ImageCropped(Uint8List bytes) = _$ImageCropped;
 
   Uint8List get bytes => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ImageCroppedCopyWith<_ImageCropped> get copyWith =>
+  $ImageCroppedCopyWith<ImageCropped> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -619,13 +619,13 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return loadingCustomImageSelected(this);
   }
@@ -633,13 +633,13 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (loadingCustomImageSelected != null) {
@@ -661,29 +661,29 @@ abstract class _LoadingCustomImageSelected
 }
 
 /// @nodoc
-abstract class _$ImageSelectedCopyWith<$Res> {
-  factory _$ImageSelectedCopyWith(
-          _ImageSelected value, $Res Function(_ImageSelected) then) =
-      __$ImageSelectedCopyWithImpl<$Res>;
+abstract class $ImageSelectedCopyWith<$Res> {
+  factory $ImageSelectedCopyWith(
+          ImageSelected value, $Res Function(ImageSelected) then) =
+      _$ImageSelectedCopyWithImpl<$Res>;
   $Res call({File image});
 }
 
 /// @nodoc
-class __$ImageSelectedCopyWithImpl<$Res>
+class _$ImageSelectedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$ImageSelectedCopyWith<$Res> {
-  __$ImageSelectedCopyWithImpl(
-      _ImageSelected _value, $Res Function(_ImageSelected) _then)
-      : super(_value, (v) => _then(v as _ImageSelected));
+    implements $ImageSelectedCopyWith<$Res> {
+  _$ImageSelectedCopyWithImpl(
+      ImageSelected _value, $Res Function(ImageSelected) _then)
+      : super(_value, (v) => _then(v as ImageSelected));
 
   @override
-  _ImageSelected get _value => super._value as _ImageSelected;
+  ImageSelected get _value => super._value as ImageSelected;
 
   @override
   $Res call({
     Object? image = freezed,
   }) {
-    return _then(_ImageSelected(
+    return _then(ImageSelected(
       image == freezed
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -694,8 +694,8 @@ class __$ImageSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ImageSelected implements _ImageSelected {
-  const _$_ImageSelected(this.image);
+class _$ImageSelected implements ImageSelected {
+  const _$ImageSelected(this.image);
 
   @override
   final File image;
@@ -708,7 +708,7 @@ class _$_ImageSelected implements _ImageSelected {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ImageSelected &&
+        (other is ImageSelected &&
             (identical(other.image, image) ||
                 const DeepCollectionEquality().equals(other.image, image)));
   }
@@ -719,8 +719,8 @@ class _$_ImageSelected implements _ImageSelected {
 
   @JsonKey(ignore: true)
   @override
-  _$ImageSelectedCopyWith<_ImageSelected> get copyWith =>
-      __$ImageSelectedCopyWithImpl<_ImageSelected>(this, _$identity);
+  $ImageSelectedCopyWith<ImageSelected> get copyWith =>
+      _$ImageSelectedCopyWithImpl<ImageSelected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -755,13 +755,13 @@ class _$_ImageSelected implements _ImageSelected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return imageSelected(this);
   }
@@ -769,13 +769,13 @@ class _$_ImageSelected implements _ImageSelected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (imageSelected != null) {
@@ -785,36 +785,36 @@ class _$_ImageSelected implements _ImageSelected {
   }
 }
 
-abstract class _ImageSelected implements ChangeCommunityAvatarEvent {
-  const factory _ImageSelected(File image) = _$_ImageSelected;
+abstract class ImageSelected implements ChangeCommunityAvatarEvent {
+  const factory ImageSelected(File image) = _$ImageSelected;
 
   File get image => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ImageSelectedCopyWith<_ImageSelected> get copyWith =>
+  $ImageSelectedCopyWith<ImageSelected> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$SavedCopyWith<$Res> {
-  factory _$SavedCopyWith(_Saved value, $Res Function(_Saved) then) =
-      __$SavedCopyWithImpl<$Res>;
+abstract class $SavedCopyWith<$Res> {
+  factory $SavedCopyWith(Saved value, $Res Function(Saved) then) =
+      _$SavedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$SavedCopyWithImpl<$Res>
+class _$SavedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$SavedCopyWith<$Res> {
-  __$SavedCopyWithImpl(_Saved _value, $Res Function(_Saved) _then)
-      : super(_value, (v) => _then(v as _Saved));
+    implements $SavedCopyWith<$Res> {
+  _$SavedCopyWithImpl(Saved _value, $Res Function(Saved) _then)
+      : super(_value, (v) => _then(v as Saved));
 
   @override
-  _Saved get _value => super._value as _Saved;
+  Saved get _value => super._value as Saved;
 }
 
 /// @nodoc
 
-class _$_Saved implements _Saved {
-  const _$_Saved();
+class _$Saved implements Saved {
+  const _$Saved();
 
   @override
   String toString() {
@@ -823,7 +823,7 @@ class _$_Saved implements _Saved {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Saved);
+    return identical(this, other) || (other is Saved);
   }
 
   @override
@@ -862,13 +862,13 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_AvatarColorChanged value) avatarColorChanged,
-    required TResult Function(_AvatarIconChanged value) avatarIconChanged,
-    required TResult Function(_ImageCropped value) imageCropped,
+    required TResult Function(AvatarColorChanged value) avatarColorChanged,
+    required TResult Function(AvatarIconChanged value) avatarIconChanged,
+    required TResult Function(ImageCropped value) imageCropped,
     required TResult Function(_LoadingCustomImageSelected value)
         loadingCustomImageSelected,
-    required TResult Function(_ImageSelected value) imageSelected,
-    required TResult Function(_Saved value) saved,
+    required TResult Function(ImageSelected value) imageSelected,
+    required TResult Function(Saved value) saved,
   }) {
     return saved(this);
   }
@@ -876,13 +876,13 @@ class _$_Saved implements _Saved {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_AvatarColorChanged value)? avatarColorChanged,
-    TResult Function(_AvatarIconChanged value)? avatarIconChanged,
-    TResult Function(_ImageCropped value)? imageCropped,
+    TResult Function(AvatarColorChanged value)? avatarColorChanged,
+    TResult Function(AvatarIconChanged value)? avatarIconChanged,
+    TResult Function(ImageCropped value)? imageCropped,
     TResult Function(_LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
-    TResult Function(_ImageSelected value)? imageSelected,
-    TResult Function(_Saved value)? saved,
+    TResult Function(ImageSelected value)? imageSelected,
+    TResult Function(Saved value)? saved,
     required TResult orElse(),
   }) {
     if (saved != null) {
@@ -892,8 +892,8 @@ class _$_Saved implements _Saved {
   }
 }
 
-abstract class _Saved implements ChangeCommunityAvatarEvent {
-  const factory _Saved() = _$_Saved;
+abstract class Saved implements ChangeCommunityAvatarEvent {
+  const factory Saved() = _$Saved;
 }
 
 /// @nodoc

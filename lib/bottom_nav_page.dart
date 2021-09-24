@@ -73,8 +73,8 @@ class BottomNavPageState extends State<BottomNavPage> {
           HomeRouter(),
           BrowseRouter(),
           MyEmptyRoute(),
-          InboxRoute(),
           ChatNavRoute(),
+          InboxRoute(),
         ],
         builder: (context, child, animation) {
           final tabsRouter = AutoTabsRouter.of(context);

@@ -25,112 +25,93 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     required this.authBloc,
   }) : super(NotificationState.initial()) {
     logInit(NotificationBloc);
-    sub = authBloc.stream.listen((event) {
-      print('LISTEN');
-      if (event is Authenticated) {
-        add(NotificationEvent.badgesChanged(event.user.notifications));
-      } else if (event is Unauthenticated) {
-        add(NotificationEvent.badgesChanged(BadgeIndicators(
-          chatMessages: 0,
-          inboxActivities: 0,
-          inboxMessages: 0,
-        )));
-      }
-    });
-    print('NotificiationBloc created');
-    _prepateSocket();
+    sub = authBloc.stream.listen(_authListener);
+    _registerEventHandlers();
+    _registerSocketListeners();
   }
 
-  // Future<void> cancel() {
-  //   // super.dispose();
-  //   sub.cancel();
-  // }
+  void _authListener(AuthState event) {
+    print('LISTEN');
+    if (event is Authenticated) {
+      add(NotificationEvent.badgesChanged(event.user.notifications));
+    } else if (event is Unauthenticated) {
+      add(NotificationEvent.badgesChanged(BadgeIndicators.empty()));
+    }
+  }
 
-  void _prepateSocket() {
-    socketManager.on(SocketEventKeys.notification,
-        (data) => NotificationInfo.fromJson(data));
+  void _registerEventHandlers() {
+    on<BadgesChanged>(_onBadgesChanged);
+    on<ActivityRead>(_onActivityRead);
+    on<InboxMessageRead>(_onInboxMessageRead);
+    on<MessageRead>(_onMessageRead);
+  }
+
+  void _registerSocketListeners() {
+    socketManager.on(SocketEventKeys.notification, _notificationSocketListener);
+  }
+
+  dynamic _notificationSocketListener(dynamic data) =>
+      NotificationInfo.fromJson(data);
+
+  FutureOr<void> _onBadgesChanged(
+    BadgesChanged event,
+    Emitter<NotificationState> emit,
+  ) {
+    // final res = await Dio().get('http://10.0.2.2:4000/api/notifications');
+    // final info = NotificationInfo.fromJson(res.data);
+
+    // await Future.delayed(Duration(seconds: 3));
+    // print(info);
+    log.e('GIRDI');
+    final badges = event.notifications;
+    emit(
+      state.copyWith(
+        unreadMessageCount: badges.chatMessages,
+        inboxUnreadMessageCount: badges.inboxMessages,
+        unreadActivitiesCount: badges.inboxActivities,
+      ),
+    );
+  }
+
+  FutureOr<void> _onActivityRead(
+    ActivityRead event,
+    Emitter<NotificationState> emit,
+  ) {
+    // TODO: network
+    emit(
+      state.copyWith(
+        unreadActivitiesCount: state.unreadActivitiesCount - 1,
+      ),
+    );
+  }
+
+  FutureOr<void> _onInboxMessageRead(
+    InboxMessageRead event,
+    Emitter<NotificationState> emit,
+  ) {
+    // TODO: network
+    emit(
+      state.copyWith(
+        inboxUnreadMessageCount: state.inboxUnreadMessageCount - 1,
+      ),
+    );
+  }
+
+  FutureOr<void> _onMessageRead(
+    MessageRead event,
+    Emitter<NotificationState> emit,
+  ) {
+    // TODO: network
+    emit(
+      state.copyWith(
+        unreadMessageCount: state.unreadMessageCount - 1,
+      ),
+    );
   }
 
   @override
   Future<void> close() {
     sub.cancel();
     return super.close();
-  }
-
-  @override
-  Stream<NotificationState> mapEventToState(
-    NotificationEvent event,
-  ) async* {
-    yield* event.map(
-      badgesChanged: (e) async* {
-        // final res = await Dio().get('http://10.0.2.2:4000/api/notifications');
-        // final info = NotificationInfo.fromJson(res.data);
-
-        // await Future.delayed(Duration(seconds: 3));
-        // print(info);
-        log.e('GIRDI');
-        final badges = e.notifications;
-        yield state.copyWith(
-          unreadMessageCount: badges.chatMessages,
-          inboxUnreadMessageCount: badges.inboxMessages,
-          unreadActivitiesCount: badges.inboxActivities,
-        );
-      },
-      activityRead: (e) async* {
-        yield state.copyWith(
-          unreadActivitiesCount: state.unreadActivitiesCount - 1,
-        );
-      },
-      inboxMessageRead: (e) async* {
-        yield state.copyWith(
-          inboxUnreadMessageCount: state.inboxUnreadMessageCount - 1,
-        );
-      },
-
-      messageRead: (e) async* {
-        yield state.copyWith(
-          unreadMessageCount: state.unreadMessageCount - 1,
-        );
-        // yield* state.info.fold(
-        //   () async* {
-        //     yield state;
-        //   },
-        //   (a) async* {
-        //     if (a.chatRoomIds.containsKey(e.id) && a.chatRoomIds[e.id]! != 0) {
-        //       final newChatRoomIds =
-        //           a.chatRoomIds.map((key, value) => MapEntry(key, value));
-        //       newChatRoomIds.update(e.id, (value) => 0, ifAbsent: () => 0);
-
-        //       yield state.copyWith(
-        //         info: some(
-        //           a.copyWith(
-        //               unreadMessagesCount:
-        //                   a.unreadMessagesCount - a.chatRoomIds[e.id]!,
-        //               chatRoomIds: newChatRoomIds),
-        //         ),
-        //       );
-        //     }
-        //   },
-        // );
-      },
-      // newMessageReceived: (e) async* {
-      //   yield state.copyWith(
-      //     inboxUnreadMessageCount: state.inboxUnreadMessageCount + 1,
-      //   );
-      //   // yield state.copyWith(
-      //   //   info: state.info.fold(
-      //   //     () => state.info,
-      //   //     (a) {
-      //   //       final newIds =
-      //   //           a.chatRoomIds.map((key, value) => MapEntry(key, value));
-      //   //       newIds.update(e.id, (value) => value + 1, ifAbsent: () => 1);
-      //   //       return some(a.copyWith(
-      //   //           unreadMessagesCount: a.unreadMessagesCount + 1,
-      //   //           chatRoomIds: newIds));
-      //   //     },
-      //   //   ),
-      //   // );
-      // },
-    );
   }
 }

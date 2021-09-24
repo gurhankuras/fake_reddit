@@ -25,50 +25,64 @@ class ChatRoomsBloc extends Bloc<ChatRoomsEvent, ChatRoomsState> {
   })  : service = chatService,
         super(ChatRoomsState.initial()) {
     logInit(ChatRoomsBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<ChatRoomsState> mapEventToState(
-    ChatRoomsEvent event,
-  ) async* {
-    yield* event.map(fetchingStarted: (e) async* {
-      yield state.copyWith(loading: true);
-      final chatRooms = await service.fetchChatRooms();
+  void registerEventHandlers() {
+    on<FetchingStarted>(_onFetchingStarted);
+    on<NewMessageReceived>(_onNewMessageReceived);
+  }
 
-      yield* chatRooms.fold(
-        (l) async* {
-          print(l);
-          // getIt<ISnackbarService>().error(l.message);
-          yield state.copyWith(loading: false);
-        },
-        (rooms) async* {
-          socketManager.on(SocketEventKeys.last_message, (data) {
-            print(data);
-            add(ChatRoomsEvent.newMessageReceived(
-                ChatMessageDTO.fromJson(data)));
-          });
-          yield state.copyWith(loading: false, chatRooms: rooms);
-        },
-      );
-    }, newMessageReceived: (e) async* {
-      final receivedMessage = e.message;
-      final rooms = state.chatRooms.map((e) {
-        if (e.id == receivedMessage.roomId) {
-          return e.copyWith(
-              user: e.user.copyWith(
-                unreadMessageCount: e.user.unreadMessageCount + 1,
-              ),
-              lastMessage: LastMessage(
-                createdAt: receivedMessage.createdAt!,
-                // createdAt: DateTime.now(),
-                senderName: receivedMessage.user.name,
-                text: receivedMessage.text,
-              ));
-        }
-        return e;
-      }).toList();
+  FutureOr<void> _onFetchingStarted(
+    FetchingStarted event,
+    Emitter<ChatRoomsState> emit,
+  ) async {
+    emit(state.copyWith(loading: true));
+    final chatRooms = await service.fetchChatRooms();
+    chatRooms.fold(
+      (f) {
+        print(f);
+        // getIt<ISnackbarService>().error(f.message);
+        emit(state.copyWith(loading: false));
+      },
+      (rooms) {
+        socketManager.on(SocketEventKeys.last_message, _lastMessageListener);
+        emit(
+          state.copyWith(
+            loading: false,
+            chatRooms: rooms,
+          ),
+        );
+      },
+    );
+  }
 
-      yield state.copyWith(chatRooms: rooms);
-    });
+  dynamic _lastMessageListener(dynamic data) {
+    print(data);
+    add(ChatRoomsEvent.newMessageReceived(ChatMessageDTO.fromJson(data)));
+  }
+
+  FutureOr<void> _onNewMessageReceived(
+    NewMessageReceived event,
+    Emitter<ChatRoomsState> emit,
+  ) {
+    final receivedMessage = event.message;
+    final rooms = state.chatRooms.map((chatRoom) {
+      if (chatRoom.id == receivedMessage.roomId) {
+        return chatRoom.copyWith(
+          user: chatRoom.user.copyWith(
+            unreadMessageCount: chatRoom.user.unreadMessageCount + 1,
+          ),
+          lastMessage: LastMessage(
+            createdAt: receivedMessage.createdAt!,
+            // createdAt: DateTime.now(),
+            senderName: receivedMessage.user.name,
+            text: receivedMessage.text,
+          ),
+        );
+      }
+      return chatRoom;
+    }).toList();
+    emit(state.copyWith(chatRooms: rooms));
   }
 }

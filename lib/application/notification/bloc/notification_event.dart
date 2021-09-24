@@ -6,12 +6,12 @@ class NotificationEvent with _$NotificationEvent {
   //     _NotificationReceived;
 
   const factory NotificationEvent.badgesChanged(BadgeIndicators notifications) =
-      _BadgesChanged;
+      BadgesChanged;
 
-  const factory NotificationEvent.messageRead(String id) = _MessageRead;
-  const factory NotificationEvent.activityRead(String id) = _ActivityRead;
+  const factory NotificationEvent.messageRead(String id) = MessageRead;
+  const factory NotificationEvent.activityRead(String id) = ActivityRead;
   const factory NotificationEvent.inboxMessageRead(String id) =
-      _InboxMessageRead;
+      InboxMessageRead;
 
   // const factory NotificationEvent.newMessageReceived(NotificationInfo info) =
   //     _NewMessageReceived;

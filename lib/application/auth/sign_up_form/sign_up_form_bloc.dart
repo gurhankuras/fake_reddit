@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/utility/log_init.dart';
 
 import '../../../domain/auth/i_auth_service.dart';
 import '../../../domain/auth/i_user_remote_checker.dart';
@@ -33,152 +34,169 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
     required this.formatValidator,
     required this.snackbarService,
   }) : super(SignUpFormState.initial(formatValidator)) {
-    log.v('SignUpFormBloc created!');
+    logInit(SignUpFormBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<SignUpFormState> mapEventToState(
-    SignUpFormEvent event,
-  ) async* {
-    yield* event.map(
-      usernameChanged: (e) async* {
-        final noneOrFailure = formatValidator.username(e.username);
-        yield* noneOrFailure.fold(
-          // passed format checked now go to server and check if username already exists
-          () async* {
-            yield state.copyWith(checkingUsername: true);
-            final noneOrVerificationFailure =
-                await checker.username(e.username);
-            yield state.copyWith(
-              checkingUsername: false,
-              username: e.username,
-              usernameFailure: noneOrVerificationFailure,
-              failure: formatValidator
-                  .form(
-                    emailValue: state.email,
-                    passwordValue: state.password,
-                    usernameValue: e.username,
-                  )
-                  .orElse(() => noneOrVerificationFailure),
-            );
-          },
-          // has format error
-          (f) async* {
-            yield state.copyWith(
-              username: e.username,
-              usernameFailure: noneOrFailure,
-              failure: formatValidator.form(
+  void registerEventHandlers() {
+    on<UsernameChanged>(_onUsernameChanged);
+    on<PasswordChanged>(_onPasswordChanged);
+    on<EmailChanged>(_onEmailChanged);
+    on<SignUpPressed>(_onSignUpPressed);
+    on<GoogleSignUpPressed>(_onGoogleSignUpPressed);
+  }
+
+  FutureOr<void> _onUsernameChanged(
+    UsernameChanged event,
+    Emitter<SignUpFormState> emit,
+  ) async {
+    final noneOrFailure = formatValidator.username(event.username);
+    noneOrFailure.fold(
+      // passed format checked now go to server and check if username already exists
+      () async {
+        emit(state.copyWith(checkingUsername: true));
+        final noneOrVerificationFailure =
+            await checker.username(event.username).whenComplete(() {});
+        final newState = state.copyWith(
+          checkingUsername: false,
+          username: event.username,
+          usernameFailure: noneOrVerificationFailure,
+          failure: formatValidator
+              .form(
                 emailValue: state.email,
                 passwordValue: state.password,
-                usernameValue: e.username,
-              ),
-            );
-          },
+                usernameValue: event.username,
+              )
+              .orElse(() => noneOrVerificationFailure),
         );
+        emit(newState);
       },
-      emailChanged: (e) async* {
-        final noneOrFailure = formatValidator.email(e.email);
-        yield* noneOrFailure.fold(
-          // passed format checked now go to server and check if email already exists
-          () async* {
-            yield state.copyWith(checkingEmail: true);
-            final noneOrVerificationFailure = await checker.email(e.email);
-            yield state.copyWith(
-              checkingEmail: false,
-              email: e.email,
-              emailFailure: noneOrVerificationFailure,
-              failure: formatValidator
-                  .form(
-                    emailValue: e.email,
-                    passwordValue: state.password,
-                    usernameValue: state.username,
-                  )
-                  .orElse(() => noneOrVerificationFailure),
-            );
-          },
-          // has format error
-          (f) async* {
-            yield state.copyWith(
-              email: e.email,
-              emailFailure: noneOrFailure,
-              failure: formatValidator.form(
-                emailValue: e.email,
-                passwordValue: state.password,
-                usernameValue: state.username,
-              ),
-            );
-          },
-        );
-      },
-      passwordChanged: (e) async* {
-        yield state.copyWith(
-          password: e.password,
-          passwordFailure: formatValidator.password(e.password),
+      // has format error
+      (f) async {
+        final newState = state.copyWith(
+          username: event.username,
+          usernameFailure: noneOrFailure,
           failure: formatValidator.form(
             emailValue: state.email,
-            passwordValue: e.password,
+            passwordValue: state.password,
+            usernameValue: event.username,
+          ),
+        );
+        emit(newState);
+      },
+    );
+  }
+
+  FutureOr<void> _onEmailChanged(
+    EmailChanged event,
+    Emitter<SignUpFormState> emit,
+  ) async {
+    final noneOrFailure = formatValidator.email(event.email);
+    noneOrFailure.fold(
+      // passed format checked now go to server and check if email already exists
+      () async {
+        emit(state.copyWith(checkingEmail: true));
+        final noneOrVerificationFailure = await checker.email(event.email);
+        final newState = state.copyWith(
+          checkingEmail: false,
+          email: event.email,
+          emailFailure: noneOrVerificationFailure,
+          failure: formatValidator
+              .form(
+                emailValue: event.email,
+                passwordValue: state.password,
+                usernameValue: state.username,
+              )
+              .orElse(() => noneOrVerificationFailure),
+        );
+        emit(newState);
+      },
+      // has format error
+      (f) async {
+        final newState = state.copyWith(
+          email: event.email,
+          emailFailure: noneOrFailure,
+          failure: formatValidator.form(
+            emailValue: event.email,
+            passwordValue: state.password,
             usernameValue: state.username,
           ),
         );
+
+        emit(newState);
       },
-      signInPressed: (e) async* {
-        // yield state.copyWith(isSubmitting: true);
+    );
+  }
 
-        final signUpCreds = Credentials(
-          email: state.email,
-          password: state.password,
-          username: state.username,
-        );
-        final failureOrSuccess = await authService.signUp(
-          credentials: signUpCreds,
-        );
+  FutureOr<void> _onPasswordChanged(
+    PasswordChanged event,
+    Emitter<SignUpFormState> emit,
+  ) async {
+    final newState = state.copyWith(
+      password: event.password,
+      passwordFailure: formatValidator.password(event.password),
+      failure: formatValidator.form(
+        emailValue: state.email,
+        passwordValue: event.password,
+        usernameValue: state.username,
+      ),
+    );
+    emit(newState);
+  }
 
-        yield* failureOrSuccess.fold(
-          (f) async* {
+  FutureOr<void> _onSignUpPressed(
+      SignUpPressed event, Emitter<SignUpFormState> emit) async {
+    final signUpCreds = Credentials(
+      email: state.email,
+      password: state.password,
+      username: state.username,
+    );
+
+    final failureOrSuccess = await authService.signUp(credentials: signUpCreds);
+
+    failureOrSuccess.fold(
+      (f) async {
+        snackbarService.error(f.message);
+        emit(state);
+      },
+      (_) async {
+        final signInOrFailure = await authService.loginWithEmail(
+          credentials: LoginCredentials(
+            username: signUpCreds.username,
+            password: signUpCreds.password,
+          ),
+        );
+        signInOrFailure.fold(
+          (f) {
             snackbarService.error(f.message);
-            // yield state.copyWith(isSubmitting: false);
-            yield state;
+            emit(state);
           },
-          (r) async* {
-            final signInOrFailure = await authService.loginWithEmail(
-              credentials: LoginCredentials(
-                username: signUpCreds.username,
-                password: signUpCreds.password,
-              ),
-            );
-            yield* signInOrFailure.fold(
-              (f) async* {
-                snackbarService.error(f.message);
-                yield state;
-              },
-              (r) async* {
-                authBloc.add(const AuthEvent.authCheckRequested());
-                yield state;
-              },
-            );
+          (_) {
+            authBloc.add(const AuthEvent.authCheckRequested());
+            emit(state);
           },
         );
       },
-      googleSignUpPressed: (e) async* {
-        // yield state.copyWith(isSubmitting: true);
+    );
+  }
 
-        final failureOrSuccess = await authService.signUpWithGoogle();
+  FutureOr<void> _onGoogleSignUpPressed(
+    GoogleSignUpPressed event,
+    Emitter<SignUpFormState> emit,
+  ) async {
+    final failureOrSuccess = await authService.signUpWithGoogle();
 
-        yield* failureOrSuccess.fold(
-          (l) async* {
-            yield state;
-          },
-          (r) async* {
-            final signInOrFailure = await authService.loginWithGoogle();
-            yield* signInOrFailure.fold(
-              (l) async* {
-                yield state;
-              },
-              (r) async* {
-                authBloc.add(const AuthEvent.authCheckRequested());
-                yield state;
-              },
-            );
+    failureOrSuccess.fold(
+      (l) async {
+        emit(state);
+      },
+      (r) async {
+        final signInOrFailure = await authService.loginWithGoogle();
+        signInOrFailure.fold(
+          (l) => emit(state),
+          (r) {
+            authBloc.add(const AuthEvent.authCheckRequested());
+            emit(state);
           },
         );
       },
@@ -231,60 +249,3 @@ class SignUpFormatValidator {
         .orElse(() => username(usernameValue));
   }
 }
-
-// abstract class IPredicate {
-//   Option<ValueFailure<String>> test(String value);
-// }
-
-// class MinimumCharacters implements IPredicate {
-//   final int minLength;
-//   const MinimumCharacters(this.minLength);
-//   @override
-//   Option<ValueFailure<String>> test(String value) {
-//     return option(
-//       value.length < minLength,
-//       ValueFailure.shortLength(failedValue: value, min: minLength),
-//     );
-//   }
-// }
-
-// class FormatValidator {
-//   Option<ValueFailure<String>> validate(String value, IPredicate pred) {
-//     return pred.test(value);
-//   }
-// }
-
-// class ValidatorObject {
-//   final Option<ValueFailure<String>> valueOrFailure;
-//   final String value;
-
-//   const ValidatorObject(this.value, this.valueOrFailure);
-
-//   ValidatorObject min(int n) {
-//     if (valueOrFailure.isSome()) {
-//       this;
-//     }
-//     return ValidatorObject(
-//         value,
-//         valueOrFailure.orElse(() => option(
-//               value.length < n,
-//               ValueFailure.shortLength(failedValue: value, min: n),
-//             )));
-//   }
-
-//   ValidatorObject max(int n) {
-//     if (valueOrFailure.isSome()) {
-//       this;
-//     }
-//     return ValidatorObject(
-//         value,
-//         valueOrFailure.orElse(() => option(
-//               value.length > n,
-//               ValueFailure.exceedingLength(failedValue: value, max: n),
-//             )));
-//   }
-
-//   Option<ValueFailure<String>> get() {
-//     return valueOrFailure;
-//   }
-// }

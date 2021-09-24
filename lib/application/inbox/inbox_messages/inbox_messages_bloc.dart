@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,6 +13,7 @@ part 'inbox_messages_bloc.freezed.dart';
 part 'inbox_messages_event.dart';
 part 'inbox_messages_state.dart';
 
+// TODO: inbox_messages_bloc is same as inbox_activities_bloc. REFACTOR
 @injectable
 class InboxMessagesBloc extends Bloc<InboxMessagesEvent, InboxMessagesState> {
   final IInboxRepository repository;
@@ -21,48 +23,47 @@ class InboxMessagesBloc extends Bloc<InboxMessagesEvent, InboxMessagesState> {
     logInit(InboxMessagesBloc);
   }
 
-  @override
-  Stream<InboxMessagesState> mapEventToState(
-    InboxMessagesEvent event,
-  ) async* {
-    yield* event.map(
-      fetchingStarted: (e) async* {
-        yield state.copyWith(loading: true);
-        final messagesOr = await repository.getInboxMessages();
-        yield* messagesOr.fold(
-          (f) async* {
-            print(f);
-            yield state.copyWith(loading: false, failed: true);
-          },
-          (messages) async* {
-            yield state.copyWith(
-              messages: messages,
-              loading: false,
-              failed: false,
-            );
-          },
-        );
-      },
-      messageRead: (e) async* {
-        final id = e.id;
-        final unitOr = await repository.markInboxMessageAsRead(id);
-        // unitOr
-        yield* unitOr.fold(
-          (failure) async* {
-            print(failure);
-            yield state;
-          },
-          (_) async* {
-            final updatedMessages = state.messages.map((m) {
-              if (m.id == id) {
-                return m.copyWith(hasRead: true);
-              }
-              return m;
-            }).toList();
+  void registerEventHandlers() {
+    on<FetchingStarted>(_onFetchingStarted);
+    on<MessageRead>(_onMessageRead);
+  }
 
-            yield state.copyWith(messages: updatedMessages);
-          },
-        );
+  FutureOr<void> _onFetchingStarted(
+    FetchingStarted event,
+    Emitter<InboxMessagesState> emit,
+  ) async {
+    emit(state.copyWith(loading: true));
+    final messagesOr = await repository.getInboxMessages();
+
+    messagesOr.fold(
+      (f) => emit(state.copyWith(loading: false, failed: true)),
+      (messages) => emit(
+        state.copyWith(
+          messages: messages,
+          loading: false,
+          failed: false,
+        ),
+      ),
+    );
+  }
+
+  FutureOr<void> _onMessageRead(
+    MessageRead event,
+    Emitter<InboxMessagesState> emit,
+  ) async {
+    final id = event.id;
+    final successOr = await repository.markInboxMessageAsRead(id);
+
+    successOr.fold(
+      (failure) => emit(state),
+      (_) {
+        final updatedMessages = state.messages.map((m) {
+          if (m.id == id) {
+            return m.copyWith(hasRead: true);
+          }
+          return m;
+        }).toList();
+        emit(state.copyWith(messages: updatedMessages));
       },
     );
   }

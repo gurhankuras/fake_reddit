@@ -40,6 +40,12 @@ class BadgeIndicators {
     required this.inboxActivities,
   });
 
+  factory BadgeIndicators.empty() => BadgeIndicators(
+        chatMessages: 0,
+        inboxActivities: 0,
+        inboxMessages: 0,
+      );
+
   factory BadgeIndicators.fromJson(Map<String, dynamic> json) =>
       _$BadgeIndicatorsFromJson(json);
   Map<String, dynamic> toJson() => _$BadgeIndicatorsToJson(this);

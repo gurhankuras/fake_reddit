@@ -16,77 +16,77 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$CreatePostEventTearOff {
   const _$CreatePostEventTearOff();
 
-  _PostTypeChanged feedTypeChanged(
+  PostTypeChanged feedTypeChanged(
       {required int index,
       required bool autofocus,
       required Future<bool?> Function() showDialog}) {
-    return _PostTypeChanged(
+    return PostTypeChanged(
       index: index,
       autofocus: autofocus,
       showDialog: showDialog,
     );
   }
 
-  _TitleChanged titleChanged(String title) {
-    return _TitleChanged(
+  TitleChanged titleChanged(String title) {
+    return TitleChanged(
       title,
     );
   }
 
-  _BodyTextChanged bodyTextChanged(String bodyText) {
-    return _BodyTextChanged(
+  BodyTextChanged bodyTextChanged(String bodyText) {
+    return BodyTextChanged(
       bodyText,
     );
   }
 
-  _UrlChanged urlChanged(String url) {
-    return _UrlChanged(
+  UrlChanged urlChanged(String url) {
+    return UrlChanged(
       url,
     );
   }
 
-  _PollEndsPressed pollEndsPressed(
+  PollEndsPressed pollEndsPressed(
       {required Future<int?> Function(Days) showDays}) {
-    return _PollEndsPressed(
+    return PollEndsPressed(
       showDays: showDays,
     );
   }
 
-  _PollOptionAdded pollOptionAdded(String option) {
-    return _PollOptionAdded(
+  PollOptionAdded pollOptionAdded(String option) {
+    return PollOptionAdded(
       option,
     );
   }
 
-  _PollOptionEdited pollOptionEdited(int index, String option) {
-    return _PollOptionEdited(
+  PollOptionEdited pollOptionEdited(int index, String option) {
+    return PollOptionEdited(
       index,
       option,
     );
   }
 
-  _PollOptionDeleted pollOptionDeleted(int index) {
-    return _PollOptionDeleted(
+  PollOptionDeleted pollOptionDeleted(int index) {
+    return PollOptionDeleted(
       index,
     );
   }
 
-  _AddImageClicked addImageClicked() {
-    return const _AddImageClicked();
+  AddImageClicked addImageClicked() {
+    return const AddImageClicked();
   }
 
-  _ImageDeleted imageDeleted(String id) {
-    return _ImageDeleted(
+  ImageDeleted imageDeleted(String id) {
+    return ImageDeleted(
       id,
     );
   }
 
-  _RecoverLastDeletedImage recoverLastDeletedImage() {
-    return const _RecoverLastDeletedImage();
+  RecoverLastDeletedImage recoverLastDeletedImage() {
+    return const RecoverLastDeletedImage();
   }
 
-  _dPostPosted feedPosted() {
-    return const _dPostPosted();
+  PostPosted feedPosted() {
+    return const PostPosted();
   }
 }
 
@@ -135,35 +135,35 @@ mixin _$CreatePostEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -187,23 +187,23 @@ class _$CreatePostEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PostTypeChangedCopyWith<$Res> {
-  factory _$PostTypeChangedCopyWith(
-          _PostTypeChanged value, $Res Function(_PostTypeChanged) then) =
-      __$PostTypeChangedCopyWithImpl<$Res>;
+abstract class $PostTypeChangedCopyWith<$Res> {
+  factory $PostTypeChangedCopyWith(
+          PostTypeChanged value, $Res Function(PostTypeChanged) then) =
+      _$PostTypeChangedCopyWithImpl<$Res>;
   $Res call({int index, bool autofocus, Future<bool?> Function() showDialog});
 }
 
 /// @nodoc
-class __$PostTypeChangedCopyWithImpl<$Res>
+class _$PostTypeChangedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$PostTypeChangedCopyWith<$Res> {
-  __$PostTypeChangedCopyWithImpl(
-      _PostTypeChanged _value, $Res Function(_PostTypeChanged) _then)
-      : super(_value, (v) => _then(v as _PostTypeChanged));
+    implements $PostTypeChangedCopyWith<$Res> {
+  _$PostTypeChangedCopyWithImpl(
+      PostTypeChanged _value, $Res Function(PostTypeChanged) _then)
+      : super(_value, (v) => _then(v as PostTypeChanged));
 
   @override
-  _PostTypeChanged get _value => super._value as _PostTypeChanged;
+  PostTypeChanged get _value => super._value as PostTypeChanged;
 
   @override
   $Res call({
@@ -211,7 +211,7 @@ class __$PostTypeChangedCopyWithImpl<$Res>
     Object? autofocus = freezed,
     Object? showDialog = freezed,
   }) {
-    return _then(_PostTypeChanged(
+    return _then(PostTypeChanged(
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -230,8 +230,8 @@ class __$PostTypeChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PostTypeChanged implements _PostTypeChanged {
-  const _$_PostTypeChanged(
+class _$PostTypeChanged implements PostTypeChanged {
+  const _$PostTypeChanged(
       {required this.index, required this.autofocus, required this.showDialog});
 
   @override
@@ -249,7 +249,7 @@ class _$_PostTypeChanged implements _PostTypeChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PostTypeChanged &&
+        (other is PostTypeChanged &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)) &&
             (identical(other.autofocus, autofocus) ||
@@ -269,8 +269,8 @@ class _$_PostTypeChanged implements _PostTypeChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$PostTypeChangedCopyWith<_PostTypeChanged> get copyWith =>
-      __$PostTypeChangedCopyWithImpl<_PostTypeChanged>(this, _$identity);
+  $PostTypeChangedCopyWith<PostTypeChanged> get copyWith =>
+      _$PostTypeChangedCopyWithImpl<PostTypeChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -322,19 +322,19 @@ class _$_PostTypeChanged implements _PostTypeChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return feedTypeChanged(this);
   }
@@ -342,18 +342,18 @@ class _$_PostTypeChanged implements _PostTypeChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (feedTypeChanged != null) {
@@ -363,44 +363,44 @@ class _$_PostTypeChanged implements _PostTypeChanged {
   }
 }
 
-abstract class _PostTypeChanged implements CreatePostEvent {
-  const factory _PostTypeChanged(
+abstract class PostTypeChanged implements CreatePostEvent {
+  const factory PostTypeChanged(
       {required int index,
       required bool autofocus,
-      required Future<bool?> Function() showDialog}) = _$_PostTypeChanged;
+      required Future<bool?> Function() showDialog}) = _$PostTypeChanged;
 
   int get index => throw _privateConstructorUsedError;
   bool get autofocus => throw _privateConstructorUsedError;
   Future<bool?> Function() get showDialog => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PostTypeChangedCopyWith<_PostTypeChanged> get copyWith =>
+  $PostTypeChangedCopyWith<PostTypeChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$TitleChangedCopyWith<$Res> {
-  factory _$TitleChangedCopyWith(
-          _TitleChanged value, $Res Function(_TitleChanged) then) =
-      __$TitleChangedCopyWithImpl<$Res>;
+abstract class $TitleChangedCopyWith<$Res> {
+  factory $TitleChangedCopyWith(
+          TitleChanged value, $Res Function(TitleChanged) then) =
+      _$TitleChangedCopyWithImpl<$Res>;
   $Res call({String title});
 }
 
 /// @nodoc
-class __$TitleChangedCopyWithImpl<$Res>
+class _$TitleChangedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$TitleChangedCopyWith<$Res> {
-  __$TitleChangedCopyWithImpl(
-      _TitleChanged _value, $Res Function(_TitleChanged) _then)
-      : super(_value, (v) => _then(v as _TitleChanged));
+    implements $TitleChangedCopyWith<$Res> {
+  _$TitleChangedCopyWithImpl(
+      TitleChanged _value, $Res Function(TitleChanged) _then)
+      : super(_value, (v) => _then(v as TitleChanged));
 
   @override
-  _TitleChanged get _value => super._value as _TitleChanged;
+  TitleChanged get _value => super._value as TitleChanged;
 
   @override
   $Res call({
     Object? title = freezed,
   }) {
-    return _then(_TitleChanged(
+    return _then(TitleChanged(
       title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -411,8 +411,8 @@ class __$TitleChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_TitleChanged implements _TitleChanged {
-  const _$_TitleChanged(this.title);
+class _$TitleChanged implements TitleChanged {
+  const _$TitleChanged(this.title);
 
   @override
   final String title;
@@ -425,7 +425,7 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _TitleChanged &&
+        (other is TitleChanged &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)));
   }
@@ -436,8 +436,8 @@ class _$_TitleChanged implements _TitleChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$TitleChangedCopyWith<_TitleChanged> get copyWith =>
-      __$TitleChangedCopyWithImpl<_TitleChanged>(this, _$identity);
+  $TitleChangedCopyWith<TitleChanged> get copyWith =>
+      _$TitleChangedCopyWithImpl<TitleChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -489,19 +489,19 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return titleChanged(this);
   }
@@ -509,18 +509,18 @@ class _$_TitleChanged implements _TitleChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (titleChanged != null) {
@@ -530,39 +530,39 @@ class _$_TitleChanged implements _TitleChanged {
   }
 }
 
-abstract class _TitleChanged implements CreatePostEvent {
-  const factory _TitleChanged(String title) = _$_TitleChanged;
+abstract class TitleChanged implements CreatePostEvent {
+  const factory TitleChanged(String title) = _$TitleChanged;
 
   String get title => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$TitleChangedCopyWith<_TitleChanged> get copyWith =>
+  $TitleChangedCopyWith<TitleChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$BodyTextChangedCopyWith<$Res> {
-  factory _$BodyTextChangedCopyWith(
-          _BodyTextChanged value, $Res Function(_BodyTextChanged) then) =
-      __$BodyTextChangedCopyWithImpl<$Res>;
+abstract class $BodyTextChangedCopyWith<$Res> {
+  factory $BodyTextChangedCopyWith(
+          BodyTextChanged value, $Res Function(BodyTextChanged) then) =
+      _$BodyTextChangedCopyWithImpl<$Res>;
   $Res call({String bodyText});
 }
 
 /// @nodoc
-class __$BodyTextChangedCopyWithImpl<$Res>
+class _$BodyTextChangedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$BodyTextChangedCopyWith<$Res> {
-  __$BodyTextChangedCopyWithImpl(
-      _BodyTextChanged _value, $Res Function(_BodyTextChanged) _then)
-      : super(_value, (v) => _then(v as _BodyTextChanged));
+    implements $BodyTextChangedCopyWith<$Res> {
+  _$BodyTextChangedCopyWithImpl(
+      BodyTextChanged _value, $Res Function(BodyTextChanged) _then)
+      : super(_value, (v) => _then(v as BodyTextChanged));
 
   @override
-  _BodyTextChanged get _value => super._value as _BodyTextChanged;
+  BodyTextChanged get _value => super._value as BodyTextChanged;
 
   @override
   $Res call({
     Object? bodyText = freezed,
   }) {
-    return _then(_BodyTextChanged(
+    return _then(BodyTextChanged(
       bodyText == freezed
           ? _value.bodyText
           : bodyText // ignore: cast_nullable_to_non_nullable
@@ -573,8 +573,8 @@ class __$BodyTextChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BodyTextChanged implements _BodyTextChanged {
-  const _$_BodyTextChanged(this.bodyText);
+class _$BodyTextChanged implements BodyTextChanged {
+  const _$BodyTextChanged(this.bodyText);
 
   @override
   final String bodyText;
@@ -587,7 +587,7 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _BodyTextChanged &&
+        (other is BodyTextChanged &&
             (identical(other.bodyText, bodyText) ||
                 const DeepCollectionEquality()
                     .equals(other.bodyText, bodyText)));
@@ -599,8 +599,8 @@ class _$_BodyTextChanged implements _BodyTextChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$BodyTextChangedCopyWith<_BodyTextChanged> get copyWith =>
-      __$BodyTextChangedCopyWithImpl<_BodyTextChanged>(this, _$identity);
+  $BodyTextChangedCopyWith<BodyTextChanged> get copyWith =>
+      _$BodyTextChangedCopyWithImpl<BodyTextChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -652,19 +652,19 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return bodyTextChanged(this);
   }
@@ -672,18 +672,18 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (bodyTextChanged != null) {
@@ -693,39 +693,37 @@ class _$_BodyTextChanged implements _BodyTextChanged {
   }
 }
 
-abstract class _BodyTextChanged implements CreatePostEvent {
-  const factory _BodyTextChanged(String bodyText) = _$_BodyTextChanged;
+abstract class BodyTextChanged implements CreatePostEvent {
+  const factory BodyTextChanged(String bodyText) = _$BodyTextChanged;
 
   String get bodyText => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$BodyTextChangedCopyWith<_BodyTextChanged> get copyWith =>
+  $BodyTextChangedCopyWith<BodyTextChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$UrlChangedCopyWith<$Res> {
-  factory _$UrlChangedCopyWith(
-          _UrlChanged value, $Res Function(_UrlChanged) then) =
-      __$UrlChangedCopyWithImpl<$Res>;
+abstract class $UrlChangedCopyWith<$Res> {
+  factory $UrlChangedCopyWith(
+          UrlChanged value, $Res Function(UrlChanged) then) =
+      _$UrlChangedCopyWithImpl<$Res>;
   $Res call({String url});
 }
 
 /// @nodoc
-class __$UrlChangedCopyWithImpl<$Res>
-    extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$UrlChangedCopyWith<$Res> {
-  __$UrlChangedCopyWithImpl(
-      _UrlChanged _value, $Res Function(_UrlChanged) _then)
-      : super(_value, (v) => _then(v as _UrlChanged));
+class _$UrlChangedCopyWithImpl<$Res> extends _$CreatePostEventCopyWithImpl<$Res>
+    implements $UrlChangedCopyWith<$Res> {
+  _$UrlChangedCopyWithImpl(UrlChanged _value, $Res Function(UrlChanged) _then)
+      : super(_value, (v) => _then(v as UrlChanged));
 
   @override
-  _UrlChanged get _value => super._value as _UrlChanged;
+  UrlChanged get _value => super._value as UrlChanged;
 
   @override
   $Res call({
     Object? url = freezed,
   }) {
-    return _then(_UrlChanged(
+    return _then(UrlChanged(
       url == freezed
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
@@ -736,8 +734,8 @@ class __$UrlChangedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_UrlChanged implements _UrlChanged {
-  const _$_UrlChanged(this.url);
+class _$UrlChanged implements UrlChanged {
+  const _$UrlChanged(this.url);
 
   @override
   final String url;
@@ -750,7 +748,7 @@ class _$_UrlChanged implements _UrlChanged {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UrlChanged &&
+        (other is UrlChanged &&
             (identical(other.url, url) ||
                 const DeepCollectionEquality().equals(other.url, url)));
   }
@@ -761,8 +759,8 @@ class _$_UrlChanged implements _UrlChanged {
 
   @JsonKey(ignore: true)
   @override
-  _$UrlChangedCopyWith<_UrlChanged> get copyWith =>
-      __$UrlChangedCopyWithImpl<_UrlChanged>(this, _$identity);
+  $UrlChangedCopyWith<UrlChanged> get copyWith =>
+      _$UrlChangedCopyWithImpl<UrlChanged>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -814,19 +812,19 @@ class _$_UrlChanged implements _UrlChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return urlChanged(this);
   }
@@ -834,18 +832,18 @@ class _$_UrlChanged implements _UrlChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (urlChanged != null) {
@@ -855,39 +853,39 @@ class _$_UrlChanged implements _UrlChanged {
   }
 }
 
-abstract class _UrlChanged implements CreatePostEvent {
-  const factory _UrlChanged(String url) = _$_UrlChanged;
+abstract class UrlChanged implements CreatePostEvent {
+  const factory UrlChanged(String url) = _$UrlChanged;
 
   String get url => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$UrlChangedCopyWith<_UrlChanged> get copyWith =>
+  $UrlChangedCopyWith<UrlChanged> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$PollEndsPressedCopyWith<$Res> {
-  factory _$PollEndsPressedCopyWith(
-          _PollEndsPressed value, $Res Function(_PollEndsPressed) then) =
-      __$PollEndsPressedCopyWithImpl<$Res>;
+abstract class $PollEndsPressedCopyWith<$Res> {
+  factory $PollEndsPressedCopyWith(
+          PollEndsPressed value, $Res Function(PollEndsPressed) then) =
+      _$PollEndsPressedCopyWithImpl<$Res>;
   $Res call({Future<int?> Function(Days) showDays});
 }
 
 /// @nodoc
-class __$PollEndsPressedCopyWithImpl<$Res>
+class _$PollEndsPressedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$PollEndsPressedCopyWith<$Res> {
-  __$PollEndsPressedCopyWithImpl(
-      _PollEndsPressed _value, $Res Function(_PollEndsPressed) _then)
-      : super(_value, (v) => _then(v as _PollEndsPressed));
+    implements $PollEndsPressedCopyWith<$Res> {
+  _$PollEndsPressedCopyWithImpl(
+      PollEndsPressed _value, $Res Function(PollEndsPressed) _then)
+      : super(_value, (v) => _then(v as PollEndsPressed));
 
   @override
-  _PollEndsPressed get _value => super._value as _PollEndsPressed;
+  PollEndsPressed get _value => super._value as PollEndsPressed;
 
   @override
   $Res call({
     Object? showDays = freezed,
   }) {
-    return _then(_PollEndsPressed(
+    return _then(PollEndsPressed(
       showDays: showDays == freezed
           ? _value.showDays
           : showDays // ignore: cast_nullable_to_non_nullable
@@ -898,8 +896,8 @@ class __$PollEndsPressedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PollEndsPressed implements _PollEndsPressed {
-  const _$_PollEndsPressed({required this.showDays});
+class _$PollEndsPressed implements PollEndsPressed {
+  const _$PollEndsPressed({required this.showDays});
 
   @override
   final Future<int?> Function(Days) showDays;
@@ -912,7 +910,7 @@ class _$_PollEndsPressed implements _PollEndsPressed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PollEndsPressed &&
+        (other is PollEndsPressed &&
             (identical(other.showDays, showDays) ||
                 const DeepCollectionEquality()
                     .equals(other.showDays, showDays)));
@@ -924,8 +922,8 @@ class _$_PollEndsPressed implements _PollEndsPressed {
 
   @JsonKey(ignore: true)
   @override
-  _$PollEndsPressedCopyWith<_PollEndsPressed> get copyWith =>
-      __$PollEndsPressedCopyWithImpl<_PollEndsPressed>(this, _$identity);
+  $PollEndsPressedCopyWith<PollEndsPressed> get copyWith =>
+      _$PollEndsPressedCopyWithImpl<PollEndsPressed>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -977,19 +975,19 @@ class _$_PollEndsPressed implements _PollEndsPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return pollEndsPressed(this);
   }
@@ -997,18 +995,18 @@ class _$_PollEndsPressed implements _PollEndsPressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (pollEndsPressed != null) {
@@ -1018,41 +1016,41 @@ class _$_PollEndsPressed implements _PollEndsPressed {
   }
 }
 
-abstract class _PollEndsPressed implements CreatePostEvent {
-  const factory _PollEndsPressed(
-      {required Future<int?> Function(Days) showDays}) = _$_PollEndsPressed;
+abstract class PollEndsPressed implements CreatePostEvent {
+  const factory PollEndsPressed(
+      {required Future<int?> Function(Days) showDays}) = _$PollEndsPressed;
 
   Future<int?> Function(Days) get showDays =>
       throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PollEndsPressedCopyWith<_PollEndsPressed> get copyWith =>
+  $PollEndsPressedCopyWith<PollEndsPressed> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$PollOptionAddedCopyWith<$Res> {
-  factory _$PollOptionAddedCopyWith(
-          _PollOptionAdded value, $Res Function(_PollOptionAdded) then) =
-      __$PollOptionAddedCopyWithImpl<$Res>;
+abstract class $PollOptionAddedCopyWith<$Res> {
+  factory $PollOptionAddedCopyWith(
+          PollOptionAdded value, $Res Function(PollOptionAdded) then) =
+      _$PollOptionAddedCopyWithImpl<$Res>;
   $Res call({String option});
 }
 
 /// @nodoc
-class __$PollOptionAddedCopyWithImpl<$Res>
+class _$PollOptionAddedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$PollOptionAddedCopyWith<$Res> {
-  __$PollOptionAddedCopyWithImpl(
-      _PollOptionAdded _value, $Res Function(_PollOptionAdded) _then)
-      : super(_value, (v) => _then(v as _PollOptionAdded));
+    implements $PollOptionAddedCopyWith<$Res> {
+  _$PollOptionAddedCopyWithImpl(
+      PollOptionAdded _value, $Res Function(PollOptionAdded) _then)
+      : super(_value, (v) => _then(v as PollOptionAdded));
 
   @override
-  _PollOptionAdded get _value => super._value as _PollOptionAdded;
+  PollOptionAdded get _value => super._value as PollOptionAdded;
 
   @override
   $Res call({
     Object? option = freezed,
   }) {
-    return _then(_PollOptionAdded(
+    return _then(PollOptionAdded(
       option == freezed
           ? _value.option
           : option // ignore: cast_nullable_to_non_nullable
@@ -1063,8 +1061,8 @@ class __$PollOptionAddedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PollOptionAdded implements _PollOptionAdded {
-  const _$_PollOptionAdded(this.option);
+class _$PollOptionAdded implements PollOptionAdded {
+  const _$PollOptionAdded(this.option);
 
   @override
   final String option;
@@ -1077,7 +1075,7 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PollOptionAdded &&
+        (other is PollOptionAdded &&
             (identical(other.option, option) ||
                 const DeepCollectionEquality().equals(other.option, option)));
   }
@@ -1088,8 +1086,8 @@ class _$_PollOptionAdded implements _PollOptionAdded {
 
   @JsonKey(ignore: true)
   @override
-  _$PollOptionAddedCopyWith<_PollOptionAdded> get copyWith =>
-      __$PollOptionAddedCopyWithImpl<_PollOptionAdded>(this, _$identity);
+  $PollOptionAddedCopyWith<PollOptionAdded> get copyWith =>
+      _$PollOptionAddedCopyWithImpl<PollOptionAdded>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1141,19 +1139,19 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return pollOptionAdded(this);
   }
@@ -1161,18 +1159,18 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (pollOptionAdded != null) {
@@ -1182,40 +1180,40 @@ class _$_PollOptionAdded implements _PollOptionAdded {
   }
 }
 
-abstract class _PollOptionAdded implements CreatePostEvent {
-  const factory _PollOptionAdded(String option) = _$_PollOptionAdded;
+abstract class PollOptionAdded implements CreatePostEvent {
+  const factory PollOptionAdded(String option) = _$PollOptionAdded;
 
   String get option => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PollOptionAddedCopyWith<_PollOptionAdded> get copyWith =>
+  $PollOptionAddedCopyWith<PollOptionAdded> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$PollOptionEditedCopyWith<$Res> {
-  factory _$PollOptionEditedCopyWith(
-          _PollOptionEdited value, $Res Function(_PollOptionEdited) then) =
-      __$PollOptionEditedCopyWithImpl<$Res>;
+abstract class $PollOptionEditedCopyWith<$Res> {
+  factory $PollOptionEditedCopyWith(
+          PollOptionEdited value, $Res Function(PollOptionEdited) then) =
+      _$PollOptionEditedCopyWithImpl<$Res>;
   $Res call({int index, String option});
 }
 
 /// @nodoc
-class __$PollOptionEditedCopyWithImpl<$Res>
+class _$PollOptionEditedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$PollOptionEditedCopyWith<$Res> {
-  __$PollOptionEditedCopyWithImpl(
-      _PollOptionEdited _value, $Res Function(_PollOptionEdited) _then)
-      : super(_value, (v) => _then(v as _PollOptionEdited));
+    implements $PollOptionEditedCopyWith<$Res> {
+  _$PollOptionEditedCopyWithImpl(
+      PollOptionEdited _value, $Res Function(PollOptionEdited) _then)
+      : super(_value, (v) => _then(v as PollOptionEdited));
 
   @override
-  _PollOptionEdited get _value => super._value as _PollOptionEdited;
+  PollOptionEdited get _value => super._value as PollOptionEdited;
 
   @override
   $Res call({
     Object? index = freezed,
     Object? option = freezed,
   }) {
-    return _then(_PollOptionEdited(
+    return _then(PollOptionEdited(
       index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -1230,8 +1228,8 @@ class __$PollOptionEditedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PollOptionEdited implements _PollOptionEdited {
-  const _$_PollOptionEdited(this.index, this.option);
+class _$PollOptionEdited implements PollOptionEdited {
+  const _$PollOptionEdited(this.index, this.option);
 
   @override
   final int index;
@@ -1246,7 +1244,7 @@ class _$_PollOptionEdited implements _PollOptionEdited {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PollOptionEdited &&
+        (other is PollOptionEdited &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)) &&
             (identical(other.option, option) ||
@@ -1261,8 +1259,8 @@ class _$_PollOptionEdited implements _PollOptionEdited {
 
   @JsonKey(ignore: true)
   @override
-  _$PollOptionEditedCopyWith<_PollOptionEdited> get copyWith =>
-      __$PollOptionEditedCopyWithImpl<_PollOptionEdited>(this, _$identity);
+  $PollOptionEditedCopyWith<PollOptionEdited> get copyWith =>
+      _$PollOptionEditedCopyWithImpl<PollOptionEdited>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1314,19 +1312,19 @@ class _$_PollOptionEdited implements _PollOptionEdited {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return pollOptionEdited(this);
   }
@@ -1334,18 +1332,18 @@ class _$_PollOptionEdited implements _PollOptionEdited {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (pollOptionEdited != null) {
@@ -1355,41 +1353,40 @@ class _$_PollOptionEdited implements _PollOptionEdited {
   }
 }
 
-abstract class _PollOptionEdited implements CreatePostEvent {
-  const factory _PollOptionEdited(int index, String option) =
-      _$_PollOptionEdited;
+abstract class PollOptionEdited implements CreatePostEvent {
+  const factory PollOptionEdited(int index, String option) = _$PollOptionEdited;
 
   int get index => throw _privateConstructorUsedError;
   String get option => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PollOptionEditedCopyWith<_PollOptionEdited> get copyWith =>
+  $PollOptionEditedCopyWith<PollOptionEdited> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$PollOptionDeletedCopyWith<$Res> {
-  factory _$PollOptionDeletedCopyWith(
-          _PollOptionDeleted value, $Res Function(_PollOptionDeleted) then) =
-      __$PollOptionDeletedCopyWithImpl<$Res>;
+abstract class $PollOptionDeletedCopyWith<$Res> {
+  factory $PollOptionDeletedCopyWith(
+          PollOptionDeleted value, $Res Function(PollOptionDeleted) then) =
+      _$PollOptionDeletedCopyWithImpl<$Res>;
   $Res call({int index});
 }
 
 /// @nodoc
-class __$PollOptionDeletedCopyWithImpl<$Res>
+class _$PollOptionDeletedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$PollOptionDeletedCopyWith<$Res> {
-  __$PollOptionDeletedCopyWithImpl(
-      _PollOptionDeleted _value, $Res Function(_PollOptionDeleted) _then)
-      : super(_value, (v) => _then(v as _PollOptionDeleted));
+    implements $PollOptionDeletedCopyWith<$Res> {
+  _$PollOptionDeletedCopyWithImpl(
+      PollOptionDeleted _value, $Res Function(PollOptionDeleted) _then)
+      : super(_value, (v) => _then(v as PollOptionDeleted));
 
   @override
-  _PollOptionDeleted get _value => super._value as _PollOptionDeleted;
+  PollOptionDeleted get _value => super._value as PollOptionDeleted;
 
   @override
   $Res call({
     Object? index = freezed,
   }) {
-    return _then(_PollOptionDeleted(
+    return _then(PollOptionDeleted(
       index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -1400,8 +1397,8 @@ class __$PollOptionDeletedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PollOptionDeleted implements _PollOptionDeleted {
-  const _$_PollOptionDeleted(this.index);
+class _$PollOptionDeleted implements PollOptionDeleted {
+  const _$PollOptionDeleted(this.index);
 
   @override
   final int index;
@@ -1414,7 +1411,7 @@ class _$_PollOptionDeleted implements _PollOptionDeleted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _PollOptionDeleted &&
+        (other is PollOptionDeleted &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)));
   }
@@ -1425,8 +1422,8 @@ class _$_PollOptionDeleted implements _PollOptionDeleted {
 
   @JsonKey(ignore: true)
   @override
-  _$PollOptionDeletedCopyWith<_PollOptionDeleted> get copyWith =>
-      __$PollOptionDeletedCopyWithImpl<_PollOptionDeleted>(this, _$identity);
+  $PollOptionDeletedCopyWith<PollOptionDeleted> get copyWith =>
+      _$PollOptionDeletedCopyWithImpl<PollOptionDeleted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1478,19 +1475,19 @@ class _$_PollOptionDeleted implements _PollOptionDeleted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return pollOptionDeleted(this);
   }
@@ -1498,18 +1495,18 @@ class _$_PollOptionDeleted implements _PollOptionDeleted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (pollOptionDeleted != null) {
@@ -1519,38 +1516,38 @@ class _$_PollOptionDeleted implements _PollOptionDeleted {
   }
 }
 
-abstract class _PollOptionDeleted implements CreatePostEvent {
-  const factory _PollOptionDeleted(int index) = _$_PollOptionDeleted;
+abstract class PollOptionDeleted implements CreatePostEvent {
+  const factory PollOptionDeleted(int index) = _$PollOptionDeleted;
 
   int get index => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$PollOptionDeletedCopyWith<_PollOptionDeleted> get copyWith =>
+  $PollOptionDeletedCopyWith<PollOptionDeleted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$AddImageClickedCopyWith<$Res> {
-  factory _$AddImageClickedCopyWith(
-          _AddImageClicked value, $Res Function(_AddImageClicked) then) =
-      __$AddImageClickedCopyWithImpl<$Res>;
+abstract class $AddImageClickedCopyWith<$Res> {
+  factory $AddImageClickedCopyWith(
+          AddImageClicked value, $Res Function(AddImageClicked) then) =
+      _$AddImageClickedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$AddImageClickedCopyWithImpl<$Res>
+class _$AddImageClickedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$AddImageClickedCopyWith<$Res> {
-  __$AddImageClickedCopyWithImpl(
-      _AddImageClicked _value, $Res Function(_AddImageClicked) _then)
-      : super(_value, (v) => _then(v as _AddImageClicked));
+    implements $AddImageClickedCopyWith<$Res> {
+  _$AddImageClickedCopyWithImpl(
+      AddImageClicked _value, $Res Function(AddImageClicked) _then)
+      : super(_value, (v) => _then(v as AddImageClicked));
 
   @override
-  _AddImageClicked get _value => super._value as _AddImageClicked;
+  AddImageClicked get _value => super._value as AddImageClicked;
 }
 
 /// @nodoc
 
-class _$_AddImageClicked implements _AddImageClicked {
-  const _$_AddImageClicked();
+class _$AddImageClicked implements AddImageClicked {
+  const _$AddImageClicked();
 
   @override
   String toString() {
@@ -1559,7 +1556,7 @@ class _$_AddImageClicked implements _AddImageClicked {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _AddImageClicked);
+    return identical(this, other) || (other is AddImageClicked);
   }
 
   @override
@@ -1615,19 +1612,19 @@ class _$_AddImageClicked implements _AddImageClicked {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return addImageClicked(this);
   }
@@ -1635,18 +1632,18 @@ class _$_AddImageClicked implements _AddImageClicked {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (addImageClicked != null) {
@@ -1656,34 +1653,34 @@ class _$_AddImageClicked implements _AddImageClicked {
   }
 }
 
-abstract class _AddImageClicked implements CreatePostEvent {
-  const factory _AddImageClicked() = _$_AddImageClicked;
+abstract class AddImageClicked implements CreatePostEvent {
+  const factory AddImageClicked() = _$AddImageClicked;
 }
 
 /// @nodoc
-abstract class _$ImageDeletedCopyWith<$Res> {
-  factory _$ImageDeletedCopyWith(
-          _ImageDeleted value, $Res Function(_ImageDeleted) then) =
-      __$ImageDeletedCopyWithImpl<$Res>;
+abstract class $ImageDeletedCopyWith<$Res> {
+  factory $ImageDeletedCopyWith(
+          ImageDeleted value, $Res Function(ImageDeleted) then) =
+      _$ImageDeletedCopyWithImpl<$Res>;
   $Res call({String id});
 }
 
 /// @nodoc
-class __$ImageDeletedCopyWithImpl<$Res>
+class _$ImageDeletedCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$ImageDeletedCopyWith<$Res> {
-  __$ImageDeletedCopyWithImpl(
-      _ImageDeleted _value, $Res Function(_ImageDeleted) _then)
-      : super(_value, (v) => _then(v as _ImageDeleted));
+    implements $ImageDeletedCopyWith<$Res> {
+  _$ImageDeletedCopyWithImpl(
+      ImageDeleted _value, $Res Function(ImageDeleted) _then)
+      : super(_value, (v) => _then(v as ImageDeleted));
 
   @override
-  _ImageDeleted get _value => super._value as _ImageDeleted;
+  ImageDeleted get _value => super._value as ImageDeleted;
 
   @override
   $Res call({
     Object? id = freezed,
   }) {
-    return _then(_ImageDeleted(
+    return _then(ImageDeleted(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1694,8 +1691,8 @@ class __$ImageDeletedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ImageDeleted implements _ImageDeleted {
-  const _$_ImageDeleted(this.id);
+class _$ImageDeleted implements ImageDeleted {
+  const _$ImageDeleted(this.id);
 
   @override
   final String id;
@@ -1708,7 +1705,7 @@ class _$_ImageDeleted implements _ImageDeleted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ImageDeleted &&
+        (other is ImageDeleted &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)));
   }
@@ -1719,8 +1716,8 @@ class _$_ImageDeleted implements _ImageDeleted {
 
   @JsonKey(ignore: true)
   @override
-  _$ImageDeletedCopyWith<_ImageDeleted> get copyWith =>
-      __$ImageDeletedCopyWithImpl<_ImageDeleted>(this, _$identity);
+  $ImageDeletedCopyWith<ImageDeleted> get copyWith =>
+      _$ImageDeletedCopyWithImpl<ImageDeleted>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1772,19 +1769,19 @@ class _$_ImageDeleted implements _ImageDeleted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return imageDeleted(this);
   }
@@ -1792,18 +1789,18 @@ class _$_ImageDeleted implements _ImageDeleted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (imageDeleted != null) {
@@ -1813,39 +1810,38 @@ class _$_ImageDeleted implements _ImageDeleted {
   }
 }
 
-abstract class _ImageDeleted implements CreatePostEvent {
-  const factory _ImageDeleted(String id) = _$_ImageDeleted;
+abstract class ImageDeleted implements CreatePostEvent {
+  const factory ImageDeleted(String id) = _$ImageDeleted;
 
   String get id => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$ImageDeletedCopyWith<_ImageDeleted> get copyWith =>
+  $ImageDeletedCopyWith<ImageDeleted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$RecoverLastDeletedImageCopyWith<$Res> {
-  factory _$RecoverLastDeletedImageCopyWith(_RecoverLastDeletedImage value,
-          $Res Function(_RecoverLastDeletedImage) then) =
-      __$RecoverLastDeletedImageCopyWithImpl<$Res>;
+abstract class $RecoverLastDeletedImageCopyWith<$Res> {
+  factory $RecoverLastDeletedImageCopyWith(RecoverLastDeletedImage value,
+          $Res Function(RecoverLastDeletedImage) then) =
+      _$RecoverLastDeletedImageCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$RecoverLastDeletedImageCopyWithImpl<$Res>
+class _$RecoverLastDeletedImageCopyWithImpl<$Res>
     extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$RecoverLastDeletedImageCopyWith<$Res> {
-  __$RecoverLastDeletedImageCopyWithImpl(_RecoverLastDeletedImage _value,
-      $Res Function(_RecoverLastDeletedImage) _then)
-      : super(_value, (v) => _then(v as _RecoverLastDeletedImage));
+    implements $RecoverLastDeletedImageCopyWith<$Res> {
+  _$RecoverLastDeletedImageCopyWithImpl(RecoverLastDeletedImage _value,
+      $Res Function(RecoverLastDeletedImage) _then)
+      : super(_value, (v) => _then(v as RecoverLastDeletedImage));
 
   @override
-  _RecoverLastDeletedImage get _value =>
-      super._value as _RecoverLastDeletedImage;
+  RecoverLastDeletedImage get _value => super._value as RecoverLastDeletedImage;
 }
 
 /// @nodoc
 
-class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
-  const _$_RecoverLastDeletedImage();
+class _$RecoverLastDeletedImage implements RecoverLastDeletedImage {
+  const _$RecoverLastDeletedImage();
 
   @override
   String toString() {
@@ -1854,7 +1850,7 @@ class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _RecoverLastDeletedImage);
+    return identical(this, other) || (other is RecoverLastDeletedImage);
   }
 
   @override
@@ -1910,19 +1906,19 @@ class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return recoverLastDeletedImage(this);
   }
@@ -1930,18 +1926,18 @@ class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (recoverLastDeletedImage != null) {
@@ -1951,33 +1947,31 @@ class _$_RecoverLastDeletedImage implements _RecoverLastDeletedImage {
   }
 }
 
-abstract class _RecoverLastDeletedImage implements CreatePostEvent {
-  const factory _RecoverLastDeletedImage() = _$_RecoverLastDeletedImage;
+abstract class RecoverLastDeletedImage implements CreatePostEvent {
+  const factory RecoverLastDeletedImage() = _$RecoverLastDeletedImage;
 }
 
 /// @nodoc
-abstract class _$dPostPostedCopyWith<$Res> {
-  factory _$dPostPostedCopyWith(
-          _dPostPosted value, $Res Function(_dPostPosted) then) =
-      __$dPostPostedCopyWithImpl<$Res>;
+abstract class $PostPostedCopyWith<$Res> {
+  factory $PostPostedCopyWith(
+          PostPosted value, $Res Function(PostPosted) then) =
+      _$PostPostedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$dPostPostedCopyWithImpl<$Res>
-    extends _$CreatePostEventCopyWithImpl<$Res>
-    implements _$dPostPostedCopyWith<$Res> {
-  __$dPostPostedCopyWithImpl(
-      _dPostPosted _value, $Res Function(_dPostPosted) _then)
-      : super(_value, (v) => _then(v as _dPostPosted));
+class _$PostPostedCopyWithImpl<$Res> extends _$CreatePostEventCopyWithImpl<$Res>
+    implements $PostPostedCopyWith<$Res> {
+  _$PostPostedCopyWithImpl(PostPosted _value, $Res Function(PostPosted) _then)
+      : super(_value, (v) => _then(v as PostPosted));
 
   @override
-  _dPostPosted get _value => super._value as _dPostPosted;
+  PostPosted get _value => super._value as PostPosted;
 }
 
 /// @nodoc
 
-class _$_dPostPosted implements _dPostPosted {
-  const _$_dPostPosted();
+class _$PostPosted implements PostPosted {
+  const _$PostPosted();
 
   @override
   String toString() {
@@ -1986,7 +1980,7 @@ class _$_dPostPosted implements _dPostPosted {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _dPostPosted);
+    return identical(this, other) || (other is PostPosted);
   }
 
   @override
@@ -2042,19 +2036,19 @@ class _$_dPostPosted implements _dPostPosted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_PostTypeChanged value) feedTypeChanged,
-    required TResult Function(_TitleChanged value) titleChanged,
-    required TResult Function(_BodyTextChanged value) bodyTextChanged,
-    required TResult Function(_UrlChanged value) urlChanged,
-    required TResult Function(_PollEndsPressed value) pollEndsPressed,
-    required TResult Function(_PollOptionAdded value) pollOptionAdded,
-    required TResult Function(_PollOptionEdited value) pollOptionEdited,
-    required TResult Function(_PollOptionDeleted value) pollOptionDeleted,
-    required TResult Function(_AddImageClicked value) addImageClicked,
-    required TResult Function(_ImageDeleted value) imageDeleted,
-    required TResult Function(_RecoverLastDeletedImage value)
+    required TResult Function(PostTypeChanged value) feedTypeChanged,
+    required TResult Function(TitleChanged value) titleChanged,
+    required TResult Function(BodyTextChanged value) bodyTextChanged,
+    required TResult Function(UrlChanged value) urlChanged,
+    required TResult Function(PollEndsPressed value) pollEndsPressed,
+    required TResult Function(PollOptionAdded value) pollOptionAdded,
+    required TResult Function(PollOptionEdited value) pollOptionEdited,
+    required TResult Function(PollOptionDeleted value) pollOptionDeleted,
+    required TResult Function(AddImageClicked value) addImageClicked,
+    required TResult Function(ImageDeleted value) imageDeleted,
+    required TResult Function(RecoverLastDeletedImage value)
         recoverLastDeletedImage,
-    required TResult Function(_dPostPosted value) feedPosted,
+    required TResult Function(PostPosted value) feedPosted,
   }) {
     return feedPosted(this);
   }
@@ -2062,18 +2056,18 @@ class _$_dPostPosted implements _dPostPosted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_PostTypeChanged value)? feedTypeChanged,
-    TResult Function(_TitleChanged value)? titleChanged,
-    TResult Function(_BodyTextChanged value)? bodyTextChanged,
-    TResult Function(_UrlChanged value)? urlChanged,
-    TResult Function(_PollEndsPressed value)? pollEndsPressed,
-    TResult Function(_PollOptionAdded value)? pollOptionAdded,
-    TResult Function(_PollOptionEdited value)? pollOptionEdited,
-    TResult Function(_PollOptionDeleted value)? pollOptionDeleted,
-    TResult Function(_AddImageClicked value)? addImageClicked,
-    TResult Function(_ImageDeleted value)? imageDeleted,
-    TResult Function(_RecoverLastDeletedImage value)? recoverLastDeletedImage,
-    TResult Function(_dPostPosted value)? feedPosted,
+    TResult Function(PostTypeChanged value)? feedTypeChanged,
+    TResult Function(TitleChanged value)? titleChanged,
+    TResult Function(BodyTextChanged value)? bodyTextChanged,
+    TResult Function(UrlChanged value)? urlChanged,
+    TResult Function(PollEndsPressed value)? pollEndsPressed,
+    TResult Function(PollOptionAdded value)? pollOptionAdded,
+    TResult Function(PollOptionEdited value)? pollOptionEdited,
+    TResult Function(PollOptionDeleted value)? pollOptionDeleted,
+    TResult Function(AddImageClicked value)? addImageClicked,
+    TResult Function(ImageDeleted value)? imageDeleted,
+    TResult Function(RecoverLastDeletedImage value)? recoverLastDeletedImage,
+    TResult Function(PostPosted value)? feedPosted,
     required TResult orElse(),
   }) {
     if (feedPosted != null) {
@@ -2083,8 +2077,8 @@ class _$_dPostPosted implements _dPostPosted {
   }
 }
 
-abstract class _dPostPosted implements CreatePostEvent {
-  const factory _dPostPosted() = _$_dPostPosted;
+abstract class PostPosted implements CreatePostEvent {
+  const factory PostPosted() = _$PostPosted;
 }
 
 /// @nodoc

@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PostContentEventTearOff {
   const _$PostContentEventTearOff();
 
-  _MetaDataFetchingStarted metaDataFetchinStarted(String postId) {
-    return _MetaDataFetchingStarted(
+  MetaDataFetchingStarted metaDataFetchinStarted(String postId) {
+    return MetaDataFetchingStarted(
       postId,
     );
   }
@@ -43,13 +43,13 @@ mixin _$PostContentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_MetaDataFetchingStarted value)
+    required TResult Function(MetaDataFetchingStarted value)
         metaDataFetchinStarted,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_MetaDataFetchingStarted value)? metaDataFetchinStarted,
+    TResult Function(MetaDataFetchingStarted value)? metaDataFetchinStarted,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -90,32 +90,31 @@ class _$PostContentEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$MetaDataFetchingStartedCopyWith<$Res>
+abstract class $MetaDataFetchingStartedCopyWith<$Res>
     implements $PostContentEventCopyWith<$Res> {
-  factory _$MetaDataFetchingStartedCopyWith(_MetaDataFetchingStarted value,
-          $Res Function(_MetaDataFetchingStarted) then) =
-      __$MetaDataFetchingStartedCopyWithImpl<$Res>;
+  factory $MetaDataFetchingStartedCopyWith(MetaDataFetchingStarted value,
+          $Res Function(MetaDataFetchingStarted) then) =
+      _$MetaDataFetchingStartedCopyWithImpl<$Res>;
   @override
   $Res call({String postId});
 }
 
 /// @nodoc
-class __$MetaDataFetchingStartedCopyWithImpl<$Res>
+class _$MetaDataFetchingStartedCopyWithImpl<$Res>
     extends _$PostContentEventCopyWithImpl<$Res>
-    implements _$MetaDataFetchingStartedCopyWith<$Res> {
-  __$MetaDataFetchingStartedCopyWithImpl(_MetaDataFetchingStarted _value,
-      $Res Function(_MetaDataFetchingStarted) _then)
-      : super(_value, (v) => _then(v as _MetaDataFetchingStarted));
+    implements $MetaDataFetchingStartedCopyWith<$Res> {
+  _$MetaDataFetchingStartedCopyWithImpl(MetaDataFetchingStarted _value,
+      $Res Function(MetaDataFetchingStarted) _then)
+      : super(_value, (v) => _then(v as MetaDataFetchingStarted));
 
   @override
-  _MetaDataFetchingStarted get _value =>
-      super._value as _MetaDataFetchingStarted;
+  MetaDataFetchingStarted get _value => super._value as MetaDataFetchingStarted;
 
   @override
   $Res call({
     Object? postId = freezed,
   }) {
-    return _then(_MetaDataFetchingStarted(
+    return _then(MetaDataFetchingStarted(
       postId == freezed
           ? _value.postId
           : postId // ignore: cast_nullable_to_non_nullable
@@ -126,8 +125,8 @@ class __$MetaDataFetchingStartedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
-  const _$_MetaDataFetchingStarted(this.postId);
+class _$MetaDataFetchingStarted implements MetaDataFetchingStarted {
+  const _$MetaDataFetchingStarted(this.postId);
 
   @override
   final String postId;
@@ -140,7 +139,7 @@ class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _MetaDataFetchingStarted &&
+        (other is MetaDataFetchingStarted &&
             (identical(other.postId, postId) ||
                 const DeepCollectionEquality().equals(other.postId, postId)));
   }
@@ -151,8 +150,8 @@ class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
 
   @JsonKey(ignore: true)
   @override
-  _$MetaDataFetchingStartedCopyWith<_MetaDataFetchingStarted> get copyWith =>
-      __$MetaDataFetchingStartedCopyWithImpl<_MetaDataFetchingStarted>(
+  $MetaDataFetchingStartedCopyWith<MetaDataFetchingStarted> get copyWith =>
+      _$MetaDataFetchingStartedCopyWithImpl<MetaDataFetchingStarted>(
           this, _$identity);
 
   @override
@@ -178,7 +177,7 @@ class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_MetaDataFetchingStarted value)
+    required TResult Function(MetaDataFetchingStarted value)
         metaDataFetchinStarted,
   }) {
     return metaDataFetchinStarted(this);
@@ -187,7 +186,7 @@ class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_MetaDataFetchingStarted value)? metaDataFetchinStarted,
+    TResult Function(MetaDataFetchingStarted value)? metaDataFetchinStarted,
     required TResult orElse(),
   }) {
     if (metaDataFetchinStarted != null) {
@@ -197,15 +196,15 @@ class _$_MetaDataFetchingStarted implements _MetaDataFetchingStarted {
   }
 }
 
-abstract class _MetaDataFetchingStarted implements PostContentEvent {
-  const factory _MetaDataFetchingStarted(String postId) =
-      _$_MetaDataFetchingStarted;
+abstract class MetaDataFetchingStarted implements PostContentEvent {
+  const factory MetaDataFetchingStarted(String postId) =
+      _$MetaDataFetchingStarted;
 
   @override
   String get postId => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$MetaDataFetchingStartedCopyWith<_MetaDataFetchingStarted> get copyWith =>
+  $MetaDataFetchingStartedCopyWith<MetaDataFetchingStarted> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
