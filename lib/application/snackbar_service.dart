@@ -48,6 +48,7 @@ class SnackbarService implements ISnackbarService {
 
   @override
   void error(String message) {
+    print('error showed');
     show(
       message: message,
       indicatorColor: Colors.red,

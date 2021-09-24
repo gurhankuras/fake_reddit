@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reddit_clone/domain/i_snackbar_service.dart';
+import 'package:reddit_clone/injection.dart';
 
 import '../../domain/i_image_service.dart';
 import '../../domain/subreddit/i_subreddit_service.dart';
@@ -82,6 +84,8 @@ class ChangeCommunityAvatarBloc
             (l) async* {
               yield state.copyWith(saving: false, success: some(false));
               yield state.copyWith(success: none());
+              getIt<ISnackbarService>().error(
+                  'Sorry , there was an error updating the avatar for r/abc');
             },
             (r) async* {
               yield state.copyWith(saving: false, success: some(true));

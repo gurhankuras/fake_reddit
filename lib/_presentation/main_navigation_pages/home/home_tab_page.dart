@@ -63,7 +63,7 @@ class NotLoggedInHomeTabBody extends StatelessWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => AutoRouter.of(context).pushNamed('login'),
+                onPressed: () => AutoRouter.of(context).navigate(LoginRoute()),
                 child: Text('LOG IN'),
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
