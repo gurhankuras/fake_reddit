@@ -13,6 +13,7 @@
 - **Navigation:** auto_route
 - **Dependency Injection:** injectable/get_it
 
+![demo](https://github.com/gurhankuras/fake_reddit/tree/master/gif/demo.gif)
 
 ### **TODO**
 - Responsive UI
