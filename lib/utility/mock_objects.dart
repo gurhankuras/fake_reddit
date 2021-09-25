@@ -47,7 +47,7 @@ List<PostEntry> mockMixedPosts = [
     image:
         'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=723&q=80',
     date: '1h',
-    subreddit: 'berserklejerk',
+    subreddit: 'examplesubreddit',
     upvotes: 5,
     user: User(
         image:
@@ -93,12 +93,12 @@ List<PostEntry> mockMixedPosts = [
 
 PostEntry mockPostEntry = PostEntry(
   type: PostType.text,
-  subreddit: 'berserklejerk',
+  subreddit: 'examplesubreddit',
   // bodyText: 'nasilsin hahahhaha',
   user: User(
     nickname: 'TheCompleteMental',
     image:
-        'https://cdnb.artstation.com/p/assets/images/images/024/649/867/large/hugo-tahar-berserk-guts-2.jpg?1583101136',
+        'https://styles.redditmedia.com/t5_ovfhp/styles/communityIcon_wkjr894f0bm41.png?width=256&s=e350ec3433eac577f084518a542add59e9398bcc',
   ),
   isNFSW: true,
   contentText: lorem(paragraphs: 1, words: 40),

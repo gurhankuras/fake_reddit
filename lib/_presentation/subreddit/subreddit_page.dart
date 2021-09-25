@@ -229,7 +229,7 @@ class _SubredditAppBar extends StatelessWidget {
       pinned: true,
       title: BlocBuilder<SubredditBloc, SubredditState>(
         builder: (context, state) {
-          return SearchBarField(hintText: 'r/berserklejerk');
+          return SearchBarField(hintText: 'r/examplesubreddit');
         },
       ),
       expandedHeight: 120,

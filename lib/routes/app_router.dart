@@ -48,12 +48,10 @@ import '../_presentation/wrapped_bottom_nav_page.dart';
         CustomRoute(
           page: CreatePostEditorPage,
           path: '',
-          transitionsBuilder: TransitionsBuilders.slideLeft,
         ),
         CustomRoute(
           path: 'overview',
           page: CreatePostEntryOverviewPage,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
         ),
       ],
     ),

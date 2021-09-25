@@ -67,7 +67,7 @@ class SubredditBloc extends Bloc<SubredditEvent, SubredditState> {
 
     subredditService
         .getPosts(
-          subredditName: 'berserklejerk',
+          subredditName: 'examplesubreddit',
         )
         .then(
           (posts) => posts.fold(

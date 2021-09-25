@@ -119,7 +119,6 @@ class AppRouter extends _i1.RootStackRouter {
         builder: (_) {
           return const _i15.CreatePostEditorPage();
         },
-        transitionsBuilder: _i1.TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false),
     CreatePostEntryOverviewRoute.name: (routeData) => _i1.CustomPage<dynamic>(
@@ -129,7 +128,6 @@ class AppRouter extends _i1.RootStackRouter {
           return _i16.CreatePostEntryOverviewPage(
               key: args.key, community: args.community);
         },
-        transitionsBuilder: _i1.TransitionsBuilders.slideLeft,
         opaque: true,
         barrierDismissible: false),
     WrappedBottomNavRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(

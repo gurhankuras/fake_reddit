@@ -21,6 +21,7 @@ class InboxMessagesBloc extends Bloc<InboxMessagesEvent, InboxMessagesState> {
     this.repository,
   ) : super(InboxMessagesState.initial()) {
     logInit(InboxMessagesBloc);
+    registerEventHandlers();
   }
 
   void registerEventHandlers() {
