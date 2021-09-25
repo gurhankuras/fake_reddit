@@ -9,7 +9,7 @@ class ChangeCommunityAvatarEvent with _$ChangeCommunityAvatarEvent {
   const factory ChangeCommunityAvatarEvent.imageCropped(Uint8List bytes) =
       ImageCropped;
   const factory ChangeCommunityAvatarEvent.loadingCustomImageSelected(
-      ImageSource source) = _LoadingCustomImageSelected;
+      ImageSource source) = LoadingCustomImageSelected;
   const factory ChangeCommunityAvatarEvent.imageSelected(File image) =
       ImageSelected;
   const factory ChangeCommunityAvatarEvent.saved() = Saved;

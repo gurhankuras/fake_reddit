@@ -17,42 +17,34 @@ part 'post_content_state.dart';
 class PostContentBloc extends Bloc<PostContentEvent, PostContentState> {
   final PostService postService;
   final CacheService cacheService;
-  // final FeedBloc? homeTabBloc;
   PostContentBloc({
     required this.postService,
     required this.cacheService,
-    // this.homeTabBloc,
   }) : super(PostContentState.initial()) {
     logInit(PostContentBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<PostContentState> mapEventToState(
-    PostContentEvent event,
-  ) async* {
-    yield* event.map(
-      metaDataFetchinStarted: (e) async* {
-        yield PostContentState.loading();
-        final postInfo =
-            await postService.fetchCommentCountAndUpvotes(e.postId);
+  void registerEventHandlers() {
+    on<MetaDataFetchingStarted>(_onMetaDataFetchingStarted);
+  }
 
-        final commentCount = postInfo['commentCount']!;
-        final upvotes = postInfo['upvotes']!;
+  FutureOr<void> _onMetaDataFetchingStarted(
+    MetaDataFetchingStarted event,
+    Emitter<PostContentState> emit,
+  ) async {
+    emit(PostContentState.loading());
+    final postInfo =
+        await postService.fetchCommentCountAndUpvotes(event.postId);
 
-        yield PostContentState.fetched(
-          commentCount: commentCount,
-          upvotes: upvotes,
-        );
-        // cacheService.prefs.setString(e.postId, e.postId).then(
-        //       (value) => homeTabBloc?.add(
-        //         FeedEvent.postVisited(
-        //           postId: e.postId,
-        //           commentCount: commentCount,
-        //           upvotes: upvotes,
-        //         ),
-        //       ),
-        //     );
-      },
+    final commentCount = postInfo['commentCount']!;
+    final upvotes = postInfo['upvotes']!;
+
+    emit(
+      PostContentState.fetched(
+        commentCount: commentCount,
+        upvotes: upvotes,
+      ),
     );
   }
 }

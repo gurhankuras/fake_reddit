@@ -29,188 +29,206 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
   CreatePostBloc({
     required this.imageService,
     @factoryParam this.community,
-  }) : super(CreatePostState.textPostEntry(
-          title: '',
-          bodyText: '',
-          feedType: PostType.text,
-          autofocus: false,
-          error: left(const PostEditFailure.empty(message: 'Empty')),
-        )) {
+  }) : super(
+          CreatePostState.textPostEntry(
+            title: '',
+            bodyText: '',
+            feedType: PostType.text,
+            autofocus: false,
+            error: left(const PostEditFailure.empty(message: 'Empty')),
+          ),
+        ) {
     logInit(CreatePostBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<CreatePostState> mapEventToState(
-    CreatePostEvent event,
-  ) async* {
-    // state.map(textPostEntry: textPostEntry, linkPostEntry: linkPostEntry, imagePostEntry: imagePostEntry, videoPostEntry: videoPostEntry, pollPostEntry: pollPostEntry)
-    final title = state.title;
-    yield* event.map(feedTypeChanged: (e) async* {
-      if (isDirty()) {
-        final leave = await e.showDialog();
-        if (leave == null) {
-          yield state;
-        } else {
-          if (leave) {
-            yield* mapIndexToState(e.index, title, e.autofocus);
-          } else {
-            yield state;
-          }
-        }
-      } else {
-        yield* mapIndexToState(e.index, title, e.autofocus);
-      }
-    }, titleChanged: (e) async* {
-      yield state.copyWith(title: e.title);
-    }, bodyTextChanged: (e) async* {
-      yield* state.maybeMap(
-        // TEXT
-        textPostEntry: (state) async* {
-          yield state.copyWith(bodyText: e.bodyText);
-        },
-        // POLL
-        pollPostEntry: (state) async* {
-          yield state.copyWith(bodyText: state.bodyText);
-        },
-        // ELSE
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, pollEndsPressed: (e) async* {
-      yield* state.maybeMap(
-        // POLL
-        pollPostEntry: (state) async* {
-          final day = await e.showDays(Days.values[state.pollEndsDays - 1]);
-          if (day != null) {
-            yield state.copyWith(pollEndsDays: day);
-          } else {
-            yield state;
-          }
-        },
-        // ELSE
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, pollOptionAdded: (e) async* {
-      yield* state.maybeMap(
-        // POLL
-        pollPostEntry: (state) async* {
-          log.d('pollOptionAdded     dddd');
-          yield state.copyWith(
-              options: state.options.map((e) => e).toList()..add(e.option));
-        },
-        // ELSE
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, urlChanged: (e) async* {
-      yield* state.maybeMap(
-        // LINK
-        linkPostEntry: (state) async* {
-          yield state.copyWith(url: e.url);
-        },
-        // ELSE
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, addImageClicked: (e) async* {
-      final imagesOption = await imageService.pickImageMultiple();
-      yield* imagesOption.fold(
-        // FAIL
-        () async* {
-          yield state;
-        },
-        (newImages) async* {
-          // SUCCESS
-          yield* state.maybeMap(
-            imagePostEntry: (state) async* {
-              final newImageData =
-                  newImages.map((file) => ImageData.withEmptyInfo(image: file));
-              yield state.copyWith(
-                images: state.images.map((e) => e).toList()
-                  ..addAll(newImageData),
-              );
-            },
-            orElse: () async* {
-              yield state;
-            },
-          );
-        },
-      );
-    }, imageDeleted: (e) async* {
-      yield* state.maybeMap(
-        imagePostEntry: (state) async* {
-          final deletedIndex =
-              state.images.indexWhere((data) => data.id == e.id);
-          final deletedData = state.images[deletedIndex];
+  void registerEventHandlers() {
+    on<PostTypeChanged>(_onPostTypeChanged);
+    on<TitleChanged>((event, emit) => emit(state.copyWith(title: event.title)));
+    on<BodyTextChanged>(_onBodyTextChanged);
+    on<UrlChanged>(_onUrlChanged);
+    on<PollEndsPressed>(_onPollEndsPressed);
+    on<PollOptionAdded>(_onPollOptionAdded);
+    on<PollOptionEdited>(_onPollOptionEdited);
+    on<PollOptionDeleted>(_onPollOptionDeleted);
+    on<AddImageClicked>(_onAddImageClicked);
+    on<ImageDeleted>(_onImageDeleted);
+    on<RecoverLastDeletedImage>(_onRecoverLastDeletedImage);
+    on<PostPosted>(_onPostPosted);
+  }
 
-          yield state.copyWith(
-            images: state.images.where((data) => data.id != e.id).toList(),
-            lastDeletedImage: some(DeletedImageData(deletedData, deletedIndex)),
-          );
-        },
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, recoverLastDeletedImage: (e) async* {
-      yield* state.maybeMap(
-        imagePostEntry: (state) async* {
-          yield* state.lastDeletedImage.fold(
-            () async* {
-              yield state;
-            },
-            (deletedImageData) async* {
-              final inserted = state.images
-                ..insert(
-                  deletedImageData.index,
-                  deletedImageData.imageData.copyWith(),
-                );
-              yield state.copyWith(
+  FutureOr<void> _onPostTypeChanged(
+    PostTypeChanged event,
+    Emitter<CreatePostState> emit,
+  ) async {
+    if (isDirty()) {
+      final leave = await event.showDialog();
+      if (leave == null) {
+        emit(state);
+      } else {
+        if (leave) {
+          emit(mapIndexToState(event.index, state.title, event.autofocus));
+        } else {
+          emit(state);
+        }
+      }
+    } else {
+      emit(mapIndexToState(event.index, state.title, event.autofocus));
+    }
+  }
+
+  FutureOr<void> _onBodyTextChanged(
+    BodyTextChanged event,
+    Emitter<CreatePostState> emit,
+  ) async {
+    state.maybeMap(
+      textPostEntry: (state) => emit(state.copyWith(bodyText: event.bodyText)),
+      pollPostEntry: (state) => emit(state.copyWith(bodyText: state.bodyText)),
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onUrlChanged(
+    UrlChanged event,
+    Emitter<CreatePostState> emit,
+  ) async {
+    state.maybeMap(
+      linkPostEntry: (state) => emit(state.copyWith(url: event.url)),
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onPollEndsPressed(
+    PollEndsPressed event,
+    Emitter<CreatePostState> emit,
+  ) async {
+    state.maybeMap(
+      pollPostEntry: (state) async {
+        final day = await event.showDays(Days.values[state.pollEndsDays - 1]);
+        day != null ? emit(state.copyWith(pollEndsDays: day)) : emit(state);
+      },
+      orElse: () async => emit(state),
+    );
+  }
+
+  FutureOr<void> _onPollOptionAdded(
+    PollOptionAdded event,
+    Emitter<CreatePostState> emit,
+  ) {
+    state.maybeMap(
+      pollPostEntry: (state) => emit(
+        state.copyWith(
+          options: state.options.map((e) => e).toList()..add(event.option),
+        ),
+      ),
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onPollOptionEdited(
+    PollOptionEdited event,
+    Emitter<CreatePostState> emit,
+  ) {
+    state.maybeMap(
+      pollPostEntry: (state) {
+        final newOptions = state.options.map((opt) => opt).toList();
+        newOptions[event.index] = event.option;
+        emit(state.copyWith(options: newOptions));
+      },
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onPollOptionDeleted(
+    PollOptionDeleted event,
+    Emitter<CreatePostState> emit,
+  ) {
+    state.maybeMap(
+      pollPostEntry: (state) {
+        final updatedOptions = state.options.map((opt) => opt).toList()
+          ..removeAt(event.index);
+        emit(state.copyWith(options: updatedOptions));
+      },
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onAddImageClicked(
+    AddImageClicked event,
+    Emitter<CreatePostState> emit,
+  ) async {
+    final imagesOption = await imageService.pickImageMultiple();
+    imagesOption.fold(
+      // FAIL
+      () => emit(state),
+      (newImages) {
+        // SUCCESS
+        state.maybeMap(
+          imagePostEntry: (state) {
+            final newImageData =
+                newImages.map((file) => ImageData.withEmptyInfo(image: file));
+            emit(state.copyWith(
+              images: state.images.map((e) => e).toList()..addAll(newImageData),
+            ));
+          },
+          orElse: () => emit(state),
+        );
+      },
+    );
+  }
+
+  FutureOr<void> _onImageDeleted(
+    ImageDeleted event,
+    Emitter<CreatePostState> emit,
+  ) {
+    state.maybeMap(
+      imagePostEntry: (state) {
+        final deletedIndex =
+            state.images.indexWhere((data) => data.id == event.id);
+        final deletedData = state.images[deletedIndex];
+
+        emit(state.copyWith(
+          images: state.images.where((data) => data.id != event.id).toList(),
+          lastDeletedImage: some(DeletedImageData(deletedData, deletedIndex)),
+        ));
+      },
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onRecoverLastDeletedImage(
+    RecoverLastDeletedImage event,
+    Emitter<CreatePostState> emit,
+  ) {
+    state.maybeMap(
+      imagePostEntry: (state) {
+        state.lastDeletedImage.fold(
+          () => emit(state),
+          (deletedImageData) {
+            final inserted = state.images
+              ..insert(
+                deletedImageData.index,
+                deletedImageData.imageData.copyWith(),
+              );
+            emit(
+              state.copyWith(
                 images: inserted.map((e) => e).toList(),
                 lastDeletedImage: none(),
-              );
-            },
-          );
-        },
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, pollOptionDeleted: (e) async* {
-      yield* state.maybeMap(
-        pollPostEntry: (state) async* {
-          yield state.copyWith(
-            options: state.options.map((opt) => opt).toList()
-              ..removeAt(e.index),
-          );
-        },
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, pollOptionEdited: (e) async* {
-      yield* state.maybeMap(
-        pollPostEntry: (state) async* {
-          final newOptions = state.options.map((opt) => opt).toList();
-          newOptions[e.index] = e.option;
-          yield state.copyWith(
-            options: newOptions,
-          );
-        },
-        orElse: () async* {
-          yield state;
-        },
-      );
-    }, feedPosted: (e) async* {
-      // mainPageBloc.add(const MainPageEvent.snackbarShowed());
-      getIt<ISnackbarService>().success('Posted!');
-      yield state;
-    });
+              ),
+            );
+          },
+        );
+      },
+      orElse: () => emit(state),
+    );
+  }
+
+  FutureOr<void> _onPostPosted(
+    PostPosted event,
+    Emitter<CreatePostState> emit,
+  ) {
+    getIt<ISnackbarService>().success('Posted!');
+    emit(state);
   }
 
   Map<PostType, CreatePostState Function(String title, bool autofocus)>
@@ -223,33 +241,28 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
           autofocus: autofocus,
           error: left(const PostEditFailure.empty(message: 'Empty')),
         ),
-    // PostType.text: (String title, bool autofocus) =>
   };
 
-  Stream<CreatePostState> mapIndexToState(
-      int index, String title, bool autofocus) async* {
-    // if (state.feedType
+  CreatePostState mapIndexToState(int index, String title, bool autofocus) {
     switch (index) {
       case 0:
-        yield CreatePostState.textPostEntry(
+        return CreatePostState.textPostEntry(
           title: title,
           bodyText: '',
           feedType: PostType.text,
           autofocus: autofocus,
           error: left(PostEditFailure.empty(message: 'Empty')),
         );
-        break;
       case 1:
-        yield CreatePostState.linkPostEntry(
+        return CreatePostState.linkPostEntry(
           title: title,
           url: '',
           feedType: PostType.link,
           autofocus: autofocus,
           error: left(PostEditFailure.empty(message: 'Empty')),
         );
-        break;
       case 2:
-        yield CreatePostState.imagePostEntry(
+        return CreatePostState.imagePostEntry(
           title: title,
           images: [],
           feedType: PostType.image,
@@ -259,17 +272,15 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
           lastDeletedImage: none(),
           nextIndex: -1,
         );
-        break;
       case 3:
-        yield CreatePostState.videoPostEntry(
+        return CreatePostState.videoPostEntry(
           title: title,
           feedType: PostType.video,
           autofocus: autofocus,
           error: left(PostEditFailure.empty(message: 'Empty')),
         );
-        break;
       case 4:
-        yield CreatePostState.pollPostEntry(
+        return CreatePostState.pollPostEntry(
           title: title,
           bodyText: '',
           options: ['', ''],
@@ -277,11 +288,10 @@ class CreatePostBloc extends Bloc<CreatePostEvent, CreatePostState> {
           feedType: PostType.poll,
           autofocus: autofocus,
           error: left(PostEditFailure.empty(message: 'Empty')),
-
           // error: left(),
         );
-        break;
       default:
+        return state;
     }
   }
 

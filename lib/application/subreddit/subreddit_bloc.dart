@@ -26,62 +26,92 @@ class SubredditBloc extends Bloc<SubredditEvent, SubredditState> {
     required this.subredditService,
   }) : super(SubredditState.initial()) {
     logInit(SubredditBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<SubredditState> mapEventToState(
-    SubredditEvent event,
-  ) async* {
-    yield* event.map(
-      cardDisplayChanged: (e) async* {
-        yield state.copyWith(displayType: e.displayType);
-      },
-      feedFetchingStarted: (e) async* {
-        yield state.copyWith(
-          subredditInfoLoading: true,
-          postsLoading: true,
+  void registerEventHandlers() {
+    on<CardDisplayChanged>(_onCardDisplayChanged);
+    on<FeedFetchingStarted>(_onFeedFetchingStarted);
+    on<SubredditInfoFetchingStarted>(_onSubredditInfoFetchingStarted);
+    on<SubredditInfoLoaded>(_onSubredditInfoLoaded);
+    on<PostsLoaded>(_onPostsLoaded);
+    on<Failed>(_onFailed);
+  }
+
+  FutureOr<void> _onCardDisplayChanged(
+    CardDisplayChanged event,
+    Emitter<SubredditState> emit,
+  ) {
+    emit(state.copyWith(displayType: event.displayType));
+  }
+
+  FutureOr<void> _onFeedFetchingStarted(
+    FeedFetchingStarted event,
+    Emitter<SubredditState> emit,
+  ) async {
+    emit(state.copyWith(
+      subredditInfoLoading: true,
+      postsLoading: true,
+    ));
+
+    subredditService
+        .getSubredditInfo(
+          subredditName: 'berserklejerk',
+        )
+        .then(
+          (info) => info.fold(
+            (failure) => add(SubredditEvent.failed(failure)),
+            (info) => add(SubredditEvent.subredditInfoLoaded(info)),
+          ),
         );
 
-        subredditService
-            .getSubredditInfo(
-              subredditName: 'berserklejerk',
-            )
-            .then(
-              (info) => info.fold(
-                (failure) => add(SubredditEvent.failed(failure)),
-                (info) => add(SubredditEvent.subredditInfoLoaded(info)),
-              ),
-            );
+    subredditService
+        .getPosts(
+          subredditName: 'berserklejerk',
+        )
+        .then(
+          (posts) => posts.fold(
+            (failure) => add(SubredditEvent.failed(failure)),
+            (posts) => add(SubredditEvent.postsLoaded(posts)),
+          ),
+        );
+  }
 
-        subredditService
-            .getPosts(
-              subredditName: 'berserklejerk',
-            )
-            .then(
-              (posts) => posts.fold(
-                (failure) => add(SubredditEvent.failed(failure)),
-                (posts) => add(SubredditEvent.postsLoaded(posts)),
-              ),
-            );
-      },
-      subredditInfoFetchingStarted: (e) async* {},
-      failed: (e) async* {
-        yield state.copyWith(
-          failure: some(e.failure),
-        );
-      },
-      postsLoaded: (e) async* {
-        yield state.copyWith(
-          postsLoading: false,
-          posts: some(e.posts),
-        );
-      },
-      subredditInfoLoaded: (e) async* {
-        yield state.copyWith(
-          subredditInfoLoading: false,
-          subredditInfo: some(e.info),
-        );
-      },
+  FutureOr<void> _onSubredditInfoFetchingStarted(
+    SubredditInfoFetchingStarted event,
+    Emitter<SubredditState> emit,
+  ) async {}
+
+  FutureOr<void> _onSubredditInfoLoaded(
+    SubredditInfoLoaded event,
+    Emitter<SubredditState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        subredditInfoLoading: false,
+        subredditInfo: some(event.info),
+      ),
     );
+  }
+
+  FutureOr<void> _onPostsLoaded(
+    PostsLoaded event,
+    Emitter<SubredditState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        postsLoading: false,
+        posts: some(event.posts),
+      ),
+    );
+  }
+
+  FutureOr<void> _onFailed(
+    Failed event,
+    Emitter<SubredditState> emit,
+  ) async {
+    emit(state.copyWith(
+      failure: some(event.failure),
+    ));
   }
 }

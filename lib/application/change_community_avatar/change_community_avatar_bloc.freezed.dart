@@ -34,8 +34,8 @@ class _$ChangeCommunityAvatarEventTearOff {
     );
   }
 
-  _LoadingCustomImageSelected loadingCustomImageSelected(ImageSource source) {
-    return _LoadingCustomImageSelected(
+  LoadingCustomImageSelected loadingCustomImageSelected(ImageSource source) {
+    return LoadingCustomImageSelected(
       source,
     );
   }
@@ -82,7 +82,7 @@ mixin _$ChangeCommunityAvatarEvent {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -93,7 +93,7 @@ mixin _$ChangeCommunityAvatarEvent {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -217,7 +217,7 @@ class _$AvatarColorChanged implements AvatarColorChanged {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -231,7 +231,7 @@ class _$AvatarColorChanged implements AvatarColorChanged {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -351,7 +351,7 @@ class _$AvatarIconChanged implements AvatarIconChanged {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -365,7 +365,7 @@ class _$AvatarIconChanged implements AvatarIconChanged {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -485,7 +485,7 @@ class _$ImageCropped implements ImageCropped {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -499,7 +499,7 @@ class _$ImageCropped implements ImageCropped {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -522,31 +522,30 @@ abstract class ImageCropped implements ChangeCommunityAvatarEvent {
 }
 
 /// @nodoc
-abstract class _$LoadingCustomImageSelectedCopyWith<$Res> {
-  factory _$LoadingCustomImageSelectedCopyWith(
-          _LoadingCustomImageSelected value,
-          $Res Function(_LoadingCustomImageSelected) then) =
-      __$LoadingCustomImageSelectedCopyWithImpl<$Res>;
+abstract class $LoadingCustomImageSelectedCopyWith<$Res> {
+  factory $LoadingCustomImageSelectedCopyWith(LoadingCustomImageSelected value,
+          $Res Function(LoadingCustomImageSelected) then) =
+      _$LoadingCustomImageSelectedCopyWithImpl<$Res>;
   $Res call({ImageSource source});
 }
 
 /// @nodoc
-class __$LoadingCustomImageSelectedCopyWithImpl<$Res>
+class _$LoadingCustomImageSelectedCopyWithImpl<$Res>
     extends _$ChangeCommunityAvatarEventCopyWithImpl<$Res>
-    implements _$LoadingCustomImageSelectedCopyWith<$Res> {
-  __$LoadingCustomImageSelectedCopyWithImpl(_LoadingCustomImageSelected _value,
-      $Res Function(_LoadingCustomImageSelected) _then)
-      : super(_value, (v) => _then(v as _LoadingCustomImageSelected));
+    implements $LoadingCustomImageSelectedCopyWith<$Res> {
+  _$LoadingCustomImageSelectedCopyWithImpl(LoadingCustomImageSelected _value,
+      $Res Function(LoadingCustomImageSelected) _then)
+      : super(_value, (v) => _then(v as LoadingCustomImageSelected));
 
   @override
-  _LoadingCustomImageSelected get _value =>
-      super._value as _LoadingCustomImageSelected;
+  LoadingCustomImageSelected get _value =>
+      super._value as LoadingCustomImageSelected;
 
   @override
   $Res call({
     Object? source = freezed,
   }) {
-    return _then(_LoadingCustomImageSelected(
+    return _then(LoadingCustomImageSelected(
       source == freezed
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
@@ -557,8 +556,8 @@ class __$LoadingCustomImageSelectedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
-  const _$_LoadingCustomImageSelected(this.source);
+class _$LoadingCustomImageSelected implements LoadingCustomImageSelected {
+  const _$LoadingCustomImageSelected(this.source);
 
   @override
   final ImageSource source;
@@ -571,7 +570,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoadingCustomImageSelected &&
+        (other is LoadingCustomImageSelected &&
             (identical(other.source, source) ||
                 const DeepCollectionEquality().equals(other.source, source)));
   }
@@ -582,9 +581,10 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
 
   @JsonKey(ignore: true)
   @override
-  _$LoadingCustomImageSelectedCopyWith<_LoadingCustomImageSelected>
-      get copyWith => __$LoadingCustomImageSelectedCopyWithImpl<
-          _LoadingCustomImageSelected>(this, _$identity);
+  $LoadingCustomImageSelectedCopyWith<LoadingCustomImageSelected>
+      get copyWith =>
+          _$LoadingCustomImageSelectedCopyWithImpl<LoadingCustomImageSelected>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -622,7 +622,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -636,7 +636,7 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -649,14 +649,14 @@ class _$_LoadingCustomImageSelected implements _LoadingCustomImageSelected {
   }
 }
 
-abstract class _LoadingCustomImageSelected
+abstract class LoadingCustomImageSelected
     implements ChangeCommunityAvatarEvent {
-  const factory _LoadingCustomImageSelected(ImageSource source) =
-      _$_LoadingCustomImageSelected;
+  const factory LoadingCustomImageSelected(ImageSource source) =
+      _$LoadingCustomImageSelected;
 
   ImageSource get source => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$LoadingCustomImageSelectedCopyWith<_LoadingCustomImageSelected>
+  $LoadingCustomImageSelectedCopyWith<LoadingCustomImageSelected>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -758,7 +758,7 @@ class _$ImageSelected implements ImageSelected {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -772,7 +772,7 @@ class _$ImageSelected implements ImageSelected {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,
@@ -865,7 +865,7 @@ class _$Saved implements Saved {
     required TResult Function(AvatarColorChanged value) avatarColorChanged,
     required TResult Function(AvatarIconChanged value) avatarIconChanged,
     required TResult Function(ImageCropped value) imageCropped,
-    required TResult Function(_LoadingCustomImageSelected value)
+    required TResult Function(LoadingCustomImageSelected value)
         loadingCustomImageSelected,
     required TResult Function(ImageSelected value) imageSelected,
     required TResult Function(Saved value) saved,
@@ -879,7 +879,7 @@ class _$Saved implements Saved {
     TResult Function(AvatarColorChanged value)? avatarColorChanged,
     TResult Function(AvatarIconChanged value)? avatarIconChanged,
     TResult Function(ImageCropped value)? imageCropped,
-    TResult Function(_LoadingCustomImageSelected value)?
+    TResult Function(LoadingCustomImageSelected value)?
         loadingCustomImageSelected,
     TResult Function(ImageSelected value)? imageSelected,
     TResult Function(Saved value)? saved,

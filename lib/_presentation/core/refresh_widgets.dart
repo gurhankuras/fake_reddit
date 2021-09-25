@@ -9,8 +9,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart' hide RefreshIndicator;
 import 'package:flutter/cupertino.dart';
-import 'package:reddit_clone/utility/log_dispose.dart';
-import 'package:reddit_clone/utility/log_init.dart';
 
 class CustomRefresherFooter extends StatelessWidget {
   const CustomRefresherFooter({Key? key}) : super(key: key);
@@ -32,7 +30,7 @@ class CustomRefresherFooter extends StatelessWidget {
         } else {
           body = Text("No more Data");
         }
-        return Container(
+        return SizedBox(
           height: 35.0,
           child: Center(child: body),
         );

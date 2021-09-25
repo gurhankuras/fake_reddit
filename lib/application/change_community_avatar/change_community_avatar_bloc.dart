@@ -29,72 +29,104 @@ class ChangeCommunityAvatarBloc
     required this.imageService,
   }) : super(ChangeCommunityAvatarState.initial()) {
     logInit(ChangeCommunityAvatarBloc);
+    registerEventHandlers();
   }
 
-  @override
-  Stream<ChangeCommunityAvatarState> mapEventToState(
-    ChangeCommunityAvatarEvent event,
-  ) async* {
-    yield* event.map(
-      avatarColorChanged: (e) async* {
-        yield state.copyWith(
-          colorIndex: e.index,
-          hasAnyChanged: true,
-        );
-      },
-      avatarIconChanged: (e) async* {
-        yield state.copyWith(
-          iconIndex: e.index,
-          hasAnyChanged: true,
-        );
-      },
-      imageCropped: (e) async* {
-        yield state.copyWith(
-          croppedImage: some(e.bytes),
-          hasAnyChanged: true,
-          selectedImage: none(),
-        );
-      },
-      loadingCustomImageSelected: (e) async* {
-        final fileOrNot = await imageService.select(source: e.source);
-        yield* fileOrNot.fold(
-          () async* {
-            yield state;
-          },
-          (image) async* {
-            add(ChangeCommunityAvatarEvent.imageSelected(image));
-            yield state;
-          },
-        );
-      },
-      imageSelected: (e) async* {
-        final bytes = e.image.readAsBytesSync();
-        yield state.copyWith(
-          selectedImage: some(bytes),
-          hasAnyChanged: true,
-        );
-      },
-      saved: (e) async* {
-        yield state.copyWith(saving: true);
-        if (state.croppedImage.isSome()) {
-          final failureOrSuccess = await communityService.changeAvatar(
-              '123232', state.croppedImage.getOrElse(() => Uint8List(0)));
-          // await Future.delayed-(Duration(seconds: 1));
-          yield* failureOrSuccess.fold(
-            (l) async* {
-              yield state.copyWith(saving: false, success: some(false));
-              yield state.copyWith(success: none());
-              getIt<ISnackbarService>().error(
-                  'Sorry , there was an error updating the avatar for r/abc');
-            },
-            (r) async* {
-              yield state.copyWith(saving: false, success: some(true));
-            },
-          );
-        }
-        yield state.copyWith(saving: false);
+  void registerEventHandlers() {
+    on<AvatarColorChanged>(_onAvatarColorChanged);
+    on<AvatarIconChanged>(_onAvatarIconChanged);
+    on<ImageCropped>(_onImageCropped);
+    on<ImageSelected>(_onImageSelected);
+    on<Saved>(_onSaved);
+    on<LoadingCustomImageSelected>(_onLoadingCustomImageSelected);
+  }
+
+  FutureOr<void> _onAvatarColorChanged(
+    AvatarColorChanged event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        colorIndex: event.index,
+        hasAnyChanged: true,
+      ),
+    );
+  }
+
+  FutureOr<void> _onAvatarIconChanged(
+    AvatarIconChanged event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        iconIndex: event.index,
+        hasAnyChanged: true,
+      ),
+    );
+  }
+
+  FutureOr<void> _onLoadingCustomImageSelected(
+    LoadingCustomImageSelected event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    final fileOrNot = await imageService.select(source: event.source);
+    fileOrNot.fold(
+      () => emit(state),
+      (image) {
+        add(ChangeCommunityAvatarEvent.imageSelected(image));
+        emit(state);
       },
     );
+  }
+
+  FutureOr<void> _onImageCropped(
+    ImageCropped event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        croppedImage: some(event.bytes),
+        hasAnyChanged: true,
+        selectedImage: none(),
+      ),
+    );
+  }
+
+  FutureOr<void> _onImageSelected(
+    ImageSelected event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    final bytes = event.image.readAsBytesSync();
+    emit(
+      state.copyWith(
+        selectedImage: some(bytes),
+        hasAnyChanged: true,
+      ),
+    );
+  }
+
+  FutureOr<void> _onSaved(
+    Saved event,
+    Emitter<ChangeCommunityAvatarState> emit,
+  ) async {
+    emit(state.copyWith(saving: true));
+    if (state.croppedImage.isSome()) {
+      final failureOrSuccess = await communityService.changeAvatar(
+          '123232', state.croppedImage.getOrElse(() => Uint8List(0)));
+      // await Future.delayed-(Duration(seconds: 1));
+      failureOrSuccess.fold(
+        (l) {
+          emit(state.copyWith(saving: false, success: some(false)));
+          emit(state.copyWith(success: none()));
+          getIt<ISnackbarService>().error(
+              'Sorry , there was an error updating the avatar for r/abc');
+        },
+        (r) {
+          emit(state.copyWith(saving: false, success: some(true)));
+        },
+      );
+    }
+    emit(state.copyWith(saving: false));
   }
 
   List<IconData> get avatars => [

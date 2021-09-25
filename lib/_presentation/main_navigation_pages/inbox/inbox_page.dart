@@ -34,6 +34,7 @@ class _InboxPageState extends State<InboxPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     print('BUILD ETTI');
     return DefaultTabController(
       length: 2,
