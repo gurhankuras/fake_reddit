@@ -15,6 +15,7 @@
 - **Navigation:** auto_route
 - **Dependency Injection:** injectable/get_it
 
+###### Çalışma gif'i
 ![demo](https://github.com/gurhankuras/fake_reddit/tree/master/gif/demo.gif)
 
 ### **TODO**
